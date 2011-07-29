@@ -1,0 +1,31 @@
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Phonegap on Sail.js!</title> 
+  
+    <link href="css/phonegap-demo.css" rel="stylesheet" type="text/css" /> 
+    <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" /> 
+    
+    <script src="js/sail.js/sail.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        Sail.load()
+            .then('js/sail.js/rollcall.js')
+            .then('js/sail.js/deps/phonegap.0.9.6.js')
+            .then('js/phonegap-demo.js')
+            .thenRun(function() { return Sail.init(PhonegapDemo) })
+    </script>
+</head>
+<body> 
+ 
+    <header> 
+        <h1>Phonegap</h1> 
+    </header> 
+    
+    <div id="connecting">
+        <img src="loader.gif" />
+        <p>Connecting...</p>
+    </div>
+        
+</body>
+</html>
