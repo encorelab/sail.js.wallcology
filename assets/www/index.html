@@ -2,37 +2,96 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-    <title>Phonegap on Sail.js!</title> 
+    <title>WallCology on Sail.js!</title> 
   
-    <link href="css/phonegap-demo.css" rel="stylesheet" type="text/css" /> 
-    <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" /> 
+    <link href="css/wallcology.css" rel="stylesheet" type="text/css" /> 
+    <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
+    <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
     
     <script src="js/sail.js/sail.js" type="text/javascript"></script>
     <script type="text/javascript">
         Sail.load()
             .then('js/sail.js/rollcall.js')
-            .then('js/phonegap-demo.js')
+            .then('js/wallcology.js')
             .load('js/sail.js/deps/phonegap.1.0.0.js')
             .thenRun(function() { 
-                return Sail.init(PhonegapDemo) 
+                return Sail.init(WallCology) 
             })
     </script>
 </head>
-<body> 
- 
-    <header> 
-        <h1>Phonegap</h1> 
-    </header> 
+
+<body>
+    <header>
+        <h1>WallCology</h1>
+    </header>
     
     <div id="connecting">
         <img src="loader.gif" />
         <p>Connecting...</p>
     </div>
     
-    <div id="menu">
-        <button id="camera">Camera</button>
-        <button href="#" id="reload">Reload</button>
-    </div>
-        
+	<div id="tabs" style="display: none">
+		<ul>
+			<li><a href="#tabs-1">Habitats</a></li>
+			<li><a href="#tabs-2">Organisms</a></li>
+			<li><a href="#tabs-3">Relationships</a></li>
+			<li><a href="#tabs-4">Counts</a></li>
+			<li><a href="#tabs-5">Graphs</a></li>
+		</ul>
+		
+		<div id="tabs-1">
+			<h4>NEW HABITAT PAGE</h4></br>
+						
+			<form>
+				<div id="radio">
+					Habitat Number
+					<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
+					<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
+					<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
+					<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
+					
+  
+				</div>
+			</form>
+			<br/>
+			<!--  <textarea rows="" cols=""></textarea>-->
+			
+			<form action="" id="habitat-content-form">
+				<div id="habitat-content">
+					<h5>Environmental Conditions (What...)</h5> <input type="text" id="environmental-conditions" value="" /><br />
+					<h5>Structural Features (What...)</h5> <input type="text" id="structural-features" value="" /><br />
+					<h5>Organisms (Which organisms live in this habitat?)</h5> <input type="text" id="organisms" value="" /><br />
+					<h5>Comments (...)</h5> <input type="text" id="comments" value="" /><br />					
+				</div>	
+			</form>
+			<br/><br/>
+			<button id="back-button">Back</button>
+			<button id="submit-button">Save</button>
+						
+		</div>
+		
+		
+		
+		<div id="tabs-2">
+			<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+		</div>
+		<div id="tabs-3">
+			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+		</div>
+		<div id="tabs-4">
+			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+		</div>
+		<div id="tabs-5">
+			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+		</div>
+	</div>    
+
+
+    <footer> 
+    </footer> 
+      
 </body>
 </html>
