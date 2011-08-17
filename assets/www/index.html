@@ -11,9 +11,11 @@
     <script type="text/javascript">
         Sail.load()
             .then('js/sail.js/rollcall.js')
-            .then('js/sail.js/deps/phonegap.0.9.6.js')
             .then('js/phonegap-demo.js')
-            .thenRun(function() { return Sail.init(PhonegapDemo) })
+            .load('js/sail.js/deps/phonegap.1.0.0.js')
+            .thenRun(function() { 
+                return Sail.init(PhonegapDemo) 
+            })
     </script>
 </head>
 <body> 
@@ -25,6 +27,11 @@
     <div id="connecting">
         <img src="loader.gif" />
         <p>Connecting...</p>
+    </div>
+    
+    <div id="menu">
+        <button id="camera">Camera</button>
+        <button href="#" id="reload">Reload</button>
     </div>
         
 </body>
