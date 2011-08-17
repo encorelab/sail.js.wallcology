@@ -8,9 +8,12 @@ public class Sail extends DroidGap {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //super.loadUrl("file:///android_asset/www/index.html");
         super.init();
         super.clearCache(); 
-        super.loadUrl("http://10.0.1.17:8000/index.html");
+        
+        // the homepage_url is defined in res/values/sail.xml
+        super.loadUrl(getString(R.string.homepage_url));
+        
+        //super.loadUrl("file:///android_asset/www/index.html");
     }
 }

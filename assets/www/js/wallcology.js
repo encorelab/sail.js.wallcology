@@ -5,7 +5,7 @@ WallCology = {
     
     init: function() {
         console.log("Initializing...")
-        
+                
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'picker'})
             .load('Strophe.AutoConnector')
@@ -13,24 +13,7 @@ WallCology = {
             .thenRun(function () {
                 Sail.autobindEvents(WallCology)
                 
-                var interval = window.setInterval(
-                      function() {
-                          if (PhoneGap.available) {
-                              console.log("PhoneGap available!")
-                              window.clearInterval(interval)
-                          } else {
-                              console.log("PhoneGap NOT available :(")
-                          }
-                      },
-                      500
-                    );
-                
                 $(document).ready(function() {
-                    
-                    $(document).bind('deviceready', function () {
-                        WallCology.initPhonegap()
-                    })
-                    
                     $('#reload').click(function() {
                         console.log("Disconnecting...")
                         Sail.Strophe.disconnect()
@@ -46,24 +29,57 @@ WallCology = {
             })
     },
     
-    initPhonegap: function() {
-        alert("device ready!")
-        
-/*        $('#camera').click(function() {
-            alert("Getting picture...")
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 100 }); 
+/*    phonegap: function() {
+        $('#camera').click(function() {
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
 
             function onSuccess(imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
+              var image = document.getElementById('photo');
+              image.src = "data:image/jpeg;base64," + imageData;
             }
 
             function onFail(message) {
-                alert('Failed because: ' + message);
+              alert('Failed because: ' + message);
             }
         })
-*/    },
-    
+        
+        $('#phonegap-info').html(JSON.stringify(navigator.device).replace(/,/g,',<br />'))
+        
+        navigator.accelerometer.watchAcceleration(
+            function(acc) {
+                $('#accelerometer').text("x: "+acc.x+", y:"+acc.y+", z:"+acc.z)
+            }
+        )
+        
+        navigator.compass.watchHeading(
+            function(heading) {
+                $('#compass').text(heading)
+            }
+        )
+        
+        navigator.geolocation.watchPosition(
+            function(position) {
+                $('#geolocation').text("Lat: "+acc.coords.latitude+", Long:"+acc.coords.longitude)
+            }
+        )
+        
+        $('#alert').click(function() {
+            navigator.notification.alert("This is an alert!", null, "Uh oh!", "Okay")
+        })
+        
+        $('#confirm').click(function() {
+            navigator.notification.alert("This is a confirmation!", null, "Yay!", "Alright")
+        })
+        
+        $('#beep').click(function() {
+            navigator.notification.beep(3)
+        })
+        
+        $('#vibrate').click(function() {
+            navigator.notification.vibrate(1000)
+        })
+    },
+*/    
     authenticate: function() {
         console.log("Authenticating...")
         
