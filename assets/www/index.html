@@ -7,12 +7,14 @@
     <link href="css/phonegap-demo.css" rel="stylesheet" type="text/css" /> 
     <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" /> 
     
+    <!-- have to load phonegap manually first -->
+    <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>
+    
     <script src="js/sail.js/sail.js" type="text/javascript"></script>
     <script type="text/javascript">
         Sail.load()
             .then('js/sail.js/rollcall.js')
             .then('js/phonegap-demo.js')
-            .load('js/sail.js/deps/phonegap.1.0.0.js')
             .thenRun(function() { 
                 return Sail.init(PhonegapDemo) 
             })
@@ -29,9 +31,40 @@
         <p>Connecting...</p>
     </div>
     
+    <fieldset>
+        <legend>Phonegap Device Info</legend>
+        <div id="phonegap-info"></div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Sensors</legend>
+        <table>
+            <tr>
+                <th>Accelerometer:</th>
+                <td id="accelerometer">Waiting...</td>
+            </tr>
+            <tr>
+                <th>Compass:</th>
+                <td id="compass">Waiting...</td>
+            </tr>
+            <tr>
+                <th>Geolocation:</th>
+                <td id="geolocation">Waiting...</td>
+            </tr>
+        </table>
+    </fieldset>
+    
     <div id="menu">
-        <button id="camera">Camera</button>
-        <button href="#" id="reload">Reload</button>
+        <button id="camera">Photo</button>
+        <button id="alert">Alert</button>
+        <button id="confirm">Confirm</button>
+        <button id="beep">Beep</button>
+        <button id="vibrate">Vibrate</button>
+    </div>
+    
+    <hr />
+    <div>
+        <button id="reload">Reload</button>
     </div>
         
 </body>
