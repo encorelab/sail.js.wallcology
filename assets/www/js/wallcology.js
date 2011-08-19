@@ -128,7 +128,7 @@ WallCology = {
                     return false;
                 });
             });
-            $('#submit-button').click(function() {
+            $('#save-button').click(function() {
                 var temp1 = $("#radio input[type='radio']:checked").val();
             	sev = new Sail.Event('habitatContent', {habitat:{wallScope:temp1, environmentalConditions:$('#environmental-conditions').val(),
             			structuralFeatures:$('#structural-features').val(), organisms:$('#organisms').val(), comments:$('#comments').val()}})

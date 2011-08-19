@@ -4,6 +4,15 @@
   left: 40%;
   right: 40%;
   text-align: center;
-  font-weight: italic;
-  
+  font-weight: bold;
 }
+
+/* is this kind of fixed positioning the way to go? What is better? */
+#top-level-menu-button {
+position:fixed;
+top:30px;
+right:5px;
+}
+
+
+	
