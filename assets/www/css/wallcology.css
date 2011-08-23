@@ -7,12 +7,29 @@
   font-weight: bold;
 }
 
-/* is this kind of fixed positioning the way to go? What is better? */
-#top-level-menu-button {
-position:fixed;
-top:30px;
-right:5px;
+#top-level-dropdown {
+	height: 40px;
+	width: 280px;
+	margin-top: 5px;
+	margin-bottom: 3px;
+	border-radius: 4px;
+	background-color: #669999;
+	border-color: #669999;
+	color: white;
+/*   font-family: DroidSans; */
+	font-weight: bold;
+	font-size: 25px;
+	padding-left: 10px;
 }
 
+/*   fuck this shit, looks like themeroller is better
+.ui-tabs {
+	background-color: #545454;
+}
 
+.ui-tabs-panel {
+	background-color: #009944;
+	color: #131413;
+}
+*/
 	

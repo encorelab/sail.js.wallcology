@@ -7,9 +7,7 @@
     <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
     
-    <!-- have to load phonegap manually first -->
-    <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>
-    
+    <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>    
     <script src="js/sail.js/sail.js" type="text/javascript"></script>
     <script type="text/javascript">
         Sail.load()
@@ -20,9 +18,14 @@
             })
     </script>
 </head>
-
+<body>
     <header>
-        <h1>WallCology</h1>
+        <select id="top-level-dropdown" onChange="changeTopLevel()">
+        <!-- FIXME -->
+			<option value="/wallcology.html">WALLCOLOGY</option>
+			<option value="/disussion.html">DISCUSSION</option>
+			<option value="/microworlds.html">MICROWORLDS</option>
+		</select>
     </header>
     
     <div id="connecting">
@@ -37,8 +40,13 @@
 			<li><a href="#tabs-3">Relationships</a></li>
 			<li><a href="#tabs-4">Counts</a></li>
 			<li><a href="#tabs-5">Graphs</a></li>
-			<li><button id="top-level-menu-button">W</button>
+			
 		</ul>
+
+		
+		
+<!-- *********************************************************************************************************  -->		
+		
 		
 		<div id="tabs-1">
 			<h4>NEW HABITAT PAGE</h4></br>
@@ -50,32 +58,69 @@
 					<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
 					<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
 					<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
-					
-  
 				</div>
 			</form>
 			<br/>
-			<!--  <textarea rows="" cols=""></textarea>-->
 			
 			<form action="" id="habitat-content-form">
 				<div id="habitat-content">
-					<h5>Environment Conditions (What...)</h5> <input type="text" id="environmental-conditions" value="" /><br />
-					<h5>Structural Features (What...)</h5> <input type="text" id="structural-features" value="" /><br />
-					<h5>Organisms (Which organisms live in this habitat?)</h5> <input type="text" id="organisms" value="" /><br />
-					<h5>Comments (...)</h5> <input type="text" id="comments" value="" /><br />					
+					<h5>Environment Conditions (temperature, humidity, light)</h5> <input type="text" id="habitat-environmental-conditions" /><br />
+					<h5>Structural Features</h5> <input type="text" id="habitat-structural-features" /><br />
+					<h5>Organisms</h5> <input type="text" id="habitat-organisms" /><br />
+					<h5>Comments</h5> <input type="text" id="habitat-comments" /><br />					
 				</div>	
 			</form>
 			<br/><br/>
-			<button id="back-button">Back</button>
-			<button id="save-button">Save</button>
+			<button class="back-button">Back</button>
+			<button class="save-button" id="habitat-save-button">Save</button>
 						
 		</div>
 		
+
+<!-- *********************************************************************************************************  -->
+
 		
 		
-		<div id="tabs-2">
-			<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+ 		<div id="tabs-2">
+			<h4>NEW ORGANISM PAGE</h4></br>
+			
+			<form>
+				<div id="organism-radio">
+					Choose an Organism
+					<!-- rename these more descriptively once we know the organisms -->
+					<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
+					<input type="radio" id="organism-radio1" value="1" />
+					<input type="radio" id="organism-radio2" value="2" />
+					<input type="radio" id="organism-radio3" value="3" />
+					<input type="radio" id="organism-radio4" value="4" />
+					<input type="radio" id="organism-radio5" value="5" />
+					<input type="radio" id="organism-radio6" value="6" />
+					<input type="radio" id="organism-radio7" value="7" />
+					<input type="radio" id="organism-radio8" value="8" />
+				</div>
+			</form>
+			<br/>
+			
+			<form action="" id="organism-content-form">
+				<div id="organism-content">
+					<h5>Morphology (what they look like)</h5> <input type="text" id="organism-morphology" /><br />
+					<h5>Behaviour (what they do)</h5> <input type="text" id="organism-behaviour" /><br />
+					<h5>Habitat (where they live)</h5> <input type="text" id="organism-habitat" /><br />
+					<h5>Comments</h5> <input type="text" id="organism-comments" /><br />					
+				</div>	
+			</form>
+			<br/><br/>
+			<button class="back-button">Back</button>
+			<button class="save-button" id="organism-save-button">Save</button>
+			
+			
 		</div>
+		
+		
+<!-- *********************************************************************************************************  -->
+
+		
+		
 		<div id="tabs-3">
 			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
 			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>

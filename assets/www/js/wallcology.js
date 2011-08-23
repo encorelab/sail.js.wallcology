@@ -120,26 +120,34 @@ WallCology = {
             $(function() {
             	$('#radio').buttonset();
             });
+
+            jQuery(document).ready(function(){
+            	jQuery("#top-level-dropdown").change(function(e){
+            		window.location.href = jQuery("#top-level-dropdown").val();
+            	});
+            });
             
             //simulates back button... we likely need something different here, as it's not really 'back', right?
             $(document).ready(function(){
-                $('#back-button').click(function(){
+                $('.back-button').click(function(){
                     parent.history.back();
                     return false;
                 });
             });
-            $('#save-button').click(function() {
-                var temp1 = $("#radio input[type='radio']:checked").val();
-            	sev = new Sail.Event('habitatContent', {habitat:{wallScope:temp1, environmentalConditions:$('#environmental-conditions').val(),
-            			structuralFeatures:$('#structural-features').val(), organisms:$('#organisms').val(), comments:$('#comments').val()}})
+            $('#habitat-save-button').click(function() {
+                var habitatRadioInput = $("#radio input[type='radio']:checked").val();
+            	sev = new Sail.Event('newHabitatContent', {habitat:{wallScope:habitatRadioInput, environmentalConditions:$('#habitat-environmental-conditions').val(),
+            			structuralFeatures:$('#habitat-structural-features').val(), organisms:$('#habitat-organisms').val(), comments:$('#habitat-comments').val()}})
             	WallCology.groupchat.sendEvent(sev)	
             });
+            $('#organism-save-button').click(function() {
+                var organismRadioInput = $("#organism-radio input[type='radio']:checked").val();
+            	sev = new Sail.Event('newOrganismContent', {organism:{chosenOrganism:organismRadioInput, morphology:$('#organism-morphology').val(),
+            			behaviour:$('#organism-behaviour').val(), organisms:$('#organism-habitat').val(), comments:$('#organism-comments').val()}})
+            	WallCology.groupchat.sendEvent(sev)	
+            });
+				
 
-            //for back button
-            //$(function() {
-//            	$( "input:submit, a, button", ".demo" ).button();
-//            	$( "a", ".demo" ).click(function() { return false; });
-            //});
 //*************************************************************************************************
  
         },
