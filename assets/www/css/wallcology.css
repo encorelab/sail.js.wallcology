@@ -1,3 +1,10 @@
+/*
+Xoom dimensions:
+1178px x 800 px
+888px x 800 px (with soft keyboard revealed)
+*/
+
+
 #connecting {
   position: absolute;
   top: 40%;
@@ -22,17 +29,47 @@
 	padding-left: 10px;
 }
 
+/***************************************************************************************************************/
 
 
-
-.organism-pics {
-	height: 80px;
-	width: 80px;
+.organism-box {
+	height: 110px;
+	width: 110px;
+	margin: 1px;
 	border-radius: 4px;
 /*  background-image: */
 	background-color: #669999;
 }
 
+
+/***************************************************************************************************************/
+
+#relationships .organism-box {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+#relationships .arrow {
+	height: 20px;
+	width: 110px;
+	background-color: #555555;
+	display: inline-block;
+}
+
+#relationships .display-box {
+	height: 300px;
+	width: 650px;
+	border-style: solid;
+	border-width: thin;
+}
+
+#relationships .add-button {
+/* 	vertical-align: baseline; */
+}
+
+
+
+/***************************************************************************************************************/
 
 
                 .drag {

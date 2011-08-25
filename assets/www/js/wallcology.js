@@ -45,17 +45,22 @@ WallCology = {
             	location.reload()
             })
 
-//**********HABITAT**************************************************************        	
+//**********HABITAT*****************************************************************************************       	
             $('#radio').buttonset()
 
         	$('#habitat .save-button').click(Sail.app.observations.newHabitatContent)
 
-//**********ORGANISM**************************************************************                              	
+//**********ORGANISM****************************************************************************************                              	
         	$('#organism .save-button').click(Sail.app.observations.newOrganismContent)
 
-        	$(".drag").mobiledraganddrop({ targets: ".drop", status: "#status"});
-			$(".drag2").mobiledraganddrop({ targets: "#drop2", status: "#status"});
+        	$(".drag").mobiledraganddrop({ targets: ".drop1", status: "#status"});
+			$(".drag2").mobiledraganddrop({ targets: "#drop1", status: "#status"});
 
+//**********RELATIONSHIPS***********************************************************************************
+			$('#relationships .arrow').click(function(){
+				//siwtch to different arrow
+			})
+			
     	},
     	
         newHabitatContent: function() {
@@ -66,7 +71,7 @@ WallCology = {
         },
         
         newOrganismContent: function() {
-	        var organismRadioInput = $("#radio2 input[type='radio']:checked").val()
+	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
 	        sev = new Sail.Event('new_organism_content', {chosenOrganism:organismRadioInput, morphology:$('#organism .morphology').val(),
 	        	behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(), comments:$('#organism .comments').val()})
 	        WallCology.groupchat.sendEvent(sev)

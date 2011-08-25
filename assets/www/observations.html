@@ -6,8 +6,10 @@
     <link href="css/wallcology.css" rel="stylesheet" type="text/css" /> 
     <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
-    
-    <script type="text/javascript" src="jquery.mobiledragdrop.js"></script>
+
+<!-- need to dl these -->
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="jquery.mobiledragdrop.js" type="text/javascript"></script>
     <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>    
     <script src="js/sail.js/sail.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -88,12 +90,12 @@
 				<h4>NEW ORGANISM PAGE</h4></br>
 				
 				<form>
-					<div id="radio2">
+					<div id="radio-organism">
 						Choose an Organism
 						<!-- rename the values more descriptively once we know the organisms -->
 						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
 						<input type="radio" id="organism-radio1" value="1" />
-<!-- 						<div class="organism-pics"></div> -->					
+ 						<div class="organism-box"></div>					
 						<input type="radio" id="organism-radio2" value="2" />
 <!-- 						<div class="organism-pics"></div> -->
 						<input type="radio" id="organism-radio3" value="3" />
@@ -139,13 +141,47 @@
 		
 		
 <!-- *********************************************************************************************************  -->
-
 		
 		
 		<div id="tabs-3">
-			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+ 			<div id="relationships">
+				<h4>NEW RELATIONSHIPS PAGE</h4></br>
+
+				<h5>Choose an Organism</h5>				
+				<div>
+					<div class="organism-box" id="box1"></div>
+					<div class="organism-box" id="box2"></div>
+					<div class="organism-box" id="box3"></div>
+					<div class="organism-box" id="box4"></div>
+					<div class="organism-box" id="box5"></div>
+				</div>
+				<br/>
+				
+				<h5>Construction Area (Drag and drop images from above. Tap arrow to change relationship type)</h5>				
+				<div>
+					<div class="organism-box" id="box6"></div>
+					<div class="arrow"></div>
+					<div class="organism-box" id="box8"></div>
+					<button class="add-button">Add</button>
+				</div>
+				
+				<div class="display">
+					<h5>Display relationships (Relationships from the construction area are displayed here)</h5>
+					<div class="display-box"></div>
+				</div>
+				
+				
+				<br/><br/>
+				<button class="back-button">Back</button>
+				<button class="save-button">Save</button>
+				<button class="reload-button">Reload</button>
+			</div>
 		</div>
+
+
+<!-- *********************************************************************************************************  -->
+
+
 		<div id="tabs-4">
 			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
 			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
