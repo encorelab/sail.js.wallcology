@@ -22,14 +22,47 @@
 	padding-left: 10px;
 }
 
-/*   fuck this shit, looks like themeroller is better
-.ui-tabs {
-	background-color: #545454;
+
+
+
+.organism-pics {
+	height: 80px;
+	width: 80px;
+	border-radius: 4px;
+/*  background-image: */
+	background-color: #669999;
 }
 
-.ui-tabs-panel {
-	background-color: #009944;
-	color: #131413;
-}
-*/
-	
+
+
+                .drag {
+                        float: left;
+                        width: 21%;
+                        background-color: Green;
+                        color: White;
+                        margin: 10px 2%;
+                        cursor: move;
+                        text-align: center;
+                        -moz-border-radius: 1em;
+                        -webkit-border-radius: 1em;
+                        border-radius: 1em;
+                }
+                
+                .selected {
+                        background-color: Yellow;
+                        color: Black;
+                }
+                
+                .drop {
+                        background-color: Blue;
+                        color: White;
+                        margin: 3px;
+                        padding: 10px;
+                        -moz-border-radius: 1em;
+                        -webkit-border-radius: 1em;
+                        border-radius: 1em;
+                }
+                .active {
+                        background-color: orange;
+                        cursor: crosshair;
+                }

@@ -28,58 +28,67 @@ WallCology = {
                 return true
             })
     },
+   
     
-/*    phonegap: function() {
-        $('#camera').click(function() {
-            navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
+    observations: {
+        
+        init: function() {
+            $('#tabs').tabs()
+            $('#tabs').show()
+        	
+            //simulates back button... we likely need something different here, as it's not really 'back', right?
+            $('.back-button').click(function(){
+                parent.history.back()
+                return false
+            })
+            $('.reload-button').click(function(){
+            	location.reload()
+            })
 
-            function onSuccess(imageData) {
-              var image = document.getElementById('photo');
-              image.src = "data:image/jpeg;base64," + imageData;
-            }
+//**********HABITAT**************************************************************        	
+            $('#radio').buttonset()
 
-            function onFail(message) {
-              alert('Failed because: ' + message);
-            }
-        })
+        	$('#habitat .save-button').click(Sail.app.observations.newHabitatContent)
+
+//**********ORGANISM**************************************************************                              	
+        	$('#organism .save-button').click(Sail.app.observations.newOrganismContent)
+
+        	$(".drag").mobiledraganddrop({ targets: ".drop", status: "#status"});
+			$(".drag2").mobiledraganddrop({ targets: "#drop2", status: "#status"});
+
+    	},
+    	
+        newHabitatContent: function() {
+        	var habitatRadioInput = $("#radio input[type='radio']:checked").val()
+        	sev = new Sail.Event('new_habitat_content', {wallScope:habitatRadioInput, environmentalConditions:$('#habitat .environmental-conditions').val(),
+        		structuralFeatures:$('#habitat .structural-features').val(), organisms:$('#habitat .organisms').val(), comments:$('#habitat .comments').val()})
+        	WallCology.groupchat.sendEvent(sev)
+        },
         
-        $('#phonegap-info').html(JSON.stringify(navigator.device).replace(/,/g,',<br />'))
-        
-        navigator.accelerometer.watchAcceleration(
-            function(acc) {
-                $('#accelerometer').text("x: "+acc.x+", y:"+acc.y+", z:"+acc.z)
-            }
-        )
-        
-        navigator.compass.watchHeading(
-            function(heading) {
-                $('#compass').text(heading)
-            }
-        )
-        
-        navigator.geolocation.watchPosition(
-            function(position) {
-                $('#geolocation').text("Lat: "+acc.coords.latitude+", Long:"+acc.coords.longitude)
-            }
-        )
-        
-        $('#alert').click(function() {
-            navigator.notification.alert("This is an alert!", null, "Uh oh!", "Okay")
-        })
-        
-        $('#confirm').click(function() {
-            navigator.notification.alert("This is a confirmation!", null, "Yay!", "Alright")
-        })
-        
-        $('#beep').click(function() {
-            navigator.notification.beep(3)
-        })
-        
-        $('#vibrate').click(function() {
-            navigator.notification.vibrate(1000)
-        })
+        newOrganismContent: function() {
+	        var organismRadioInput = $("#radio2 input[type='radio']:checked").val()
+	        sev = new Sail.Event('new_organism_content', {chosenOrganism:organismRadioInput, morphology:$('#organism .morphology').val(),
+	        	behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(), comments:$('#organism .comments').val()})
+	        WallCology.groupchat.sendEvent(sev)
+        }
     },
-*/    
+   
+    
+    
+    
+    discussion: {
+    	init: function() {
+    		
+    	}
+    },
+    
+    experiment: {
+    	init: function() {
+    		
+    	}
+    },
+    
+
     authenticate: function() {
         console.log("Authenticating...")
         
@@ -109,47 +118,18 @@ WallCology = {
             WallCology.groupchat.join()
             $('#username').text(session.account.login)
       	    $('#connecting').hide()						
-
-            $('#tabs').show()
-
+        	jQuery("#top-level-dropdown").change(function(e){
+        		window.location.href = jQuery("#top-level-dropdown").val();
+        	})
             
-//where should all this go? Maybe after everything else?**************************************************************
-            $(function() {
-            	$('#tabs').tabs();
-            });
-            $(function() {
-            	$('#radio').buttonset();
-            });
-
-            jQuery(document).ready(function(){
-            	jQuery("#top-level-dropdown").change(function(e){
-            		window.location.href = jQuery("#top-level-dropdown").val();
-            	});
-            });
-            
-            //simulates back button... we likely need something different here, as it's not really 'back', right?
-            $(document).ready(function(){
-                $('.back-button').click(function(){
-                    parent.history.back();
-                    return false;
-                });
-            });
-            $('#habitat-save-button').click(function() {
-                var habitatRadioInput = $("#radio input[type='radio']:checked").val();
-            	sev = new Sail.Event('newHabitatContent', {habitat:{wallScope:habitatRadioInput, environmentalConditions:$('#habitat-environmental-conditions').val(),
-            			structuralFeatures:$('#habitat-structural-features').val(), organisms:$('#habitat-organisms').val(), comments:$('#habitat-comments').val()}})
-            	WallCology.groupchat.sendEvent(sev)	
-            });
-            $('#organism-save-button').click(function() {
-                var organismRadioInput = $("#organism-radio input[type='radio']:checked").val();
-            	sev = new Sail.Event('newOrganismContent', {organism:{chosenOrganism:organismRadioInput, morphology:$('#organism-morphology').val(),
-            			behaviour:$('#organism-behaviour').val(), organisms:$('#organism-habitat').val(), comments:$('#organism-comments').val()}})
-            	WallCology.groupchat.sendEvent(sev)	
-            });
-				
-
-//*************************************************************************************************
- 
+            if (true) {
+            	Sail.app.observations.init()
+            } else if (false) {
+            	Sail.app.discussions.init()
+            } else if (false) {
+            	Sail.app.experiment.init()
+            }
+             
         },
         
         authenticated: function(ev) {
@@ -157,3 +137,54 @@ WallCology = {
         }
     }
 }
+    /*    phonegap: function() {
+    $('#camera').click(function() {
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
+
+        function onSuccess(imageData) {
+          var image = document.getElementById('photo');
+          image.src = "data:image/jpeg;base64," + imageData;
+        }
+
+        function onFail(message) {
+          alert('Failed because: ' + message);
+        }
+    })
+    
+    $('#phonegap-info').html(JSON.stringify(navigator.device).replace(/,/g,',<br />'))
+    
+    navigator.accelerometer.watchAcceleration(
+        function(acc) {
+            $('#accelerometer').text("x: "+acc.x+", y:"+acc.y+", z:"+acc.z)
+        }
+    )
+    
+    navigator.compass.watchHeading(
+        function(heading) {
+            $('#compass').text(heading)
+        }
+    )
+    
+    navigator.geolocation.watchPosition(
+        function(position) {
+            $('#geolocation').text("Lat: "+acc.coords.latitude+", Long:"+acc.coords.longitude)
+        }
+    )
+    
+    $('#alert').click(function() {
+        navigator.notification.alert("This is an alert!", null, "Uh oh!", "Okay")
+    })
+    
+    $('#confirm').click(function() {
+        navigator.notification.alert("This is a confirmation!", null, "Yay!", "Alright")
+    })
+    
+    $('#beep').click(function() {
+        navigator.notification.beep(3)
+    })
+    
+    $('#vibrate').click(function() {
+        navigator.notification.vibrate(1000)
+    })
+},
+*/    
