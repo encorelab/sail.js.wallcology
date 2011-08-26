@@ -4,6 +4,10 @@
     <title>WallCology on Sail.js!</title> 
   
     <link href="css/wallcology.css" rel="stylesheet" type="text/css" /> 
+    <link href="css/counts.css" rel="stylesheet" type="text/css" />  
+    <link href="css/graphs.css" rel="stylesheet" type="text/css" />  
+    <link href="css/habitats.css" rel="stylesheet" type="text/css" />  
+    <link href="css/organisms.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
 
@@ -47,13 +51,13 @@
 
 		
 		
-<!-- *********************************************************************************************************  -->		
-		
-		
+<!-- ********************************** HABITAT *********************************  -->		
+			
 		<div id="tabs-1">
 			<div id="habitat">
 				<h4>NEW HABITAT PAGE</h4></br>
-							
+				 
+				<!-- The student chose which  -->   		
 				<form>
 					<div id="radio">
 						Habitat Number
@@ -65,23 +69,40 @@
 				</form>
 				<br/>
 				
-				<form action="" class="content-form">
-					<div class="content">
-						<h5>Environment Conditions (temperature, humidity, light)</h5> <input type="text" class="environmental-conditions" /><br />
-						<h5>Structural Features</h5> <input type="text" class="structural-features" /><br />
-						<h5>Organisms</h5> <input type="text" class="organisms" /><br />
-						<h5>Comments</h5> <input type="text" class="comments" /><br />					
+				<form action="" class="content-form"> 
+					<div class="content">     
+						
+						<div class="habitat-form-fields"> 
+							<h5>Environment Conditions (temperature, humidity, light)</h5> 
+							<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
+						</div>
+						
+						<div class="habitat-form-fields">  
+							<h5>Structural Features</h5> 
+							<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
+						</div>
+						
+						<div class="habitat-form-fields"> 
+							<h5>Organisms</h5> 
+							<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
+						</div> 
+						
+						<div class="habitat-form-fields"> 
+							<h5>Comments</h5> 
+							<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
+						</div>                                                              				
 					</div>	
-				</form>
-				<br/><br/>
-				<button class="back-button">Back</button>
-				<button class="save-button">Save</button>
-				<button class="reload-button">Reload</button>
+				</form>  
+				<div id="action-buttons">
+					<button class="back-button">Back</button>
+					<button class="save-button">Save</button>
+					<button class="reload-button">Reload</button>
+				</div>
 			</div>			
 		</div>
 		
 
-<!-- *********************************************************************************************************  -->
+<!-- ************************************ ORGANISMS *********************************************  -->
 
 		
 		
@@ -140,7 +161,7 @@
 		</div>
 		
 		
-<!-- *********************************************************************************************************  -->
+<!-- ************************************** RELATIONSHIPS *********************************************  -->
 		
 		
 		<div id="tabs-3">
