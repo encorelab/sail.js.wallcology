@@ -66,8 +66,6 @@ WallCology = {
 //**********ORGANISM****************************************************************************************                              	
         	$('#organism .save-button').click(Sail.app.observations.newOrganismContent)
 
-        	$(".drag").mobiledraganddrop({ targets: ".drop1", status: "#status"});
-			$(".drag2").mobiledraganddrop({ targets: "#drop1", status: "#status"});
 
 //**********RELATIONSHIPS***********************************************************************************
 			$('#relationships .arrow').click(function(){
@@ -138,7 +136,7 @@ WallCology = {
         connected: function(ev) {
             WallCology.groupchat.join()
             $('#username').text(session.account.login)
-      	    $('#connecting').hide()						
+      	    //$('#connecting').hide()						
         	jQuery("#top-level-dropdown").change(function(e){
         		window.location.href = jQuery("#top-level-dropdown").val();
         	})
