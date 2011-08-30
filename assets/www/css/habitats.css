@@ -1,15 +1,15 @@
-div#habitat {
+div#new-habitat {
 	margin-left: 100px;  
 }
 
-div#habitat div.habitat-form-fields {
+div#new-habitat div.habitat-form-fields {
 	margin-bottom: 50px;	
 } 
                        
-div#habitat div#action-buttons {
+div#new-habitat div#action-buttons {
 	width: 500px;               
 }
 
-div#habitat button.save-button {
+div#new-habitat button.save-button {
 	float: right;
 }    

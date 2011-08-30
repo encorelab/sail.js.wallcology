@@ -35,30 +35,36 @@ WallCology = {
         init: function() {
             $('#tabs').tabs()
             $('#tabs').show()
+            
+            $('#new-habitat').hide()
         	
-            //simulates back button... we likely need something different here, as it's not really 'back', right?
-            $('.back-button').click(function(){
-                parent.history.back()
-                return false
-            })
             $('.reload-button').click(function(){
             	location.reload()
             })
 
-//**********HABITAT*****************************************************************************************       	
+//**********HABITAT*********************************************************************************************            
+            $('#open-habitat .new-page-button').click(function(){
+            	$('#open-habitat').hide()
+            	$('#new-habitat').show()
+            })
+            
+            
+//**********NEW HABITAT*****************************************************************************************       	
             $('#radio').buttonset()
 
-        	$('#habitat .save-button').click(Sail.app.observations.newHabitatContent)
+        	$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
+
+            $('#new-habitat .back-button').click(function(){
+            	$('#new-habitat').hide()
+            	$('#open-habitat').show()
+            })
 
 //**********ORGANISM****************************************************************************************                              	
-        	$('#organism .save-button').click(Sail.app.observations.newOrganismContent)
-
-        	$('.drag').mobiledraganddrop({ targets: ".drop1", status: '#status'});
-			$('.drag2').mobiledraganddrop({ targets: '#drop1', status: '#status'});
+        	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
 
 //**********RELATIONSHIPS***********************************************************************************
-			$('#relationships .arrow').click(function(){
-				//siwtch to different arrow
+			$('#new-relationships .arrow').click(function(){
+				//switch to different arrow
 			})
 			
     	},
@@ -66,16 +72,16 @@ WallCology = {
         newHabitatContent: function() {
         	var habitatRadioInput = $("#radio input[type='radio']:checked").val()
         	sev = new Sail.Event('new_observation', {run_id:"temp", type:'habitat', wallscope:habitatRadioInput,
-        		environmental_conditions:$('#habitat .environmental-conditions').val(), structural_features:$('#habitat .structural-features').val(),
-        		organisms:$('#habitat .organisms').val(), comments:$('#habitat .comments').val()})
+        		environmental_conditions:$('#new-habitat .environmental-conditions').val(), structural_features:$('#new-habitat .structural-features').val(),
+        		organisms:$('#new-habitat .organisms').val(), comments:$('#new-habitat .comments').val()})
         	WallCology.groupchat.sendEvent(sev)
         },
         
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
 	        sev = new Sail.Event('new_observation', {run_id:"temp", type:'organism', chosen_organism:organismRadioInput,
-	        	morphology:$('#organism .morphology').val(), behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(),
-	        	comments:$('#organism .comments').val()})
+	        	morphology:$('#new-organism .morphology').val(), behaviour:$('#new-organism .behaviour').val(), organisms:$('#new-organism .habitat').val(),
+	        	comments:$('#new-organism .comments').val()})
 	        WallCology.groupchat.sendEvent(sev)
         },
         

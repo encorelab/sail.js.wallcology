@@ -54,7 +54,38 @@
 <!-- ********************************** HABITAT *********************************  -->		
 			
 		<div id="tabs-1">
-			<div id="habitat">
+			<div id="open-habitat">
+				<h4>HABITAT</h4></br>
+				<p>Pick from the two sets of criteria below to show community results:</p>
+				
+ 				<form>
+					<div id="radio">
+						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Habitat 1</label>
+						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Habitat 2</label>
+						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Habitat 3</label>
+						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Habitat 4</label>
+					</div>
+				</form>
+				<br/>			
+ 				<form>
+					<div id="radio">
+						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Organisms</label>
+						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Environmental Conditions</label>
+						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3"></label>
+						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Habitat 4</label>
+					</div>
+				</form>
+				<br/>			
+			
+			
+				Or add a new habitat page:
+				<button class="new-page-button">ADD NEW HABITAT PAGE</button>
+			
+			</div>
+				
+		
+		
+			<div id="new-habitat">
 				<h4>NEW HABITAT PAGE</h4></br>
 				 
 				<!-- The student chose which  -->   		
@@ -107,7 +138,7 @@
 		
 		
  		<div id="tabs-2">
- 			<div id="organism">
+ 			<div id="new-organism">
 				<h4>NEW ORGANISM PAGE</h4></br>
 				
 				<form>
@@ -116,22 +147,26 @@
 						<!-- rename the values more descriptively once we know the organisms -->
 						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
 						<!-- what the fuck is wrong with these radio buttons??? -->
-						<input type="radio" id="organism-radio1" value="1" />
- 						<img src="/images/icon_0000_blue-bug.png" />				
-						<input type="radio" id="organism-radio2" value="2" />
+ 						<img src="/images/icon_0000_blue-bug.png" />
 						<img src="/images/icon_0001_blue-bug-stage-1.png" />
-						<input type="radio" id="organism-radio3" value="3" />
 						<img src="/images/icon_0002_blue-bug-stage-2.png" />
-						<input type="radio" id="organism-radio4" value="4" />
 						<img src="/images/icon_0003_blue-bug-stage-3.png" />
-						<input type="radio" id="organism-radio5" value="5" />
 						<img src="/images/icon_0004_green-bug-stage-1.png" />
-						<input type="radio" id="organism-radio6" value="6" />
 						<img src="/images/icon_0008_green-bug.png" />
-						<input type="radio" id="organism-radio7" value="7" />
 						<img src="/images/icon_0006_fuzzy-mold.png" />
-						<input type="radio" id="organism-radio8" value="8" />
 						<img src="/images/icon_0007_scum.png" />
+						<input type="radio" id="organism-radio1" value="1" />
+						<input type="radio" id="organism-radio2" value="2" />
+						<input type="radio" id="organism-radio3" value="3" />
+						<input type="radio" id="organism-radio4" value="4" />
+						<input type="radio" id="organism-radio5" value="5" />
+
+						<input type="radio" id="organism-radio6" value="6" />
+
+						<input type="radio" id="organism-radio7" value="7" />
+
+						<input type="radio" id="organism-radio8" value="8" />
+
 					</div>
 				</form>
 				<br/>
@@ -146,13 +181,8 @@
 					</div>	
 				</form>
 				
-				<div class="drag" id="drag1">
-					<p>Drag 1</p>
-				</div>
 				<h5>Life Cycle (how they grow - drag images from above)</h5>
-				<div class="drop" id="drop1">
-					<div style="clear: both;"><p>Dropzone</p></div>
-				</div>
+
 				
 				<br/><br/>
 				<button class="back-button">Back</button>
@@ -166,7 +196,7 @@
 		
 		
 		<div id="tabs-3">
- 			<div id="relationships">
+ 			<div id="new-relationships">
 				<h4>NEW RELATIONSHIPS PAGE</h4></br>
 
 				<h5>Show Relationships of Energy Transfer</h5>
