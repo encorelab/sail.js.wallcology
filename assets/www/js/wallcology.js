@@ -53,8 +53,8 @@ WallCology = {
 //**********ORGANISM****************************************************************************************                              	
         	$('#organism .save-button').click(Sail.app.observations.newOrganismContent)
 
-        	$(".drag").mobiledraganddrop({ targets: ".drop1", status: "#status"});
-			$(".drag2").mobiledraganddrop({ targets: "#drop1", status: "#status"});
+        	$('.drag').mobiledraganddrop({ targets: ".drop1", status: '#status'});
+			$('.drag2').mobiledraganddrop({ targets: '#drop1', status: '#status'});
 
 //**********RELATIONSHIPS***********************************************************************************
 			$('#relationships .arrow').click(function(){
@@ -65,29 +65,40 @@ WallCology = {
     	
         newHabitatContent: function() {
         	var habitatRadioInput = $("#radio input[type='radio']:checked").val()
-        	sev = new Sail.Event('new_habitat_content', {wallScope:habitatRadioInput, environmentalConditions:$('#habitat .environmental-conditions').val(),
-        		structuralFeatures:$('#habitat .structural-features').val(), organisms:$('#habitat .organisms').val(), comments:$('#habitat .comments').val()})
+        	sev = new Sail.Event('new_observation', {run_id:"temp", type:'habitat', wallscope:habitatRadioInput,
+        		environmental_conditions:$('#habitat .environmental-conditions').val(), structural_features:$('#habitat .structural-features').val(),
+        		organisms:$('#habitat .organisms').val(), comments:$('#habitat .comments').val()})
         	WallCology.groupchat.sendEvent(sev)
         },
         
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_organism_content', {chosenOrganism:organismRadioInput, morphology:$('#organism .morphology').val(),
-	        	behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(), comments:$('#organism .comments').val()})
+	        sev = new Sail.Event('new_observation', {run_id:"temp", type:'organism', chosen_organism:organismRadioInput,
+	        	morphology:$('#organism .morphology').val(), behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(),
+	        	comments:$('#organism .comments').val()})
 	        WallCology.groupchat.sendEvent(sev)
+        },
+        
+        newRelationshipsContent: function() {
+	        
+//	        sev = new Sail.Event('new_observation', {run_id:Sail.app.run, type:'relationships'
+//	        	morphology:$('#organism .morphology').val(), behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(),
+//	        	comments:$('#organism .comments').val()
+//	        	})
+//	        WallCology.groupchat.sendEvent(sev)
         }
+
     },
    
-    
-    
-    
+//**********************************************************************************************************************************    
+     
     discussion: {
     	init: function() {
     		
     	}
     },
     
-    experiment: {
+    investigation: {
     	init: function() {
     		
     	}

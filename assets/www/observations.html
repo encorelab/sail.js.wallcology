@@ -115,22 +115,23 @@
 						Choose an Organism
 						<!-- rename the values more descriptively once we know the organisms -->
 						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
+						<!-- what the fuck is wrong with these radio buttons??? -->
 						<input type="radio" id="organism-radio1" value="1" />
- 						<div class="organism-box"></div>					
+ 						<img src="/images/icon_0000_blue-bug.png" />				
 						<input type="radio" id="organism-radio2" value="2" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0001_blue-bug-stage-1.png" />
 						<input type="radio" id="organism-radio3" value="3" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0002_blue-bug-stage-2.png" />
 						<input type="radio" id="organism-radio4" value="4" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0003_blue-bug-stage-3.png" />
 						<input type="radio" id="organism-radio5" value="5" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0004_green-bug-stage-1.png" />
 						<input type="radio" id="organism-radio6" value="6" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0008_green-bug.png" />
 						<input type="radio" id="organism-radio7" value="7" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0006_fuzzy-mold.png" />
 						<input type="radio" id="organism-radio8" value="8" />
-<!-- 						<div class="organism-pics"></div> -->
+						<img src="/images/icon_0007_scum.png" />
 					</div>
 				</form>
 				<br/>
@@ -168,7 +169,15 @@
  			<div id="relationships">
 				<h4>NEW RELATIONSHIPS PAGE</h4></br>
 
-				<h5>Choose an Organism</h5>				
+				<h5>Show Relationships of Energy Transfer</h5>
+				<br/>				
+				<div>
+				To define each relationship:
+				1. Choose two organisms by tapping the next button
+				2. Tap first icon (the FROM)
+				3. Tap "Is primary source of energy for..." or "Is secondary source of energy for..." button
+				4. Tap the second icon (the TO)
+				</div>
 				<div>
 					<div class="organism-box" id="box1"></div>
 					<div class="organism-box" id="box2"></div>
@@ -178,20 +187,11 @@
 				</div>
 				<br/>
 				
-				<h5>Construction Area (Drag and drop images from above. Tap arrow to change relationship type)</h5>				
-				<div>
-					<div class="organism-box" id="box6"></div>
-					<div class="arrow"></div>
-					<div class="organism-box" id="box8"></div>
-					<button class="add-button">Add</button>
-				</div>
+				<br/>
+				<button class="primary-source-button">Is a primary source of energy for...</button>
+				<button class="secondary-source-button">Is a secondary source of energy for...</button>
 				
-				<div class="display">
-					<h5>Display relationships (Relationships from the construction area are displayed here)</h5>
-					<div class="display-box"></div>
-				</div>
-				
-				
+				<button class="clear-button">Clear</button>
 				<br/><br/>
 				<button class="back-button">Back</button>
 				<button class="save-button">Save</button>
