@@ -11,7 +11,7 @@ WallCology = {
             Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
         
         Sail.modules
-            .load('Rollcall.Authenticator', {mode: 'picker'})
+            .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
             .thenRun(function () {
