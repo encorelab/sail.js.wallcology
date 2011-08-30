@@ -172,6 +172,10 @@ WallCology = {
         
         authenticated: function(ev) {
             $('#connecting').hide()
+        },
+        
+        logout: function(ev) {
+            Sail.app.run = null
         }
     }
 }
