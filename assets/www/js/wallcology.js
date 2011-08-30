@@ -94,6 +94,9 @@ WallCology = {
 				//switch to different arrow
 			})
 			
+//**********COUNTS******************************************************************************************			
+			
+			
     	},
     	
         newHabitatContent: function() {
