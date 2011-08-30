@@ -57,8 +57,8 @@
 				<h4>HABITAT</h4></br>
 				<p>Pick from the two sets of criteria below to show community results:</p>
 				
- 				<form>
-					<div id="radio">
+  				<form>
+					<div id="radio" class="select-habitat">
 						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Habitat 1</label>
 						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Habitat 2</label>
 						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Habitat 3</label>
@@ -67,15 +67,21 @@
 				</form>
 				<br/>			
  				<form>
-					<div id="radio">
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Organisms</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Environmental Conditions</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3"></label>
+					<div id="radio" class="select-criteria">
+						<input type="radio" id="radio1" name="radio" value="1" /><label for="organisms">Organisms</label>
+						<input type="radio" id="radio2" name="radio" value="2" /><label for="environmental-conditions">Environmental Conditions</label>
+						<input type="radio" id="radio3" name="radio" value="3" /><label for="structural-features">Structural Features</label>
 						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Habitat 4</label>
 					</div>
 				</form>
-				<br/>			
-			
+				<br/>		
+ 				
+				
+<!--  				<table class="habitat-table">
+					
+				
+				</table>	
+ -->			
 			
 				Or add a new habitat page:
 				<button class="new-page-button">ADD NEW HABITAT PAGE</button>
@@ -89,7 +95,7 @@
 				 
 				<!-- The student chose which  -->   		
 				<form>
-					<div id="radio">
+					<div id="radio" class="select-wallscope">
 						Habitat Number
 						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
 						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
@@ -171,14 +177,19 @@
 				<br/>
 			
 				
+
+<!-- 				<div id="accordion" class="content">
+					<h5><a href="#">Morphology (what they look like) </a></h5><br />
+					<h5><a href="#">Behaviour (what they do) <input type="text" class="behaviour" /></a></h5><br />
+					<h5><a href="#">Habitat (where they live) <input type="text" class="habitat" /></a></h5><br />
+					<h5><a href="#">Comments <input type="text" class="comments" /></a></h5><br />				
+				</div>	
+				
 				<form action="" class="content-form">
-					<div class="content">
-						<h5>Morphology (what they look like)</h5> <input type="text" class="morphology" /><br />
-						<h5>Behaviour (what they do)</h5> <input type="text" class="behaviour" /><br />
-						<h5>Habitat (where they live)</h5> <input type="text" class="habitat" /><br />
-						<h5>Comments</h5> <input type="text" class="comments" /><br />					
-					</div>	
+					<input type="text" class="morphology">
 				</form>
+ -->				
+
 				
 				<h5>Life Cycle (how they grow - drag images from above)</h5>
 				

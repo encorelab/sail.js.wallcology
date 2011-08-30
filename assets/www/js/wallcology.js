@@ -61,6 +61,7 @@ WallCology = {
             	$('#new-habitat').show()
             })
             
+//            $('#open-habitat .habitat-table').dataTable()
             
 //**********NEW HABITAT*****************************************************************************************       	
             $('#radio').buttonset()
@@ -83,17 +84,25 @@ WallCology = {
     	},
     	
         newHabitatContent: function() {
-        	var habitatRadioInput = $("#radio input[type='radio']:checked").val()
-        	sev = new Sail.Event('new_observation', {run_id:"temp", type:'habitat', wallscope:habitatRadioInput,
-        		environmental_conditions:$('#new-habitat .environmental-conditions').val(), structural_features:$('#new-habitat .structural-features').val(),
-        		organisms:$('#new-habitat .organisms').val(), comments:$('#new-habitat .comments').val()})
+        	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
+        	sev = new Sail.Event('new_observation', {run:Sail.app.run,
+        		type:'habitat',
+        		wallscope:habitatRadioInput,
+        		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
+        		structural_features:$('#new-habitat .structural-features').val(),
+        		organisms:$('#new-habitat .organisms').val(),
+        		comments:$('#new-habitat .comments').val()})
         	WallCology.groupchat.sendEvent(sev)
         },
         
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_observation', {run_id:"temp", type:'organism', chosen_organism:organismRadioInput,
-	        	morphology:$('#new-organism .morphology').val(), behaviour:$('#new-organism .behaviour').val(), organisms:$('#new-organism .habitat').val(),
+	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        	type:'organism',
+	        	chosen_organism:organismRadioInput,
+	        	morphology:$('#new-organism .morphology').val(),
+	        	behaviour:$('#new-organism .behaviour').val(),
+	        	organisms:$('#new-organism .habitat').val(),
 	        	comments:$('#new-organism .comments').val()})
 	        WallCology.groupchat.sendEvent(sev)
         },
