@@ -1,11 +1,15 @@
 WallCology = {
-    rollcallURL: 'http://rollcall.proto.encorelab.org',
+    rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
     xmppDomain: 'proto.encorelab.org',
-    groupchatRoom: 's3@conference.proto.encorelab.org',
+    groupchatRoom: null,
     
     init: function() {
         console.log("Initializing...")
-                
+        
+        Sail.app.run = JSON.parse($.cookie('run'))
+        if (Sail.app.run)
+            Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
+        
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'picker'})
             .load('Strophe.AutoConnector')
@@ -22,6 +26,15 @@ WallCology = {
                     })
 
                     $('#connecting').show()
+                    
+                    $('#class-selection button').click(function() {
+                        runName = $(this).data('run')
+                        Sail.app.rollcall.fetchRun(runName, function(run) {
+                            Sail.app.run = run
+                            $.cookie('run', JSON.stringify(run))
+                            location.href = '/observations.html'
+                        })
+                    })
                 })
 
                 $(Sail.app).trigger('initialized')
@@ -117,7 +130,10 @@ WallCology = {
         WallCology.rollcall = new Rollcall.Client(WallCology.rollcallURL)
         WallCology.token = WallCology.rollcall.getCurrentToken()
 
-        if (!WallCology.token) {
+        if (!WallCology.run) {
+            if ($.url.attr('file') != 'index.html')
+                window.location.href = "/index.html"
+        } else if (!WallCology.token) {
             Rollcall.Authenticator.requestLogin()
         } else {
             WallCology.rollcall.fetchSessionForToken(WallCology.token, function(data) {
@@ -139,7 +155,7 @@ WallCology = {
         connected: function(ev) {
             WallCology.groupchat.join()
             $('#username').text(session.account.login)
-      	    $('#connecting').hide()						
+      	    //$('#connecting').hide()						
         	jQuery("#top-level-dropdown").change(function(e){
         		window.location.href = jQuery("#top-level-dropdown").val();
         	})

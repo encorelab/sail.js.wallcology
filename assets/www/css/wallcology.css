@@ -29,6 +29,19 @@ Xoom dimensions:
 	padding-left: 10px;
 }
 
+#class-selection {
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 200px;
+  text-align: center;
+}
+
+#class-selection button {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 100%;
+}
+
 /***************************************************************************************************************/
 
 
