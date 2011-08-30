@@ -61,6 +61,19 @@ WallCology = {
             	$('#new-habitat').show()
             })
             
+            $(".select-habitat input[type='radio']").click(function(){
+            	console.log("TEST")
+            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	//do your database queries here
+            })
+
+            $(".select-criteria input[type='radio']").click(function(){
+            	console.log("TEST2")
+            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	//do your database queries here
+            })
+            		
+            				
 //            $('#open-habitat .habitat-table').dataTable()
             
 //**********NEW HABITAT*****************************************************************************************       	
