@@ -97,6 +97,19 @@ WallCology = {
 					]
 			} )
 */           
+            $(".select-habitat input[type='radio']").click(function(){
+            	console.log("TEST")
+            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	//do your database queries here
+            })
+
+            $(".select-criteria input[type='radio']").click(function(){
+            	console.log("TEST2")
+            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	//do your database queries here
+            })
+            		
+
 //**********NEW HABITAT*****************************************************************************************       	
             $('#radio').buttonset()
 
@@ -114,6 +127,9 @@ WallCology = {
 			$('#new-relationships .arrow').click(function(){
 				//switch to different arrow
 			})
+			
+//**********COUNTS******************************************************************************************			
+			
 			
     	},
     	

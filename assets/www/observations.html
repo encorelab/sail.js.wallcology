@@ -60,26 +60,26 @@
 				<h4>HABITAT</h4></br>
 				<p>Pick from the two sets of criteria below to show community results:</p>
 				
-  				<form>
-					<div id="radio" class="select-habitat">
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Habitat 1</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Habitat 2</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Habitat 3</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Habitat 4</label>
+				<!-- TODO: Fix theming on al radio buttons as per http://jqueryui.com/demos/button/#radio -->
+   				<form>
+					<div class="select-habitat">
+						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
+						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
+						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
+						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
 					</div>
 				</form>
 				<br/>			
  				<form>
-					<div id="radio" class="select-criteria">
+					<div class="select-criteria">
 						<input type="radio" id="radio1" name="radio" value="1" /><label for="organisms">Organisms</label>
 						<input type="radio" id="radio2" name="radio" value="2" /><label for="environmental-conditions">Environmental Conditions</label>
 						<input type="radio" id="radio3" name="radio" value="3" /><label for="structural-features">Structural Features</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Habitat 4</label>
+						<input type="radio" id="radio4" name="radio" value="4" /><label for="comments">Comments</label>
 					</div>
 				</form>
 				<br/>		
- 				
-				
+ 			
   				<div class="data-table">
 <!-- TODO: Table should be filled by call to sleepy mongoose to retrieve data, e.g. http://proto.encorelab.org:27080/foo/bar/_find-->
 					<table cellpadding="0" cellspacing="0" border="0" class="display" id="table_id">
@@ -311,13 +311,64 @@
 		</div>
 
 
-<!-- *********************************************************************************************************  -->
-
+<!-- **********************************COUNTS*****************************************************************  -->
 
 		<div id="tabs-4">
-			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+			<div id="new-counts">
+				<h4>NEW COUNT PAGE</h4></br>
+
+				<form>
+					<div class="select-habitat">
+						Habitat Number
+						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
+						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
+						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
+						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
+					</div>
+				</form>
+				<br/>
+
+				<div class="record-organisms">
+					<h5>Count Organisms</h5></br>
+					<button class="start-counting">START COUNTING</button>
+	
+					<img src="/images/icon_0006_fuzzy-mold.png" />
+					<img src="/images/icon_0007_scum.png" />
+					<img src="/images/icon_0000_blue-bug.png" />
+					<img src="/images/icon_0008_green-bug.png" />
+					<img src="/images/icon_0005_predator.png" />
+				</div>
+				
+				<div class="record-environment">
+					<div class="temperature-lowhigh">
+						<h5>Record Temperature</h5>
+						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+					</div>					
+					<div class="ligh-levels-lowhigh">
+						<h5>Record Light Levels</h5>
+						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+					</div>					
+					<div class="humidity-lowhigh">
+						<h5>Record Humidity</h5>
+						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+					</div>					
+					
+				</div>
+				
+				<button class="stop-counting">STOP COUNTING</button></br>
+				<button class="back-button">Back</button>
+				<button class="save-button">Save</button>
+			</div>
 		</div>
+		
+		
+		
+		
+<!-- *********************************************************************************************************  -->		
+		
 		<div id="tabs-5">
 			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
 			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
