@@ -15,13 +15,14 @@
 	<link href="js/sail.js/css/dataTables/demo_table.css" rel="stylesheet" type="text/css" />
 
     <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>    
-    <script src="js/sail.js/sail.js" type="text/javascript"></script>
+    <script src="js/sail.js/sail.js" type="text/javascript"></script> 
     
     <script type="text/javascript">
         Sail.load()
             .then('js/sail.js/rollcall.js')
             .then('js/sail.js/deps/jquery.dataTables.js')
             .then('js/wallcology.js')
+			.then('js/organisms.js')
             .thenRun(function() { 
                 return Sail.init(WallCology) 
             })
@@ -216,38 +217,60 @@
 		
  		<div id="tabs-2">
  			<div id="new-organism">
-				<h4>NEW ORGANISM PAGE</h4></br>
-				
-				<form>
-					<div id="radio-organism">
-						Choose an Organism
+				<h4>NEW ORGANISM PAGE</h4>			
+                   
+				<div class='section-title'> <b> Choose an Organism </b> </div>
+				<table id="organism-table">   
+					
+					<tr> 
+						<td id="blue-bug-stage-1">
+							<img src="/images/icon_0001_blue-bug-stage-1.png" />  
+						</td>						
+						<td id="green-bug-stage-1">
+							<img src="/images/icon_0004_green-bug-stage-1.png" />						
+						</td>
+						<td id="blue-bug-stage-3">    
+							<img src="/images/icon_0003_blue-bug-stage-3.png" />						
+						</td>
+						<td id="blue-bug-stage-2">
+							<img src="/images/icon_0002_blue-bug-stage-2.png" />						
+						</td>
+						<td id="blue-bug">
+							 <img src="/images/icon_0000_blue-bug.png" />   					
+						</td>						
+					</tr>
+					
+					<tr>     
+						<td>
+							<img src="/images/icon_0000_blue-bug.png" />						
+						</td>
+						<td id="predator"> 
+							<img src="/images/icon_0005_predator.png" />
+						   <!-- <img src="/images/icon_0008_green-bug.png" />						 -->
+						</td>
+						<td id="scum">
+							<img src="/images/icon_0007_scum.png" /> 					
+						</td>
+						<td id="fuzzy-mold"> 
+							<img src="/images/icon_0006_fuzzy-mold.png" /> 						
+						</td>
+						<td id="sun">
+							<img src="/images/icon_0009_sun.png" />						
+						</td>						
+					</tr>
 						<!-- rename the values more descriptively once we know the organisms -->
 						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
 						<!-- what the fuck is wrong with these radio buttons??? -->
- 						<img src="/images/icon_0000_blue-bug.png" />
-						<img src="/images/icon_0001_blue-bug-stage-1.png" />
-						<img src="/images/icon_0002_blue-bug-stage-2.png" />
-						<img src="/images/icon_0003_blue-bug-stage-3.png" />
-						<img src="/images/icon_0004_green-bug-stage-1.png" />
-						<img src="/images/icon_0008_green-bug.png" />
-						<img src="/images/icon_0006_fuzzy-mold.png" />
-						<img src="/images/icon_0007_scum.png" />
-						<input type="radio" id="organism-radio1" value="1" />
-						<input type="radio" id="organism-radio2" value="2" />
-						<input type="radio" id="organism-radio3" value="3" />
-						<input type="radio" id="organism-radio4" value="4" />
-						<input type="radio" id="organism-radio5" value="5" />
+				</table>    
+				<input type="hidden" id="selected-organism" value=""/>
 
-						<input type="radio" id="organism-radio6" value="6" />
-
-						<input type="radio" id="organism-radio7" value="7" />
-
-						<input type="radio" id="organism-radio8" value="8" />
-
-					</div>
-				</form>
-				<br/>
-			
+				<div class='section-title'> <b> Describe the organism </b> (use the categories that apply) </div>
+			                                                                                                     
+				<div> <b> Morphology </b> (what it looks like) </div>
+				
+				<div> <b> Behavior </b> (what it does) </div>
+				<div> <b> Habitat </b> (where it lives) </div>
+				<div> <b> Comments </b> </div>												
 				
 
 <!-- 				<div id="accordion" class="content">
@@ -262,10 +285,9 @@
 				</form>
  -->				
 
+				                     
+				<div class='section-title'> <b> Show the life cycle </b> (organisms will have between 1 and 4 stages) </div>  				
 				
-				<h5>Life Cycle (how they grow - drag images from above)</h5>
-				
-				<br/><br/>
 				<button class="back-button">Back</button>
 				<button class="save-button">Save</button>
 				<button class="reload-button">Reload</button>
@@ -331,31 +353,44 @@
 				<div class="record-organisms">
 					<h5>Count Organisms</h5></br>
 					<button class="start-counting">START COUNTING</button>
-	
-					<img src="/images/icon_0006_fuzzy-mold.png" />
-					<img src="/images/icon_0007_scum.png" />
-					<img src="/images/icon_0000_blue-bug.png" />
-					<img src="/images/icon_0008_green-bug.png" />
-					<img src="/images/icon_0005_predator.png" />
+					<div class="mold">
+						<img src="/images/icon_0006_fuzzy-mold.png" />
+						<div id="mold-slider"></div>
+					</div>
+					<div class="scum">
+						<img src="/images/icon_0007_scum.png" />
+						<div id="scum-slider"></div>
+					</div>
+					<div class="blue-bug">
+						<img src="/images/icon_0000_blue-bug.png" />
+						<div id="blue-bug-slider"></div>
+					</div>
+					<div class="green-bug">
+						<img src="/images/icon_0008_green-bug.png" />
+						<div id="green-bug-slider"></div>
+					</div>
+					<div class="predator">
+						<img src="/images/icon_0005_predator.png" />
+						<div id="predator-slider"></div>
+					</div>
 				</div>
 				
 				<div class="record-environment">
 					<div class="temperature-lowhigh">
 						<h5>Record Temperature</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="temp-low" value="1" /><label for="temp-low">Low</label>
+						<input type="radio" name="temp-high" value="2" /><label for="temp-high">High</label>
 					</div>					
-					<div class="ligh-levels-lowhigh">
+					<div class="light-levels-lowhigh">
 						<h5>Record Light Levels</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="light-low" value="1" /><label for="light-low">Low</label>
+						<input type="radio" name="light-high" value="2" /><label for="light-high">High</label>
 					</div>					
 					<div class="humidity-lowhigh">
 						<h5>Record Humidity</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="humidity-low" value="1" /><label for="humidity-low">Low</label>
+						<input type="radio" name="humidity-high" value="2" /><label for="humidity-high">High</label>
 					</div>					
-					
 				</div>
 				
 				<button class="stop-counting">STOP COUNTING</button></br>

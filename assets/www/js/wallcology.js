@@ -1,3 +1,15 @@
+//TODO
+//fix all of the radio buttons
+//confirm that all of the sevs are working
+//get those jpgs that are missing from the dataTables
+//finish counts
+//start relationships again
+
+
+//Sail.app.groupchatRoom to get room
+
+
+
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
     xmppDomain: 'proto.encorelab.org',
@@ -7,11 +19,12 @@ WallCology = {
         console.log("Initializing...")
         
         Sail.app.run = JSON.parse($.cookie('run'))
-        if (Sail.app.run)
+        if (Sail.app.run) {
             Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
+        }
         
         Sail.modules
-            .load('Rollcall.Authenticator', {mode: 'picker'})
+            .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
             .thenRun(function () {
@@ -29,9 +42,9 @@ WallCology = {
                     
                     $('#class-selection button').click(function() {
                         runName = $(this).data('run')
-                        Sail.app.rollcall.fetchRun(runName, function(run) {
-                            Sail.app.run = run
-                            $.cookie('run', JSON.stringify(run))
+                        Sail.app.rollcall.fetchRun(runName, function(data) {
+                            Sail.app.run = data.run
+                            $.cookie('run', JSON.stringify(Sail.app.run))
                             location.href = '/observations.html'
                         })
                     })
@@ -149,13 +162,28 @@ WallCology = {
 			})
 			
 //**********COUNTS******************************************************************************************			
+
+			$("#mold-slider").slider();
+			$("#scum-slider").slider();
+			$("#blue-bug-slider").slider();
+			$("#green-bug-slider").slider();
+			$("#predator-slider").slider();
+			
+			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)
+            $('#new-counts .back-button').click(function(){
+            	$('#new-counts').hide()
+            	$('#open-counts').show()
+            })
+			
+//***************************************************************************************************************
 			
 			
     	},
 
         newHabitatContent: function() {
         	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
-        	sev = new Sail.Event('new_observation', {run:Sail.app.run,
+        	sev = new Sail.Event('new_observation',{
+        		run:Sail.app.run,
         		type:'habitat',
         		wallscope:habitatRadioInput,
         		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
@@ -167,7 +195,8 @@ WallCology = {
         
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation',{
+	        	run:Sail.app.run,
 	        	type:'organism',
 	        	chosen_organism:organismRadioInput,
 	        	morphology:$('#new-organism .morphology').val(),
@@ -184,7 +213,30 @@ WallCology = {
 //	        	comments:$('#organism .comments').val()
 //	        	})
 //	        WallCology.groupchat.sendEvent(sev)
-        }
+        },
+
+        newCountsContent: function() {
+	        var countsHabitatRadio = $("#new-counts .select-habitat input[type='radio']:checked").val()
+	        var countsTemperatureRadio = $("#new-counts .temperature-lowhigh input[type='radio']:checked").val()
+	        var countsLightRadio = $("#new-counts .light-levels-lowhigh input[type='radio']:checked").val()
+	        var countsHumidityRadio = $("#new-counts .humidity-lowhigh input[type='radio']:checked").val()
+	        
+	        sev = new Sail.Event('new_count', {run:Sail.app.run,
+	        	type:"count",
+	        	chosen_habitat:countsHabitatRadio,
+	        	start_time:"TEMP",
+	        	end_time:"TEMP@",
+/*	        	mold:$('#new-counts .mold').slider("value"),
+	        	scum:$('#new-counts .scum').slider("value"),
+	        	blue_bug:$('#new-counts .blue-bug').slider("value"),
+	        	green_bug:$('#new-counts .green-bug').slider("value"),
+	        	predator:$('#new-counts .predator').slider("value"),
+*/	        	temperature:countsTemperatureRadio,
+	        	light_levels:countsLightRadio,
+	        	humidity:countsHumidityRadio,
+	        	})
+	        WallCology.groupchat.sendEvent(sev)
+        },
 
     },
    
@@ -251,9 +303,13 @@ WallCology = {
         
         authenticated: function(ev) {
             $('#connecting').hide()
+        },
+        
+        logout: function(ev) {
+            Sail.app.run = null
         }
     }
-}
+} 
     /*    phonegap: function() {
     $('#camera').click(function() {
         navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
