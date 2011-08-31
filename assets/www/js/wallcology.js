@@ -7,8 +7,9 @@ WallCology = {
         console.log("Initializing...")
         
         Sail.app.run = JSON.parse($.cookie('run'))
-        if (Sail.app.run)
+        if (Sail.app.run) {
             Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
+        }
         
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
@@ -29,9 +30,9 @@ WallCology = {
                     
                     $('#class-selection button').click(function() {
                         runName = $(this).data('run')
-                        Sail.app.rollcall.fetchRun(runName, function(run) {
-                            Sail.app.run = run
-                            $.cookie('run', JSON.stringify(run))
+                        Sail.app.rollcall.fetchRun(runName, function(data) {
+                            Sail.app.run = data.run
+                            $.cookie('run', JSON.stringify(Sail.app.run))
                             location.href = '/observations.html'
                         })
                     })
