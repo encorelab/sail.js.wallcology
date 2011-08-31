@@ -61,6 +61,26 @@ WallCology = {
             	$('#new-habitat').show()
             })
 
+ 			$.get("/mongoose/foo/bar/_find", 
+			  function(data) {
+				var resultArray
+			    if (data.ok === 1) {
+					console.log("Mongoose returned a data set")
+					
+					resultArray = data.results
+					// TODO: loop over result and use it to change content of table
+					/*for (var i = 0; i<resultArray.size(); i++) {
+						resultArray[i]
+					}*/
+					
+					return true
+				}
+				else {
+					console.log("Mongoose request failed")
+					return false
+				}
+			  }, "json")
+			
 			$('#table_id').dataTable()
             
 /*            $('#open-habitat .habitat-table').dataTable({
@@ -132,7 +152,7 @@ WallCology = {
 			
 			
     	},
-    	
+
         newHabitatContent: function() {
         	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
         	sev = new Sail.Event('new_observation', {run:Sail.app.run,
