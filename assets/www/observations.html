@@ -259,31 +259,44 @@
 				<div class="record-organisms">
 					<h5>Count Organisms</h5></br>
 					<button class="start-counting">START COUNTING</button>
-	
-					<img src="/images/icon_0006_fuzzy-mold.png" />
-					<img src="/images/icon_0007_scum.png" />
-					<img src="/images/icon_0000_blue-bug.png" />
-					<img src="/images/icon_0008_green-bug.png" />
-					<img src="/images/icon_0005_predator.png" />
+					<div class="mold">
+						<img src="/images/icon_0006_fuzzy-mold.png" />
+						<div id="mold-slider"></div>
+					</div>
+					<div class="scum">
+						<img src="/images/icon_0007_scum.png" />
+						<div id="scum-slider"></div>
+					</div>
+					<div class="blue-bug">
+						<img src="/images/icon_0000_blue-bug.png" />
+						<div id="blue-bug-slider"></div>
+					</div>
+					<div class="green-bug">
+						<img src="/images/icon_0008_green-bug.png" />
+						<div id="green-bug-slider"></div>
+					</div>
+					<div class="predator">
+						<img src="/images/icon_0005_predator.png" />
+						<div id="predator-slider"></div>
+					</div>
 				</div>
 				
 				<div class="record-environment">
 					<div class="temperature-lowhigh">
 						<h5>Record Temperature</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="radio" value="1" /><label for="temp-low">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="temp-high">High</label>
 					</div>					
-					<div class="ligh-levels-lowhigh">
+					<div class="light-levels-lowhigh">
 						<h5>Record Light Levels</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="radio" value="1" /><label for="light-low">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="light-high">High</label>
 					</div>					
 					<div class="humidity-lowhigh">
 						<h5>Record Humidity</h5>
-						<input type="radio" name="radio" value="1" /><label for="radio1">Low</label>
-						<input type="radio" name="radio" value="2" /><label for="radio2">High</label>
+						<input type="radio" name="radio" value="1" /><label for="humidity-low">Low</label>
+						<input type="radio" name="radio" value="2" /><label for="humidity-high">High</label>
 					</div>					
-					
 				</div>
 				
 				<button class="stop-counting">STOP COUNTING</button></br>
