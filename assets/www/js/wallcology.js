@@ -6,7 +6,7 @@
 //start relationships again
 
 
-//Sail.app.groupchatRoom to get room
+//Sail.app.groupchatRoom to get room. Currently ie "wallcology-julia-fall2010"
 
 
 
