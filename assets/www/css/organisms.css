@@ -21,4 +21,14 @@ td.selected {
 	background-color: white;
 	border-style: solid;
 	border-width: 1px;
+}                
+
+h5.organism-description-section {
+	border-style: solid;
+	border-width: 1px;   
+	width: 300px;
+}
+
+div.description-content {
+	display: none;
 }
