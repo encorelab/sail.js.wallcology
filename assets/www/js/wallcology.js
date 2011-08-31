@@ -183,7 +183,7 @@ WallCology = {
             $('#connecting').hide()
         }
     }
-}
+} 
     /*    phonegap: function() {
     $('#camera').click(function() {
         navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
