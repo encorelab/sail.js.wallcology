@@ -6,6 +6,9 @@
 //start relationships again
 
 
+//Sail.app.groupchatRoom to get room
+
+
 
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
