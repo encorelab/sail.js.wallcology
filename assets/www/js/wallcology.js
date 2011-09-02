@@ -1,12 +1,11 @@
 //TODO
-//fix all of the radio buttons
-//confirm that all of the sevs are working
-//get those jpgs that are missing from the dataTables
-//finish counts
+//redo data dictionary
+//add the graphics
+//complete all of habitats, get a better of an idea of how complex a whole unit will be (also, querying the db)
 //start relationships again
 
 
-//Sail.app.groupchatRoom to get room. Currently ie "wallcology-julia-fall2010"
+//Sail.app.groupchatRoom to get room. Currently ie "wallcology-julia-fall2011"
 
 
 
@@ -63,7 +62,9 @@ WallCology = {
             $('#tabs').show()
             
             $('#new-habitat').hide()
-        	
+
+            $('.jquery-radios').buttonset()
+            
             $('.reload-button').click(function(){
             	location.reload()
             })
@@ -129,23 +130,23 @@ WallCology = {
 						}
 					]
 			} )
-*/           
+*/          
+			
+			//these aren't working, correctly... TODO
             $(".select-habitat input[type='radio']").click(function(){
-            	console.log("TEST")
+            	console.log("radio1")
             	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
             	//do your database queries here
             })
 
             $(".select-criteria input[type='radio']").click(function(){
-            	console.log("TEST2")
+            	console.log("radio2")
             	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
             	//do your database queries here
             })
             		
 
-//**********NEW HABITAT*****************************************************************************************       	
-            $('#radio').buttonset()
-
+//**********NEW HABITAT*****************************************************************************************
         	$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
 
             $('#new-habitat .back-button').click(function(){
@@ -163,11 +164,7 @@ WallCology = {
 			
 //**********COUNTS******************************************************************************************			
 
-			$("#mold-slider").slider();
-			$("#scum-slider").slider();
-			$("#blue-bug-slider").slider();
-			$("#green-bug-slider").slider();
-			$("#predator-slider").slider();
+			$('#new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)
             $('#new-counts .back-button').click(function(){
@@ -175,13 +172,12 @@ WallCology = {
             	$('#open-counts').show()
             })
 			
-//***************************************************************************************************************
-			
-			
     	},
 
+//***************************************************************************************************************
+    	
         newHabitatContent: function() {
-        	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
+        	var habitatRadioInput = $("#new-habitat .select-wallscope-radios input[type='radio']:checked").val()
         	sev = new Sail.Event('new_observation',{
         		run:Sail.app.run,
         		type:'habitat',
@@ -193,6 +189,7 @@ WallCology = {
         	WallCology.groupchat.sendEvent(sev)
         },
         
+        //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
 	        sev = new Sail.Event('new_observation',{
@@ -216,24 +213,42 @@ WallCology = {
         },
 
         newCountsContent: function() {
-	        var countsHabitatRadio = $("#new-counts .select-habitat input[type='radio']:checked").val()
-	        var countsTemperatureRadio = $("#new-counts .temperature-lowhigh input[type='radio']:checked").val()
-	        var countsLightRadio = $("#new-counts .light-levels-lowhigh input[type='radio']:checked").val()
-	        var countsHumidityRadio = $("#new-counts .humidity-lowhigh input[type='radio']:checked").val()
-	        
 	        sev = new Sail.Event('new_count', {run:Sail.app.run,
 	        	type:"count",
-	        	chosen_habitat:countsHabitatRadio,
-	        	start_time:"TEMP",
-	        	end_time:"TEMP@",
-/*	        	mold:$('#new-counts .mold').slider("value"),
-	        	scum:$('#new-counts .scum').slider("value"),
-	        	blue_bug:$('#new-counts .blue-bug').slider("value"),
-	        	green_bug:$('#new-counts .green-bug').slider("value"),
-	        	predator:$('#new-counts .predator').slider("value"),
-*/	        	temperature:countsTemperatureRadio,
-	        	light_levels:countsLightRadio,
-	        	humidity:countsHumidityRadio,
+	        	chosen_habitat:$("#new-counts .select-habitat-radios input[type='radio']:checked").val(),
+	        	temperature:$("#new-counts .temperature-radios input[type='radio']:checked").val(),
+	        	light_level:$("#new-counts .light-level-radios input[type='radio']:checked").val(),
+	        	humidity:$("#new-counts .humidity-radios input[type='radio']:checked").val(),
+	        	scum_percent:$('#new-counts .count-scum-percent').val(),
+	        	mold_percent:$('#new-counts .count-mold-percent').val(),
+	        	blue_bug:[{
+	        		count1:$('#new-counts .count-blue-bug1').val(),
+	        		count2:$('#new-counts .count-blue-bug2').val(),
+	        		count3:$('#new-counts .count-blue-bug3').val(),
+	        		average:$('#new-counts .count-blue-bug4').val(),
+	        		multiplier:$('#new-counts .count-blue-bug5').val(),
+	        		final_count:$('#new-counts .count-blue-bug6').val(),
+	        		}],
+	        	green_bug:[{
+	        		count1:$('#new-counts .count-green-bug1').val(),
+	        		count2:$('#new-counts .count-green-bug2').val(),
+	        		count3:$('#new-counts .count-green-bug3').val(),
+	        		average:$('#new-counts .count-green-bug4').val(),
+	        		multiplier:$('#new-counts .count-green-bug5').val(),
+	        		final_count:$('#new-counts .count-green-bug6').val(),
+	        		}],
+	        	predator:[{
+	        		count1:$('#new-counts .count-predator1').val(),
+	        		count2:$('#new-counts .count-predator2').val(),
+	        		count3:$('#new-counts .count-predator3').val(),
+	        		average:$('#new-counts .count-predator4').val(),
+	        		multiplier:$('#new-counts .count-predator5').val(),
+	        		final_count:$('#new-counts .count-predator6').val(),
+	        		}],
+	        	date:$('#new-counts-datepicker').datepicker('getDate'),
+	        	hour:$('#new-counts .hour').val(),
+	        	minute:$('#new-counts .minute').val(),
+	        	ampm:$("#new-counts .ampm-radios input[type='radio']:checked").val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
         },

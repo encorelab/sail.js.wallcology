@@ -61,24 +61,20 @@
 				<h4>HABITAT</h4></br>
 				<p>Pick from the two sets of criteria below to show community results:</p>
 				
-				<!-- TODO: Fix theming on al radio buttons as per http://jqueryui.com/demos/button/#radio -->
-   				<form>
-					<div class="select-habitat">
-						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
-						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
-						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
-						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
-					</div>
-				</form>
+				<!-- TODO: Fix theming on all radio buttons as per http://jqueryui.com/demos/button/#radio -->
+				<div class="select-habitat-radios jquery-radios">
+					<input type="radio" name="select-habitat" id="open-habitat-r1" value="habitat-1" /><label for="open-habitat-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="open-habitat-r2" value="habitat-2" /><label for="open-habitat-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="open-habitat-r3" value="habitat-3" /><label for="open-habitat-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="open-habitat-r4" value="habitat-4" /><label for="open-habitat-r4">Habitat 4</label>
+				</div>
 				<br/>			
- 				<form>
-					<div class="select-criteria">
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="organisms">Organisms</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="environmental-conditions">Environmental Conditions</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="structural-features">Structural Features</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="comments">Comments</label>
-					</div>
-				</form>
+				<div class="select-criteria-radios jquery-radios">
+					<input type="radio" name="select-criteria" id="open-habitat-r5" value="organisms" /><label for="open-habitat-r5">Organisms</label>
+					<input type="radio" name="select-criteria" id="open-habitat-r6" value="environmental-conditions" /><label for="open-habitat-r6">Environmental Conditions</label>
+					<input type="radio" name="select-criteria" id="open-habitat-r7" value="structural-features" /><label for="open-habitat-r7">Structural Features</label>
+					<input type="radio" name="select-criteria" id="open-habitat-r8" value="comments" /><label for="open-habitat-r8">Comments</label>
+				</div>
 				<br/>		
  			
   				<div class="data-table">
@@ -167,41 +163,39 @@
 				<h4>NEW HABITAT PAGE</h4></br>
 				 
 				<!-- The student chose which  -->   		
-				<form>
-					<div id="radio" class="select-wallscope">
-						Habitat Number
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
-					</div>
-				</form>
+				<div class="select-wallscope-radios jquery-radios">
+					Habitat Number
+					<input type="radio" name="select-wallscope" id="new-habitat-r1" value="1" /><label for="new-habitat-r1">Wallscope 1</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r2" value="2" /><label for="new-habitat-r2">Wallscope 2</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r3" value="3" /><label for="new-habitat-r3">Wallscope 3</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r4" value="4" /><label for="new-habitat-r4">Wallscope 4</label>
+				</div>
 				<br/>
+
 				
-				<form action="" class="content-form"> 
-					<div class="content">     
-						
-						<div class="habitat-form-fields"> 
-							<h5>Environment Conditions (temperature, humidity, light)</h5> 
-							<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
-						</div>
-						
-						<div class="habitat-form-fields">  
-							<h5>Structural Features</h5> 
-							<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
-						</div>
-						
-						<div class="habitat-form-fields"> 
-							<h5>Organisms</h5> 
-							<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
-						</div> 
-						
-						<div class="habitat-form-fields"> 
-							<h5>Comments</h5> 
-							<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
-						</div>                                                              				
-					</div>	
-				</form>  
+				<div class="content">     
+					
+					<div class="habitat-form-fields"> 
+						<h5>Environment Conditions (temperature, humidity, light)</h5> 
+						<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
+					</div>
+					
+					<div class="habitat-form-fields">  
+						<h5>Structural Features</h5> 
+						<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
+					</div>
+					
+					<div class="habitat-form-fields"> 
+						<h5>Organisms</h5> 
+						<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
+					</div> 
+					
+					<div class="habitat-form-fields"> 
+						<h5>Comments</h5> 
+						<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
+					</div>                                                              				
+				</div>	
+
 				<div id="action-buttons">
 					<button class="back-button">Back</button>
 					<button class="save-button">Save</button>
@@ -213,7 +207,6 @@
 
 <!-- ************************************ ORGANISMS *********************************************  -->
 
-		
 		
  		<div id="tabs-2">
  			<div id="new-organism">
@@ -260,7 +253,7 @@
 					</tr>
 						<!-- rename the values more descriptively once we know the organisms -->
 						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
-						<!-- what the fuck is wrong with these radio buttons??? -->
+						
 				</table>    
 				<input type="hidden" id="selected-organism" value=""/>
 
@@ -339,67 +332,116 @@
 			<div id="new-counts">
 				<h4>NEW COUNT PAGE</h4></br>
 
-				<form>
-					<div class="select-habitat">
-						Habitat Number
-						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
-						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
-						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
-						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
-					</div>
-				</form>
+				<div class="select-habitat-radios jquery-radios">
+					Habitat Number
+					<input type="radio" name="select-habitat" id="new-count-r1" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="new-count-r2" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="new-count-r3" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="new-count-r4" value="4" /><label for="new-count-r4">Habitat 4</label>
+				</div>
 				<br/>
 
-				<div class="record-organisms">
-					<h5>Count Organisms</h5></br>
-					<button class="start-counting">START COUNTING</button>
-					<div class="mold">
-						<img src="/images/icon_0006_fuzzy-mold.png" />
-						<div id="mold-slider"></div>
-					</div>
-					<div class="scum">
-						<img src="/images/icon_0007_scum.png" />
-						<div id="scum-slider"></div>
-					</div>
-					<div class="blue-bug">
-						<img src="/images/icon_0000_blue-bug.png" />
-						<div id="blue-bug-slider"></div>
-					</div>
-					<div class="green-bug">
-						<img src="/images/icon_0008_green-bug.png" />
-						<div id="green-bug-slider"></div>
-					</div>
-					<div class="predator">
-						<img src="/images/icon_0005_predator.png" />
-						<div id="predator-slider"></div>
-					</div>
-				</div>
-				
 				<div class="record-environment">
-					<div class="temperature-lowhigh">
+					<div class="temperature-radios jquery-radios">
 						<h5>Record Temperature</h5>
-						<input type="radio" name="temp-low" value="1" /><label for="temp-low">Low</label>
-						<input type="radio" name="temp-high" value="2" /><label for="temp-high">High</label>
+						<input type="radio" name="temp" value="low" id="new-count-r5" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" /><label for="new-count-r6">High</label>
 					</div>					
-					<div class="light-levels-lowhigh">
+					<div class="light-level-radios jquery-radios">
 						<h5>Record Light Levels</h5>
-						<input type="radio" name="light-low" value="1" /><label for="light-low">Low</label>
-						<input type="radio" name="light-high" value="2" /><label for="light-high">High</label>
+						<input type="radio" name="light" value="low" id="new-count-r7" /><label for="new-count-r7">Low</label>
+						<input type="radio" name="light" value="high" id="new-count-r8" /><label for="new-count-r8">High</label>
 					</div>					
-					<div class="humidity-lowhigh">
+					<div class="humidity-radios jquery-radios">
 						<h5>Record Humidity</h5>
-						<input type="radio" name="humidity-low" value="1" /><label for="humidity-low">Low</label>
-						<input type="radio" name="humidity-high" value="2" /><label for="humidity-high">High</label>
+						<input type="radio" name="humidity" value="low" id="new-count-r9" /><label for="new-count-r9">Low</label>
+						<input type="radio" name="humidity" value="high" id="new-count-r10" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
+
+
+				<div class="record-organisms">
+					<h5>Count Organisms</h5>
+					<p>Enter percentage of WallScope covered by vegitation</p>
+					<div class="count-scum">
+						<img src="/images/icon_0007_scum.png" />
+						<textarea rows="4" cols="5" class="text-box count-scum-percent"></textarea>
+						%
+					</div>
+					<div class="count-mold">
+						<img src="/images/icon_0006_fuzzy-mold.png" />
+						<textarea rows="4" cols="5" class="text-box count-mold-percent"></textarea>
+						%
+					</div>
+
+					<p>Enter up to three counts for each organism</p>
+					<div class="count-blue-bug">
+						<img src="/images/icon_0000_blue-bug.png" />
+						<textarea rows="4" cols="5" class="text-box count-blue-bug1"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-blue-bug2"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-blue-bug3"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-blue-bug4"></textarea>
+						x
+						<textarea rows="4" cols="5" class="text-box count-blue-bug5"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-blue-bug6"></textarea>																	
+					</div>
+					<div class="count-green-bug">
+						<img src="/images/icon_0008_green-bug.png" />
+						<textarea rows="4" cols="5" class="text-box count-green-bug1"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-green-bug2"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-green-bug3"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-green-bug4"></textarea>
+						x
+						<textarea rows="4" cols="5" class="text-box count-green-bug5"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-green-bug6"></textarea>			
+					</div>
+					<div class="count-predator">
+						<img src="/images/icon_0005_predator.png" />
+						<textarea rows="4" cols="5" class="text-box count-predator1"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-predator2"></textarea>
+						+
+						<textarea rows="4" cols="5" class="text-box count-predator3"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-predator4"></textarea>
+						x
+						<textarea rows="4" cols="5" class="text-box count-predator5"></textarea>
+						=
+						<textarea rows="4" cols="5" class="text-box count-predator6"></textarea>
+					</div>
+				</div>
 				
-				<button class="stop-counting">STOP COUNTING</button></br>
+				<div class="new-count-date-time">
+					<h5>Record Date</h5>
+					<div class="date">
+						<p>Date <input id="new-counts-datepicker" type="text"></p>				
+					</div>
+					
+					<h5>Record Time</h5>
+					<div class="time">
+						Hour
+						<textarea rows="4" cols="5" class="text-box hour"></textarea>
+						Minute
+						<textarea rows="4" cols="5" class="text-box minute"></textarea>
+						<div class="ampm-radios">
+							<input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am">a.m.</label>
+							<input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-rpm">p.m.</label>
+						</div>	
+					</div>
+				</div>
+				
 				<button class="back-button">Back</button>
 				<button class="save-button">Save</button>
 			</div>
 		</div>
-		
-		
 		
 		
 <!-- *********************************************************************************************************  -->		
