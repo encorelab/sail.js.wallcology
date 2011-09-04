@@ -48,20 +48,72 @@
 			<li><a href="#tabs-2">Organisms</a></li>
 			<li><a href="#tabs-3">Relationships</a></li>
 			<li><a href="#tabs-4">Counts</a></li>
-			<li><a href="#tabs-5">Graphs</a></li>
-			
 		</ul>
-
 		
 		
 <!-- ********************************** HABITAT *********************************  -->		
 			
 		<div id="tabs-1">
-			<div id="open-habitat">
-				<h4>HABITAT</h4></br>
-				<p>Pick from the two sets of criteria below to show community results:</p>
+		
+			<div id="landing-habitat">
+				<div id="action-buttons">
+					<button class="new-button">I want to describe a HABITAT</button>
+					<button class="view-button">I want to see what others said</button>
+				</div>
+			</div>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+	
+			<div id="new-habitat">
+				<h4>NEW HABITAT PAGE</h4></br>
+				 
+				<!-- The student chose which  -->   		
+				<div class="select-wallscope-radios jquery-radios">
+					Habitat Number
+					<input type="radio" name="select-wallscope" id="new-habitat-r1" value="1" /><label for="new-habitat-r1">Wallscope 1</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r2" value="2" /><label for="new-habitat-r2">Wallscope 2</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r3" value="3" /><label for="new-habitat-r3">Wallscope 3</label>
+					<input type="radio" name="select-wallscope" id="new-habitat-r4" value="4" /><label for="new-habitat-r4">Wallscope 4</label>
+				</div>
+				<br/>
 				
-				<!-- TODO: Fix theming on all radio buttons as per http://jqueryui.com/demos/button/#radio -->
+				<div class="content">     
+					<div class="habitat-form-fields"> 
+						<h5>Environment Conditions (temperature, humidity, light)</h5> 
+						<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
+					</div>
+					
+					<div class="habitat-form-fields">  
+						<h5>Structural Features</h5> 
+						<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
+					</div>
+					
+					<div class="habitat-form-fields"> 
+						<h5>Organisms</h5> 
+						<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
+					</div> 
+					
+					<div class="habitat-form-fields"> 
+						<h5>Comments</h5> 
+						<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
+					</div>                                                              				
+				</div>	
+
+				<div id="action-buttons">
+					<button class="back-button">BACK</button>
+					<button class="save-button">SAVE</button>
+					<button class="reload-button">RELOAD</button>
+				</div>
+			</div>			
+
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+		
+			<div id="open-habitat">
+				<h4>What others said about the HABITATS</h4>
+				<h5>Pick from the two stes of criteria below to show community results:</h5>
+				
 				<div class="select-habitat-radios jquery-radios">
 					<input type="radio" name="select-habitat" id="open-habitat-r1" value="habitat-1" /><label for="open-habitat-r1">Habitat 1</label>
 					<input type="radio" name="select-habitat" id="open-habitat-r2" value="habitat-2" /><label for="open-habitat-r2">Habitat 2</label>
@@ -77,6 +129,8 @@
 				</div>
 				<br/>		
  			
+ 				<!-- this needs to be incorporated into the datatable, and changes its text to show author selected, pulling data from rollcall --> 
+ 				<button class="author-filter-button">Everyone temp</button>
   				<div class="data-table">
 <!-- TODO: Table should be filled by call to sleepy mongoose to retrieve data, e.g. http://proto.encorelab.org:27080/foo/bar/_find-->
 					<table cellpadding="0" cellspacing="0" border="0" class="display" id="table_id">
@@ -151,64 +205,73 @@
 						</tbody>
 					</table>
 				</div>
-				
-				Or add a new habitat page:
-				<button class="new-page-button">ADD NEW HABITAT PAGE</button>
-			
+
+				<div id="action-buttons">				
+					<button class="back-button">BACK</button>
+					<button class="add-button">ADD TO DISCUSSIONS</button>
+				</div>
 			</div>
+			
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+			<div id="add-to-discussion-habitat">
+			<!-- will this be duplicated in other tabs? -->
+			
+				<h4>Add to Discussions</h4>
 				
-		
-		
-			<div id="new-habitat">
-				<h4>NEW HABITAT PAGE</h4></br>
-				 
-				<!-- The student chose which  -->   		
-				<div class="select-wallscope-radios jquery-radios">
-					Habitat Number
-					<input type="radio" name="select-wallscope" id="new-habitat-r1" value="1" /><label for="new-habitat-r1">Wallscope 1</label>
-					<input type="radio" name="select-wallscope" id="new-habitat-r2" value="2" /><label for="new-habitat-r2">Wallscope 2</label>
-					<input type="radio" name="select-wallscope" id="new-habitat-r3" value="3" /><label for="new-habitat-r3">Wallscope 3</label>
-					<input type="radio" name="select-wallscope" id="new-habitat-r4" value="4" /><label for="new-habitat-r4">Wallscope 4</label>
+				<h5>Here are entries you are adding to your note:</h5>
+				
+				<!-- ANOTHER DATA TABLE, SELECTED QUERY -->
+				
+				<div class="discussion-thread">
+					<h5>Discussion Thread</h5>
+				        <select id="discussion-thread-dropdown">
+<!-- 				        	These values are pulled from the discussion topic list
+							<option>topic1</option>
+							<option>topic2</option>
+							<option>topic3</option>
+ -->					</select>
+ 				</div>
+			
+				<div class="add-to-discussion-form-fields"> 
+					<h5>Note</h5> 
+					<textarea rows="5" cols="45" class="text-box note"></textarea> 							
 				</div>
-				<br/>
-
 				
-				<div class="content">     
-					
-					<div class="habitat-form-fields"> 
-						<h5>Environment Conditions (temperature, humidity, light)</h5> 
-						<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
-					</div>
-					
-					<div class="habitat-form-fields">  
-						<h5>Structural Features</h5> 
-						<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
-					</div>
-					
-					<div class="habitat-form-fields"> 
-						<h5>Organisms</h5> 
-						<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
-					</div> 
-					
-					<div class="habitat-form-fields"> 
-						<h5>Comments</h5> 
-						<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
-					</div>                                                              				
-				</div>	
-
+				<div class="add-to-discussion-form-fields"> 
+					<h5>Headline</h5> 
+					<textarea rows="2" cols="45" class="text-box headline"></textarea> 							
+				</div>
+				
+				<div>
+					<h5>Keywords</h5>
+					<button class="choose-keywords-button">CHOOSE KEYWORDS</button>
+				</div>
+			
 				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button class="save-button">Save</button>
-					<button class="reload-button">Reload</button>
+					<button class="back-button">BACK</button>
+					<button class="save-button">SAVE</button>
+					<button class="reload-button">RELOAD</button>
 				</div>
-			</div>			
+			</div>
+		
 		</div>
 		
 
 <!-- ************************************ ORGANISMS *********************************************  -->
 
-		
  		<div id="tabs-2">
+ 			<div id="landing-organism">
+				<div id="action-buttons">
+					<button class="new-button">I want to describe an ORGANISM</button>
+					<button class="view-button">I want to see what others said</button>
+ 				</div>
+ 			</div>
+
+
+<!-- ************************************ ORGANISMS *********************************************  -->
+		
+
  			<div id="new-organism">
 				<h4>NEW ORGANISM PAGE</h4>			
                    
@@ -292,18 +355,19 @@
 		
 		
 		<div id="tabs-3">
- 			<div id="new-relationships">
+			<div id="landing-relationships">
+				<div id="action-buttons">
+					<button class="new-button">I want to add a new relationship</button>
+					<button class="view-button">I want to see what others said</button>
+				</div>
+			</div>
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+ 			<div id="new-relationship">
 				<h4>NEW RELATIONSHIPS PAGE</h4></br>
 
-				<h5>Show Relationships of Energy Transfer</h5>
-				<br/>				
-				<div>
-				To define each relationship:
-				1. Choose two organisms by tapping the next button
-				2. Tap first icon (the FROM)
-				3. Tap "Is primary source of energy for..." or "Is secondary source of energy for..." button
-				4. Tap the second icon (the TO)
-				</div>
 				<div>
 					<div class="organism-box" id="box1"></div>
 					<div class="organism-box" id="box2"></div>
@@ -312,16 +376,23 @@
 					<div class="organism-box" id="box5"></div>
 				</div>
 				<br/>
-				
-				<br/>
-				<button class="primary-source-button">Is a primary source of energy for...</button>
-				<button class="secondary-source-button">Is a secondary source of energy for...</button>
-				
-				<button class="clear-button">Clear</button>
-				<br/><br/>
-				<button class="back-button">Back</button>
-				<button class="save-button">Save</button>
-				<button class="reload-button">Reload</button>
+
+								
+				<div id="action-buttons">
+					<button class="back-button">Back</button>
+					<button class="save-button">Save</button>
+					<button class="reload-button">Reload</button>
+				</div>
+			</div>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+ 			<div id="view-relationships">
+
+								
+				<div id="action-buttons">
+					<button class="back-button">Back</button>
+				</div>
 			</div>
 		</div>
 
@@ -443,13 +514,7 @@
 			</div>
 		</div>
 		
-		
-<!-- *********************************************************************************************************  -->		
-		
-		<div id="tabs-5">
-			<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-			<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-		</div>
+
 	</div>    
 
 

@@ -62,6 +62,12 @@ WallCology = {
             $('#tabs').show()
             
             $('#new-habitat').hide()
+            $('#open-habitat').hide()
+            $('#add-to-discussion-habitat').hide()
+            $('#new-organism').hide()
+            $('#open-organism').hide()
+            $('#new-relationship').hide()
+            $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
             
@@ -69,11 +75,34 @@ WallCology = {
             	location.reload()
             })
 
-//**********HABITAT*********************************************************************************************            
-            $('#open-habitat .new-page-button').click(function(){
-            	$('#open-habitat').hide()
+//**********HABITAT*************************************************************************************************
+            $('#landing-habitat .new-button').click(function(){
+            	$('#landing-habitat').hide()
             	$('#new-habitat').show()
             })
+            $('#landing-habitat .view-button').click(function(){
+            	$('#landing-habitat').hide()
+            	$('#open-habitat').show()
+            })
+            
+//**********NEW HABITAT*****************************************************************************************
+        	$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
+
+            $('#new-habitat .back-button').click(function(){
+            	$('#new-habitat').hide()
+            	$('#landing-habitat').show()
+            })            
+            
+//**********OPEN HABITAT*********************************************************************************************            
+            $('#open-habitat .back-button').click(function(){
+            	$('#open-habitat').hide()
+            	$('#landing-habitat').show()
+            })
+            $('#open-habitat .add-button').click(function(){
+            	$('#open-habitat').hide()
+            	$('#add-to-discussion-habitat').show()
+            })
+            
 
  			$.get("/mongoose/foo/bar/_find", 
 			  function(data) {
@@ -144,23 +173,72 @@ WallCology = {
             	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
             	//do your database queries here
             })
-            		
 
-//**********NEW HABITAT*****************************************************************************************
-        	$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
-
-            $('#new-habitat .back-button').click(function(){
-            	$('#new-habitat').hide()
-            	$('#open-habitat').show()
+            
+//**********ADD TO DISCUSSION HABITAT*****************************************************************************************
+                        
+            $('#add-to-discussion-habitat .choose-keywords-button').click(function(){
+            	//pop up with all keywords, pulled from discussion area
             })
+            
+            $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
+            $('#add-to-discussion-habitat .back-button').click(function(){
+            	$('#add-to-discussion-habitat').hide()
+            	$('#open-habitat').show()
+            })         
+            
+            
+//**********ORGANISM****************************************************************************************            
 
-//**********ORGANISM****************************************************************************************                              	
+            $('#landing-organism .new-button').click(function(){
+            	$('#landing-organism').hide()
+            	$('#new-organism').show()
+            })
+            $('#landing-organism .view-button').click(function(){
+            	$('#landing-organism').hide()
+            	$('#open-organism').show()
+            })
+            
+//**********NEW ORGANISM****************************************************************************************
+            
         	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
+            $('#new-organism .back-button').click(function(){
+            	$('#new-organism').hide()
+            	$('#landing-organism').show()
+            })            
 
+//**********OPEN ORGANISM***************************************************************************************
+        	
+            $('#open-organism .back-button').click(function(){
+            	$('#open-organism').hide()
+            	$('#landing-organism').show()
+            })            
+        	
+        	
 //**********RELATIONSHIPS***********************************************************************************
-			$('#new-relationships .arrow').click(function(){
-				//switch to different arrow
-			})
+            $('#landing-relationships .new-button').click(function(){
+            	$('#landing-relationships').hide()
+            	$('#new-relationship').show()
+            })
+            $('#landing-relationships .view-button').click(function(){
+            	$('#landing-relationships').hide()
+            	$('#view-relationships').show()
+            })
+            
+//**********NEW RELATIONSHIP***********************************************************************************          
+
+            $('#new-relationship .save-button').click(Sail.app.observations.newRelationshipContent)
+            $('#new-relationship .back-button').click(function(){
+            	$('#new-relationships').hide()
+            	$('#landing-relationships').show()
+            })
+            
+//**********VIEW RELATIONSHIPS**********************************************************************************            
+            
+            $('#view-relationships .back-button').click(function(){
+            	$('#view-relationships').hide()
+            	$('#landing-relationships').show()
+            })
 			
 //**********COUNTS******************************************************************************************			
 
@@ -177,44 +255,59 @@ WallCology = {
 //***************************************************************************************************************
     	
         newHabitatContent: function() {
-        	var habitatRadioInput = $("#new-habitat .select-wallscope-radios input[type='radio']:checked").val()
         	sev = new Sail.Event('new_observation',{
         		run:Sail.app.run,
         		type:'habitat',
-        		wallscope:habitatRadioInput,
+        		wallscope:$("#new-habitat .select-wallscope-radios input[type='radio']:checked").val(),
         		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
         		structural_features:$('#new-habitat .structural-features').val(),
         		organisms:$('#new-habitat .organisms').val(),
-        		comments:$('#new-habitat .comments').val()})
+        		comments:$('#new-habitat .comments').val()
+        		})
+        	WallCology.groupchat.sendEvent(sev)
+        },
+        
+        //this might be more generalizable with passed params
+        newDiscussionContent: function() {
+        	sev = new Sail.Event('new_discussion_content',{
+        		run:Sail.app.run,
+        		type:'discussion',
+        		//evidence? pieces of habitat content that were queried (by id number?)
+        		discussion_thread:'temp', //pulling from the dropdown
+        		note:$('#add-to-discussion-habitat .note').val(),
+        		headline:$('#add-to-discussion-habitat .headline').val(),
+        		keywords:'something' //is this going to be plural? where the fuck do they think these things are going to be displayed?
+        		})
         	WallCology.groupchat.sendEvent(sev)
         },
         
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
         newOrganismContent: function() {
-	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
 	        sev = new Sail.Event('new_observation',{
 	        	run:Sail.app.run,
 	        	type:'organism',
-	        	chosen_organism:organismRadioInput,
+	        	chosen_organism:$("#radio-organism input[type='radio']:checked").val(),
 	        	morphology:$('#new-organism .morphology').val(),
 	        	behaviour:$('#new-organism .behaviour').val(),
 	        	organisms:$('#new-organism .habitat').val(),
-	        	comments:$('#new-organism .comments').val()})
+	        	comments:$('#new-organism .comments').val()
+	        	})
 	        WallCology.groupchat.sendEvent(sev)
         },
         
-        newRelationshipsContent: function() {
-	        
-//	        sev = new Sail.Event('new_observation', {run_id:Sail.app.run, type:'relationships'
-//	        	morphology:$('#organism .morphology').val(), behaviour:$('#organism .behaviour').val(), organisms:$('#organism .habitat').val(),
-//	        	comments:$('#organism .comments').val()
-//	        	})
-//	        WallCology.groupchat.sendEvent(sev)
+        newRelationshipContent: function() {
+	        sev = new Sail.Event('new_relationship',{
+	        	run:Sail.app.run,
+	        	type:'relationship',
+	        	//some stuff about the relationship
+	        	//comments:$('#new-relationship .comments').val()
+	        	})
+	        WallCology.groupchat.sendEvent(sev)
         },
 
         newCountsContent: function() {
 	        sev = new Sail.Event('new_count', {run:Sail.app.run,
-	        	type:"count",
+	        	type:'count',
 	        	chosen_habitat:$("#new-counts .select-habitat-radios input[type='radio']:checked").val(),
 	        	temperature:$("#new-counts .temperature-radios input[type='radio']:checked").val(),
 	        	light_level:$("#new-counts .light-level-radios input[type='radio']:checked").val(),
@@ -302,8 +395,8 @@ WallCology = {
             WallCology.groupchat.join()
             $('#username').text(session.account.login)
       	    //$('#connecting').hide()						
-        	jQuery("#top-level-dropdown").change(function(e){
-        		window.location.href = jQuery("#top-level-dropdown").val();
+        	jQuery('#top-level-dropdown').change(function(e){
+        		window.location.href = jQuery('#top-level-dropdown').val();
         	})
             
             if (true) {
