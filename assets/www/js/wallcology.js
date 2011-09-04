@@ -272,11 +272,11 @@ WallCology = {
         	sev = new Sail.Event('new_discussion_content',{
         		run:Sail.app.run,
         		type:'discussion',
-        		//evidence? pieces of habitat content that were queried (by id number?)
-        		discussion_thread:'temp', //pulling from the dropdown
+        		evidence:'pieces of habitat content that were queried (by id number?) and selected from the data table',
+        		discussion_thread:'from the dropdown',
         		note:$('#add-to-discussion-habitat .note').val(),
         		headline:$('#add-to-discussion-habitat .headline').val(),
-        		keywords:'something' //is this going to be plural? where the fuck do they think these things are going to be displayed?
+        		keywords:'still a mess' //is this going to be plural? where the fuck do they think these things are going to be displayed?
         		})
         	WallCology.groupchat.sendEvent(sev)
         },

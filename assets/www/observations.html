@@ -269,7 +269,7 @@
  			</div>
 
 
-<!-- ************************************ ORGANISMS *********************************************  -->
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////  -->
 		
 
  			<div id="new-organism">
@@ -296,13 +296,12 @@
 						</td>						
 					</tr>
 					
-					<tr>     
-						<td>
-							<img src="/images/icon_0000_blue-bug.png" />						
-						</td>
-						<td id="predator"> 
-							<img src="/images/icon_0005_predator.png" />
-						   <!-- <img src="/images/icon_0008_green-bug.png" />						 -->
+					<tr>  
+						<td id="sun">
+							<img src="/images/icon_0009_sun.png" />	
+						</td>					
+						<td id="green-bug">
+							<img src="/images/icon_0008_green-bug.png" />						
 						</td>
 						<td id="scum">
 							<img src="/images/icon_0007_scum.png" /> 					
@@ -310,12 +309,11 @@
 						<td id="fuzzy-mold"> 
 							<img src="/images/icon_0006_fuzzy-mold.png" /> 						
 						</td>
-						<td id="sun">
-							<img src="/images/icon_0009_sun.png" />						
-						</td>						
+						<td id="predator"> 
+							<img src="/images/icon_0005_predator.png" />
+						</td>
 					</tr>
 						<!-- rename the values more descriptively once we know the organisms -->
-						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
 						
 				</table>    
 				<input type="hidden" id="selected-organism" value=""/>
@@ -328,20 +326,6 @@
 				<div> <b> Habitat </b> (where it lives) </div>
 				<div> <b> Comments </b> </div>												
 				
-
-<!-- 				<div id="accordion" class="content">
-					<h5><a href="#">Morphology (what they look like) </a></h5><br />
-					<h5><a href="#">Behaviour (what they do) <input type="text" class="behaviour" /></a></h5><br />
-					<h5><a href="#">Habitat (where they live) <input type="text" class="habitat" /></a></h5><br />
-					<h5><a href="#">Comments <input type="text" class="comments" /></a></h5><br />				
-				</div>	
-				
-				<form action="" class="content-form">
-					<input type="text" class="morphology">
-				</form>
- -->				
-
-				                     
 				<div class='section-title'> <b> Show the life cycle </b> (organisms will have between 1 and 4 stages) </div>  				
 				
 				<button class="back-button">Back</button>
@@ -357,7 +341,7 @@
 		<div id="tabs-3">
 			<div id="landing-relationships">
 				<div id="action-buttons">
-					<button class="new-button">I want to add a new relationship</button>
+					<button class="new-button">I want to add a relationship</button>
 					<button class="view-button">I want to see what others said</button>
 				</div>
 			</div>
@@ -366,16 +350,45 @@
 <!-- ///////////////////////////////////////////////////////////////////////////////// -->
 
  			<div id="new-relationship">
-				<h4>NEW RELATIONSHIPS PAGE</h4></br>
+				<h4>NEW RELATIONSHIP PAGE</h4></br>
 
-				<div>
+
+				<table class="organism-selectables">
+					<tr> 
+						<td id="sun">
+							<img src="/images/icon_0009_sun.png" />	
+						</td>					
+						<td id="scum">
+							<img src="/images/icon_0007_scum.png" /> 					
+						</td>
+						<td id="fuzzy-mold"> 
+							<img src="/images/icon_0006_fuzzy-mold.png" /> 						
+						</td>
+						<td id="blue-bug">
+							 <img src="/images/icon_0000_blue-bug.png" />   					
+						</td> 
+						<td id="green-bug">
+							<img src="/images/icon_0008_green-bug.png" />						
+						</td>
+						<td id="predator"> 
+							<img src="/images/icon_0005_predator.png" />
+						</td>
+					</tr>
+				</table>
+
+				<div class="organism-dropzones">
+					<h5>Add Relationship (the transfer of energy from one organism to another)</h5>
 					<div class="organism-box" id="box1"></div>
+					<div class="arrow"></div>
 					<div class="organism-box" id="box2"></div>
-					<div class="organism-box" id="box3"></div>
-					<div class="organism-box" id="box4"></div>
-					<div class="organism-box" id="box5"></div>
 				</div>
 				<br/>
+
+				<div class="comment">
+					<h5>Additional Comments</h5>
+					<textarea rows="10" cols="50" class="text-box comments"></textarea> 				
+				</div>
+                                                           				
 
 								
 				<div id="action-buttons">
