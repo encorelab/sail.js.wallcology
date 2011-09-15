@@ -68,7 +68,7 @@
 			<div id="new-habitat">
 				<h4>NEW HABITAT PAGE</h4></br>
 				 
-				<!-- The student chose which  -->   		
+				<!-- The student chose which habitat this observation is about  -->   		
 				<div class="select-wallscope-radios jquery-radios">
 					Habitat Number
 					<input type="radio" name="select-wallscope" id="new-habitat-r1" value="1" /><label for="new-habitat-r1">Wallscope 1</label>
@@ -114,13 +114,15 @@
 				<h4>What others said about the HABITATS</h4>
 				<h5>Pick from the two stes of criteria below to show community results:</h5>
 				
+				<!-- sort by habitat -->
 				<div class="select-habitat-radios jquery-radios">
 					<input type="radio" name="select-habitat" id="open-habitat-r1" value="habitat-1" /><label for="open-habitat-r1">Habitat 1</label>
 					<input type="radio" name="select-habitat" id="open-habitat-r2" value="habitat-2" /><label for="open-habitat-r2">Habitat 2</label>
 					<input type="radio" name="select-habitat" id="open-habitat-r3" value="habitat-3" /><label for="open-habitat-r3">Habitat 3</label>
 					<input type="radio" name="select-habitat" id="open-habitat-r4" value="habitat-4" /><label for="open-habitat-r4">Habitat 4</label>
 				</div>
-				<br/>			
+				<br/>
+				<!-- sort by criteria  -->			
 				<div class="select-criteria-radios jquery-radios">
 					<input type="radio" name="select-criteria" id="open-habitat-r5" value="organisms" /><label for="open-habitat-r5">Organisms</label>
 					<input type="radio" name="select-criteria" id="open-habitat-r6" value="environmental-conditions" /><label for="open-habitat-r6">Environmental Conditions</label>
@@ -252,6 +254,7 @@
 					<button class="back-button">BACK</button>
 					<button class="save-button">SAVE</button>
 					<button class="reload-button">RELOAD</button>
+					<button class="author-search-button">SEARCH BY AUTHOR</button>
 				</div>
 			</div>
 		
@@ -423,7 +426,6 @@
 					<input type="radio" name="select-habitat" id="new-count-r3" value="3" /><label for="new-count-r3">Habitat 3</label>
 					<input type="radio" name="select-habitat" id="new-count-r4" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
-				<br/>
 
 				<div class="record-environment">
 					<div class="temperature-radios jquery-radios">
@@ -443,7 +445,7 @@
 					</div>					
 				</div>
 
-
+	
 				<div class="record-organisms">
 					<h5>Count Organisms</h5>
 					<p>Enter percentage of WallScope covered by vegitation</p>

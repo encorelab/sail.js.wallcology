@@ -1,4 +1,17 @@
-#record-organisms {
-	padding: 10px;
+div#new-counts {
+	margin-left: 100px;  
 }
-/* this is necessary for the sliders */
+
+.record-environment{
+    padding: 0;
+    margin-left: 0;
+    padding: 0;
+	float: left;
+	list-style-type: none;
+}
+
+
+
+.record-organisms {
+	clear: left;
+}

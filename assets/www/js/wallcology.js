@@ -64,6 +64,7 @@ WallCology = {
             $('#new-habitat').hide()
             $('#open-habitat').hide()
             $('#add-to-discussion-habitat').hide()
+            $('#author-search-habitat').hide()
             $('#new-organism').hide()
             $('#open-organism').hide()
             $('#new-relationship').hide()
@@ -181,11 +182,45 @@ WallCology = {
             	//pop up with all keywords, pulled from discussion area
             })
             
+            $('#add-to-discussion-habitat .author-search-button').click(function(){
+            	$('#author-search-habitat').show()
+    	            Sail.app.rollcall.fetchAllUsers(function(data) {
+    	            	$(data).each(function() {
+		                u = this['user']
+		                li = $("<li id='user-"+u.account.login+"'>"+u.account.login+"</li> ")
+		                li.data('account', u.account)
+		                li.click(function() { Sail.app.ollcall.Authenticator.pickLogin($(this).data('account')) })
+		                picker.children(".users").append(li)
+    	            	})
+		            
+		            $(inContainer || 'body').append(picker)
+
+    	            })
+            })
+            
+            
             $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
             $('#add-to-discussion-habitat .back-button').click(function(){
             	$('#add-to-discussion-habitat').hide()
             	$('#open-habitat').show()
-            })         
+            })
+            
+            
+////////////AUTHOR SELECT POPUP///////////////////////////////////////////////////////////////
+            
+//            Sail.app.rollcall.fetchAllUsers(function(data) {
+//            $(data).each(function() {
+//                u = this['user']
+//                li = $("<li id='user-"+u.account.login+"'>"+u.account.login+"</li> ")
+//                li.data('account', u.account)
+//                li.click(function() { Rollcall.Authenticator.pickLogin($(this).data('account')) })
+//                picker.children(".users").append(li)
+//            })
+//            
+//            $(inContainer || 'body').append(picker)
+
+            
+            
             
             
 //**********ORGANISM****************************************************************************************            
