@@ -10,4 +10,12 @@ $(function(){
 		selectedOrganism = event.currentTarget.id;
 		$('input#selected-organism').val(selectedOrganism);
     });
-});
+}); 
+
+$(function (){       	
+	$("div#new-organism h5.organism-description-section").click(function (event) { 
+		$("div#new-organism div.description-content").hide();
+		$(this).parent().find("div.description-content").toggle()
+	}); 	
+});  
+    
