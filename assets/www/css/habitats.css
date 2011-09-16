@@ -12,7 +12,7 @@ div#tabs {
 }                 
 
 div#tabs div#tabs-1 {
-	background-image:url('../images/bkgd_habitat.png');  
+	background-image:url('../images/bkgd_habitat.png');
 	background-repeat: no-repeat;
 	height: 1200px;	     
 }                  
@@ -83,7 +83,7 @@ div#aggregate-view-note-type-filter {
 table#aggregate-habitat-table {
 	border: 1px solid gray;
 	margin-bottom: 25px;     
-	width: 100%;
+	width: 750px;
 }
 
 table#aggregate-habitat-table th {
