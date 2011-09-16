@@ -31,4 +31,14 @@ h5.organism-description-section {
 
 div.description-content {
 	display: none;
+}        
+
+div#new-organism div#organism-evolution {
+	width: 100%;
+	float: left;         
+}
+
+div#new-organism div.arrow {
+	width: 40px;
+	float: left;	
 }

@@ -1,3 +1,51 @@
+html{
+	height: 100%; 
+}    
+
+body {
+	height: 100%;
+}                
+
+div#tabs {
+	height: 100%;
+ 	font-size: 16px;
+}                 
+
+div#tabs div#tabs-1 {
+	background-image:url('../images/bkgd_habitat.png');  
+	background-repeat: no-repeat;
+	height: 1200px;	     
+}                  
+
+div#open-habitat {
+	height: 100%;
+}
+                      
+div#habitat-menu-page {
+	background-image: url('../images/transparent_bkg.png');
+	margin-left: auto;
+	margin-right: auto;     
+	width: 380px;    
+	height: 290px;  
+	display: table; 
+	_position: relative; 
+	overflow: hidden;    
+	margin-top: 200px;
+}   
+
+div#inner-habitat-menu-page {
+	_position: absolute; 
+	_top: 50%; 
+	display: table-cell; 
+	vertical-align: middle; 
+	padding-left: 40px;
+}          
+
+
+div.habitat-page-heading {
+	color: #336699;
+}
+
 div#new-habitat {
 	margin-left: 100px;  
 }
@@ -12,4 +60,37 @@ div#new-habitat div#action-buttons {
 
 div#new-habitat button.save-button {
 	float: right;
-}    
+}       
+
+div.habitat-page-heading {
+	margin-bottom: 20px;
+}
+
+div#aggregate-habitat-filters {
+	margin-bottom: 20px;
+}   
+
+div#aggregate-view-habitat-filter {
+	margin-bottom: 10px;
+}          
+  
+
+div#aggregate-view-note-type-filter {
+	margin-bottom: 25px;
+}                          
+      
+                             
+table#aggregate-habitat-table {
+	border: 1px solid gray;
+	margin-bottom: 25px;     
+	width: 100%;
+}
+
+table#aggregate-habitat-table th {
+	border: 1px solid #333333;
+	padding-left: 5px;
+} 
+
+table#aggregate-habitat-table td {
+	font-size: 12px;
+}

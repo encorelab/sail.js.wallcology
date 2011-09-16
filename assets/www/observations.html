@@ -55,12 +55,29 @@
 		
 		
 <!-- ********************************** HABITAT *********************************  -->		
+			      
+		<!-- This should be the original page of Habitat -->
+		
 			
-		<div id="tabs-1">
-			<div id="open-habitat">
-				<h4>HABITAT</h4></br>
+		<div id="tabs-1">     
+			      		
+			<div id="open-habitat">   
+				             
+				<div id="habitat-menu-page">  
+					<div id="inner-habitat-menu-page">	
+						<button type="button" id="describe-habitat-button" class="new-page-button">I want to Describe a HABITAT</button>							
+						<br/><br/>
+						<button type="button" id="what-others-said-habitat-button" class="new-page-button">I want to see what others said</button>
+					</div>
+				</div>
+			
+			
+			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin-->	
+		    <div id="temporarily-hidden" style="display:none">
+				<h4>HABITAT</h4>
+				            			
 				<p>Pick from the two sets of criteria below to show community results:</p>
-				
+				            
 				<!-- TODO: Fix theming on al radio buttons as per http://jqueryui.com/demos/button/#radio -->
    				<form>
 					<div class="select-habitat">
@@ -154,15 +171,17 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div> 
 				
+			
 				Or add a new habitat page:
-				<button class="new-page-button">ADD NEW HABITAT PAGE</button>
+				<button class="new-page-button">ADD NEW HABITAT PAGE</button> 
+ 			 </div>
 			
 			</div>
 				
 		
-		
+		    <!-- New Habitat Page -->
 			<div id="new-habitat">
 				<h4>NEW HABITAT PAGE</h4></br>
 				 
@@ -170,6 +189,7 @@
 				<form>
 					<div id="radio" class="select-wallscope">
 						Habitat Number
+						<br/>
 						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
 						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
 						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
@@ -193,7 +213,7 @@
 						
 						<div class="habitat-form-fields"> 
 							<h5>Organisms</h5> 
-							<textarea rows="5" cols="50" class="text-box organisms">	</textarea> 						
+							<textarea rows="5" cols="50" class="text-box organisms"></textarea> 						
 						</div> 
 						
 						<div class="habitat-form-fields"> 
@@ -204,10 +224,107 @@
 				</form>  
 				<div id="action-buttons">
 					<button class="back-button">Back</button>
-					<button class="save-button">Save</button>
-					<button class="reload-button">Reload</button>
+					<button class="save-button">Save</button>     
 				</div>
-			</div>			
+			</div>	
+			
+			
+			<!-- See what others said for Habitats Page -->
+			<div id="what-others-said-habitat">
+				<div class="habitat-page-heading"> What others said about the HABITATS </div>
+				<div id='aggregate-habitat-filters'>
+					Pick from the two sets of criteria below to show community results: 
+					
+					<br/>
+					<br/>
+					<div id="aggregate-view-habitat-filter"> 
+						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" /><label for="habitat-filter-1">Habitat 1</label> 
+						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" /><label for="habitat-filter-2">Habitat 2</label> 
+						<input type="radio" id="habitat-filter-3" name="habitat-filter-set" /><label for="habitat-filter-3">Habitat 3</label>
+						<input type="radio" id="habitat-filter-4" name="habitat-filter-set" /><label for="habitat-filter-4">Habitat 4</label> 
+					</div>
+
+					<div id="aggregate-view-note-type-filter">  						
+						<input type="radio" id="habitat-note-filter-1" name="note-filter-set" /><label for="habitat-note-filter-1">Organisms</label> 
+						<input type="radio" id="habitat-note-filter-2" name="note-filter-set" /><label for="habitat-note-filter-2">Environmental Conditions</label> 
+						<input type="radio" id="habitat-note-filter-3" name="note-filter-set" /><label for="habitat-note-filter-3">Structural Features</label>
+						<input type="radio" id="habitat-note-filter-4" name="note-filter-set" /><label for="habitat-note-filter-4">Comments</label>
+					</div>
+				</div>
+
+				<div> If you want to add a note to discussions, check off the entries you want added to it: </div>
+				<div id="habitat-aggregate-results"> 
+					<table id="aggregate-habitat-table">   
+						<thead>
+							<tr> 
+								<th id="dynamic-column-aggregate-habitat"> </th>
+								<th> Author(s)</th>
+								<th> Last Updated</th>
+							</tr>                               
+						<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
+					   </thead>
+						<tbody> 
+							<script type="text/javascript">  
+								//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
+								dummyData = [
+									[
+										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+										"Beatrice S, Jeffery G",
+										"10/1/2011 2:34pm"
+									],
+									
+									[
+										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+										"Louis B, Naomi C",
+										"10/1/2011 2:45pm"
+									],
+																		
+								];
+								for (i=0; i<= dummyData.size(); i++) {
+									
+								}
+							</script>
+							<tr>
+								<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
+								</td>
+								<td> Louis B, Naomi C </td>
+								<td> 10/1/2011 2:45 pm </td>
+							</tr> 
+							
+							<tr>
+								<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+								</td>
+								<td> Beatrice S, Jeffery G </td>
+								<td> 10/1/2011 2:34 pm </td>
+							</tr>
+						</tbody>
+					</table>   					
+			    </div>
+				   				
+				<div id="action-buttons">
+					<button class="back-button">Back</button>
+					<button id="add-to-discussion-button-habitat" class="">Add to Discussion</button>     
+				</div>
+		    </div>
+		
+		
+		  	<!-- Add to Discussion for Habitats Page -->  
+			<div id="add-to-discussions-habitat">
+				<div class="habitat-page-heading"> Add to Discussions </div>  
+				
+				<div id="selected-input-from-others-habitat">
+					Here are entries you're adding to your note:
+				</div>	
+			             
+			
+				<div id="action-buttons">
+					<button class="back-button">Back</button>
+					<button id="add-to-discussion-button-habitat" class="">Save</button>     
+				</div>  			
+			</div>	
+			
+		                               
+		
 		</div>
 		
 
@@ -217,9 +334,9 @@
 		
  		<div id="tabs-2">
  			<div id="new-organism">
-				<h4>NEW ORGANISM PAGE</h4>			
+				<img src="/resources/new_organism.png"/>			
                    
-				<div class='section-title'> <b> Choose an Organism </b> </div>
+				<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div>
 				<table id="organism-table">   
 					
 					<tr> 
@@ -295,9 +412,23 @@
 				</div>												
 				
                 
-				<div class='section-title'> <b> Show the life cycle </b> (organisms will have between 1 and 4 stages) </div>   
+				<div class='section-title'> <b> Show the life cycle </b> (organisms will have between 1 and 4 stages) </div>  
 				
-				   			
+				<div id="organism-evolution">
+					<div></div>
+				
+					<div class="arrow"><img src="/resources/arrow.png"></div>
+				
+					<div></div>
+				
+					<div class="arrow"><img src="/resources/arrow.png"></div>					 
+				
+					<div></div>
+				   		   
+					<div class="arrow"><img src="/resources/arrow.png"></div>
+				
+					<div></div> 
+				</div>
 				
 				<button class="back-button">Back</button>
 				<button class="save-button">Save</button>

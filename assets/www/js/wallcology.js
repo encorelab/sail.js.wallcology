@@ -45,21 +45,85 @@ WallCology = {
     
     observations: {
         
-        init: function() {
+        init: function() {     
+			var oTable;
+			var gaiSelected =  [];
+			
             $('#tabs').tabs()
             $('#tabs').show()
             
-            $('#new-habitat').hide()
+            $('#new-habitat').hide()  
+            $('#what-others-said-habitat').hide()  
+			$('#add-to-discussions-habitat').hide();
         	
             $('.reload-button').click(function(){
             	location.reload()
-            })
+            })     
+            
 
-//**********HABITAT*********************************************************************************************            
-            $('#open-habitat .new-page-button').click(function(){
-            	$('#open-habitat').hide()
-            	$('#new-habitat').show()
-            })
+//**********HABITAT*********************************************************************************************  
+            // When Describe a New Habitat is clicked, this page page should be loaded
+            $('#open-habitat #describe-habitat-button').click(function(){
+            	$('#open-habitat').hide()   
+				$('#add-to-discussions-habitat').hide();
+            	$('#new-habitat').show()                    
+
+				//we need to clear all the fields here
+				$('textarea.text-box').val();
+            })    
+                  
+            // When See What Others Said is clicked, this page page should be loaded
+			$('div#open-habitat #what-others-said-habitat-button').click(function(){
+            	$('#open-habitat').hide()           
+				$("#add-to-discussions-habitat").hide();
+            	$('#what-others-said-habitat').show() 
+                // Uncheck all selected filters and the chosen notes
+				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
+				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
+				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
+				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
+				           
+				// We create a table with the second column being 500px
+				// TODO: we need to feed the data to the table to be inserted
+				oTable = $('#aggregate-habitat-table').dataTable({
+					"bAutoWidth": false,  
+										
+					"aoColumns": [ 
+						{ "sWidth": "500px" },
+						null,
+						null
+					],
+					
+					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
+						{
+							$(nRow).addClass('row_selected');
+						}
+						return nRow;
+					}
+				 });
+            })  
+
+
+			// We need to handle the clicking of the table rows
+			/* Click event handler */
+			$('#aggregate-habitat-table tbody tr').live('click', function () {
+				var aData = oTable.fnGetData( this );
+				var iId = aData[0];
+
+				if ( jQuery.inArray(iId, gaiSelected) == -1 )
+				{
+					gaiSelected[gaiSelected.length++] = iId;
+				}
+				else
+				{
+					gaiSelected = jQuery.grep(gaiSelected, function(value) {
+						return value != iId;
+					} );
+				}
+
+				$(this).toggleClass('row_selected');
+			} );
 
 			$('#table_id').dataTable()
             
@@ -118,7 +182,61 @@ WallCology = {
             $('#new-habitat .back-button').click(function(){
             	$('#new-habitat').hide()
             	$('#open-habitat').show()
-            })
+            })  
+
+            
+			$('#what-others-said-habitat .back-button').click(function(){
+            	$('#what-others-said-habitat').hide()
+            	$('#open-habitat').show()
+            })  
+
+        	 $('#add-to-discussions-habitat .back-button').click(function(){
+				$('#add-to-discussions-habitat').hide()
+				$('#what-others-said-habitat').show()
+	         })   
+	
+			$("#what-others-said-habitat #add-to-discussion-button-habitat").click(function(){
+				// Check to see if all required filters/comments are selected
+				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
+					// TODO: send the data to the server to be saved
+					// Dummy code to move to the next step
+					   $('#what-others-said-habitat').hide()
+					   $('#add-to-discussions-habitat').show()
+					// End of Dummy code
+				} else {
+					alert ("Please select at least 2 filters!");
+				}
+			})
+
+			$(function() {
+				$("div#aggregate-view-habitat-filter").buttonset();
+				$("div#aggregate-view-note-type-filter").buttonset();
+			});  
+			    
+			// Send selected filters for the agents to pull them back
+			$("div#aggregate-habitat-filters input").click(function(){
+				totalFiltersSelected = $("div#aggregate-habitat-filters input").attr("checked");
+				// A filter from each category is selected so we can send them to the agents
+				if (totalFiltersSelected == 2){
+				   alert ('woohoo');
+				}                         				
+			})                      
+			
+			// Actions that need to be taken when filters in the Habitat's aggregate view are clicked
+			$("div#aggregate-habitat-filters input").click(function() { 
+						
+				// Set the table header for the dynamic column
+				if (this.name == "note-filter-set"){               
+					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
+				}
+			})
+
+
+			// Selected filters in the Aggregate view for Habitats page
+			// $('div#aggregate-view-habitat-filter button').click(function() {
+			// 				$('div#what-others-said-habitat button').removeClass('ui-state-active');
+			// 				$(this).addClass('ui-state-active');
+			// 			})
 
 //**********ORGANISM****************************************************************************************                              	
         	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
