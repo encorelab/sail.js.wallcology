@@ -22,7 +22,7 @@
             .then('js/sail.js/rollcall.js')
             .then('js/sail.js/deps/jquery.dataTables.js')
             .then('js/wallcology.js')
-			.then('js/organisms.js')
+/* 			.then('js/organisms.js') */
             .thenRun(function() { 
                 return Sail.init(WallCology) 
             })
@@ -31,9 +31,9 @@
 <body>
     <header>
         <select id="top-level-dropdown">
-			<option value="wallcology.html">WALLCOLOGY</option>
-			<option value="disussion.html">DISCUSSION</option>
-			<option value="microworlds.html">MICROWORLDS</option>
+			<option value="observations.html">OBSERVATIONS</option>
+			<option value="disussions.html">DISCUSSIONS</option>
+			<option value="microworlds.html">INVESTIGATIONS</option>
 		</select>
     </header>
     
@@ -429,8 +429,9 @@
 					<input type="radio" name="select-habitat" id="new-count-r4" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
+				<div class="divider"></div>
 
-				<div class="record-environment">
+				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
 						<h4>Record Temperature</h4>
 						<input type="radio" name="temp" value="low" id="new-count-r5" /><label for="new-count-r5">Low</label>
@@ -470,7 +471,7 @@
 						<tr>
 							<td><img src="/images/icon_0000_blue-bug.png" /></td>
 							<td><input type="text" class="text-box count-blue-bug1"/>+</td>
-							<td><input tyllpe="text" class="text-box count-blue-bug2"/>+</td>
+							<td><input type="text" class="text-box count-blue-bug2"/>+</td>
 							<td><input type="text" class="text-box count-blue-bug3"/></td>
 							<td><input type="text" class="text-box count-blue-bug4"/>x</td>
 							<td><input type="text" class="text-box count-blue-bug5"/>=</td>
@@ -497,25 +498,19 @@
 					</table>
 				</div>
 				
-				<div class="new-count-date-time">
-					<h5>Record Date</h5>
-					<div class="date">
-						<p>Date <input id="new-counts-datepicker" type="text"></p>				
-					</div>
-					
-					<h5>Record Time</h5>
-					<div class="time">
-						Hour
-						<textarea rows="4" cols="5" class="text-box hour"></textarea>
-						Minute
-						<textarea rows="4" cols="5" class="text-box minute"></textarea>
-						<div class="ampm-radios">
-							<input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am">a.m.</label>
-							<input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-rpm">p.m.</label>
-						</div>	
-					</div>
+				<div class="record-date">
+					<h4>Record Time Record Time</h4>				
+					<table class="enter-time">
+						<tr>
+							<td>Date <input id="new-counts-datepicker" type="text"></td>
+							<td>Hour <input type="text" class="text-box hour"/></td>
+							<td>Minute <input type="text" class="text-box minute"/></td>
+							<td><input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am">a.m.</label></td>
+							<td><input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-rpm">p.m.</label></td>
+						</tr>
+					</table>
 				</div>
-				
+				<br/>
 				<button class="back-button">Back</button>
 				<button class="save-button">Save</button>
 			</div>
