@@ -1,6 +1,6 @@
 //TODO
 //redo data dictionary
-//add the graphics
+
 //complete all of habitats, get a better of an idea of how complex a whole unit will be (also, querying the db)
 //start relationships again
 
