@@ -57,13 +57,17 @@ WallCology = {
     
     observations: {
         
-        init: function() {
+        init: function() {     
+			var oTable;
+			var gaiSelected =  [];
+			
             $('#tabs').tabs()
             $('#tabs').show()
             $('#tabs').tabs({ selected: 3 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
-            $('#open-habitat').hide()
+			$('#what-others-said-habitat').hide()  
+            $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
             $('#new-organism').hide()
@@ -79,8 +83,13 @@ WallCology = {
 
 //**********HABITAT*************************************************************************************************
             $('#landing-habitat .new-button').click(function(){
-            	$('#landing-habitat').hide()
+            	$('#open-habitat').hide()   
+				$('#add-to-discussions-habitat').hide();
+				$('#landing-habitat').hide()
             	$('#new-habitat').show()
+
+				//we need to clear all the fields here
+				$('textarea.text-box').val();
             })
             $('#landing-habitat .view-button').click(function(){
             	$('#landing-habitat').hide()
@@ -88,13 +97,14 @@ WallCology = {
             })
             
 //**********NEW HABITAT*****************************************************************************************
-        	$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
+        	// $('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
 
             $('#new-habitat .back-button').click(function(){
             	$('#new-habitat').hide()
-            	$('#landing-habitat').show()
-            })            
-            
+            	$('#open-habitat').show()
+            })       
+
+     		
 //**********OPEN HABITAT*********************************************************************************************            
             $('#open-habitat .back-button').click(function(){
             	$('#open-habitat').hide()
@@ -103,7 +113,70 @@ WallCology = {
             $('#open-habitat .add-button').click(function(){
             	$('#open-habitat').hide()
             	$('#add-to-discussion-habitat').show()
-            })
+            })            
+
+			// When I want to Describe a Habitat is clicked 
+			$('div#open-habitat button#describe-habitat-button').click(function(){
+				$('#open-habitat').hide()           
+				$("#add-to-discussions-habitat").hide();
+            	$('#what-others-said-habitat').hide();
+				$('#new-habitat').show();
+			})
+
+			// When See What Others Said is clicked, this page page should be loaded
+			$('div#open-habitat #what-others-said-habitat-button').click(function(){
+            	$('#open-habitat').hide()           
+				$("#add-to-discussions-habitat").hide();
+            	$('#what-others-said-habitat').show() 
+                // Uncheck all selected filters and the chosen notes
+				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
+				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
+				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
+				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
+				           
+				// We create a table with the second column being 500px
+				// TODO: we need to feed the data to the table to be inserted
+				oTable = $('#aggregate-habitat-table').dataTable({
+					"bAutoWidth": false,  
+					
+					"bDestroy" : true,  
+					  				
+					"aoColumns": [ 
+						{ "sWidth": "500px" },
+						null,
+						null
+					],
+					
+					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
+						{
+							$(nRow).addClass('row_selected');
+						}
+						return nRow;
+					}
+				 });
+            })  
+
+
+			// We need to handle the clicking of the table rows
+			/* Click event handler */
+			$('#aggregate-habitat-table tbody tr').live('click', function () {
+				var aData = oTable.fnGetData( this );
+				var iId = aData[0];
+
+				if ( jQuery.inArray(iId, gaiSelected) == -1 )
+				{
+					gaiSelected[gaiSelected.length++] = iId;
+				}
+				else
+				{
+					gaiSelected = jQuery.grep(gaiSelected, function(value) {
+						return value != iId;
+					} );
+				}
+
+				$(this).toggleClass('row_selected');
+			} );
             
 
  			$.get("/mongoose/foo/bar/_find", 
@@ -179,6 +252,8 @@ WallCology = {
             
 //**********ADD TO DISCUSSION HABITAT*****************************************************************************************
                         
+			$('#radio').buttonset()
+
             $('#add-to-discussion-habitat .choose-keywords-button').click(function(){
             	//pop up with all keywords, pulled from discussion area
             })
@@ -201,7 +276,9 @@ WallCology = {
             
             
             $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
+			$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
             $('#add-to-discussion-habitat .back-button').click(function(){
+				$('#new-habitat').hide()
             	$('#add-to-discussion-habitat').hide()
             	$('#open-habitat').show()
             })
@@ -221,22 +298,60 @@ WallCology = {
 //            $(inContainer || 'body').append(picker)
 
             
-            
-            
-            
-//**********ORGANISM****************************************************************************************            
+			$('#what-others-said-habitat .back-button').click(function(){
+            	$('#what-others-said-habitat').hide()
+            	$('#open-habitat').show()
+            })  
 
-            $('#landing-organism .new-button').click(function(){
-            	$('#landing-organism').hide()
-            	$('#new-organism').show()
-            })
-            $('#landing-organism .view-button').click(function(){
-            	$('#landing-organism').hide()
-            	$('#open-organism').show()
-            })
-            
-//**********NEW ORGANISM****************************************************************************************
-            
+        	 $('#add-to-discussions-habitat .back-button').click(function(){
+				$('#add-to-discussions-habitat').hide()
+				$('#what-others-said-habitat').show()
+	         })   
+	
+			$("#what-others-said-habitat #add-to-discussion-button-habitat").click(function(){
+				// Check to see if all required filters/comments are selected
+				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
+					// TODO: send the data to the server to be saved
+					// Dummy code to move to the next step
+					   $('#what-others-said-habitat').hide()
+					   $('#add-to-discussions-habitat').show()
+					// End of Dummy code
+				} else {
+					alert ("Please select at least 2 filters!");
+				}
+			})
+
+			$(function() {
+				$("div#aggregate-view-habitat-filter").buttonset();
+				$("div#aggregate-view-note-type-filter").buttonset();
+			});  
+			    
+			// Send selected filters for the agents to pull them back
+			$("div#aggregate-habitat-filters input").click(function(){
+				totalFiltersSelected = $("div#aggregate-habitat-filters input").attr("checked");
+				// A filter from each category is selected so we can send them to the agents
+				if (totalFiltersSelected == 2){
+				   alert ('woohoo');
+				}                         				
+			})                      
+			
+			// Actions that need to be taken when filters in the Habitat's aggregate view are clicked
+			$("div#aggregate-habitat-filters input").click(function() { 
+						
+				// Set the table header for the dynamic column
+				if (this.name == "note-filter-set"){               
+					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
+				}
+			})
+
+
+			// Selected filters in the Aggregate view for Habitats page
+			// $('div#aggregate-view-habitat-filter button').click(function() {
+			// 				$('div#what-others-said-habitat button').removeClass('ui-state-active');
+			// 				$(this).addClass('ui-state-active');
+			// 			})
+
+//**********ORGANISM****************************************************************************************                              	
         	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
             $('#new-organism .back-button').click(function(){
             	$('#new-organism').hide()
@@ -290,10 +405,11 @@ WallCology = {
 //***************************************************************************************************************
     	
         newHabitatContent: function() {
-        	sev = new Sail.Event('new_observation',{
-        		run:Sail.app.run,
+        	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
+        	sev = new Sail.Event('new_observation', {
+				run:Sail.app.run,
         		type:'habitat',
-        		wallscope:$("#new-habitat .select-wallscope-radios input[type='radio']:checked").val(),
+        		wallscope:habitatRadioInput,
         		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
         		structural_features:$('#new-habitat .structural-features').val(),
         		organisms:$('#new-habitat .organisms').val(),
@@ -317,10 +433,10 @@ WallCology = {
         
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
         newOrganismContent: function() {
-	        sev = new Sail.Event('new_observation',{
-	        	run:Sail.app.run,
+	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
+	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
 	        	type:'organism',
-	        	chosen_organism:$("#radio-organism input[type='radio']:checked").val(),
+	        	chosen_organism:organismRadioInput,
 	        	morphology:$('#new-organism .morphology').val(),
 	        	behaviour:$('#new-organism .behaviour').val(),
 	        	organisms:$('#new-organism .habitat').val(),
@@ -451,7 +567,7 @@ WallCology = {
             Sail.app.run = null
         }
     }
-} 
+}
     /*    phonegap: function() {
     $('#camera').click(function() {
         navigator.camera.getPicture(onSuccess, onFail, { quality: 15 }); 
