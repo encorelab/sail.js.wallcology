@@ -417,92 +417,84 @@
 
 		<div id="tabs-4">
 			<div id="new-counts">
-				<h4>NEW COUNT PAGE</h4></br>
-
+				<h3>NEW COUNT PAGE</h3></br>
+				
+				<div class="select-habitat-title">
+					<h4>Habitat Number</h4>
+				</div>
 				<div class="select-habitat-radios jquery-radios">
-					Habitat Number
 					<input type="radio" name="select-habitat" id="new-count-r1" value="1" /><label for="new-count-r1">Habitat 1</label>
 					<input type="radio" name="select-habitat" id="new-count-r2" value="2" /><label for="new-count-r2">Habitat 2</label>
 					<input type="radio" name="select-habitat" id="new-count-r3" value="3" /><label for="new-count-r3">Habitat 3</label>
 					<input type="radio" name="select-habitat" id="new-count-r4" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
+
 				<div class="record-environment">
 					<div class="temperature-radios jquery-radios">
-						<h5>Record Temperature</h5>
+						<h4>Record Temperature</h4>
 						<input type="radio" name="temp" value="low" id="new-count-r5" /><label for="new-count-r5">Low</label>
 						<input type="radio" name="temp" value="high" id="new-count-r6" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
-						<h5>Record Light Levels</h5>
+						<h4>Record Light Levels</h4>
 						<input type="radio" name="light" value="low" id="new-count-r7" /><label for="new-count-r7">Low</label>
 						<input type="radio" name="light" value="high" id="new-count-r8" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
-						<h5>Record Humidity</h5>
+						<h4>Record Humidity</h4>
 						<input type="radio" name="humidity" value="low" id="new-count-r9" /><label for="new-count-r9">Low</label>
 						<input type="radio" name="humidity" value="high" id="new-count-r10" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
+				
 
-	
 				<div class="record-organisms">
-					<h5>Count Organisms</h5>
-					<p>Enter percentage of WallScope covered by vegitation</p>
-					<div class="count-scum">
-						<img src="/images/icon_0007_scum.png" />
-						<textarea rows="4" cols="5" class="text-box count-scum-percent"></textarea>
-						%
-					</div>
-					<div class="count-mold">
-						<img src="/images/icon_0006_fuzzy-mold.png" />
-						<textarea rows="4" cols="5" class="text-box count-mold-percent"></textarea>
-						%
-					</div>
+					<h4>Count Organisms</h4>
+					<table class="count-vegetation">
+						<tr>
+							<th colspan="8">Enter percentage of WallScope covered by vegitation</th>
+ 						</tr>
+ 						<tr>
+	 						<td><img src="/images/icon_0007_scum.png" /></td>
+	 						<td><input type="text" class="text-box count-scum-percent"/>%</td>
+	 						<td><img src="/images/icon_0006_fuzzy-mold.png" /></td>
+	 						<td><input type="text" class="text-box count-mold-percent"/>%</td>
+ 						</tr>
+					</table>
 
-					<p>Enter up to three counts for each organism</p>
-					<div class="count-blue-bug">
-						<img src="/images/icon_0000_blue-bug.png" />
-						<textarea rows="4" cols="5" class="text-box count-blue-bug1"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-blue-bug2"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-blue-bug3"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-blue-bug4"></textarea>
-						x
-						<textarea rows="4" cols="5" class="text-box count-blue-bug5"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-blue-bug6"></textarea>																	
-					</div>
-					<div class="count-green-bug">
-						<img src="/images/icon_0008_green-bug.png" />
-						<textarea rows="4" cols="5" class="text-box count-green-bug1"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-green-bug2"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-green-bug3"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-green-bug4"></textarea>
-						x
-						<textarea rows="4" cols="5" class="text-box count-green-bug5"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-green-bug6"></textarea>			
-					</div>
-					<div class="count-predator">
-						<img src="/images/icon_0005_predator.png" />
-						<textarea rows="4" cols="5" class="text-box count-predator1"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-predator2"></textarea>
-						+
-						<textarea rows="4" cols="5" class="text-box count-predator3"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-predator4"></textarea>
-						x
-						<textarea rows="4" cols="5" class="text-box count-predator5"></textarea>
-						=
-						<textarea rows="4" cols="5" class="text-box count-predator6"></textarea>
-					</div>
+					<table class="count-organisms">
+						<tr>
+							<th colspan="8">Enter up to three counts for each organism</th>
+						</tr>
+						<tr>
+							<td><img src="/images/icon_0000_blue-bug.png" /></td>
+							<td><input type="text" class="text-box count-blue-bug1"/>+</td>
+							<td><input tyllpe="text" class="text-box count-blue-bug2"/>+</td>
+							<td><input type="text" class="text-box count-blue-bug3"/></td>
+							<td><input type="text" class="text-box count-blue-bug4"/>x</td>
+							<td><input type="text" class="text-box count-blue-bug5"/>=</td>
+							<td><input type="text" class="text-box count-blue-bug6"/></td>
+						</tr>
+						<tr>
+							<td><img src="/images/icon_0008_green-bug.png" /></td>
+							<td><input type="text" class="text-box count-green-bug1"/>+</td>
+							<td><input type="text" class="text-box count-green-bug2"/>+</td>
+							<td><input type="text" class="text-box count-green-bug3"/></td>
+							<td><input type="text" class="text-box count-green-bug4"/>x</td>
+							<td><input type="text" class="text-box count-green-bug5"/>=</td>
+							<td><input type="text" class="text-box count-green-bug6"/></td>
+						</tr>							
+						<tr>
+							<td><img src="/images/icon_0005_predator.png" /></td>
+							<td><input type="text" class="text-box predator1"/>+</td>
+							<td><input type="text" class="text-box predator2"/>+</td>
+							<td><input type="text" class="text-box predator3"/></td>
+							<td><input type="text" class="text-box predator4"/>x</td>
+							<td><input type="text" class="text-box predator5"/>=</td>
+							<td><input type="text" class="text-box predator6"/></td>
+						</tr>							
+					</table>
 				</div>
 				
 				<div class="new-count-date-time">

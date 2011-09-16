@@ -1,17 +1,70 @@
-div#new-counts {
+#new-counts {
 	margin-left: 100px;  
 }
 
-.record-environment{
-    padding: 0;
-    margin-left: 0;
+#new-counts div.select-habitat-title {
+	float: left;
+}
+
+#new-counts div.select-habitat-radios {
+	float: left;
+}
+
+#new-counts div.temperature-radios {
+    margin-left: 20px;
+	float: left;
+}
+
+#new-counts div.light-level-radios {
+    margin-left: 20px;
     padding: 0;
 	float: left;
-	list-style-type: none;
+}
+
+#new-counts div.humidity-radios {
+    margin-left: 20px;
+    padding: 0;
+	float: left;
 }
 
 
 
-.record-organisms {
+#new-counts .text-box {
+	width: 50px;
+}
+
+/* 
+#new-counts div.count-scum {
+	float: left;
+}
+
+#new-counts div.percent-test {
+
+}
+
+#new-counts div.count-mold {
+
+}
+
+#new-counts div.count-blue-bug {
 	clear: left;
+
 }
+
+.blue-bug {
+	float: left;
+}
+
+.symbols {
+	float: left;
+}
+
+.count-blue-bug .text-box {
+	float: left;
+}
+ */
+
+
+/* #new-counts div.symbols {
+		vertical-align: middle;
+} */

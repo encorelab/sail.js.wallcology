@@ -60,6 +60,7 @@ WallCology = {
         init: function() {
             $('#tabs').tabs()
             $('#tabs').show()
+            $('#tabs').tabs({ selected: 3 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
             $('#open-habitat').hide()
@@ -247,8 +248,7 @@ WallCology = {
             $('#open-organism .back-button').click(function(){
             	$('#open-organism').hide()
             	$('#landing-organism').show()
-            })            
-        	
+            })             	
         	
 //**********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
@@ -302,16 +302,15 @@ WallCology = {
         	WallCology.groupchat.sendEvent(sev)
         },
         
-        //this might be more generalizable with passed params
+        //this should now be generalised for habitat+organisms+(other?)
         newDiscussionContent: function() {
-        	sev = new Sail.Event('new_discussion_content',{
+        	sev = new Sail.Event('new_observation',{
         		run:Sail.app.run,
         		type:'discussion',
         		evidence:'pieces of habitat content that were queried (by id number?) and selected from the data table',
-        		discussion_thread:'from the dropdown',
         		note:$('#add-to-discussion-habitat .note').val(),
         		headline:$('#add-to-discussion-habitat .headline').val(),
-        		keywords:'still a mess' //is this going to be plural? where the fuck do they think these things are going to be displayed?
+        		keywords:'still a mess'
         		})
         	WallCology.groupchat.sendEvent(sev)
         },
@@ -331,7 +330,7 @@ WallCology = {
         },
         
         newRelationshipContent: function() {
-	        sev = new Sail.Event('new_relationship',{
+	        sev = new Sail.Event('new_observation',{
 	        	run:Sail.app.run,
 	        	type:'relationship',
 	        	//some stuff about the relationship
@@ -341,7 +340,7 @@ WallCology = {
         },
 
         newCountsContent: function() {
-	        sev = new Sail.Event('new_count', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
 	        	type:'count',
 	        	chosen_habitat:$("#new-counts .select-habitat-radios input[type='radio']:checked").val(),
 	        	temperature:$("#new-counts .temperature-radios input[type='radio']:checked").val(),
