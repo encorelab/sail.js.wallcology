@@ -17,11 +17,6 @@ WallCology = {
     init: function() {
         console.log("Initializing...")
         
-        Sail.app.run = JSON.parse($.cookie('run'))
-        if (Sail.app.run) {
-            Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
-        }
-        
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
@@ -562,10 +557,6 @@ WallCology = {
         authenticated: function(ev) {
             $('#connecting').hide()
         },
-        
-        logout: function(ev) {
-            Sail.app.run = null
-        }
     }
 }
     /*    phonegap: function() {
