@@ -64,9 +64,9 @@
 				             
 				<div id="habitat-menu-page">  
 					<div id="inner-habitat-menu-page">	
-						<button type="button" id="describe-habitat-button" class="new-page-button">I want to Describe a HABITAT</button>							
+						<button type="button" id="describe-habitat-button" class="new-page-button">I want to describe a HABITAT</button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-habitat-button" class="new-page-button">I want to see what others said</button>
+						<button type="button" id="what-others-said-habitat-button" class="new-page-button">I want to see what others observed</button>
 					</div>
 				</div>
 			
@@ -443,7 +443,7 @@
 			<div id="landing-relationships">
 				<div id="action-buttons">
 					<button class="new-button">I want to add a relationship</button>
-					<button class="view-button">I want to see what others said</button>
+					<button class="view-button">I want to see what others observed</button>
 				</div>
 			</div>
 
@@ -515,7 +515,8 @@
 
 		<div id="tabs-4">
 			<div id="new-counts">
-				<h3>NEW COUNT PAGE</h3></br>
+				<img class="new-counts-image" src="/images/new_count.png" />
+				<div class="divider"></div>
 				
 				<div class="select-habitat-title">
 					<h4>Habitat Number</h4>
@@ -531,17 +532,17 @@
 
 				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
-						<h4>Record Temperature</h4>
-						<input type="radio" name="temp" value="low" id="new-count-r5" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" /><label for="new-count-r6">High</label>
+						<h3>Record Temperature</h3>
+						<input type="radio" name="temp" value="low" class="counts-radios" id="new-count-r5" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" class="counts-radios" id="new-count-r6" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
-						<h4>Record Light Levels</h4>
+						<h3>Record Light Levels</h3>
 						<input type="radio" name="light" value="low" id="new-count-r7" /><label for="new-count-r7">Low</label>
 						<input type="radio" name="light" value="high" id="new-count-r8" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
-						<h4>Record Humidity</h4>
+						<h3>Record Humidity</h3>
 						<input type="radio" name="humidity" value="low" id="new-count-r9" /><label for="new-count-r9">Low</label>
 						<input type="radio" name="humidity" value="high" id="new-count-r10" /><label for="new-count-r10">High</label>
 					</div>					
@@ -549,52 +550,52 @@
 				
 
 				<div class="record-organisms">
-					<h4>Count Organisms</h4>
+					<h3>Count Organisms</h3>
 					<table class="count-vegetation">
 						<tr>
-							<th colspan="4">Enter percentage of WallScope covered by vegitation</th>
+							<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
  						</tr>
  						<tr>
-	 						<td><img src="/images/icon_0007_scum.png" /></td>
+	 						<td><img src="/images/icon_0007_scum.png" class="scum-image" /></td>
 	 						<td><input type="text" class="text-box count-scum-percent"/>%</td>
-	 						<td><img src="/images/icon_0006_fuzzy-mold.png" /></td>
+	 						<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image"/></td>
 	 						<td><input type="text" class="text-box count-mold-percent"/>%</td>
  						</tr>
 					</table>
 
 					<table class="count-organisms">
 						<tr>
-							<th colspan="4">Enter up to three counts for each organism</th>
-							<th colspan="1">Average counts</th>
-							<th colspan="1">Multiply by Multiplier</th>
+							<th colspan="4" class="table-header">Enter up to three counts for each organism</th>
+							<th colspan="1" class="table-header">Average counts</th>
+							<th colspan="1" class="table-header">Multiplier</th>
 							<th colspan="1">Final count</th>
 						</tr>
 						<tr>
 							<td><img src="/images/icon_0000_blue-bug.png" /></td>
 							<td><input type="text" class="text-box count-blue-bug1"/>+</td>
 							<td><input type="text" class="text-box count-blue-bug2"/>+</td>
-							<td><input type="text" class="text-box count-blue-bug3"/></td>
-							<td><input type="text" class="text-box count-blue-bug4"/>x</td>
-							<td><input type="text" class="text-box count-blue-bug5"/>=</td>
-							<td><input type="text" class="text-box count-blue-bug6"/></td>
+							<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
+							<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
+							<td>x<input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
+							<td>=<input type="text" class="text-box count-blue-bug6"/></td>
 						</tr>
 						<tr>
 							<td><img src="/images/icon_0008_green-bug.png" /></td>
 							<td><input type="text" class="text-box count-green-bug1"/>+</td>
 							<td><input type="text" class="text-box count-green-bug2"/>+</td>
 							<td><input type="text" class="text-box count-green-bug3"/></td>
-							<td><input type="text" class="text-box count-green-bug4"/>x</td>
-							<td><input type="text" class="text-box count-green-bug5"/>=</td>
-							<td><input type="text" class="text-box count-green-bug6"/></td>
+							<td><input type="text" class="text-box count-green-bug4"/></td>
+							<td>x<input type="text" class="text-box count-green-bug5"/></td>
+							<td>=<input type="text" class="text-box count-green-bug6"/></td>
 						</tr>							
 						<tr>
 							<td><img src="/images/icon_0005_predator.png" /></td>
 							<td><input type="text" class="text-box predator1"/>+</td>
 							<td><input type="text" class="text-box predator2"/>+</td>
 							<td><input type="text" class="text-box predator3"/></td>
-							<td><input type="text" class="text-box predator4"/>x</td>
-							<td><input type="text" class="text-box predator5"/>=</td>
-							<td><input type="text" class="text-box predator6"/></td>
+							<td><input type="text" class="text-box predator4"/></td>
+							<td>x<input type="text" class="text-box predator5"/></td>
+							<td>=<input type="text" class="text-box predator6"/></td>
 						</tr>							
 					</table>
 				</div>
@@ -602,15 +603,15 @@
 				<div class="record-date">		
 					<table class="enter-time">
 						<tr>
-							<th colspan="1">Record Date</th>
-							<th colspan="3">Record Time</th>
+							<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
+							<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
 						</tr>
 						<tr>
 							<td>Date <input id="new-counts-datepicker" type="text"></td>
-							<td>Hour <input type="text" class="text-box hour"/></td>
-							<td>Minute <input type="text" class="text-box minute"/></td>
-							<td><input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am">a.m.</label></td>
-							<td><input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-rpm">p.m.</label></td>
+							<td>Hour <input type="text" class="text-box hour" /></td>
+							<td>Minute <input type="text" class="text-box minute" /></td>
+							<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am"></label></td>
+							<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-pm"></label></td>
 						</tr>
 					</table>
 				</div>
