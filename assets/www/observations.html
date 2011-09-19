@@ -7,7 +7,7 @@
   
     <link href="css/wallcology.css" rel="stylesheet" type="text/css" /> 
     <link href="css/counts.css" rel="stylesheet" type="text/css" />  
-    <link href="css/graphs.css" rel="stylesheet" type="text/css" />  
+    <link href="css/relationships.css" rel="stylesheet" type="text/css" />  
     <link href="css/habitats.css" rel="stylesheet" type="text/css" />  
     <link href="css/organisms.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
@@ -440,73 +440,79 @@
 		
 		
 		<div id="tabs-3">
-			<div id="landing-relationships">
-				<div id="action-buttons">
-					<button class="new-button">I want to add a relationship</button>
-					<button class="view-button">I want to see what others observed</button>
+			<div id="relationships">
+				<div id="landing-relationships">
+					<div id="inner-landing-relationships">
+						<button type="button" class="new-button">I want to describe a RELATIONSHIP</button>
+						</br></br>
+						<button type="button" class="view-button">I want to see what others observed</button>
+					</div>
 				</div>
-			</div>
 
 
-<!-- ///////////////////////////////////////////////////////////////////////////////// -->
-
- 			<div id="new-relationship">
-				<h4>NEW RELATIONSHIP PAGE</h4></br>
-
-
-				<table class="organism-selectables">
-					<tr> 
-						<td id="sun">
-							<img src="/images/icon_0009_sun.png" />	
-						</td>					
-						<td id="scum">
-							<img src="/images/icon_0007_scum.png" /> 					
-						</td>
-						<td id="fuzzy-mold"> 
-							<img src="/images/icon_0006_fuzzy-mold.png" /> 						
-						</td>
-						<td id="blue-bug">
-							 <img src="/images/icon_0000_blue-bug.png" />   					
-						</td> 
-						<td id="green-bug">
-							<img src="/images/icon_0008_green-bug.png" />						
-						</td>
-						<td id="predator"> 
-							<img src="/images/icon_0005_predator.png" />
-						</td>
-					</tr>
-				</table>
-
-				<div class="organism-dropzones">
-					<h5>Add Relationship (the transfer of energy from one organism to another)</h5>
-					<div class="organism-box" id="box1"></div>
-					<div class="arrow"></div>
-					<div class="organism-box" id="box2"></div>
+	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+	
+	 			<div id="new-relationship">
+					<img class="new-relationship-image" src="/images/new_relationship.png" />
+<!-- 				<div class="divider"></div>
+ -->
+					</br>
+	
+					<table class="organism-selectables">
+						<tr>
+							<th colspan="1">Organisms</th>
+ 						</tr>
+ 						<tr> 
+							<td id="sun">
+								<img src="/images/icon_0009_sun.png" />	
+							</td>					
+							<td id="scum">
+								<img src="/images/icon_0007_scum.png" /> 					
+							</td>
+							<td id="fuzzy-mold"> 
+								<img src="/images/icon_0006_fuzzy-mold.png" /> 						
+							</td>
+							<td id="blue-bug">
+								 <img src="/images/icon_0000_blue-bug.png" />   					
+							</td> 
+							<td id="green-bug">
+								<img src="/images/icon_0008_green-bug.png" />						
+							</td>
+							<td id="predator"> 
+								<img src="/images/icon_0005_predator.png" />
+							</td>
+						</tr>
+					</table>
+	
+					<div class="organism-dropzones">
+						<h4>Add Relationship (the transfer of energy from one organism to another)</h4>
+						<div class="organism-box" id="box1"></div>
+						<img class="arrow2" src="/images/arrow.png" />
+						<div class="organism-box" id="box2"></div>
+					</div>
+					<br/>
+	
+					<div class="comment">
+						<h5>Additional Comments</h5>
+						<textarea rows="10" cols="50" class="text-box comments"></textarea> 				
+					</div>
+	                                                           				
+					<div id="action-buttons">
+						<button class="back-button">Back</button>
+						<button class="save-button">Save</button>
+					</div>
 				</div>
-				<br/>
-
-				<div class="comment">
-					<h5>Additional Comments</h5>
-					<textarea rows="10" cols="50" class="text-box comments"></textarea> 				
+	
+	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+	
+	 			<div id="view-relationships">
+	
+									
+					<div id="action-buttons">
+						<button class="back-button">Back</button>
+					</div>
 				</div>
-                                                           				
-
-								
-				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button class="save-button">Save</button>
-					<button class="reload-button">Reload</button>
-				</div>
-			</div>
-
-<!-- ///////////////////////////////////////////////////////////////////////////////// -->
-
- 			<div id="view-relationships">
-
-								
-				<div id="action-buttons">
-					<button class="back-button">Back</button>
-				</div>
+				
 			</div>
 		</div>
 
