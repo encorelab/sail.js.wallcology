@@ -88,7 +88,7 @@ WallCology = {
 				$('#landing-habitat').hide()
             	$('#new-habitat').show()
 
-				//we need to clear all the fields here
+				//we need to clear all the fields here (TODO)
 				$('textarea.text-box').val();
             })
             $('#landing-habitat .view-button').click(function(){
