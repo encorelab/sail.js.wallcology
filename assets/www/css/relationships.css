@@ -1,14 +1,7 @@
-html{
-	height: 100%; 
-}    
-
-body {
+#relationships {
 	height: 100%;
-}
-
-div#tabs {
-	height: 100%;
- 	font-size: 16px;
+	margin-left: 40px;
+	font-size: 14px;
 }
    
 #tabs div#tabs-3 {
@@ -18,7 +11,15 @@ div#tabs {
 }
 
 /* Rokham's magical css */
-#relationships {
+html{
+	height: 100%; 
+}    
+
+body {
+	height: 100%;
+}
+
+div#tabs {
 	height: 100%;
 }
 
@@ -42,6 +43,44 @@ div#tabs {
 	padding-left: 40px;
 }
 
+#new-relationship .image {
+	padding-right: 8px;
+}
+
+#new-relationship .table-header {
+	text-align: left;
+}
+
+#new-relationship .add-relationship-title {
+	display: inline;
+}
+
+#new-relationship .organism-box {
+	margin-top: 55px;
+	height: 110px;
+	width: 110px;
+	border-radius: 4px;
+	background-color: white;
+	color: white;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+#new-relationship .organism-dropzones {
+	margin-left: 170px;
+}
+
+#new-relationship .arrow-image {
+	margin-bottom: 30px;
+}
+
+#new-relationship .comments {
+	height: 220px;
+	width: 620px;
+}
+
+
+
 /*    TODO 
 #inner-landing-relationships .view-button {
 	margin-top: 30px;
@@ -53,9 +92,5 @@ div#tabs {
  */
  
  
-/* .organism-dropzones {
-	margin-left:auto;
-	margin-right:auto;
-}
- */
- 
+
+  
