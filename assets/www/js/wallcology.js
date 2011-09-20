@@ -1,14 +1,3 @@
-//TODO
-//redo data dictionary
-
-//complete all of habitats, get a better of an idea of how complex a whole unit will be (also, querying the db)
-//start relationships again
-
-
-//Sail.app.groupchatRoom to get room. Currently ie "wallcology-julia-fall2011"
-
-
-
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
     xmppDomain: 'proto.encorelab.org',
