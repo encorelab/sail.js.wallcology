@@ -1,21 +1,39 @@
 #new-counts {
-	 font-size: 16px; 
+	 font-size: 14px; 
 }
 
-div#tabs div#tabs-4 {
-	background-image:url('../images/bkgd_count.png');  
+#tabs div#tabs-4 {
+	background-image:url('/images/bkgd_count.png');  
 	background-repeat: no-repeat;
 	height: 1200px;
 }   
-
-/* #new-counts h4 {
-	font-size: 60px;
+ 
+#new-counts .ui-button {
+	width: 110px;
 }
- */
+
+#new-counts .text-box {
+	width: 40px;
+	height: 40px;
+}
+
+#new-counts #new-count-am {
+	/* need to style these larger... they're way too small for a tablet */
+}
+
+#new-counts .table-header {
+	text-align: left;
+}
+
+
+/*  ******************POSITIONING********************* */
+#new-counts .new-counts-image {
+	float: left;
+}
  
 #new-counts div.select-habitat-title {
 	float: left;
-	margin: -13px 40px 0 0;
+	margin: -13px 33px 0 0;
 }
 
 #new-counts div.select-habitat-radios {
@@ -51,12 +69,30 @@ div#tabs div#tabs-4 {
 	clear: left;
 }
 
-#new-counts .text-box {
-	width: 50px;
-	height: 50px;
+#new-counts .count-vegetation {
+	margin-bottom: 20px;
 }
 
-#new-counts 
+#new-counts .fuzzy-mold-image {
+	margin-top: 10px;
+}
+
+#new-counts .fuzzy-mold-image {
+	margin-top: 10px;
+	margin-left: 140px;
+}
+
+#new-counts .column-spacing {
+	margin-right: 80px;
+}
+
+#new-counts #new-counts-datepicker {
+	margin-right: 60px;
+}
+
+#new-counts button.save-button {
+	float: right;
+}
 
 
 /* #new-counts div.symbols {

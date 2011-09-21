@@ -1,0 +1,96 @@
+#relationships {
+	height: 100%;
+	margin-left: 40px;
+	font-size: 14px;
+}
+   
+#tabs div#tabs-3 {
+	background-image:url('/images/bkgd_relationship.png');  
+	background-repeat: no-repeat;
+	height: 1200px;
+}
+
+/* Rokham's magical css */
+html{
+	height: 100%; 
+}    
+
+body {
+	height: 100%;
+}
+
+div#tabs {
+	height: 100%;
+}
+
+#landing-relationships {
+	background-image: url('/images/transparent_bkg.png');
+	margin-left: auto;
+	margin-right: auto;     
+	width: 380px;    
+	height: 290px;  
+	display: table; 
+	_position: relative; 
+	overflow: hidden;    
+	margin-top: 200px;
+}   
+
+#inner-landing-relationships {
+	_position: absolute; 
+	_top: 50%; 
+	display: table-cell; 
+	vertical-align: middle; 
+	padding-left: 40px;
+}
+
+#new-relationship .image {
+	padding-right: 8px;
+}
+
+#new-relationship .table-header {
+	text-align: left;
+}
+
+#new-relationship .add-relationship-title {
+	display: inline;
+}
+
+#new-relationship .organism-box {
+	margin-top: 55px;
+	height: 110px;
+	width: 110px;
+	border-radius: 4px;
+	background-color: white;
+	color: white;
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+#new-relationship .organism-dropzones {
+	margin-left: 170px;
+}
+
+#new-relationship .arrow-image {
+	margin-bottom: 30px;
+}
+
+#new-relationship .comments {
+	height: 220px;
+	width: 620px;
+}
+
+
+
+/*    TODO 
+#inner-landing-relationships .view-button {
+	margin-top: 30px;
+}
+
+#relationships .landing-relationships-button {
+	height: 50px;
+}
+ */
+ 
+ 
+
+  
