@@ -1,3 +1,9 @@
+/* TODO
+-get the 'Average counts' header to be centred
+-make the am and pm radios larger (too small for tablet)
+
+ */
+
 #new-counts {
 	 font-size: 14px; 
 }
@@ -17,12 +23,25 @@
 	height: 40px;
 }
 
+#new-counts .image {
+	height: 60px;
+	width: 60px;
+}
+
+.table-body {
+	font-size: 21px;
+}
+
 #new-counts #new-count-am {
 	/* need to style these larger... they're way too small for a tablet */
 }
 
 #new-counts .table-header {
 	text-align: left;
+}
+
+#new-counts .table-header-spacing {
+	text-align: center;
 }
 
 
@@ -90,8 +109,12 @@
 	margin-right: 60px;
 }
 
-#new-counts button.save-button {
-	float: right;
+#new-counts .back-button {
+	margin-left: 10px;
+}
+
+#new-counts .save-button {
+	margin-left: 450px;
 }
 
 
