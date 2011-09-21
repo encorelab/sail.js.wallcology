@@ -70,7 +70,6 @@ WallCology = {
             $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
-            $('#new-organism').hide()
             $('#open-organism').hide()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
