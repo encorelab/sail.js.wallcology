@@ -1,14 +1,3 @@
-//TODO
-//redo data dictionary
-//add the graphics
-//complete all of habitats, get a better of an idea of how complex a whole unit will be (also, querying the db)
-//start relationships again
-
-
-//Sail.app.groupchatRoom to get room. Currently ie "wallcology-julia-fall2011"
-
-
-
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
     xmppDomain: 'proto.encorelab.org',
@@ -18,9 +7,6 @@ WallCology = {
         console.log("Initializing...")
         
         Sail.app.run = JSON.parse($.cookie('run'))
-        if (Sail.app.run) {
-            Sail.app.groupchatRoom = Sail.app.run.name+'@conference.'+Sail.app.xmppDomain
-        }
         
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
@@ -63,7 +49,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 3 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -87,7 +73,7 @@ WallCology = {
 				$('#landing-habitat').hide()
             	$('#new-habitat').show()
 
-				//we need to clear all the fields here
+				//we need to clear all the fields here (TODO)
 				$('textarea.text-box').val();
             })
             $('#landing-habitat .view-button').click(function(){
@@ -378,7 +364,7 @@ WallCology = {
 
             $('#new-relationship .save-button').click(Sail.app.observations.newRelationshipContent)
             $('#new-relationship .back-button').click(function(){
-            	$('#new-relationships').hide()
+            	$('#new-relationship').hide()
             	$('#landing-relationships').show()
             })
             
@@ -562,8 +548,8 @@ WallCology = {
             $('#connecting').hide()
         },
         
-        logout: function(ev) {
-            Sail.app.run = null
+        unauthenticated: function(ev) {
+            window.location.href = "/index.html"
         }
     }
 }
