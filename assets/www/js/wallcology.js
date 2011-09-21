@@ -6,6 +6,8 @@ WallCology = {
     init: function() {
         console.log("Initializing...")
         
+        Sail.app.run = JSON.parse($.cookie('run'))
+        
         Sail.modules
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
@@ -546,6 +548,10 @@ WallCology = {
         authenticated: function(ev) {
             $('#connecting').hide()
         },
+        
+        unauthenticated: function(ev) {
+            window.location.href = "/index.html"
+        }
     }
 }
     /*    phonegap: function() {
