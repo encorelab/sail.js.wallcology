@@ -528,7 +528,7 @@ WallCology = {
         },
         
         connected: function(ev) {
-
+            WallCology.groupchat.join()
             $('#username').text(session.account.login)
       	    //$('#connecting').hide()						
         	jQuery('#top-level-dropdown').change(function(e){
