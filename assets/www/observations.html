@@ -1,3 +1,11 @@
+<!-- TODO
+-style jquery ui buttons to correct colors
+-get text input to do new lines, not centered
+
+
+ -->
+
+
 <!DOCTYPE html> 
 <html> 
 <head> 
@@ -65,7 +73,8 @@
 				</div>
 			
 			
-			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin-->	
+			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin
+					This can be deleted, as far as I know-->	
 		    <div id="temporarily-hidden" style="display:none">
 				<h4>HABITAT</h4>
 				            			
@@ -176,60 +185,58 @@
 		
 		    <!-- New Habitat Page -->
 			<div id="new-habitat">
-				<h4>NEW HABITAT PAGE</h4></br>
+				<img class="new-habitat-image" src="/images/new_habitat.png" />
+				<div class="divider"></div>
 				 
 				<!-- The student chose which  -->   		
-				<form>
-					<div id="radio" class="select-wallscope">
-						Habitat Number
-						<br/>
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
-					</div>
-				</form>
+				<div class="select-wallscope-title">
+					<h4>Habitat Number</h4>
+				</div>
+
+				<div class="select-wallscope jquery-radios">
+					<input type="radio" id="radio1" class="radio-button" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
+					<input type="radio" id="radio2" class="radio-button" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
+					<input type="radio" id="radio3" class="radio-button" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
+					<input type="radio" id="radio4" class="radio-button" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
+				</div>
 				<br/>
+				<div class="divider"></div>
 				
 				<form action="" class="content-form"> 
-					<div class="content">     
-						
+					<div class="content">     						
 						<div class="habitat-form-fields"> 
-							<h5>Environment Conditions (temperature, humidity, light)</h5> 
-							<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
+							<h4>Environment Conditions (temperature, humidity, light)</h4>
+							<textarea class="text-box environmental-conditions"></textarea> 
 						</div>
 						
 						<div class="habitat-form-fields">  
-							<h5>Structural Features</h5> 
-							<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
+							<h4>Structural Features</h4>
+							<textarea class="text-box structural-features"></textarea> 
 						</div>
 						
 						<div class="habitat-form-fields"> 
-							<h5>Organisms</h5> 
-							<textarea rows="5" cols="50" class="text-box organisms"></textarea> 						
+							<h4>Organisms</h4>
+							<textarea class="text-box organisms"></textarea> 						
 						</div> 
 						
 						<div class="habitat-form-fields"> 
-							<h5>Comments</h5> 
-							<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
+							<h4>Comments</h4>
+							<textarea class="text-box comments"></textarea>  							
 						</div>                                                              				
 					</div>	
 				</form>  
 				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button class="save-button">Save</button>     
+					<button class="back-button button">BACK</button>
+					<button class="save-button">SAVE</button>     
 				</div>
-			</div>	
-			
+			</div>
 			
 			<!-- See what others said for Habitats Page -->
 			<div id="what-others-said-habitat">
-				<div class="habitat-page-heading"> What others said about the HABITATS </div>
-				<div id='aggregate-habitat-filters'>
-					Pick from the two sets of criteria below to show community results: 
-					
-					<br/>
-					<br/>
+				<br/>
+				<div class="habitat-page-heading"><h2>What others said about the HABITATS</h2></div>
+				<div id="aggregate-habitat-filters">
+					<h4>Pick from the two sets of criteria below to show community results:</h4>
 					<div id="aggregate-view-habitat-filter"> 
 						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" /><label for="habitat-filter-1">Habitat 1</label> 
 						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" /><label for="habitat-filter-2">Habitat 2</label> 
@@ -245,7 +252,7 @@
 					</div>
 				</div>
 
-				<div> If you want to add a note to discussions, check off the entries you want added to it: </div>
+				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
 				<div id="habitat-aggregate-results"> 
 					<table id="aggregate-habitat-table">   
 						<thead>
@@ -294,14 +301,14 @@
 					</table>   					
 			    </div>
 				   				
-				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button id="add-to-discussion-button-habitat" class="">Add to Discussion</button>     
+				<div class="action-buttons">
+					<button class="back-button">BACK</button>  				
+					<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>
 				</div>
 		    </div>
 		
 		
-		  	<!-- Add to Discussion for Habitats Page -->  
+<!-- 		  	Add to Discussion for Habitats Page  
 			<div id="add-to-discussions-habitat">
 				<div class="habitat-page-heading"> Add to Discussions </div>  
 				
@@ -311,11 +318,11 @@
 			             
 			
 				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button id="add-to-discussion-button-habitat" class="">Save</button>     
+					<button class="back-button">BACK</button>
+					<button id="add-to-discussion-button-habitat" class="">SAVE</button>     
 				</div>  			
 			</div>	
-			
+ -->			
 		                               
 		
 		</div>
@@ -423,8 +430,8 @@
 					<div></div> 
 				</div>
 				
-				<button class="back-button">Back</button>
-				<button class="save-button">Save</button>
+				<button class="back-button">BACK</button>
+				<button class="save-button">SAVE</button>
 				<button class="reload-button">Reload</button>
 			</div>
 		</div>
@@ -488,20 +495,22 @@
 	
 					<div class="comment">
 						<h3>Additional Comments</h3>
-						<input type="text" class="text-box comments"/>			
+						<textarea class="text-box comments"></textarea>  			
 					</div>
 	                                                           				
 					<div id="action-buttons">
-						<button class="back-button">Back</button>
-						<button class="save-button">Save</button>
+						<button class="back-button">BACK</button>
+						<button class="save-button">SAVE</button>
 					</div>
 				</div>
 	
 	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
 	
 	 			<div id="view-relationships">
-					<br/><br/>
-					<h3>What others said about the RELATIONSHIPS</h3>
+					<br/>
+					<div class="view-relationships-title">
+						<h2>What others said about the RELATIONSHIPS</h2>
+					</div>
 					
 					<div class="view-relationships-table-background">
 						<table class="view-relationships-table">
@@ -515,6 +524,7 @@
 								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 							</tr>
 							<tr>
+								<!-- data for display boxes to be pulled from the DB -->
 								<td><img src="/images/icon_0009_sun.png" class="image sun" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
 								<td class="display-box sun1">1</td>
@@ -570,9 +580,58 @@
 							</tr>
 						</table>
 					</div>
+					<br/><br/>
+					
+<!-- 					<div id="relationships-results"> 
+						<table id="aggregate-relationships-table">   
+							<thead>
+								<tr> 
+									<th id="dynamic-column"> </th>
+									<th> Author(s)</th>
+									<th> Last Updated</th>
+								</tr>                               
+							TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids
+						   </thead>
+							<tbody> 
+								<script type="text/javascript">  
+									//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
+									dummyData = [
+										[
+											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+											"Beatrice S, Jeffery G",
+											"10/1/2011 2:34pm"
+										],
+										
+										[
+											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+											"Louis B, Naomi C",
+											"10/1/2011 2:45pm"
+										],
+																			
+									];
+									for (i=0; i<= dummyData.length; i++) {
+										
+									}
+								</script>
+								<tr>
+									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
+									</td>
+									<td> Louis B, Naomi C </td>
+									<td> 10/1/2011 2:45 pm </td>
+								</tr> 							
+								<tr>
+									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+									</td>
+									<td> Beatrice S, Jeffery G </td>
+									<td> 10/1/2011 2:34 pm </td>
+								</tr>
+							</tbody>
+						</table>   					
+				    </div> -->
+					
 									
 					<div id="action-buttons">
-						<button class="back-button">Back</button>
+						<button class="back-button">BACK</button>
 					</div>
 				</div>
 				
@@ -686,7 +745,7 @@
 				</div>
 				<br/>
 
-				<button class="save-button">Save</button>
+				<button class="save-button">SAVE</button>
 			</div>
 		</div>
 		

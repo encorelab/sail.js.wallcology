@@ -110,6 +110,10 @@ div#tabs {
  
 /*****************************VIEW RELATIONSHIPS**************************/
 
+#view-relationships .view-relationships-title {
+	color: #EE5023;
+}
+
 #view-relationships .image {
 	height: 58px;
 	width: 66px;
@@ -118,7 +122,7 @@ div#tabs {
 #view-relationships .display-box {
 	height: 58px;
 	width: 66px;
-	background-color: #d2d4d5;
+	background-color: #D2D4D5;
 	font-size: 24px;
 	text-align: center;
 }

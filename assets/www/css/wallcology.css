@@ -29,6 +29,10 @@ Xoom dimensions:
 	padding-left: 10px;
 }
 
+body {
+	font-family: 'Tahoma', 'Trebuchet MS', Helvetica Narrow, Helvetica, Geneva, Verdana, sans-serif;
+}
+
 #class-selection {
   margin: 0 auto;
   margin-top: 10%;
