@@ -1,7 +1,6 @@
 /* TODO
 -get the 'Average counts' header to be centred
 -make the am and pm radios larger (too small for tablet)
--is fuzzy mold image aligned correctly?
  */
 
 #new-counts {
@@ -29,7 +28,11 @@
 	width: 60px;
 }
 
-.table-body {
+#new-counts .table-body {
+	font-size: 21px;
+}
+
+#new-counts .text-box {
 	font-size: 21px;
 }
 
@@ -94,7 +97,7 @@
 	margin-bottom: 20px;
 }
 
-#new-counts .fuzzy-mold-image {
+#new-counts .scum-image {
 	margin-top: 10px;
 }
 
@@ -111,12 +114,12 @@
 	margin-right: 60px;
 }
 
-#new-counts .back-button {
-	margin-left: 10px;
+#new-counts .minute {
+	margin-right: 20px;
 }
 
 #new-counts .save-button {
-	margin-left: 450px;
+	margin-left: 560px;
 }
 
 

@@ -380,12 +380,7 @@ WallCology = {
 
 			$('#new-counts-datepicker').datepicker()
 			
-			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)
-            $('#new-counts .back-button').click(function(){
-            	$('#new-counts').hide()
-            	$('#open-counts').show()
-            })
-			
+			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)			
     	},
 
 //***************************************************************************************************************
@@ -444,10 +439,10 @@ WallCology = {
         newCountsContent: function() {
 	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
 	        	type:'count',
-	        	chosen_habitat:$("#new-counts .select-habitat-radios input[type='radio']:checked").val(),
-	        	temperature:$("#new-counts .temperature-radios input[type='radio']:checked").val(),
-	        	light_level:$("#new-counts .light-level-radios input[type='radio']:checked").val(),
-	        	humidity:$("#new-counts .humidity-radios input[type='radio']:checked").val(),
+	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
+	        	temperature:$('input:radio[name=temp]:checked').val(),
+	        	light_level:$('input:radio[name=light]:checked').val(),
+	        	humidity:$('input:radio[name=humidity]:checked').val(),
 	        	scum_percent:$('#new-counts .count-scum-percent').val(),
 	        	mold_percent:$('#new-counts .count-mold-percent').val(),
 	        	blue_bug:[{
@@ -477,9 +472,13 @@ WallCology = {
 	        	date:$('#new-counts-datepicker').datepicker('getDate'),
 	        	hour:$('#new-counts .hour').val(),
 	        	minute:$('#new-counts .minute').val(),
-	        	ampm:$("#new-counts .ampm-radios input[type='radio']:checked").val()
+	        	ampm:$('input:radio[name=ampm]:checked').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
+	        //reset fields
+	        $('#new-counts .text-box').val('')
+	        $("input:radio").prop('checked', false)
+	        $('#new-counts .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
         },
 
     },

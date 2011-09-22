@@ -25,12 +25,11 @@ div#habitat-menu-page {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
 	margin-right: auto;     
-	width: 380px;    
-	height: 290px;  
+	height: 470px;      
 	display: table; 
 	_position: relative; 
 	overflow: hidden;    
-	margin-top: 200px;
+	margin-top: 160px;
 }   
 
 div#inner-habitat-menu-page {
@@ -39,7 +38,18 @@ div#inner-habitat-menu-page {
 	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
 }          
+
+#inner-habitat-menu-page .new-page-button {
+	width: 550px;
+	height: 80px;
+}
+
+#inner-habitat-menu-page #what-others-said-habitat-button {
+	margin-top: 50px;
+}
 
 
 div.habitat-page-heading {

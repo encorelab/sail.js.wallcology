@@ -10,6 +10,10 @@
 	height: 1200px;
 }
 
+#relationships .ui-button {
+	width: 100px;
+}
+
 /* Rokham's magical css */
 html{
 	height: 100%; 
@@ -26,13 +30,12 @@ div#tabs {
 #landing-relationships {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
-	margin-right: auto;     
-	width: 380px;    
-	height: 290px;  
+	margin-right: auto;       
+	height: 470px;  
 	display: table; 
 	_position: relative; 
 	overflow: hidden;    
-	margin-top: 200px;
+	margin-top: 160px;
 }   
 
 #inner-landing-relationships {
@@ -41,7 +44,22 @@ div#tabs {
 	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
 }
+
+#inner-landing-relationships .landing-relationships-button {
+	width: 550px;
+	height: 80px;
+}
+
+#inner-landing-relationships .view-button {
+	margin-top: 50px;
+}
+	
+
+
+/************************************ NEW RELATIONSHIP********************************/
 
 #new-relationship .image {
 	padding-right: 8px;
@@ -71,7 +89,7 @@ div#tabs {
 }
 
 #new-relationship .arrow-image {
-	margin-bottom: 30px;
+	margin-bottom: 48px;
 }
 
 #new-relationship .comments {
@@ -89,20 +107,37 @@ div#tabs {
 	margin-left: 430px
 }
 
-#new-relationship .ui-button {
-	width: 100px;
+ 
+/*****************************VIEW RELATIONSHIPS**************************/
+
+#view-relationships .image {
+	height: 58px;
+	width: 66px;
 }
 
-/*    TODO 
-#inner-landing-relationships .view-button {
+#view-relationships .display-box {
+	height: 58px;
+	width: 66px;
+	background-color: #d2d4d5;
+	font-size: 24px;
+	text-align: center;
+}
+
+#view-relationships .blank-box {
+	background-color: white;
+}
+
+#view-relationships .view-relationships-table-background {
+	width: 490px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px 8px 8px 8px;
+	background-color: white;
+	border: thin;
+	border-style: groove;
+}
+
+#view-relationships .back-button {
+	margin-left: 30px;
 	margin-top: 30px;
 }
-
-#relationships .landing-relationships-button {
-	height: 50px;
-}
- */
- 
- 
-
-  
