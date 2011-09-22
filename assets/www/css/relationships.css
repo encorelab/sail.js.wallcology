@@ -1,6 +1,6 @@
 #relationships {
 	height: 100%;
-	margin-left: 40px;
+	margin-left: 20px;
 	font-size: 14px;
 }
    
@@ -76,10 +76,22 @@ div#tabs {
 
 #new-relationship .comments {
 	height: 220px;
-	width: 620px;
+	width: 660px;
 }
 
+#new-relationship .back-button {
+	margin-top: 30px;
+	margin-left: 10px;
+}
 
+#new-relationship .save-button {
+	margin-top: 30px;
+	margin-left: 430px
+}
+
+#new-relationship .ui-button {
+	width: 100px;
+}
 
 /*    TODO 
 #inner-landing-relationships .view-button {

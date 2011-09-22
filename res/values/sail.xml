@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="homepage_url">http://142.1.242.2:8000/</string>
+    <string name="homepage_url">http://10.0.1.41:8000/</string>
 </resources>

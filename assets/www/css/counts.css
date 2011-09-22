@@ -6,6 +6,7 @@
 
 #new-counts {
 	 font-size: 14px; 
+	 margin-left: 20px;
 }
 
 #tabs div#tabs-4 {
@@ -15,7 +16,7 @@
 }   
  
 #new-counts .ui-button {
-	width: 110px;
+	width: 100px;
 }
 
 #new-counts .text-box {
@@ -40,9 +41,10 @@
 	text-align: left;
 }
 
-#new-counts .table-header-spacing {
+#new-counts .align-center {
 	text-align: center;
 }
+
 
 
 /*  ******************POSITIONING********************* */
