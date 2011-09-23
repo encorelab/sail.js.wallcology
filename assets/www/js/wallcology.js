@@ -341,7 +341,42 @@ WallCology = {
             $('#new-organism .back-button').click(function(){
             	$('#new-organism').hide()
             	$('#landing-organism').show()
-            })            
+            })                     
+
+			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
+			$('div#tabs-2 table#organism-table td').click(function(){    
+				$('div#tabs-2 table#organism-table td').css('border', 'none');
+				$(this).css('border', '1px solid red');
+				$('div#tabs-2 input#selected-organism').attr('value', this.id);
+			})    
+			
+			$('div#tabs-2 table#juvenile-organism-table td').click(function(){    
+				$('div#tabs-2 table#juvenile-organism-table td').css('border', 'none');
+				$(this).css('border', '1px solid red');
+				$('div#tabs-2 input#selected-juvenile').attr('value', this.id);
+			})
+			
+			
+			// if an organism is selected
+			$('div#tabs-2 div#organism-evolution span.organism-only').click (function(){
+				selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');   
+				if (selectedOrganismId === ""){
+					alert ("You must first choose an organism and then click this cell");
+				}else {
+					$('div#tabs-2 div#organism-evolution span.organism-only').html($('div#tabs-2 table#organism-table td#'+selectedOrganismId).html());  				
+				}
+			})
+			 
+			// if a juvenile is selected
+			$('div#tabs-2 div#organism-evolution span.juvenile-only').click (function(){
+				selectedJuvenileId = $('div#tabs-2 input#selected-juvenile').attr('value');   
+				if (selectedJuvenileId === ""){
+					alert ("You must first choose a Juvenile and then click this cell");
+				}else {
+					$('div#tabs-2 div#organism-evolution span.juvenile-only').html($('div#tabs-2 table#organism-table td#'+selectedJuvenileId).html());  				
+				}
+			})
+			
 
 //**********OPEN ORGANISM***************************************************************************************
         	

@@ -328,100 +328,115 @@
 		
  		<div id="tabs-2">
  			<div id="new-organism">
-				<img src="/resources/new_organism.png"/>			
-                   
-				<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div>
-				<table id="organism-table">   
+				<div id="organism-page-image">
+					<img src="/resources/new_organism.png"/>   
+					<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div> 			  
+				</div>         
+				<!-- This div contains the two tables of organisms where students can select from-->                                                                                                           
+				<div id="organism-tables">
+					<table id="organism-table">
+						<tr>
+							<td id="scum">
+								<img src="/images/icon_scum_small.png" /> 					
+							</td>
+							<td id="fuzzy-mold"> 
+								<img src="/images/icon_mold_small.png" /> 						
+							</td>					
+						</tr>
 					
-					<tr> 
-						<td id="blue-bug-stage-1">
-							<img src="/images/icon_0001_blue-bug-stage-1.png" />  
-						</td>						
-						<td id="green-bug-stage-1">
-							<img src="/images/icon_0004_green-bug-stage-1.png" />						
-						</td>
-						<td id="blue-bug-stage-3">    
-							<img src="/images/icon_0003_blue-bug-stage-3.png" />						
-						</td>
-						<td id="blue-bug-stage-2">
-							<img src="/images/icon_0002_blue-bug-stage-2.png" />						
-						</td>
-						<td id="blue-bug">
-							 <img src="/images/icon_0000_blue-bug.png" />   					
-						</td>						
-					</tr>
+						<tr> 
+							<td id="blue-bug-stage-3">    
+								<img src="/images/icon_blue_small.png" />						
+							</td>
+							<td id="blue-bug-stage-2">
+								<img src="/images/icon_turtle_small.png" />						
+							</td>					
+						</tr> 
 					
-					<tr>     
-						<td>
-							<img src="/images/icon_0000_blue-bug.png" />						
-						</td>
-						<td id="predator"> 
-							<img src="/images/icon_0005_predator.png" />
-						   <!-- <img src="/images/icon_0008_green-bug.png" />						 -->
-						</td>
-						<td id="scum">
-							<img src="/images/icon_0007_scum.png" /> 					
-						</td>
-						<td id="fuzzy-mold"> 
-							<img src="/images/icon_0006_fuzzy-mold.png" /> 						
-						</td>
-						<td id="sun">
-							<img src="/images/icon_0009_sun.png" />						
-						</td>						
-					</tr>
-						<!-- rename the values more descriptively once we know the organisms -->
-						<!-- we will probably need to have drag/dropable items (svgs) with radio buttons overtop -->
-						<!-- what the fuck is wrong with these radio buttons??? -->
-				</table>    
-				<input type="hidden" id="selected-organism" value=""/>
-
-				<div class='section-title'> <b> Describe the organism </b> (use the categories that apply) </div>
-			                                                                                                     
-				<div> 
-					<h5 class="organism-description-section"> <b> Morphology </b> (what it looks like) </h5> 
-					<div class="description-content morphology"> 
-						<textarea rows="5" cols="50"></textarea>							
-					</div>
-				 </div>
+						<tr>
+							<td id="blue-bug">
+							 	<img src="/images/icon_predator_small.png" />   					
+							</td>					
+						</tr>
+					</table>
+				         
+					<div class='section-title'> <b>Juvenile Form</b> </div> 
+					<table id="juvenile-organism-table"> 
+						<tr>
+						 	<td>
+								<img src="/images/icon_eggblue_small.png" />						
+							</td>
+							<td id="predator"> 
+								<img src="/images/icon_tealegg_small.png" />
+							</td> 				
+						</tr>
+					 
+						<tr>
+						 	<td>
+								<img src="/images/icon_blue_bug_small.png" /> 						
+							</td>
+							<td id="predator"> 
+								<img src="/images/icon_pupa2_small.png" /> 	
+							</td>   											
+						</tr>
+						  				
+						<tr>
+							<td id="sun">
+								<img src="/images/icon_predator_small.png" />						
+							</td>
+						</tr>
+					</table>
+					<input type="hidden" id="selected-organism" value=""/>
+					<input type="hidden" id="selected-juvenile" value=""/>					
+				</div> 
+			          
+				<div id="organism-descriptions">
+					<div> 
+						<div class='section-title'> <b> Morphology </b> (what it looks like) </div> 					
+						<div id="organism-morphology"> 
+							<textarea rows="3" cols="50"></textarea>							
+						</div>
+				 	</div>
 				
-				<div> 
-					<h5 class="organism-description-section"> <b> Behavior </b> (what it does) </h5>
-					<div class="description-content behavior"> 
-						<textarea rows="5" cols="50"></textarea>
-					</div>
-				</div>    
+					<div>                                                                               
+						<div class='section-title'> <b> Behavior </b> (what it does) </div> 					
+						<div id="organism-behavior">
+							<textarea rows="3" cols="50"></textarea>
+						</div>
+					</div>    
 				
-				<div>
-					<h5 class="organism-description-section"> <b> Habitat </b> (where it lives) </h5>
-					<div class="description-content habitat"> 
-						<textarea rows="5" cols="50"></textarea>
-					</div>
-				</div>     
+					<div> 
+						<div class='section-title'> <b> Habitat </b> (where they live) </div> 					
+						<div id="organism-habitat">
+							<textarea rows="3" cols="50"></textarea>
+						</div>
+					</div>     
 				
-				<div>
-					<h5 class="organism-description-section"> <b> Comments </b></h5>
-					<div class="description-content comment"> 
-						<textarea rows="5" cols="50"></textarea>
+					<div>        
+						<div class='section-title'> <b> Comments </b></div> 					
+						<div id="organism-comments">
+							<textarea rows="3" cols="50"></textarea>
+						</div>
 					</div>
 				</div>												
 				
                 
-				<div class='section-title'> <b> Show the life cycle </b> (organisms will have between 1 and 4 stages) </div>  
+				<div id="organism-life-cycle-text" class='section-title'> <b> Life Cycle </b> (Tap on an organism image, then tap on the box to fill it in. Each adult organism will have either one, two or three juvenile forms.) </div>  
 				
 				<div id="organism-evolution">
-					<div></div>
+					<span class='organism-blank-cell juvenile-only'></span>
 				
 					<div class="arrow"><img src="/resources/arrow.png"></div>
 				
-					<div></div>
+					<span class='organism-blank-cell juvenile-only'></span>
 				
 					<div class="arrow"><img src="/resources/arrow.png"></div>					 
 				
-					<div></div>
+					<span class='organism-blank-cell juvenile-only'></span>
 				   		   
 					<div class="arrow"><img src="/resources/arrow.png"></div>
 				
-					<div></div> 
+					<span class='organism-blank-cell organism-only'></span> 
 				</div>
 				
 				<button class="back-button">Back</button>

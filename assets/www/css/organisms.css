@@ -3,9 +3,23 @@ div#tabs-2 {
 	padding-top: 0px;
 }
 
+div#tabs-2 img#organism-page-image {
+	float: left;
+}
+                            
+div#tabs-2 div#organism-tables {
+	width: 15%;
+	float: left;  
+}
+                
+div#tabs-2 div#organism-descriptions {
+	width: 85%;
+	float: left;       
+}
+
 div#new-organism table#organism-table {
 	margin-bottom: 20px;	
-}      
+}                           
 
 div#new-organism div.section-title {
 	font-size: 11px;
@@ -27,18 +41,32 @@ h5.organism-description-section {
 	border-style: solid;
 	border-width: 1px;   
 	width: 300px;
-}
+}       
 
-div.description-content {
-	display: none;
-}        
+div#tabs-2 div#organism-life-cycle-text {
+	width: 100%;
+	float: left;
+}                   
+
+div#tabs-2 span.organism-blank-cell {                 
+   display: inline;   
+   width: 58px;
+   height: 58px;
+   background-color: #cccccc;
+   float: left; 
+}
+      
 
 div#new-organism div#organism-evolution {
 	width: 100%;
-	float: left;         
+	float: left; 
+	margin-bottom: 30px;        
 }
 
 div#new-organism div.arrow {
 	width: 40px;
-	float: left;	
+	float: left;  
+	margin-top: 20px;      
+	margin-left: 5px;
+	margin-right: 5px;
 }
