@@ -12,6 +12,7 @@ WallCology = {
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
+            .load('CommonKnowledge', {buttonContainer: '#tabs'})
             .thenRun(function () {
                 Sail.autobindEvents(WallCology)
                 
