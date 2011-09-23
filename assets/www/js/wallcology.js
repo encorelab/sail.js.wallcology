@@ -604,7 +604,7 @@ WallCology = {
 	        	ampm:$('input:radio[name=ampm]:checked').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
-	        //reset fields
+	        //clear fields
 	        $('#new-counts .text-box').val('')
 	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
