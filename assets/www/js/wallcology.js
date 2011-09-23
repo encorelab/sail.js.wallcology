@@ -49,7 +49,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -363,14 +363,28 @@ WallCology = {
 //**********NEW RELATIONSHIP***********************************************************************************          
 
             $('#new-relationship .save-button').click(Sail.app.observations.newRelationshipContent)
-            $('#new-relationship .back-button').click(function(){
+            $('#new-relationship .back-button').click(function() {
             	$('#new-relationship').hide()
             	$('#landing-relationships').show()
             })
             
+            $('#new-relationship .selectable').click(function() {
+            	$('.selectable').removeClass('selected')
+            	$(this).toggleClass('selected')            	
+            })
+            
+            $('#new-relationship .organism-box').click(function() {
+            	selected = $('.selected')
+            	clone = selected.clone()
+            	clone.attr('')
+            	$(this).append(clone)
+            	selected.removeClass('selected')
+            	$(this).remove(clone)
+            })
+            
 //**********VIEW RELATIONSHIPS**********************************************************************************            
             
-            $('#view-relationships .back-button').click(function(){
+            $('#view-relationships .back-button').click(function() {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })

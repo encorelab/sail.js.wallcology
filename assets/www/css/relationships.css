@@ -107,6 +107,17 @@ div#tabs {
 	margin-left: 430px
 }
 
+/* .selectable .ui-selecting {
+	background: #FECA40;
+} */
+
+.selectable .selected {
+	background: #F99999; color: white;
+}
+ 
+ 
+ 
+ 
  
 /*****************************VIEW RELATIONSHIPS**************************/
 
