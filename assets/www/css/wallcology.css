@@ -4,6 +4,13 @@ Xoom dimensions:
 888px x 800 px (with soft keyboard revealed)
 */
 
+a {
+  color: #047AAC;
+}
+
+a:active {
+  color: #A9E75E;
+}
 
 #connecting {
   position: absolute;
@@ -12,6 +19,13 @@ Xoom dimensions:
   right: 40%;
   text-align: center;
   font-weight: bold;
+}
+
+#auth-indicator {
+}
+
+#discuss-button {
+  top: 6px !important;
 }
 
 #top-level-dropdown {
