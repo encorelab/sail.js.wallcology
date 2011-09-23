@@ -66,4 +66,17 @@ div#new-organism div.arrow {
 div#new-organism div#organism-action-buttons {
 	width: 100%;
 	float: left;
+}   
+
+
+/* What others said about organisms page*/
+div#tabs-2 div#what-others-said-about-organisms  {
+   	background-image: url('/images/bkgd_habitat.png'); 
 }
+
+
+
+
+
+
+

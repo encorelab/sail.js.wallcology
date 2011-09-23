@@ -49,15 +49,16 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
             $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
-            // $('#new-organism').hide()
-            $('#open-organism').hide()
+            $('#new-organism').hide()
+            $('#what-others-said-about-organisms').hide()
+            $('#open-organism').show()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
 
@@ -123,6 +124,8 @@ WallCology = {
 				// TODO: we need to feed the data to the table to be inserted
 				oTable = $('#aggregate-habitat-table').dataTable({
 					"bAutoWidth": false,  
+					
+					"sPaginationType": "full_numbers",                          
 					
 					"bDestroy" : true,  
 					  				
@@ -336,7 +339,58 @@ WallCology = {
 			// 				$(this).addClass('ui-state-active');
 			// 			})
 
-//**********ORGANISM****************************************************************************************                              	
+//**********ORGANISM****************************************************************************************    
+
+			// When I want to Describe an ORGANISM is clicked 
+			$('div#open-organism button#describe-organism-button').click(function(){
+				$("#organism-menu-page").hide();
+				$('#new-organism').show();
+			})
+
+			// When See What Others Said is clicked, this page page should be loaded
+			$('div#open-organism #what-others-said-organism-button').click(function(){ 
+				$("#organism-menu-page").hide();
+				$('#new-organism').hide(); 
+				$('#what-others-said-about-organisms').show();
+			   
+/**			 
+            	$('#open-habitat').hide()           
+				$("#add-to-discussions-habitat").hide();
+            	$('#what-others-said-habitat').show() 
+                // Uncheck all selected filters and the chosen notes
+				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
+				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
+				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
+				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
+				           
+				// We create a table with the second column being 500px
+				// TODO: we need to feed the data to the table to be inserted
+				oTable = $('#aggregate-habitat-table').dataTable({
+					"bAutoWidth": false,  
+					
+					"sPaginationType": "full_numbers",                          
+					
+					"bDestroy" : true,  
+					  				
+					"aoColumns": [ 
+						{ "sWidth": "500px" },
+						null,
+						null
+					],
+					
+					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
+						{
+							$(nRow).addClass('row_selected');
+						}
+						return nRow;
+					}
+				 });  
+*/
+            })
+
+
+                          	
         	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
             $('#new-organism .back-button').click(function(){
             	$('#new-organism').hide()
