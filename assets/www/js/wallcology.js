@@ -373,7 +373,7 @@ WallCology = {
 				if (selectedJuvenileId === ""){
 					alert ("You must first choose a Juvenile and then click this cell");
 				}else {
-					$('div#tabs-2 div#organism-evolution span.juvenile-only').html($('div#tabs-2 table#organism-table td#'+selectedJuvenileId).html());  				
+					$(this).html($('div#tabs-2 table#juvenile-organism-table td#'+selectedJuvenileId).html());  				
 				}
 			})
 			
