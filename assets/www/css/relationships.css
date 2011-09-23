@@ -75,13 +75,19 @@ div#tabs {
 
 #new-relationship .organism-box {
 	margin-top: 55px;
-	height: 110px;
-	width: 110px;
-	border-radius: 4px;
+	height: 100px;
+	width: 100px;
+	border-radius: 7px;
 	background-color: white;
 	color: white;
 	display: inline-block;
 	vertical-align: baseline;
+}
+
+#new-relationship .selected {
+	background: #F99999;
+	color: white;
+	margin: -10px;
 }
 
 #new-relationship .organism-dropzones {
@@ -105,16 +111,7 @@ div#tabs {
 #new-relationship .save-button {
 	margin-top: 30px;
 	margin-left: 430px
-}
-
-/* .selectable .ui-selecting {
-	background: #FECA40;
-} */
-
-.selectable .selected {
-	background: #F99999; color: white;
-}
- 
+} 
  
  
  

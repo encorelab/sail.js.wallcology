@@ -367,6 +367,7 @@ WallCology = {
             	$('#new-relationship').hide()
             	$('#landing-relationships').show()
             })
+
             
             $('#new-relationship .selectable').click(function() {
             	$('.selectable').removeClass('selected')
@@ -374,12 +375,12 @@ WallCology = {
             })
             
             $('#new-relationship .organism-box').click(function() {
+            	$(this).html("")
             	selected = $('.selected')
             	clone = selected.clone()
             	clone.attr('')
             	$(this).append(clone)
-            	selected.removeClass('selected')
-            	$(this).remove(clone)
+            	$('.selectable').removeClass('selected')
             })
             
 //**********VIEW RELATIONSHIPS**********************************************************************************            
@@ -430,6 +431,8 @@ WallCology = {
 				$(this).toggleClass('row_selected');
 			});*/
 			
+            
+            
 //**********COUNTS******************************************************************************************			
 
 			$('#new-counts-datepicker').datepicker()
@@ -450,6 +453,7 @@ WallCology = {
         		comments:$('#new-habitat .comments').val()
         		})
         	WallCology.groupchat.sendEvent(sev)
+        	//clear fields
 	        $('#new-habitat .text-box').val('')
 	        $("input:radio").prop('checked', false)
 	        $('#new-habitat .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
@@ -458,7 +462,8 @@ WallCology = {
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
         newOrganismContent: function() {
 	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation', {
+	        	run:Sail.app.run,
 	        	type:'organism',
 	        	chosen_organism:organismRadioInput,
 	        	morphology:$('#new-organism .morphology').val(),
@@ -470,17 +475,25 @@ WallCology = {
         },
         
         newRelationshipContent: function() {
-	        sev = new Sail.Event('new_observation',{
+	        sev = new Sail.Event('new_observation', {
 	        	run:Sail.app.run,
 	        	type:'relationship',
-	        	//some stuff about the relationship
-	        	//comments:$('#new-relationship .comments').val()
+	        	energy_transfer:{
+	        		"from":$('#box1').children().attr("id"),
+	        		"to":$('#box2').children().attr("id")	        		
+	        	},
+	        	comments:$('#new-relationship .comments').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
+	        //clear fields
+	        $('#box1').html("")
+	        $('#box2').html("")		
+	        $('#new-relationship .comments').val('')
         },
 
         newCountsContent: function() {
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation', {
+	        	run:Sail.app.run,
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
 	        	temperature:$('input:radio[name=temp]:checked').val(),
