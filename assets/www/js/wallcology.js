@@ -359,21 +359,37 @@ WallCology = {
 			
 			// if an organism is selected
 			$('div#tabs-2 div#organism-evolution span.organism-only').click (function(){
-				selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');   
-				if (selectedOrganismId === ""){
-					alert ("You must first choose an organism and then click this cell");
-				}else {
-					$('div#tabs-2 div#organism-evolution span.organism-only').html($('div#tabs-2 table#organism-table td#'+selectedOrganismId).html());  				
+				
+				selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value'); 
+				selectedImageHTML =  $('div#tabs-2 table#organism-table td#'+selectedOrganismId).html();
+				  
+				// We need to clear the content of the cell
+				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
+					$(this).html("");
+				} else {
+					// selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');   
+					if (selectedOrganismId === ""){
+						alert ("You must first choose an organism and then click this cell");
+					}else {
+						$(this).html(selectedImageHTML);  				
+					}
 				}
 			})
 			 
 			// if a juvenile is selected
-			$('div#tabs-2 div#organism-evolution span.juvenile-only').click (function(){
-				selectedJuvenileId = $('div#tabs-2 input#selected-juvenile').attr('value');   
-				if (selectedJuvenileId === ""){
-					alert ("You must first choose a Juvenile and then click this cell");
-				}else {
-					$(this).html($('div#tabs-2 table#juvenile-organism-table td#'+selectedJuvenileId).html());  				
+			$('div#tabs-2 div#organism-evolution span.juvenile-only').click (function(){ 
+				
+				selectedJuvenileId = $('div#tabs-2 input#selected-juvenile').attr('value');
+				selectedImageHTML = $('div#tabs-2 table#juvenile-organism-table td#'+selectedJuvenileId).html()   
+				
+				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
+					$(this).html("");
+				} else {            					
+					if (selectedJuvenileId === ""){
+						alert ("You must first choose a Juvenile and then click this cell");
+					}else {
+						$(this).html(selectedImageHTML);  				
+					}
 				}
 			})
 			
@@ -452,17 +468,40 @@ WallCology = {
         },
         
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
-        newOrganismContent: function() {
-	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
-	        	type:'organism',
-	        	chosen_organism:organismRadioInput,
-	        	morphology:$('#new-organism .morphology').val(),
-	        	behaviour:$('#new-organism .behaviour').val(),
-	        	organisms:$('#new-organism .habitat').val(),
-	        	comments:$('#new-organism .comments').val()
-	        	})
+        newOrganismContent: function() {       
+	                                                     
+			morphology = $('div#new-organism div#organism-descriptions div#organism-morphology textarea').val();
+			behavior = $('div#new-organism div#organism-descriptions div#organism-behavior textarea').val();
+			habitat = $('div#new-organism div#organism-descriptions div#organism-habitat textarea').val();
+			comments = $('div#new-organism div#organism-descriptions div#organism-comments textarea').val();
+			
+			sev = new Sail.Event('new_observation', {
+				run:Sail.app.run,
+				type:'organism',
+				morphology:morphology,
+		        behaviour:behavior,
+		        habitat:habitat,
+		        comments:comments,
+		        chosen_organism:'',
+				juveniles:[{ 
+					first:'',
+					second:'',
+					third:''
+				}]
+			})  
+			
 	        WallCology.groupchat.sendEvent(sev)
+			
+	        // var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
+	        // 	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        // 	        	type:'organism',
+	        // 	        	chosen_organism:organismRadioInput,
+	        // 	        	morphology:$('#new-organism .morphology').val(),
+	        // 	        	behaviour:$('#new-organism .behaviour').val(),
+	        // 	        	organisms:$('#new-organism .habitat').val(),
+	        // 	        	comments:$('#new-organism .comments').val()
+	        // 	        	})
+	        // 	        WallCology.groupchat.sendEvent(sev)
         },
         
         newRelationshipContent: function() {

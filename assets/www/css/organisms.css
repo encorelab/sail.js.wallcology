@@ -27,21 +27,11 @@ div#new-organism div.section-title {
 }        
                  
 /* We keep the value of the selected organism hidden in here*/
-input#selected-organism {
+div#new-organism input#selected-organism {
 	display: none;
 }       
-
-td.selected {        
-	background-color: white;
-	border-style: solid;
-	border-width: 1px;
-}                
-
-h5.organism-description-section {
-	border-style: solid;
-	border-width: 1px;   
-	width: 300px;
-}       
+        
+     
 
 div#tabs-2 div#organism-life-cycle-text {
 	width: 100%;
