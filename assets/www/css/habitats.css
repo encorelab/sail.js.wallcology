@@ -1,20 +1,21 @@
+div#open-habitat {
+	margin-left: 20px;
+	height: 100%;
+}
+
 html{
 	height: 100%; 
 }    
 
 body {
 	height: 100%;
-}                
-
-div#tabs {
-	height: 100%;
- 	font-size: 16px;
-}                 
+}             
 
 div#tabs div#tabs-1 {
 	background-image:url('/images/bkgd_habitat.png');
 	background-repeat: no-repeat;
-	height: 1200px;	     
+	height: 1200px;
+ 	font-size: 14px;		     
 }                  
 
 div#open-habitat {
@@ -25,12 +26,11 @@ div#habitat-menu-page {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
 	margin-right: auto;     
-	width: 380px;    
-	height: 290px;  
+	height: 470px;      
 	display: table; 
 	_position: relative; 
 	overflow: hidden;    
-	margin-top: 200px;
+	margin-top: 160px;
 }   
 
 div#inner-habitat-menu-page {
@@ -39,46 +39,81 @@ div#inner-habitat-menu-page {
 	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
 }          
 
+#inner-habitat-menu-page .new-page-button {
+	width: 550px;
+	height: 80px;
+}
 
+#inner-habitat-menu-page #what-others-said-habitat-button {
+	margin-top: 50px;
+}
+
+#new-habitat div.divider {
+	clear: left;
+}
 div.habitat-page-heading {
 	color: #336699;
 }
 
-div#new-habitat {
-	margin-left: 100px;  
+#new-habitat .new-habitat-image {
+	float: left;
+}
+
+#new-habitat div.select-wallscope-title {
+	float: left;
+	margin: -13px 33px 0 0;
+}
+
+#new-habitat div.select-wallscope {
+	float: left;
 }
 
 div#new-habitat div.habitat-form-fields {
-	margin-bottom: 50px;	
-} 
+	margin-bottom: 30px;	
+}
+
+div#new-habitat .text-box {
+	height: 110px;
+	width: 680px;
+	margin-top: -12px;
+}
                        
 div#new-habitat div#action-buttons {
-	width: 500px;               
+	width: 660px;               
 }
 
 div#new-habitat button.save-button {
 	float: right;
-}       
+	width: 100px;
+}
+
+div#new-habitat button.back-button {
+	width: 100px;
+	margin-left: 20px;
+}    
 
 div.habitat-page-heading {
 	margin-bottom: 20px;
 }
 
-div#aggregate-habitat-filters {
-	margin-bottom: 20px;
-}   
+div#what-others-said-habitat .habitat-page-heading {
+	color: #007ADF;
+}
 
 div#aggregate-view-habitat-filter {
-	margin-bottom: 10px;
+	margin-top: 15px;
+	margin-bottom: 20px; 
+	text-align: center;
 }          
-  
 
 div#aggregate-view-note-type-filter {
 	margin-bottom: 25px;
-}                          
-      
+	text-align: center;
+}                             
                              
 table#aggregate-habitat-table {
 	border: 1px solid gray;
@@ -94,3 +129,19 @@ table#aggregate-habitat-table th {
 table#aggregate-habitat-table td {
 	font-size: 12px;
 }
+
+
+
+div#what-others-said-habitat div.action-buttons {
+	width: 720px;               
+}
+
+div#what-others-said-habitat button.back-button {
+	width: 100px;
+	margin-left: 20px;	
+}
+
+div#what-others-said-habitat button.add-to-discussion-button {
+	float: right;
+
+}    

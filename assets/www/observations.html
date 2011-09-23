@@ -1,3 +1,11 @@
+<!-- TODO
+-style jquery ui buttons to correct colors
+-get text input to do new lines, not centered
+
+
+ -->
+
+
 <!DOCTYPE html> 
 <html> 
 <head> 
@@ -24,7 +32,6 @@
             .then('js/sail.js/rollcall.js')
             .then('js/sail.js/deps/jquery.dataTables.js')
             .then('js/wallcology.js')
-/* 			.then('js/organisms.js') */
             .thenRun(function() { 
                 return Sail.init(WallCology) 
             })
@@ -59,14 +66,15 @@
 				             
 				<div id="habitat-menu-page">  
 					<div id="inner-habitat-menu-page">	
-						<button type="button" id="describe-habitat-button" class="new-page-button">I want to describe a HABITAT</button>							
+						<button type="button" id="describe-habitat-button" class="new-page-button"><b>I want to describe a HABITAT</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-habitat-button" class="new-page-button">I want to see what others observed</button>
+						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others observed</b></button>
 					</div>
 				</div>
 			
 			
-			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin-->	
+			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin
+					This can be deleted, as far as I know-->	
 		    <div id="temporarily-hidden" style="display:none">
 				<h4>HABITAT</h4>
 				            			
@@ -177,60 +185,58 @@
 		
 		    <!-- New Habitat Page -->
 			<div id="new-habitat">
-				<h4>NEW HABITAT PAGE</h4></br>
+				<img class="new-habitat-image" src="/images/new_habitat.png" />
+				<div class="divider"></div>
 				 
 				<!-- The student chose which  -->   		
-				<form>
-					<div id="radio" class="select-wallscope">
-						Habitat Number
-						<br/>
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
-					</div>
-				</form>
+				<div class="select-wallscope-title">
+					<h4>Habitat Number</h4>
+				</div>
+
+				<div class="select-wallscope jquery-radios">
+					<input type="radio" id="radio1" class="radio-button" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
+					<input type="radio" id="radio2" class="radio-button" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
+					<input type="radio" id="radio3" class="radio-button" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
+					<input type="radio" id="radio4" class="radio-button" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
+				</div>
 				<br/>
+				<div class="divider"></div>
 				
 				<form action="" class="content-form"> 
-					<div class="content">     
-						
+					<div class="content">     						
 						<div class="habitat-form-fields"> 
-							<h5>Environment Conditions (temperature, humidity, light)</h5> 
-							<textarea rows="5" cols="50" class="text-box environmental-conditions"></textarea>
+							<h4>Environment Conditions (temperature, humidity, light)</h4>
+							<textarea class="text-box environmental-conditions"></textarea> 
 						</div>
 						
 						<div class="habitat-form-fields">  
-							<h5>Structural Features</h5> 
-							<textarea rows="5" cols="50" class="text-box structural-features"></textarea> 
+							<h4>Structural Features</h4>
+							<textarea class="text-box structural-features"></textarea> 
 						</div>
 						
 						<div class="habitat-form-fields"> 
-							<h5>Organisms</h5> 
-							<textarea rows="5" cols="50" class="text-box organisms"></textarea> 						
+							<h4>Organisms</h4>
+							<textarea class="text-box organisms"></textarea> 						
 						</div> 
 						
 						<div class="habitat-form-fields"> 
-							<h5>Comments</h5> 
-							<textarea rows="5" cols="50" class="text-box comments"></textarea> 							
+							<h4>Comments</h4>
+							<textarea class="text-box comments"></textarea>  							
 						</div>                                                              				
 					</div>	
 				</form>  
 				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button class="save-button">Save</button>     
+					<button class="back-button button">BACK</button>
+					<button class="save-button">SAVE</button>     
 				</div>
-			</div>	
-			
+			</div>
 			
 			<!-- See what others said for Habitats Page -->
 			<div id="what-others-said-habitat">
-				<div class="habitat-page-heading"> What others said about the HABITATS </div>
-				<div id='aggregate-habitat-filters'>
-					Pick from the two sets of criteria below to show community results: 
-					
-					<br/>
-					<br/>
+				<br/>
+				<div class="habitat-page-heading"><h2>What others said about the HABITATS</h2></div>
+				<div id="aggregate-habitat-filters">
+					<h4>Pick from the two sets of criteria below to show community results:</h4>
 					<div id="aggregate-view-habitat-filter"> 
 						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" /><label for="habitat-filter-1">Habitat 1</label> 
 						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" /><label for="habitat-filter-2">Habitat 2</label> 
@@ -246,7 +252,7 @@
 					</div>
 				</div>
 
-				<div> If you want to add a note to discussions, check off the entries you want added to it: </div>
+				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
 				<div id="habitat-aggregate-results"> 
 					<table id="aggregate-habitat-table">   
 						<thead>
@@ -295,14 +301,14 @@
 					</table>   					
 			    </div>
 				   				
-				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button id="add-to-discussion-button-habitat" class="">Add to Discussion</button>     
+				<div class="action-buttons">
+					<button class="back-button">BACK</button>  				
+					<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>
 				</div>
 		    </div>
 		
 		
-		  	<!-- Add to Discussion for Habitats Page -->  
+<!-- 		  	Add to Discussion for Habitats Page  
 			<div id="add-to-discussions-habitat">
 				<div class="habitat-page-heading"> Add to Discussions </div>  
 				
@@ -312,11 +318,11 @@
 			             
 			
 				<div id="action-buttons">
-					<button class="back-button">Back</button>
-					<button id="add-to-discussion-button-habitat" class="">Save</button>     
+					<button class="back-button">BACK</button>
+					<button id="add-to-discussion-button-habitat" class="">SAVE</button>     
 				</div>  			
 			</div>	
-			
+ -->			
 		                               
 		
 		</div>
@@ -442,8 +448,8 @@
 					<span class='organism-blank-cell organism-only'></span> 
 				</div>
 				
-				<button class="back-button">Back</button>
-				<button class="save-button">Save</button>
+				<button class="back-button">BACK</button>
+				<button class="save-button">SAVE</button>
 				<button class="reload-button">Reload</button>
 			</div>
 		</div>
@@ -456,9 +462,9 @@
 			<div id="relationships">
 				<div id="landing-relationships">
 					<div id="inner-landing-relationships">
-						<button type="button" class="new-button landing-relationships-button">I want to describe a RELATIONSHIP</button>
-						</br></br>
-						<button type="button" class="view-button landing-relationships-button">I want to see what others observed</button>
+						<button type="button" class="new-button landing-relationships-button"><b>I want to describe a RELATIONSHIP</b></button>
+						<br/><br/>
+						<button type="button" class="view-button landing-relationships-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>
 
@@ -467,31 +473,30 @@
 	
 	 			<div id="new-relationship">
 					<img class="new-relationship-image" src="/images/new_relationship.png" />
-<!-- 				<div class="divider"></div>
- -->
-					</br>
+
+					<br/>
 	
 					<table class="organism-selectables table-header">
 						<tr>
 							<th colspan="1"><h3>Organisms</h3></th>
  						</tr>
  						<tr> 
-							<td id="sun" class="image">
+							<td id="sun" class="image selectable">
 								<img src="/images/icon_0009_sun.png" />	
 							</td>					
-							<td id="scum" class="image">
+							<td id="scum" class="image selectable">
 								<img src="/images/icon_0007_scum.png" /> 					
 							</td>
-							<td id="fuzzy-mold" class="image"> 
+							<td id="fuzzy-mold" class="image selectable"> 
 								<img src="/images/icon_0006_fuzzy-mold.png" /> 						
 							</td>
-							<td id="blue-bug" class="image">
+							<td id="blue-bug" class="image selectable">
 								 <img src="/images/icon_0000_blue-bug.png" />   					
 							</td> 
-							<td id="green-bug" class="image">
+							<td id="green-bug" class="image selectable">
 								<img src="/images/icon_0008_green-bug.png" />						
 							</td>
-							<td id="predator" class="image"> 
+							<td id="predator" class="image selectable"> 
 								<img src="/images/icon_0005_predator.png" />
 							</td>
 						</tr>
@@ -500,30 +505,151 @@
 					
 					<h3 class="add-relationship-title">Add Relationship</h3> (the transfer of energy from one organism to another)
 					<div class="organism-dropzones">
-						<div class="organism-box" id="box1"></div>
-						<img class="arrow-image" src="/images/arrow.png" />
+						<div class="organism-box" id="box1" ></div>
+						<img class="arrow-image" src="/images/arrow_relationships.png" />
 						<div class="organism-box" id="box2"></div>
 					</div>
 					<br/>
 	
 					<div class="comment">
 						<h3>Additional Comments</h3>
-						<input type="text" class="text-box comments"/>			
+						<textarea class="text-box comments"></textarea>  			
 					</div>
 	                                                           				
 					<div id="action-buttons">
-						<button class="back-button">Back</button>
-						<button class="save-button">Save</button>
+						<button class="back-button">BACK</button>
+						<button class="save-button">SAVE</button>
 					</div>
 				</div>
 	
 	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
 	
 	 			<div id="view-relationships">
-	
+					<br/>
+					<div class="view-relationships-title">
+						<h2>What others said about the RELATIONSHIPS</h2>
+					</div>
+					
+					<div class="view-relationships-table-background">
+						<table class="view-relationships-table">
+	 						<tr>
+								<td class="display-box blank-box"></td>					
+								<td class="display-box blank-box"></td>
+								<td><img src="/images/icon_0007_scum.png" class="image scum" /></td>
+								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
+								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td> 
+								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
+								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
+							</tr>
+							<tr>
+								<!-- data for display boxes to be pulled from the DB -->
+								<td><img src="/images/icon_0009_sun.png" class="image sun" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box sun1">1</td>
+								<td class="display-box sun2">2</td>
+								<td class="display-box sun3">3</td>
+								<td class="display-box sun4">4</td>
+								<td class="display-box sun5">5</td>
+							</tr>
+							<tr>
+								<td><img src="/images/icon_0007_scum.png" class="image scum" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box scum1">1</td>
+								<td class="display-box scum2">2</td>
+								<td class="display-box scum3">3</td>
+								<td class="display-box scum4">4</td>
+								<td class="display-box scum5">5</td>
+							</tr>
+							<tr>
+								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box mold1">1</td>
+								<td class="display-box mold2">2</td>
+								<td class="display-box mold3">3</td>
+								<td class="display-box mold4">4</td>
+								<td class="display-box mold5">5</td>
+							</tr>
+							<tr>
+								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box blue-bug1">1</td>
+								<td class="display-box blue-bug2">2</td>
+								<td class="display-box blue-bug3">3</td>
+								<td class="display-box blue-bug4">4</td>
+								<td class="display-box blue-bug5">5</td>
+							</tr>
+							<tr>
+								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box green-bug1">1</td>
+								<td class="display-box green-bug2">2</td>
+								<td class="display-box green-bug3">3</td>
+								<td class="display-box green-bug4">4</td>
+								<td class="display-box green-bug5">5</td>
+							</tr>
+							<tr>
+								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
+								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
+								<td class="display-box predator1">1</td>
+								<td class="display-box predator2">2</td>
+								<td class="display-box predator3">3</td>
+								<td class="display-box predator4">4</td>
+								<td class="display-box predator5">5</td>
+							</tr>
+						</table>
+					</div>
+					<br/><br/>
+					
+<!-- 					<div id="relationships-results"> 
+						<table id="aggregate-relationships-table">   
+							<thead>
+								<tr> 
+									<th id="dynamic-column"> </th>
+									<th> Author(s)</th>
+									<th> Last Updated</th>
+								</tr>                               
+							TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids
+						   </thead>
+							<tbody> 
+								<script type="text/javascript">  
+									//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
+									dummyData = [
+										[
+											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+											"Beatrice S, Jeffery G",
+											"10/1/2011 2:34pm"
+										],
+										
+										[
+											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
+											"Louis B, Naomi C",
+											"10/1/2011 2:45pm"
+										],
+																			
+									];
+									for (i=0; i<= dummyData.length; i++) {
+										
+									}
+								</script>
+								<tr>
+									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
+									</td>
+									<td> Louis B, Naomi C </td>
+									<td> 10/1/2011 2:45 pm </td>
+								</tr> 							
+								<tr>
+									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+									</td>
+									<td> Beatrice S, Jeffery G </td>
+									<td> 10/1/2011 2:34 pm </td>
+								</tr>
+							</tbody>
+						</table>   					
+				    </div> -->
+					
 									
 					<div id="action-buttons">
-						<button class="back-button">Back</button>
+						<button class="back-button">BACK</button>
 					</div>
 				</div>
 				
@@ -542,10 +668,10 @@
 					<h4>Habitat Number</h4>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
-					<input type="radio" name="select-habitat" id="new-count-r1" value="1" /><label for="new-count-r1">Habitat 1</label>
-					<input type="radio" name="select-habitat" id="new-count-r2" value="2" /><label for="new-count-r2">Habitat 2</label>
-					<input type="radio" name="select-habitat" id="new-count-r3" value="3" /><label for="new-count-r3">Habitat 3</label>
-					<input type="radio" name="select-habitat" id="new-count-r4" value="4" /><label for="new-count-r4">Habitat 4</label>
+					<input type="radio" name="select-habitat" id="new-count-r1" class="radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="new-count-r2" class="radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="new-count-r3" class="radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="new-count-r4" class="radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
 				<div class="divider"></div>
@@ -553,18 +679,18 @@
 				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
 						<h3>Record Temperature</h3>
-						<input type="radio" name="temp" value="low" class="counts-radios" id="new-count-r5" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" class="counts-radios" id="new-count-r6" /><label for="new-count-r6">High</label>
+						<input type="radio" name="temp" value="low" id="new-count-r5" class="radio-button" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" class="radio-button" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
 						<h3>Record Light Levels</h3>
-						<input type="radio" name="light" value="low" id="new-count-r7" /><label for="new-count-r7">Low</label>
-						<input type="radio" name="light" value="high" id="new-count-r8" /><label for="new-count-r8">High</label>
+						<input type="radio" name="light" value="low" id="new-count-r7" class="radio-button" /><label for="new-count-r7">Low</label>
+						<input type="radio" name="light" value="high" id="new-count-r8" class="radio-button" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
 						<h3>Record Humidity</h3>
-						<input type="radio" name="humidity" value="low" id="new-count-r9" /><label for="new-count-r9">Low</label>
-						<input type="radio" name="humidity" value="high" id="new-count-r10" /><label for="new-count-r10">High</label>
+						<input type="radio" name="humidity" value="low" id="new-count-r9" class="radio-button" /><label for="new-count-r9">Low</label>
+						<input type="radio" name="humidity" value="high" id="new-count-r10" class="radio-button" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
 				
@@ -575,48 +701,48 @@
 						<tr>
 							<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
  						</tr>
- 						<tr>
-	 						<td><img src="/images/icon_0007_scum.png" class="scum-image" /></td>
-	 						<td><input type="text" class="text-box count-scum-percent"/>%</td>
-	 						<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image"/></td>
-	 						<td><input type="text" class="text-box count-mold-percent"/>%</td>
+ 						<tr class="table-body">
+	 						<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
+	 						<td><input type="text" class="text-box count-scum-percent"/> %</td>
+	 						<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
+	 						<td><input type="text" class="text-box count-mold-percent"/> %</td>
  						</tr>
 					</table>
 
 					<table class="count-organisms">
 						<tr>
-							<th colspan="4" class="table-header">Enter up to three counts for each organism</th>
-							<th colspan="1" class="table-header">Average counts</th>
+							<th colspan="4" class="table-header">Enter up to three counts</th>  <!-- removed 'for each organism' for space concerns -->
+							<th colspan="1" class="table-header-center">Average counts</th>
 							<th colspan="1" class="table-header">Multiplier</th>
 							<th colspan="1">Final count</th>
 						</tr>
-						<tr>
-							<td><img src="/images/icon_0000_blue-bug.png" /></td>
-							<td><input type="text" class="text-box count-blue-bug1"/>+</td>
-							<td><input type="text" class="text-box count-blue-bug2"/>+</td>
+						<tr class="table-body">
+							<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
+							<td><input type="text" class="text-box count-blue-bug1"/> +</td>
+							<td><input type="text" class="text-box count-blue-bug2"/> +</td>
 							<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
 							<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
-							<td>x<input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
-							<td>=<input type="text" class="text-box count-blue-bug6"/></td>
+							<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
+							<td>= <input type="text" class="text-box count-blue-bug6"/></td>
 						</tr>
-						<tr>
-							<td><img src="/images/icon_0008_green-bug.png" /></td>
-							<td><input type="text" class="text-box count-green-bug1"/>+</td>
-							<td><input type="text" class="text-box count-green-bug2"/>+</td>
+						<tr class="table-body">
+							<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
+							<td><input type="text" class="text-box count-green-bug1"/> +</td>
+							<td><input type="text" class="text-box count-green-bug2"/> +</td>
 							<td><input type="text" class="text-box count-green-bug3"/></td>
 							<td><input type="text" class="text-box count-green-bug4"/></td>
-							<td>x<input type="text" class="text-box count-green-bug5"/></td>
-							<td>=<input type="text" class="text-box count-green-bug6"/></td>
+							<td>x <input type="text" class="text-box count-green-bug5"/></td>
+							<td>= <input type="text" class="text-box count-green-bug6"/></td>
 						</tr>							
-						<tr>
-							<td><img src="/images/icon_0005_predator.png" /></td>
-							<td><input type="text" class="text-box predator1"/>+</td>
-							<td><input type="text" class="text-box predator2"/>+</td>
+						<tr class="table-body">
+							<td><img src="/images/icon_0005_predator.png" class="image"/></td>
+							<td><input type="text" class="text-box predator1"/> +</td>
+							<td><input type="text" class="text-box predator2"/> +</td>
 							<td><input type="text" class="text-box predator3"/></td>
 							<td><input type="text" class="text-box predator4"/></td>
-							<td>x<input type="text" class="text-box predator5"/></td>
-							<td>=<input type="text" class="text-box predator6"/></td>
-						</tr>							
+							<td>x <input type="text" class="text-box predator5"/></td>
+							<td>= <input type="text" class="text-box predator6"/></td>
+						</tr>						
 					</table>
 				</div>
 				
@@ -627,17 +753,17 @@
 							<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
 						</tr>
 						<tr>
-							<td>Date <input id="new-counts-datepicker" type="text"></td>
+							<td>Date <input type="text" id="new-counts-datepicker"></td>
 							<td>Hour <input type="text" class="text-box hour" /></td>
 							<td>Minute <input type="text" class="text-box minute" /></td>
-							<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" /><label for="new-count-am"></label></td>
-							<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" /><label for="new-count-pm"></label></td>
+							<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
+							<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
 						</tr>
 					</table>
 				</div>
 				<br/>
-				<button class="back-button">Back</button>
-				<button class="save-button">Save</button>
+
+				<button class="save-button">SAVE</button>
 			</div>
 		</div>
 		

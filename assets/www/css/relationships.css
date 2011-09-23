@@ -1,6 +1,6 @@
 #relationships {
 	height: 100%;
-	margin-left: 40px;
+	margin-left: 20px;
 	font-size: 14px;
 }
    
@@ -8,6 +8,10 @@
 	background-image:url('/images/bkgd_relationship.png');  
 	background-repeat: no-repeat;
 	height: 1200px;
+}
+
+#relationships .ui-button {
+	width: 100px;
 }
 
 /* Rokham's magical css */
@@ -26,13 +30,12 @@ div#tabs {
 #landing-relationships {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
-	margin-right: auto;     
-	width: 380px;    
-	height: 290px;  
+	margin-right: auto;       
+	height: 470px;  
 	display: table; 
 	_position: relative; 
 	overflow: hidden;    
-	margin-top: 200px;
+	margin-top: 160px;
 }   
 
 #inner-landing-relationships {
@@ -41,7 +44,22 @@ div#tabs {
 	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
 }
+
+#inner-landing-relationships .landing-relationships-button {
+	width: 550px;
+	height: 80px;
+}
+
+#inner-landing-relationships .view-button {
+	margin-top: 50px;
+}
+	
+
+
+/************************************ NEW RELATIONSHIP********************************/
 
 #new-relationship .image {
 	padding-right: 8px;
@@ -57,13 +75,19 @@ div#tabs {
 
 #new-relationship .organism-box {
 	margin-top: 55px;
-	height: 110px;
-	width: 110px;
-	border-radius: 4px;
+	height: 100px;
+	width: 100px;
+	border-radius: 7px;
 	background-color: white;
 	color: white;
 	display: inline-block;
 	vertical-align: baseline;
+}
+
+#new-relationship .selected {
+	background: #F99999;
+	color: white;
+	margin: -10px;
 }
 
 #new-relationship .organism-dropzones {
@@ -71,26 +95,61 @@ div#tabs {
 }
 
 #new-relationship .arrow-image {
-	margin-bottom: 30px;
+	margin-bottom: 48px;
 }
 
 #new-relationship .comments {
 	height: 220px;
-	width: 620px;
+	width: 660px;
 }
 
+#new-relationship .back-button {
+	margin-top: 30px;
+	margin-left: 10px;
+}
 
+#new-relationship .save-button {
+	margin-top: 30px;
+	margin-left: 430px
+} 
+ 
+ 
+ 
+ 
+/*****************************VIEW RELATIONSHIPS**************************/
 
-/*    TODO 
-#inner-landing-relationships .view-button {
+#view-relationships .view-relationships-title {
+	color: #EE5023;
+}
+
+#view-relationships .image {
+	height: 58px;
+	width: 66px;
+}
+
+#view-relationships .display-box {
+	height: 58px;
+	width: 66px;
+	background-color: #D2D4D5;
+	font-size: 24px;
+	text-align: center;
+}
+
+#view-relationships .blank-box {
+	background-color: white;
+}
+
+#view-relationships .view-relationships-table-background {
+	width: 490px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px 8px 8px 8px;
+	background-color: white;
+	border: thin;
+	border-style: groove;
+}
+
+#view-relationships .back-button {
+	margin-left: 30px;
 	margin-top: 30px;
 }
-
-#relationships .landing-relationships-button {
-	height: 50px;
-}
- */
- 
- 
-
-  

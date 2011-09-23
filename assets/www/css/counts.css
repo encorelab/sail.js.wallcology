@@ -1,5 +1,11 @@
+/* TODO
+-get the 'Average counts' header to be centred
+-make the am and pm radios larger (too small for tablet)
+ */
+
 #new-counts {
 	 font-size: 14px; 
+	 margin-left: 20px;
 }
 
 #tabs div#tabs-4 {
@@ -9,12 +15,25 @@
 }   
  
 #new-counts .ui-button {
-	width: 110px;
+	width: 100px;
 }
 
 #new-counts .text-box {
 	width: 40px;
 	height: 40px;
+}
+
+#new-counts .image {
+	height: 60px;
+	width: 60px;
+}
+
+#new-counts .table-body {
+	font-size: 21px;
+}
+
+#new-counts .text-box {
+	font-size: 21px;
 }
 
 #new-counts #new-count-am {
@@ -24,6 +43,11 @@
 #new-counts .table-header {
 	text-align: left;
 }
+
+#new-counts .align-center {
+	text-align: center;
+}
+
 
 
 /*  ******************POSITIONING********************* */
@@ -73,7 +97,7 @@
 	margin-bottom: 20px;
 }
 
-#new-counts .fuzzy-mold-image {
+#new-counts .scum-image {
 	margin-top: 10px;
 }
 
@@ -90,8 +114,12 @@
 	margin-right: 60px;
 }
 
-#new-counts button.save-button {
-	float: right;
+#new-counts .minute {
+	margin-right: 20px;
+}
+
+#new-counts .save-button {
+	margin-left: 560px;
 }
 
 

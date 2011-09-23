@@ -56,6 +56,7 @@ WallCology = {
             $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
+            $('#new-organism').hide()
             $('#open-organism').hide()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
@@ -82,7 +83,6 @@ WallCology = {
             })
             
 //**********NEW HABITAT*****************************************************************************************
-        	// $('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
 
             $('#new-habitat .back-button').click(function(){
             	$('#new-habitat').hide()
@@ -222,17 +222,17 @@ WallCology = {
 */          
 			
 			//these aren't working, correctly... TODO
-            $(".select-habitat input[type='radio']").click(function(){
+/*            $(".select-habitat input[type='radio']").click(function(){
             	console.log("radio1")
-            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
             	//do your database queries here
             })
 
             $(".select-criteria input[type='radio']").click(function(){
             	console.log("radio2")
-            	/*var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()*/
+            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
             	//do your database queries here
-            })
+            })*/
 
             
 //**********ADD TO DISCUSSION HABITAT*****************************************************************************************
@@ -293,7 +293,7 @@ WallCology = {
 				$('#what-others-said-habitat').show()
 	         })   
 	
-			$("#what-others-said-habitat #add-to-discussion-button-habitat").click(function(){
+			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
 				// Check to see if all required filters/comments are selected
 				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
 					// TODO: send the data to the server to be saved
@@ -414,59 +414,102 @@ WallCology = {
 //**********NEW RELATIONSHIP***********************************************************************************          
 
             $('#new-relationship .save-button').click(Sail.app.observations.newRelationshipContent)
-            $('#new-relationship .back-button').click(function(){
+            $('#new-relationship .back-button').click(function() {
             	$('#new-relationship').hide()
             	$('#landing-relationships').show()
+            })
+
+            
+            $('#new-relationship .selectable').click(function() {
+            	$('.selectable').removeClass('selected')
+            	$(this).toggleClass('selected')            	
+            })
+            
+            $('#new-relationship .organism-box').click(function() {
+            	$(this).html("")
+            	selected = $('.selected')
+            	clone = selected.clone()
+            	clone.attr('')
+            	$(this).append(clone)
+            	$('.selectable').removeClass('selected')
             })
             
 //**********VIEW RELATIONSHIPS**********************************************************************************            
             
-            $('#view-relationships .back-button').click(function(){
+            $('#view-relationships .back-button').click(function() {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
+            
+/*			oTable = $('#aggregate-relationships-table').dataTable({
+				"bAutoWidth": false,  
+				
+				"bDestroy" : true,  
+				  				
+				"aoColumns": [ 
+					{ "sWidth": "700px" },
+					null,
+					null
+				],
+				
+				"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+					if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
+					{
+						$(nRow).addClass('row_selected');
+					}
+					return nRow;
+				}
+			}); 
+
+
+			// We need to handle the clicking of the table rows
+			 Click event handler 
+			$('#aggregate-relationships-table tbody tr').live('click', function () {
+				var aData = oTable.fnGetData( this );
+				var iId = aData[0];
+	
+				if ( jQuery.inArray(iId, gaiSelected) == -1 )
+				{
+					gaiSelected[gaiSelected.length++] = iId;
+				}
+				else
+				{
+					gaiSelected = jQuery.grep(gaiSelected, function(value) {
+						return value != iId;
+					});
+				}
+	
+				$(this).toggleClass('row_selected');
+			});*/
 			
+            
+            
 //**********COUNTS******************************************************************************************			
 
 			$('#new-counts-datepicker').datepicker()
 			
-			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)
-            $('#new-counts .back-button').click(function(){
-            	$('#new-counts').hide()
-            	$('#open-counts').show()
-            })
-			
+			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)			
     	},
 
 //***************************************************************************************************************
     	
         newHabitatContent: function() {
-        	var habitatRadioInput = $("#radio .select-wallscope input[type='radio']:checked").val()
         	sev = new Sail.Event('new_observation', {
 				run:Sail.app.run,
         		type:'habitat',
-        		wallscope:habitatRadioInput,
+        		wallscope:$('input:radio[name=radio]:checked').val(),
         		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
         		structural_features:$('#new-habitat .structural-features').val(),
         		organisms:$('#new-habitat .organisms').val(),
         		comments:$('#new-habitat .comments').val()
         		})
         	WallCology.groupchat.sendEvent(sev)
+        	//clear fields
+	        $('#new-habitat .text-box').val('')
+	        $("input:radio").prop('checked', false)
+	        $('#new-habitat .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
         },
-        
-        //this should now be generalised for habitat+organisms+(other?)
-        newDiscussionContent: function() {
-        	sev = new Sail.Event('new_observation',{
-        		run:Sail.app.run,
-        		type:'discussion',
-        		evidence:'pieces of habitat content that were queried (by id number?) and selected from the data table',
-        		note:$('#add-to-discussion-habitat .note').val(),
-        		headline:$('#add-to-discussion-habitat .headline').val(),
-        		keywords:'still a mess'
-        		})
-        	WallCology.groupchat.sendEvent(sev)
-        },
-        
+                
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
         newOrganismContent: function() {       
 	                                                     
@@ -505,22 +548,30 @@ WallCology = {
         },
         
         newRelationshipContent: function() {
-	        sev = new Sail.Event('new_observation',{
+	        sev = new Sail.Event('new_observation', {
 	        	run:Sail.app.run,
 	        	type:'relationship',
-	        	//some stuff about the relationship
-	        	//comments:$('#new-relationship .comments').val()
+	        	energy_transfer:{
+	        		"from":$('#box1').children().attr("id"),
+	        		"to":$('#box2').children().attr("id")	        		
+	        	},
+	        	comments:$('#new-relationship .comments').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
+	        //clear fields
+	        $('#box1').html("")
+	        $('#box2').html("")		
+	        $('#new-relationship .comments').val('')
         },
 
         newCountsContent: function() {
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation', {
+	        	run:Sail.app.run,
 	        	type:'count',
-	        	chosen_habitat:$("#new-counts .select-habitat-radios input[type='radio']:checked").val(),
-	        	temperature:$("#new-counts .temperature-radios input[type='radio']:checked").val(),
-	        	light_level:$("#new-counts .light-level-radios input[type='radio']:checked").val(),
-	        	humidity:$("#new-counts .humidity-radios input[type='radio']:checked").val(),
+	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
+	        	temperature:$('input:radio[name=temp]:checked').val(),
+	        	light_level:$('input:radio[name=light]:checked').val(),
+	        	humidity:$('input:radio[name=humidity]:checked').val(),
 	        	scum_percent:$('#new-counts .count-scum-percent').val(),
 	        	mold_percent:$('#new-counts .count-mold-percent').val(),
 	        	blue_bug:[{
@@ -550,9 +601,26 @@ WallCology = {
 	        	date:$('#new-counts-datepicker').datepicker('getDate'),
 	        	hour:$('#new-counts .hour').val(),
 	        	minute:$('#new-counts .minute').val(),
-	        	ampm:$("#new-counts .ampm-radios input[type='radio']:checked").val()
+	        	ampm:$('input:radio[name=ampm]:checked').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
+	        //reset fields
+	        $('#new-counts .text-box').val('')
+	        $("input:radio").prop('checked', false)
+	        $('#new-counts .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
+        },
+
+        //this should now be generalised for habitat+organisms+(other?)
+        newDiscussionContent: function() {
+        	sev = new Sail.Event('new_observation',{
+        		run:Sail.app.run,
+        		type:'discussion',
+        		evidence:'pieces of habitat content that were queried (by id number?) and selected from the data table',
+        		note:$('#add-to-discussion-habitat .note').val(),
+        		headline:$('#add-to-discussion-habitat .headline').val(),
+        		keywords:'still a mess'
+        		})
+        	WallCology.groupchat.sendEvent(sev)
         },
 
     },
@@ -601,7 +669,6 @@ WallCology = {
         },
         
         connected: function(ev) {
-            WallCology.groupchat.join()
             $('#username').text(session.account.login)
       	    //$('#connecting').hide()						
         	jQuery('#top-level-dropdown').change(function(e){
