@@ -49,14 +49,14 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
             $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
-            $('#new-organism').hide()
+            // $('#new-organism').hide()
             $('#open-organism').hide()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
@@ -387,7 +387,8 @@ WallCology = {
 				} else {            					
 					if (selectedJuvenileId === ""){
 						alert ("You must first choose a Juvenile and then click this cell");
-					}else {
+					}else {  
+						$(this).attr('value', selectedJuvenileId);
 						$(this).html(selectedImageHTML);  				
 					}
 				}
@@ -516,8 +517,14 @@ WallCology = {
 			morphology = $('div#new-organism div#organism-descriptions div#organism-morphology textarea').val();
 			behavior = $('div#new-organism div#organism-descriptions div#organism-behavior textarea').val();
 			habitat = $('div#new-organism div#organism-descriptions div#organism-habitat textarea').val();
-			comments = $('div#new-organism div#organism-descriptions div#organism-comments textarea').val();
+			comments = $('div#new-organism div#organism-descriptions div#organism-comments textarea').val(); 
 			
+			chosen_organism = $('div#new-organism input#selected-organism').attr('value');
+			chosen_juveniles = $('div#new-organism span.juvenile-only');
+			first_juvenile =  $(chosen_juveniles[0]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value') ;
+			second_juvenile =  $(chosen_juveniles[1]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[1]).attr('value');
+			third_juvenile =  $(chosen_juveniles[2]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
+						
 			sev = new Sail.Event('new_observation', {
 				run:Sail.app.run,
 				type:'organism',
@@ -525,11 +532,11 @@ WallCology = {
 		        behaviour:behavior,
 		        habitat:habitat,
 		        comments:comments,
-		        chosen_organism:'',
+		        chosen_organism:chosen_organism,
 				juveniles:[{ 
-					first:'',
-					second:'',
-					third:''
+					first: first_juvenile,
+					second: second_juvenile,
+					third: third_juvenile
 				}]
 			})  
 			
