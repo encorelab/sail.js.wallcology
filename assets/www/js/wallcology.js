@@ -365,7 +365,8 @@ WallCology = {
 				  
 				// We need to clear the content of the cell
 				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
-					$(this).html("");
+					$(this).html(""); 
+					$(this).attr('value', "null");
 				} else {
 					// selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');   
 					if (selectedOrganismId === ""){
@@ -383,7 +384,8 @@ WallCology = {
 				selectedImageHTML = $('div#tabs-2 table#juvenile-organism-table td#'+selectedJuvenileId).html()   
 				
 				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
-					$(this).html("");
+					$(this).html("");       
+					$(this).attr('value', "null");					
 				} else {            					
 					if (selectedJuvenileId === ""){
 						alert ("You must first choose a Juvenile and then click this cell");
@@ -521,9 +523,9 @@ WallCology = {
 			
 			chosen_organism = $('div#new-organism input#selected-organism').attr('value');
 			chosen_juveniles = $('div#new-organism span.juvenile-only');
-			first_juvenile =  $(chosen_juveniles[0]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value') ;
-			second_juvenile =  $(chosen_juveniles[1]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[1]).attr('value');
-			third_juvenile =  $(chosen_juveniles[2]).attr('value') == 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
+			first_juvenile =  $(chosen_juveniles[0]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value') ;
+			second_juvenile =  $(chosen_juveniles[1]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[1]).attr('value');
+			third_juvenile =  $(chosen_juveniles[2]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
 						
 			sev = new Sail.Event('new_observation', {
 				run:Sail.app.run,
