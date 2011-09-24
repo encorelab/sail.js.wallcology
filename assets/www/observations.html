@@ -18,11 +18,13 @@
     <link href="css/relationships.css" rel="stylesheet" type="text/css" />  
     <link href="css/habitats.css" rel="stylesheet" type="text/css" />  
     <link href="css/organisms.css" rel="stylesheet" type="text/css" />
-    <link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
+
+	<link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_page.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_table_jui.css" rel="stylesheet" type="text/css" />
-	<link href="js/sail.js/css/dataTables/demo_table.css" rel="stylesheet" type="text/css" />
+	<link href="js/sail.js/css/dataTables/demo_table.css" rel="stylesheet" type="text/css" />  
+	
 
     <script src="js/sail.js/deps/phonegap.1.0.0.js" type="text/javascript"></script>    
     <script src="js/sail.js/sail.js" type="text/javascript"></script> 
@@ -346,203 +348,250 @@
 
 		
 		
- 		<div id="tabs-2">  
-	  		 <div id="open-organism">
+		<div id="tabs-2">  
+			<div id="open-organism">
 	
-			 <div id="organism-menu-page">  
-				<div id="inner-habitat-menu-page">	
-					<button type="button" id="describe-organism-button" class="new-page-button"><b>I want to describe an ORGANISM</b></button>							
-					<br/><br/>
-					<button type="button" id="what-others-said-organism-button" class="new-page-button"><b>I want to see what others said</b></button>
+				<div id="organism-menu-page">  
+					<div id="inner-habitat-menu-page">	
+						<button type="button" id="describe-organism-button" class="new-page-button"><b>I want to describe an ORGANISM</b></button>							
+						<br/><br/>
+						<button type="button" id="what-others-said-organism-button" class="new-page-button"><b>I want to see what others  said</b></button>
+					</div>
 				</div>
-			</div>
 	
- 			<div id="new-organism">
-				<div id="organism-page-image">
-					<img src="/resources/new_organism.png"/>   
-					<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div> 			  
-				</div>         
-				<!-- This div contains the two tables of organisms where students can select from-->                                                                                                           
-				<div id="organism-tables">
-					<table id="organism-table">
-						<tr>
-							<td id="scum">
-								<img src="/images/icon_scum_small.png" /> 					
-							</td>
-							<td id="fuzzy-mold"> 
-								<img src="/images/icon_mold_small.png" /> 						
-							</td>					
-						</tr>
+				<div id="new-organism">
+					<div id="organism-page-image">
+						<img src="/resources/new_organism.png"/>   
+						<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div> 			  
+					</div>         
+					<!-- This div contains the two tables of organisms where students can select from-->                                                                                                           
+					<div id="organism-tables">
+						<table id="organism-table">
+							<tr>
+								<td id="scum">
+									<img src="/images/icon_scum_small.png" /> 					
+								</td>
+								<td id="fuzzy-mold"> 
+									<img src="/images/icon_mold_small.png" /> 						
+								</td>					
+							</tr>
 					
-						<tr> 
-							<td id="blue-bug">    
-								<img src="/images/icon_blue_small.png" />						
-							</td>
-							<td id="turtle">
-								<img src="/images/icon_turtle_small.png" />						
-							</td>					
-						</tr> 
+							<tr> 
+								<td id="blue-bug">    
+									<img src="/images/icon_blue_small.png" />						
+								</td>
+								<td id="turtle">
+									<img src="/images/icon_turtle_small.png" />						
+								</td>					
+							</tr> 
 					
-						<tr>
-							<td id="predator">
-							 	<img src="/images/icon_predator_small.png" />   					
-							</td>					
-						</tr>
-					</table>          
+							<tr>
+								<td id="predator">
+									<img src="/images/icon_predator_small.png" />   					
+								</td>					
+							</tr>
+						</table>          
 					                            
 					
-					<!-- Table for Juveniles -->
+						<!-- Table for Juveniles -->
 				         
-					<div class='section-title'> <b>Juvenile Form</b> </div> 
-					<table id="juvenile-organism-table"> 
-						<tr>
-						 	<td id="eggblue">
-								<img src="/images/icon_eggblue_small.png" />						
-							</td>
-							<td id="tealegg"> 
-								<img src="/images/icon_tealegg_small.png" />
-							</td> 				
-						</tr>
+						<div class='section-title'> <b>Juvenile Form</b> </div> 
+						<table id="juvenile-organism-table"> 
+							<tr>
+						 		<td id="eggblue">
+									<img src="/images/icon_eggblue_small.png" />						
+								</td>
+								<td id="tealegg"> 
+									<img src="/images/icon_tealegg_small.png" />
+								</td> 				
+							</tr>
 					 
-						<tr>
-						 	<td id="blue-bug-stage-1">
-								<img src="/images/icon_blue_bug_small.png" /> 						
-							</td>
-							<td id="pupa"> 
-								<img src="/images/icon_pupa2_small.png" /> 	
-							</td>   											
-						</tr>
+							<tr>
+						 		<td id="blue-bug-stage-1">
+									<img src="/images/icon_blue_bug_small.png" /> 						
+								</td>
+								<td id="pupa"> 
+									<img src="/images/icon_pupa2_small.png" /> 	
+								</td>   											
+							</tr>
 						  				
-						<tr>
-							<td id="predator-stage-1">
-								<img src="/images/icon_predator_small.png" />						
-							</td>
-						</tr>
-					</table>
-					<input type="hidden" id="selected-organism" value=""/>
-					<input type="hidden" id="selected-juvenile" value=""/>					
-				</div> 
+							<tr>
+								<td id="predator-stage-1">
+									<img src="/images/icon_predator_small.png" />						
+								</td>
+							</tr>
+						</table>
+						<input type="hidden" id="selected-organism" value=""/>
+						<input type="hidden" id="selected-juvenile" value=""/>					
+					</div> 
 			          
-				<div id="organism-descriptions">
-					<div> 
-						<div class='section-title'> <b> Morphology </b> (what it looks like) </div> 					
-						<div id="organism-morphology"> 
-							<textarea rows="3" cols="50"></textarea>							
-						</div>
-				 	</div>
+					<div id="organism-descriptions">
+						<div> 
+							<div class='section-title'> <b> Morphology </b> (what it looks like) </div> 					
+							<div id="organism-morphology"> 
+								<textarea rows="3" cols="50"></textarea>							
+							</div>
+				 		</div>
 				
-					<div>                                                                               
-						<div class='section-title'> <b> Behavior </b> (what it does) </div> 					
-						<div id="organism-behavior">
-							<textarea rows="3" cols="50"></textarea>
-						</div>
-					</div>    
+						<div>                                                                               
+							<div class='section-title'> <b> Behavior </b> (what it does) </div> 					
+							<div id="organism-behavior">
+								<textarea rows="3" cols="50"></textarea>
+							</div>
+						</div>    
 				
-					<div> 
-						<div class='section-title'> <b> Habitat </b> (where they live) </div> 					
-						<div id="organism-habitat">
-							<textarea rows="3" cols="50"></textarea>
-						</div>
-					</div>     
+						<div> 
+							<div class='section-title'> <b> Habitat </b> (where they live) </div> 					
+							<div id="organism-habitat">
+								<textarea rows="3" cols="50"></textarea>
+							</div>
+						</div>     
 				
-					<div>        
-						<div class='section-title'> <b> Comments </b></div> 					
-						<div id="organism-comments">
-							<textarea rows="3" cols="50"></textarea>
+						<div>        
+							<div class='section-title'> <b> Comments </b></div> 					
+							<div id="organism-comments">
+								<textarea rows="3" cols="50"></textarea>
+							</div>
 						</div>
-					</div>
-				</div>												
+					</div>												
 				
                 
-				<div id="organism-life-cycle-text" class='section-title'> <b> Life Cycle </b> (Tap on an organism image, then tap on the box to fill it in. Each adult organism will have either one, two or three juvenile forms.) </div>  
+					<div id="organism-life-cycle-text" class='section-title'> <b> Life Cycle </b> (Tap on an organism image, then tap on the box to fill it in. Each adult organism will have either one, two or three juvenile forms.) </div>  
 				
-				<div id="organism-evolution">
-					<span class='organism-blank-cell juvenile-only' value="null"></span>
+					<div id="organism-evolution">
+						<span class='organism-blank-cell juvenile-only' value="null"></span>
 				
-					<div class="arrow"><img src="/resources/arrow.png"></div>
+						<div class="arrow"><img src="/resources/arrow.png"></div>
 				
-					<span class='organism-blank-cell juvenile-only' value="null"></span>
+						<span class='organism-blank-cell juvenile-only' value="null"></span>
 				
-					<div class="arrow"><img src="/resources/arrow.png"></div>					 
+						<div class="arrow"><img src="/resources/arrow.png"></div>					 
 				
-					<span class='organism-blank-cell juvenile-only' value="null"></span>
+						<span class='organism-blank-cell juvenile-only' value="null"></span>
 				   		   
-					<div class="arrow"><img src="/resources/arrow.png"></div>
+						<div class="arrow"><img src="/resources/arrow.png"></div>
 				
-					<span class='organism-blank-cell organism-only' value="null"></span> 
-				</div>
+						<span class='organism-blank-cell organism-only' value="null"></span> 
+					</div>
 				      
-				<div id="organism-action-buttons">
-					<button class="back-button">BACK</button>
-					<button class="save-button">SAVE</button>      
+					<div id="organism-action-buttons">
+						<button class="back-button">BACK</button>
+						<button class="save-button">SAVE</button>      
+					</div>
 				</div>
-			</div>
 			
 			 
-			<!-- What others said about organisms page -->
-			<div id="what-others-said-about-organisms">
+				<!-- What others said about organisms page -->
+				<div id="what-others-said-about-organisms">
 				
-			    <div class="organism-page-heading"><h2>What others said about ORGANISMS</h2></div> 
-			    <div id="aggregate-organism-filters">
-					<h4>Pick from the two sets of criteria to show community results:</h4>
+			    	<div class="organism-page-heading"><h2>What others said about ORGANISMS</h2></div> 
+			    	<div id="aggregate-organism-filters">
+						<h4>Pick from the two sets of criteria to show community results:</h4>
 					
-					<div id="organism-filters">
-						<table>
-							<tr>
-								<td value="scum">
-									<img src="/images/icon_scum_small.png">
-								</td>
+						<div id="organism-filters">
+							<table>
+								<tr>
+									<td value="scum">
+										<img src="/images/icon_scum_small.png">
+									</td>
 								
-								<td value="mold">
-									<img src="/images/icon_mold_small.png">
-								</td>                                      								
+									<td value="mold">
+										<img src="/images/icon_mold_small.png">
+									</td>                                      								
 								
-								<td value="blue">
-									<img src="/images/icon_blue_small.png">
-								</td>
+									<td value="blue">
+										<img src="/images/icon_blue_small.png">
+									</td>
 								    
-								<td value="turtle">
-									<img src="/images/icon_turtle_small.png">
-								</td>
+									<td value="turtle">
+										<img src="/images/icon_turtle_small.png">
+									</td>
 								
-								<td value="predator">
-									<img src="/images/icon_predator_small.png">
-								</td>								
-							</tr>
-						</table> 
-						<input id="chosen-organism-filter" type="hidden" value="null">
-					</div> 
+									<td value="predator">
+										<img src="/images/icon_predator_small.png">
+									</td>								
+								</tr>
+							</table> 
+							<input id="chosen-organism-filter" type="hidden" value="null">
+						</div> 
 					
-					<div id="organism-comment-filters">
-						<table>
-							<tr>
-								<td class='organism-comment-filter' value="morphology">
-									Morphology
+						<div id="organism-comment-filters">
+							<table>
+								<tr>
+									<td class='organism-comment-filter' value="Morphology">
+										Morphology
 								</td>
 								
-								<td class='organism-comment-filter' value="behavior">
+								<td class='organism-comment-filter' value="Behavior">
 									Behavior
 								</td>                                      								
 								
-								<td class='organism-comment-filter' value="habitat">
+								<td class='organism-comment-filter' value="Habitat">
 									Habitat
 								</td>
 								    
-								<td class='organism-comment-filter' value="comments">
+								<td class='organism-comment-filter' value="Comments">
 									Comments
 								</td>       
 							</tr>
 						</table>    
 						<input id="chosen-organism-comment-filter" type="hidden" value="null">						
-					</div>
+					</div>  
+					
+					<div id="organism-what-others-said-aggregate-table">
+						<h4> If you want to add a note to discussions, check off the notes that apply to it:</h4>
+						
+						<table id="aggregate-organism-table">   
+							<thead>
+								<tr> 
+									<th id="dynamic-column-aggregate-organism"> </th>
+									<th> Author(s)</th>
+									<th> Last Updated</th>
+								</tr>                               
+							<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
+						   </thead>   
+						
+						   <tbody>
+						   		<tr>
+									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
+									</td>
+									<td> Louis B, Naomi C </td>
+									<td> 10/1/2011 2:45 pm </td>
+								</tr> 
 
-				<div id="organism-what-others-said-action-buttons">
-					<button class="back-button">BACK</button>
-					<button class="save-button">SAVE</button>    
+								<tr>
+									<td> lorm lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+									</td>
+									<td> Ali B, Sally T </td>
+									<td> 10/1/2011 12:34 pm </td>
+								</tr>
+
+								<tr>
+									<td> looooo loooo orem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+									</td>
+									<td> Jelly F, Kelly M </td>
+									<td> 10/1/2011 18:34 pm </td>
+								</tr>
+
+								<tr>
+									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
+									</td>
+									<td> Beatrice S, Jeffery G </td>
+									<td> 10/1/2011 2:34 pm </td>
+								</tr>
+							</tbody>				
+						</table>
+						
+					</div>
+					
+					<div id="organism-what-others-said-action-buttons">
+						<button class="back-button">BACK</button>
+						<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>    
+					</div>
+					
 				</div>
-			</div> 
-			
 			</div>
+           
 		</div> 
 		
 		

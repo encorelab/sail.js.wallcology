@@ -109,7 +109,7 @@ WallCology = {
 				$('#new-habitat').show();
 			})
 
-			// When See What Others Said is clicked, this page page should be loaded
+			// When See What Others Said for Habitat is clicked, this page page should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
             	$('#open-habitat').hide()           
 				$("#add-to-discussions-habitat").hide();
@@ -124,7 +124,8 @@ WallCology = {
 				// TODO: we need to feed the data to the table to be inserted
 				oTable = $('#aggregate-habitat-table').dataTable({
 					"bAutoWidth": false,  
-					
+
+					"bJQueryUI" : true,					
 					"sPaginationType": "full_numbers",                          
 					
 					"bDestroy" : true,  
@@ -346,12 +347,7 @@ WallCology = {
 				$("#organism-menu-page").hide();
 				$('#new-organism').show();    
 				// Clear all selections and text areas
-				$('#new-organism table#organism-table td').css('border', 'none');
-				$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
-				$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
-				$('#new-organism div#organism-descriptions textarea').val('');          
-				$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
-				$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
+				Sail.app.observations.clearNewOrganismPage();			
 			})
 
 			// When See What Others Said is clicked, this page page should be loaded
@@ -366,20 +362,12 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
 				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
 			   
-/**			 
-            	$('#open-habitat').hide()           
-				$("#add-to-discussions-habitat").hide();
-            	$('#what-others-said-habitat').show() 
-                // Uncheck all selected filters and the chosen notes
-				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
-				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
-				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
-				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
-				           
 				// We create a table with the second column being 500px
 				// TODO: we need to feed the data to the table to be inserted
-				oTable = $('#aggregate-habitat-table').dataTable({
-					"bAutoWidth": false,  
+				oTableOrganism = $('#aggregate-organism-table').dataTable({
+					"bAutoWidth": false, 
+					
+					"bJQueryUI" : true,    
 					
 					"sPaginationType": "full_numbers",                          
 					
@@ -398,13 +386,16 @@ WallCology = {
 						}
 						return nRow;
 					}
-				 });  
-*/
+				 });
             })
 
 
                           	
-        	$('#open-organism div#organism-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+        	$('#open-organism div#organism-action-buttons .save-button').click(function() {
+       			Sail.app.observations.newOrganismContent(); 
+				Sail.app.observations.clearNewOrganismPage();	
+			})                           
+			
             $('#open-organism div#organism-action-buttons .back-button').click(function(){
 				$('#open-organism').show()
             	$('#new-organism').hide()
@@ -474,15 +465,15 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
 			})  
 			 
-			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){
+			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){ 		
 				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#CCCCCC', 'color':'black'});
 				$(this).css({'background-color':'#669933', 'color':'white'}); 
 				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters input#chosen-organism-comment-filter').attr('value', $(this).attr('value'));
+				$("table#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value'));
 			})
 			
 			
-			
-			// TODO: need to define a new function to submit the data from selected comments to add to discussion
+			// When we 
 			$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
 			$('#open-organism div#organism-what-others-said-action-buttons .back-button').click(function(){
 				$('#open-organism').show()
@@ -585,7 +576,27 @@ WallCology = {
 			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)			
     	},
 
-//***************************************************************************************************************
+//***************************************************************************************************************  
+
+
+// ******************************************   HELPER FUNCTIONS *************************************************
+
+	clearNewOrganismPage: function () {
+		$('#new-organism table#organism-table td').css('border', 'none');
+		$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
+		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
+		$('#new-organism div#organism-descriptions textarea').val('');          
+		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
+		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
+	},
+
+
+
+
+
+// ***************************************************************************************************************
+
+
     	
         newHabitatContent: function() {
         	sev = new Sail.Event('new_observation', {

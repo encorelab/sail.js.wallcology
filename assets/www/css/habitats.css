@@ -116,13 +116,11 @@ div#aggregate-view-note-type-filter {
 }                             
                              
 table#aggregate-habitat-table {
-	border: 1px solid gray;
 	margin-bottom: 25px;     
 	width: 750px;
 }
 
 table#aggregate-habitat-table th {
-	border: 1px solid #333333;
 	padding-left: 5px;
 } 
 

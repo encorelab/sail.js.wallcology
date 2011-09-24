@@ -1,7 +1,20 @@
+div#open-organism {
+	height: 100%;
+}
+
+html{
+	height: 100%; 
+}    
+
+body {
+	height: 100%;
+}
+
+
 div#tabs-2 {
 	background-image: url('/images/bkgd_habitat.png');
-	padding-left: 25px;
-	padding-top: 0px;
+	padding-left: 25px; 
+	height: 1200px;
 }
 
 div#tabs-2 img#organism-page-image {
@@ -17,6 +30,10 @@ div#tabs-2 div#organism-descriptions {
 	width: 75%;
 	float: left;
 	margin-bottom: 25px;       
+}    
+
+div#tabs-2 div#new-organism {
+	height: 100%;
 }
 
 div#new-organism table#organism-table {
@@ -68,12 +85,7 @@ div#new-organism div#organism-action-buttons {
 	float: left;
 }   
 
-
-/* What others said about organisms page*/
-div#tabs-2 div#what-others-said-about-organisms  {
-   	background-image: url('/images/bkgd_habitat.png'); 
-}
-         
+                                                             
 
 div.organism-page-heading {
 	color: #669933;
@@ -99,7 +111,22 @@ div#open-organism div#what-others-said-about-organisms div#organism-comment-filt
 	background-color: #ccc; 
 	text-align: center; 
 	padding: 10px;
-}       
+}         
+              
+div#open-organism div#what-others-said-about-organisms div#organism-what-others-said-aggregate-table {
+	margin-bottom: 30px;
+}
+
+div#open-organism div#what-others-said-about-organisms table#aggregate-organism-table th{
+	font-size: 16px;
+}
+
+div#open-organism div#what-others-said-about-organisms table#aggregate-organism-table {
+	margin-bottom: 25px;     
+	width: 750px;
+	float: left;    
+	font-size: 12px;
+}
 
 
 
