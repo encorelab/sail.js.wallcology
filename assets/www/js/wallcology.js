@@ -49,7 +49,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -393,8 +393,9 @@ WallCology = {
                           	
         	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
             $('#new-organism .back-button').click(function(){
+				$('#open-organism').show()
             	$('#new-organism').hide()
-            	$('#landing-organism').show()
+            	$('#open-organism #organism-menu-page').show()
             })                     
 
 			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
@@ -453,10 +454,7 @@ WallCology = {
 
 //**********OPEN ORGANISM***************************************************************************************
         	
-            $('#open-organism .back-button').click(function(){
-            	$('#open-organism').hide()
-            	$('#landing-organism').show()
-            })             	
+                      	
         	
 //**********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
