@@ -457,7 +457,7 @@
 				<div id="organism-life-cycle-text" class='section-title'> <b> Life Cycle </b> (Tap on an organism image, then tap on the box to fill it in. Each adult organism will have either one, two or three juvenile forms.) </div>  
 				
 				<div id="organism-evolution">
-					<span class='organism-blank-cell juvenile-only'></span>
+					<span class='organism-blank-cell juvenile-only' value="null"></span>
 				
 					<div class="arrow"><img src="/resources/arrow.png"></div>
 				
@@ -474,15 +474,72 @@
 				      
 				<div id="organism-action-buttons">
 					<button class="back-button">BACK</button>
-					<button class="save-button">SAVE</button>
-					<button class="reload-button">Reload</button>
+					<button class="save-button">SAVE</button>      
 				</div>
 			</div>
 			
 			 
 			<!-- What others said about organisms page -->
 			<div id="what-others-said-about-organisms">
-            	test
+				
+			    <div class="organism-page-heading"><h2>What others said about ORGANISMS</h2></div> 
+			    <div id="aggregate-organism-filters">
+					<h4>Pick from the two sets of criteria to show community results:</h4>
+					
+					<div id="organism-filters">
+						<table>
+							<tr>
+								<td value="scum">
+									<img src="/images/icon_scum_small.png">
+								</td>
+								
+								<td value="mold">
+									<img src="/images/icon_mold_small.png">
+								</td>                                      								
+								
+								<td value="blue">
+									<img src="/images/icon_blue_small.png">
+								</td>
+								    
+								<td value="turtle">
+									<img src="/images/icon_turtle_small.png">
+								</td>
+								
+								<td value="predator">
+									<img src="/images/icon_predator_small.png">
+								</td>								
+							</tr>
+						</table> 
+						<input id="chosen-organism-filter" type="hidden" value="null">
+					</div> 
+					
+					<div id="organism-comment-filters">
+						<table>
+							<tr>
+								<td class='organism-comment-filter' value="morphology">
+									Morphology
+								</td>
+								
+								<td class='organism-comment-filter' value="behavior">
+									Behavior
+								</td>                                      								
+								
+								<td class='organism-comment-filter' value="habitat">
+									Habitat
+								</td>
+								    
+								<td class='organism-comment-filter' value="comments">
+									Comments
+								</td>       
+							</tr>
+						</table>    
+						<input id="chosen-organism-comment-filter" type="hidden" value="null">						
+					</div>
+
+				<div id="organism-what-others-said-action-buttons">
+					<button class="back-button">BACK</button>
+					<button class="save-button">SAVE</button>    
+				</div>
 			</div> 
 			
 			</div>

@@ -344,7 +344,14 @@ WallCology = {
 			// When I want to Describe an ORGANISM is clicked 
 			$('div#open-organism button#describe-organism-button').click(function(){
 				$("#organism-menu-page").hide();
-				$('#new-organism').show();
+				$('#new-organism').show();    
+				// Clear all selections and text areas
+				$('#new-organism table#organism-table td').css('border', 'none');
+				$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
+				$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
+				$('#new-organism div#organism-descriptions textarea').val('');          
+				$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
+				$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
 			})
 
 			// When See What Others Said is clicked, this page page should be loaded
@@ -352,6 +359,12 @@ WallCology = {
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').show();
+				
+				// clear all the Selected Filters
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none'); 
+				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-filter').attr('value', 'null');
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
+				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
 			   
 /**			 
             	$('#open-habitat').hide()           
@@ -391,12 +404,14 @@ WallCology = {
 
 
                           	
-        	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
-            $('#new-organism .back-button').click(function(){
+        	$('#open-organism div#organism-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+            $('#open-organism div#organism-action-buttons .back-button').click(function(){
 				$('#open-organism').show()
             	$('#new-organism').hide()
             	$('#open-organism #organism-menu-page').show()
-            })                     
+            })   
+           
+            
 
 			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
 			$('div#tabs-2 table#organism-table td').click(function(){    
@@ -449,7 +464,31 @@ WallCology = {
 						$(this).html(selectedImageHTML);  				
 					}
 				}
+			})    
+			
+			
+			// Letting the user select from the Organism Filters to pull in the comments given by all students
+			$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').click(function(){
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
+				$(this).css('border', '2px solid #669933');     
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
+			})  
+			 
+			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#CCCCCC', 'color':'black'});
+				$(this).css({'background-color':'#669933', 'color':'white'}); 
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters input#chosen-organism-comment-filter').attr('value', $(this).attr('value'));
 			})
+			
+			
+			
+			// TODO: need to define a new function to submit the data from selected comments to add to discussion
+			$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+			$('#open-organism div#organism-what-others-said-action-buttons .back-button').click(function(){
+				$('#open-organism').show()
+	           	$('#open-organism #what-others-said-about-organisms').hide()
+	           	$('#open-organism #organism-menu-page').show()
+	        })
 			
 
 //**********OPEN ORGANISM***************************************************************************************
@@ -575,7 +614,7 @@ WallCology = {
 			
 			chosen_organism = $('div#new-organism input#selected-organism').attr('value');
 			chosen_juveniles = $('div#new-organism span.juvenile-only');
-			first_juvenile =  $(chosen_juveniles[0]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value') ;
+			first_juvenile =  $(chosen_juveniles[0]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value');
 			second_juvenile =  $(chosen_juveniles[1]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[1]).attr('value');
 			third_juvenile =  $(chosen_juveniles[2]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
 						
