@@ -9,6 +9,32 @@ html{
 body {
 	height: 100%;
 }
+           
+div#organism-menu-page {
+	background-image: url('/images/transparent_bkg.png');
+	margin-left: auto;
+	margin-right: auto;     
+	height: 470px;      
+	display: table; 
+	_position: relative; 
+	overflow: hidden;    
+	margin-top: 160px;
+}   
+
+div#inner-organism-menu-page {
+	_position: absolute; 
+	_top: 50%; 
+	display: table-cell; 
+	vertical-align: middle; 
+	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
+}          
+
+#inner-organism-menu-page .new-page-button {
+	width: 550px;
+	height: 80px;
+}
 
 
 div#tabs-2 {
@@ -84,8 +110,16 @@ div#new-organism div#organism-action-buttons {
 	width: 100%;
 	float: left;
 }   
+  
 
-                                                             
+div#new-organism button.back-button {
+	width: 100px;
+}
+
+div#new-organism button.save-button {
+	float: right;
+	width: 100px;       
+}                                                             
 
 div.organism-page-heading {
 	color: #669933;
@@ -126,6 +160,11 @@ div#open-organism div#what-others-said-about-organisms table#aggregate-organism-
 	width: 750px;
 	float: left;    
 	font-size: 12px;
+}                        
+
+
+div#what-others-said-about-organisms button.add-to-discussion-button {
+	float: right;
 }
 
 
