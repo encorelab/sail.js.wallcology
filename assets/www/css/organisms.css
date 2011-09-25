@@ -44,6 +44,7 @@ div#tabs-2 {
 	background-image: url('/images/bkgd_organism.png');
 	padding-left: 25px; 
 	height: 1200px;
+	font-size: 14px;
 }
 
 div#tabs-2 img#organism-page-image {
@@ -65,13 +66,26 @@ div#tabs-2 div#new-organism {
 	height: 100%;
 }
 
+#new-organism .image {
+	height: 60px;
+	width: 60px;
+}
+
+/* this shit needs to be fixed so that there is a transparent border, so the images don't shift when clicked on
+#new-organism
+#organism-table td {
+	background-color: transparent;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+} */
+
 div#new-organism table#organism-table {
 	margin-bottom: 25px;	
 }                           
 
 div#new-organism div.section-title {
-	font-size: 11px;
-	margin-bottom: 15px;	
+	margin-bottom: 8px;	
 }        
                  
 /* We keep the value of the selected organism hidden in here*/
@@ -85,9 +99,8 @@ div#tabs-2 div#organism-life-cycle-text {
 }                   
 
 #new-organism #organism-evolution {
-	margin-left: 150px;
+	margin-left: 120px;
 }
-
 
 div#tabs-2 span.organism-blank-cell {                 
    display: inline;   
@@ -98,17 +111,6 @@ div#tabs-2 span.organism-blank-cell {
    float: left; 
    margin-left: 10px;
    margin-right: 10px;
-}
-      
-
-/* div#new-organism div#organism-evolution {
-	width: 100%;
-	float: left; 
-	margin-bottom: 30px;        
-} */
- 
-div#new-organism .arrow {
-	width: 15px;
 }
 
 div#new-organism div#organism-action-buttons {

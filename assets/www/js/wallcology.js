@@ -407,13 +407,13 @@ WallCology = {
 			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
 			$('div#tabs-2 table#organism-table td').click(function(){    
 				$('div#tabs-2 table#organism-table td').css('border', 'none');
-				$(this).css('border', '1px solid red');
+				$(this).css('border', '1px solid black');
 				$('div#tabs-2 input#selected-organism').attr('value', this.id);
 			})    
 			
 			$('div#tabs-2 table#juvenile-organism-table td').click(function(){    
 				$('div#tabs-2 table#juvenile-organism-table td').css('border', 'none');
-				$(this).css('border', '1px solid red');
+				$(this).css('border', '1px solid black');
 				$('div#tabs-2 input#selected-juvenile').attr('value', this.id);
 			})
 			
@@ -719,19 +719,6 @@ WallCology = {
 	        $('#new-counts .text-box').val('')
 	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
-        },
-
-        //this should now be generalised for habitat+organisms+(other?)
-        newDiscussionContent: function() {
-        	sev = new Sail.Event('new_observation',{
-        		run:Sail.app.run,
-        		type:'discussion',
-        		evidence:'pieces of habitat content that were queried (by id number?) and selected from the data table',
-        		note:$('#add-to-discussion-habitat .note').val(),
-        		headline:$('#add-to-discussion-habitat .headline').val(),
-        		keywords:'still a mess'
-        		})
-        	WallCology.groupchat.sendEvent(sev)
         },
 
     },
