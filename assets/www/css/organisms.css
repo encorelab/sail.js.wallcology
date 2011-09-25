@@ -36,9 +36,12 @@ div#inner-organism-menu-page {
 	height: 80px;
 }
 
+#inner-organism-menu-page #what-others-said-organism-button {
+	margin-top: 50px;
+}
 
 div#tabs-2 {
-	background-image: url('/images/bkgd_habitat.png');
+	background-image: url('/images/bkgd_organism.png');
 	padding-left: 25px; 
 	height: 1200px;
 }
@@ -75,36 +78,38 @@ div#new-organism div.section-title {
 div#new-organism input#selected-organism {
 	display: none;
 }       
-        
-     
 
 div#tabs-2 div#organism-life-cycle-text {
 	width: 75%;
 	float: left;
 }                   
 
+#new-organism #organism-evolution {
+	margin-left: 150px;
+}
+
+
 div#tabs-2 span.organism-blank-cell {                 
    display: inline;   
-   width: 58px;
-   height: 58px;
+   width: 60px;
+   height: 60px;
    background-color: #cccccc;
+   border-radius: 4px;
    float: left; 
+   margin-left: 10px;
+   margin-right: 10px;
 }
       
 
-div#new-organism div#organism-evolution {
+/* div#new-organism div#organism-evolution {
 	width: 100%;
 	float: left; 
 	margin-bottom: 30px;        
+} */
+ 
+div#new-organism .arrow {
+	width: 15px;
 }
-
-div#new-organism div.arrow {
-	width: 40px;
-	float: left;  
-	margin-top: 20px;      
-	margin-left: 5px;
-	margin-right: 5px;
-}     
 
 div#new-organism div#organism-action-buttons {
 	width: 100%;
