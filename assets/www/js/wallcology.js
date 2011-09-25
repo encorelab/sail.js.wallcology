@@ -1,5 +1,6 @@
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
+	mongooseURL: '/mongoose',
     xmppDomain: 'proto.encorelab.org',
     groupchatRoom: null,
     
@@ -525,6 +526,45 @@ WallCology = {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
+
+			//$('#view-relationships .sun1')
+			
+			$('#view-relationships .sun1').click(function() {
+				alert("Armin")
+				// Trying to call the following URL
+				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={"type"%3A"relationship"}
+				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
+				
+				// jQuery sleepy mongoose plugin way (not doing that right now)
+				/*observations = $().sleepyMongo({'sleepyUrl': WallCology.mongooseURL + '/observations/'})
+				
+				observations.find({}, function(data) {
+					alert("Inside the mongo db: " + data.ok)
+				})*/
+				
+				$.get("/mongoose/wallcology/observations/_find", 
+				  function(data) {
+					var resultArray
+				    if (data.ok === 1) {
+						console.log("Mongoose returned a data set")
+
+						alert("Got an ok:" +data.ok)
+						resultArray = data.results
+						
+						alert(resultArray)
+
+						return true
+					}
+					else {
+						console.log("Mongoose request failed")
+						return false
+					}
+				  }, "json")
+
+				//observations.find({}, function(data) {
+					//alert("Mongo data: " +data)
+				//})
+			})
             
 /*			oTable = $('#aggregate-relationships-table').dataTable({
 				"bAutoWidth": false,  
