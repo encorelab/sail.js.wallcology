@@ -49,7 +49,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -57,7 +57,8 @@ WallCology = {
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
             $('#new-organism').hide()
-            $('#open-organism').hide()
+            $('#what-others-said-about-organisms').hide()
+            $('#open-organism').show()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
 
@@ -108,7 +109,7 @@ WallCology = {
 				$('#new-habitat').show();
 			})
 
-			// When See What Others Said is clicked, this page page should be loaded
+			// When See What Others Said for Habitat is clicked, this page page should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
             	$('#open-habitat').hide()           
 				$("#add-to-discussions-habitat").hide();
@@ -123,6 +124,9 @@ WallCology = {
 				// TODO: we need to feed the data to the table to be inserted
 				oTable = $('#aggregate-habitat-table').dataTable({
 					"bAutoWidth": false,  
+
+					"bJQueryUI" : true,					
+					"sPaginationType": "full_numbers",                          
 					
 					"bDestroy" : true,  
 					  				
@@ -336,19 +340,151 @@ WallCology = {
 			// 				$(this).addClass('ui-state-active');
 			// 			})
 
-//**********ORGANISM****************************************************************************************                              	
-        	$('#new-organism .save-button').click(Sail.app.observations.newOrganismContent)
-            $('#new-organism .back-button').click(function(){
+//**********ORGANISM****************************************************************************************    
+
+			// When I want to Describe an ORGANISM is clicked 
+			$('div#open-organism button#describe-organism-button').click(function(){
+				$("#organism-menu-page").hide();
+				$('#new-organism').show();    
+				// Clear all selections and text areas
+				Sail.app.observations.clearNewOrganismPage();			
+			})
+
+			// When See What Others Said is clicked, this page page should be loaded
+			$('div#open-organism #what-others-said-organism-button').click(function(){ 
+				$("#organism-menu-page").hide();
+				$('#new-organism').hide(); 
+				$('#what-others-said-about-organisms').show();
+				
+				// clear all the Selected Filters
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none'); 
+				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-filter').attr('value', 'null');
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
+				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
+			   
+				// We create a table with the second column being 500px
+				// TODO: we need to feed the data to the table to be inserted
+				oTableOrganism = $('#aggregate-organism-table').dataTable({
+					"bAutoWidth": false, 
+					
+					"bJQueryUI" : true,    
+					
+					"sPaginationType": "full_numbers",                          
+					
+					"bDestroy" : true,  
+					  				
+					"aoColumns": [ 
+						{ "sWidth": "500px" },
+						null,
+						null
+					],
+					
+					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
+						{
+							$(nRow).addClass('row_selected');
+						}
+						return nRow;
+					}
+				 });
+            })
+
+
+                          	
+        	$('#open-organism div#organism-action-buttons .save-button').click(function() {
+       			Sail.app.observations.newOrganismContent(); 
+				Sail.app.observations.clearNewOrganismPage();	
+			})                           
+			
+            $('#open-organism div#organism-action-buttons .back-button').click(function(){
+				$('#open-organism').show()
             	$('#new-organism').hide()
-            	$('#landing-organism').show()
-            })            
+            	$('#open-organism #organism-menu-page').show()
+            })   
+           
+            
+
+			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
+			$('div#tabs-2 table#organism-table td').click(function(){    
+				$('div#tabs-2 table#organism-table td').css('border', 'none');
+				$(this).css('border', '1px solid red');
+				$('div#tabs-2 input#selected-organism').attr('value', this.id);
+			})    
+			
+			$('div#tabs-2 table#juvenile-organism-table td').click(function(){    
+				$('div#tabs-2 table#juvenile-organism-table td').css('border', 'none');
+				$(this).css('border', '1px solid red');
+				$('div#tabs-2 input#selected-juvenile').attr('value', this.id);
+			})
+			
+			
+			// if an organism is selected
+			$('div#tabs-2 div#organism-evolution span.organism-only').click (function(){
+				
+				selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value'); 
+				selectedImageHTML =  $('div#tabs-2 table#organism-table td#'+selectedOrganismId).html();
+				  
+				// We need to clear the content of the cell
+				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
+					$(this).html(""); 
+					$(this).attr('value', "null");
+				} else {
+					// selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');   
+					if (selectedOrganismId === ""){
+						alert ("You must first choose an organism and then click this cell");
+					}else {
+						$(this).html(selectedImageHTML);  				
+					}
+				}
+			})
+			 
+			// if a juvenile is selected
+			$('div#tabs-2 div#organism-evolution span.juvenile-only').click (function(){ 
+				
+				selectedJuvenileId = $('div#tabs-2 input#selected-juvenile').attr('value');
+				selectedImageHTML = $('div#tabs-2 table#juvenile-organism-table td#'+selectedJuvenileId).html()   
+				
+				if ($(this).html() != "" && $(this).html() == selectedImageHTML){
+					$(this).html("");       
+					$(this).attr('value', "null");					
+				} else {            					
+					if (selectedJuvenileId === ""){
+						alert ("You must first choose a Juvenile and then click this cell");
+					}else {  
+						$(this).attr('value', selectedJuvenileId);
+						$(this).html(selectedImageHTML);  				
+					}
+				}
+			})    
+			
+			
+			// Letting the user select from the Organism Filters to pull in the comments given by all students
+			$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').click(function(){
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
+				$(this).css('border', '2px solid #669933');     
+				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
+			})  
+			 
+			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){ 		
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#CCCCCC', 'color':'black'});
+				$(this).css({'background-color':'#669933', 'color':'white'}); 
+				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters input#chosen-organism-comment-filter').attr('value', $(this).attr('value'));
+				$("table#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value'));
+			})
+			
+			
+			// When we 
+			$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+			$('#open-organism div#organism-what-others-said-action-buttons .back-button').click(function(){
+				$('#open-organism').show()
+	           	$('#open-organism #what-others-said-about-organisms').hide()
+	           	$('#open-organism #organism-menu-page').show()
+	        })
+			
 
 //**********OPEN ORGANISM***************************************************************************************
         	
-            $('#open-organism .back-button').click(function(){
-            	$('#open-organism').hide()
-            	$('#landing-organism').show()
-            })             	
+                      	
         	
 //**********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
@@ -363,14 +499,29 @@ WallCology = {
 //**********NEW RELATIONSHIP***********************************************************************************          
 
             $('#new-relationship .save-button').click(Sail.app.observations.newRelationshipContent)
-            $('#new-relationship .back-button').click(function(){
+            $('#new-relationship .back-button').click(function() {
             	$('#new-relationship').hide()
             	$('#landing-relationships').show()
+            })
+
+            
+            $('#new-relationship .selectable').click(function() {
+            	$('.selectable').removeClass('selected')
+            	$(this).toggleClass('selected')            	
+            })
+            
+            $('#new-relationship .organism-box').click(function() {
+            	$(this).html("")
+            	selected = $('.selected')
+            	clone = selected.clone()
+            	clone.attr('')
+            	$(this).append(clone)
+            	$('.selectable').removeClass('selected')
             })
             
 //**********VIEW RELATIONSHIPS**********************************************************************************            
             
-            $('#view-relationships .back-button').click(function(){
+            $('#view-relationships .back-button').click(function() {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
@@ -416,6 +567,8 @@ WallCology = {
 				$(this).toggleClass('row_selected');
 			});*/
 			
+            
+            
 //**********COUNTS******************************************************************************************			
 
 			$('#new-counts-datepicker').datepicker()
@@ -423,7 +576,27 @@ WallCology = {
 			$('#new-counts .save-button').click(Sail.app.observations.newCountsContent)			
     	},
 
-//***************************************************************************************************************
+//***************************************************************************************************************  
+
+
+// ******************************************   HELPER FUNCTIONS *************************************************
+
+	clearNewOrganismPage: function () {
+		$('#new-organism table#organism-table td').css('border', 'none');
+		$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
+		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
+		$('#new-organism div#organism-descriptions textarea').val('');          
+		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
+		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
+	},
+
+
+
+
+
+// ***************************************************************************************************************
+
+
     	
         newHabitatContent: function() {
         	sev = new Sail.Event('new_observation', {
@@ -436,37 +609,75 @@ WallCology = {
         		comments:$('#new-habitat .comments').val()
         		})
         	WallCology.groupchat.sendEvent(sev)
+        	//clear fields
 	        $('#new-habitat .text-box').val('')
 	        $("input:radio").prop('checked', false)
 	        $('#new-habitat .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
         },
                 
         //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
-        newOrganismContent: function() {
-	        var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
-	        	type:'organism',
-	        	chosen_organism:organismRadioInput,
-	        	morphology:$('#new-organism .morphology').val(),
-	        	behaviour:$('#new-organism .behaviour').val(),
-	        	organisms:$('#new-organism .habitat').val(),
-	        	comments:$('#new-organism .comments').val()
-	        	})
+        newOrganismContent: function() {       
+	                                                     
+			morphology = $('div#new-organism div#organism-descriptions div#organism-morphology textarea').val();
+			behavior = $('div#new-organism div#organism-descriptions div#organism-behavior textarea').val();
+			habitat = $('div#new-organism div#organism-descriptions div#organism-habitat textarea').val();
+			comments = $('div#new-organism div#organism-descriptions div#organism-comments textarea').val(); 
+			
+			chosen_organism = $('div#new-organism input#selected-organism').attr('value');
+			chosen_juveniles = $('div#new-organism span.juvenile-only');
+			first_juvenile =  $(chosen_juveniles[0]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[0]).attr('value');
+			second_juvenile =  $(chosen_juveniles[1]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[1]).attr('value');
+			third_juvenile =  $(chosen_juveniles[2]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
+						
+			sev = new Sail.Event('new_observation', {
+				run:Sail.app.run,
+				type:'organism',
+				morphology:morphology,
+		        behaviour:behavior,
+		        habitat:habitat,
+		        comments:comments,
+		        chosen_organism:chosen_organism,
+				juveniles:[{ 
+					first: first_juvenile,
+					second: second_juvenile,
+					third: third_juvenile
+				}]
+			})  
+			
 	        WallCology.groupchat.sendEvent(sev)
+			
+	        // var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
+	        // 	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        // 	        	type:'organism',
+	        // 	        	chosen_organism:organismRadioInput,
+	        // 	        	morphology:$('#new-organism .morphology').val(),
+	        // 	        	behaviour:$('#new-organism .behaviour').val(),
+	        // 	        	organisms:$('#new-organism .habitat').val(),
+	        // 	        	comments:$('#new-organism .comments').val()
+	        // 	        	})
+	        // 	        WallCology.groupchat.sendEvent(sev)
         },
         
         newRelationshipContent: function() {
-	        sev = new Sail.Event('new_observation',{
+	        sev = new Sail.Event('new_observation', {
 	        	run:Sail.app.run,
 	        	type:'relationship',
-	        	//some stuff about the relationship
-	        	//comments:$('#new-relationship .comments').val()
+	        	energy_transfer:{
+	        		"from":$('#box1').children().attr("id"),
+	        		"to":$('#box2').children().attr("id")	        		
+	        	},
+	        	comments:$('#new-relationship .comments').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
+	        //clear fields
+	        $('#box1').html("")
+	        $('#box2').html("")		
+	        $('#new-relationship .comments').val('')
         },
 
         newCountsContent: function() {
-	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
+	        sev = new Sail.Event('new_observation', {
+	        	run:Sail.app.run,
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
 	        	temperature:$('input:radio[name=temp]:checked').val(),
@@ -504,7 +715,7 @@ WallCology = {
 	        	ampm:$('input:radio[name=ampm]:checked').val()
 	        	})
 	        WallCology.groupchat.sendEvent(sev)
-	        //reset fields
+	        //clear fields
 	        $('#new-counts .text-box').val('')
 	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
