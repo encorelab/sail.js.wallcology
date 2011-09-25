@@ -636,26 +636,17 @@ WallCology = {
 		        behaviour:behavior,
 		        habitat:habitat,
 		        comments:comments,
-		        chosen_organism:chosen_organism,
-				juveniles:[{ 
-					first: first_juvenile,
-					second: second_juvenile,
-					third: third_juvenile
-				}]
-			})  
-			
+		        organism:chosen_organism,
+				lifecycle:{ 
+					slot1: first_juvenile,
+					slot2: second_juvenile,
+					slot3: third_juvenile
+				}
+			})  			
 	        WallCology.groupchat.sendEvent(sev)
-			
-	        // var organismRadioInput = $("#radio-organism input[type='radio']:checked").val()
-	        // 	        sev = new Sail.Event('new_observation', {run:Sail.app.run,
-	        // 	        	type:'organism',
-	        // 	        	chosen_organism:organismRadioInput,
-	        // 	        	morphology:$('#new-organism .morphology').val(),
-	        // 	        	behaviour:$('#new-organism .behaviour').val(),
-	        // 	        	organisms:$('#new-organism .habitat').val(),
-	        // 	        	comments:$('#new-organism .comments').val()
-	        // 	        	})
-	        // 	        WallCology.groupchat.sendEvent(sev)
+	        //clear fields
+	        $('#new-organism .textarea').val('')
+	        $('#new-organism .organism-blank-cell').html("")
         },
         
         newRelationshipContent: function() {
@@ -685,30 +676,32 @@ WallCology = {
 	        	humidity:$('input:radio[name=humidity]:checked').val(),
 	        	scum_percent:$('#new-counts .count-scum-percent').val(),
 	        	mold_percent:$('#new-counts .count-mold-percent').val(),
-	        	blue_bug:[{
-	        		count1:$('#new-counts .count-blue-bug1').val(),
-	        		count2:$('#new-counts .count-blue-bug2').val(),
-	        		count3:$('#new-counts .count-blue-bug3').val(),
-	        		average:$('#new-counts .count-blue-bug4').val(),
-	        		multiplier:$('#new-counts .count-blue-bug5').val(),
-	        		final_count:$('#new-counts .count-blue-bug6').val(),
-	        		}],
-	        	green_bug:[{
-	        		count1:$('#new-counts .count-green-bug1').val(),
-	        		count2:$('#new-counts .count-green-bug2').val(),
-	        		count3:$('#new-counts .count-green-bug3').val(),
-	        		average:$('#new-counts .count-green-bug4').val(),
-	        		multiplier:$('#new-counts .count-green-bug5').val(),
-	        		final_count:$('#new-counts .count-green-bug6').val(),
-	        		}],
-	        	predator:[{
-	        		count1:$('#new-counts .count-predator1').val(),
-	        		count2:$('#new-counts .count-predator2').val(),
-	        		count3:$('#new-counts .count-predator3').val(),
-	        		average:$('#new-counts .count-predator4').val(),
-	        		multiplier:$('#new-counts .count-predator5').val(),
-	        		final_count:$('#new-counts .count-predator6').val(),
-	        		}],
+	        	organism_counts:{
+		        	blue_bug:{
+		        		count1:$('#new-counts .count-blue-bug1').val(),
+		        		count2:$('#new-counts .count-blue-bug2').val(),
+		        		count3:$('#new-counts .count-blue-bug3').val(),
+		        		average:$('#new-counts .count-blue-bug4').val(),
+		        		multiplier:$('#new-counts .count-blue-bug5').val(),
+		        		final_count:$('#new-counts .count-blue-bug6').val()
+		        		},
+		        	green_bug:{
+		        		count1:$('#new-counts .count-green-bug1').val(),
+		        		count2:$('#new-counts .count-green-bug2').val(),
+		        		count3:$('#new-counts .count-green-bug3').val(),
+		        		average:$('#new-counts .count-green-bug4').val(),
+		        		multiplier:$('#new-counts .count-green-bug5').val(),
+		        		final_count:$('#new-counts .count-green-bug6').val()
+		        		},
+		        	predator:{
+		        		count1:$('#new-counts .count-predator1').val(),
+		        		count2:$('#new-counts .count-predator2').val(),
+		        		count3:$('#new-counts .count-predator3').val(),
+		        		average:$('#new-counts .count-predator4').val(),
+		        		multiplier:$('#new-counts .count-predator5').val(),
+		        		final_count:$('#new-counts .count-predator6').val()
+		        		} //FIX THIS AND PIRATENPAD
+	        	},
 	        	date:$('#new-counts-datepicker').datepicker('getDate'),
 	        	hour:$('#new-counts .hour').val(),
 	        	minute:$('#new-counts .minute').val(),
