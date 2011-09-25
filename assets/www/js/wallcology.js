@@ -461,7 +461,7 @@ WallCology = {
 			// Letting the user select from the Organism Filters to pull in the comments given by all students
 			$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').click(function(){
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
-				$(this).css('border', '2px solid #669933');     
+				$(this).css('border', '1px solid black');     
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
 			})  
 			 

@@ -50,6 +50,10 @@ div#tabs-2 {
 div#tabs-2 img#organism-page-image {
 	float: left;
 }
+
+#new-organism #organism-page-image {
+	margin-bottom: 15px;
+}
                             
 div#tabs-2 div#organism-tables {
 	width: 25%;
@@ -64,9 +68,10 @@ div#tabs-2 div#organism-descriptions {
 
 div#tabs-2 div#new-organism {
 	height: 100%;
+	margin-left: 10px;
 }
 
-#new-organism .image {
+#tabs-2 .image {
 	height: 60px;
 	width: 60px;
 }
@@ -81,25 +86,38 @@ div#tabs-2 div#new-organism {
 } */
 
 div#new-organism table#organism-table {
+	margin-top: 10px;
 	margin-bottom: 25px;	
-}                           
+}
 
 div#new-organism div.section-title {
-	margin-bottom: 8px;	
+	margin-top: 8px;
+	margin-bottom: 4px;	
 }        
                  
 /* We keep the value of the selected organism hidden in here*/
 div#new-organism input#selected-organism {
 	display: none;
-}       
+}
+
+#new-organism .arrow-image {
+	width: 35px;
+	height: 20px;
+}
 
 div#tabs-2 div#organism-life-cycle-text {
-	width: 75%;
+	margin-bottom: 20px;
 	float: left;
-}                   
+}
+
+#new-organism div.divider {
+	clear: left;
+}
 
 #new-organism #organism-evolution {
-	margin-left: 120px;
+	margin-top: 8px;
+	margin-left: 140px;
+	margin-bottom: 20px;
 }
 
 div#tabs-2 span.organism-blank-cell {                 
@@ -117,19 +135,19 @@ div#new-organism div#organism-action-buttons {
 	width: 100%;
 	float: left;
 }   
-  
 
 div#new-organism button.back-button {
 	width: 100px;
+	margin-left: 20px;
 }
 
 div#new-organism button.save-button {
-	float: right;
-	width: 100px;       
+	width: 100px;
+	margin-left: 460px;       
 }                                                             
 
 div.organism-page-heading {
-	color: #669933;
+	color: #0CA958;
 }  
 
 
