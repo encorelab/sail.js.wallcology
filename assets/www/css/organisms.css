@@ -87,7 +87,7 @@ div#tabs-2 div#new-organism {
 
 div#new-organism table#organism-table {
 	margin-top: 10px;
-	margin-bottom: 25px;	
+	margin-bottom: 10px;	
 }
 
 div#new-organism div.section-title {
@@ -106,7 +106,7 @@ div#new-organism input#selected-organism {
 }
 
 div#tabs-2 div#organism-life-cycle-text {
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 	float: left;
 }
 
@@ -117,7 +117,7 @@ div#tabs-2 div#organism-life-cycle-text {
 #new-organism #organism-evolution {
 	margin-top: 8px;
 	margin-left: 140px;
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 div#tabs-2 span.organism-blank-cell {                 
