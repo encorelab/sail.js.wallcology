@@ -34,6 +34,8 @@
             .then('js/sail.js/rollcall.js')
             .then('js/sail.js/deps/jquery.dataTables.js')
             .then('js/wallcology.js')
+			// loading sleepy mongoose jQuery plugin (for now we don't do it)
+			//.then('js/sail.js/deps/jquery-sleepy-mongoose-0.0.2.js')
             .thenRun(function() { 
                 return Sail.init(WallCology) 
             })
