@@ -1,6 +1,6 @@
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
-    xmppDomain: 'proto.encorelab.org',
+    xmppDomain: 'glint',
     groupchatRoom: null,
     
     init: function() {
@@ -782,7 +782,7 @@ WallCology = {
         
         connected: function(ev) {
             $('#username').text(session.account.login)
-      	    //$('#connecting').hide()						
+      	    					
         	jQuery('#top-level-dropdown').change(function(e){
         		window.location.href = jQuery('#top-level-dropdown').val();
         	})
@@ -798,7 +798,7 @@ WallCology = {
         },
         
         authenticated: function(ev) {
-            $('#connecting').hide()
+            
         },
         
         unauthenticated: function(ev) {
