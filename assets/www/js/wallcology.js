@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -169,7 +169,7 @@ WallCology = {
 			} );
             
 
- 			$.get("/mongoose/foo/bar/_find", 
+/* 			$.get("/mongoose/foo/bar/_find", 
 			  function(data) {
 				var resultArray
 			    if (data.ok === 1) {
@@ -177,9 +177,9 @@ WallCology = {
 					
 					resultArray = data.results
 					// TODO: loop over result and use it to change content of table
-					/*for (var i = 0; i<resultArray.size(); i++) {
+					for (var i = 0; i<resultArray.size(); i++) {
 						resultArray[i]
-					}*/
+					}
 					
 					return true
 				}
@@ -188,7 +188,7 @@ WallCology = {
 					return false
 				}
 			  }, "json")
-			
+*/			
 			$('#table_id').dataTable()
             
 /*            $('#open-habitat .habitat-table').dataTable({
@@ -530,28 +530,23 @@ WallCology = {
 			//$('#view-relationships .sun1')
 			
 			$('#view-relationships .sun1').click(function() {
-				alert("Armin")
 				// Trying to call the following URL
 				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={"type"%3A"relationship"}
 				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
-				
-				// jQuery sleepy mongoose plugin way (not doing that right now)
-				/*observations = $().sleepyMongo({'sleepyUrl': WallCology.mongooseURL + '/observations/'})
-				
-				observations.find({}, function(data) {
-					alert("Inside the mongo db: " + data.ok)
-				})*/
-				
-				$.get("/mongoose/wallcology/observations/_find", 
+/*				criteria={"type"%3A"relationship"}
+				sort={"energy_transfer.to":1}
+*/				$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"}, sort:{"energy_transfer.to":"-1"} },
 				  function(data) {
 					var resultArray
 				    if (data.ok === 1) {
 						console.log("Mongoose returned a data set")
 
-						alert("Got an ok:" +data.ok)
 						resultArray = data.results
+						alert(resultArray.length)
 						
-						alert(resultArray)
+
+						alert(resultArray[0].type)
+						
 
 						return true
 					}
@@ -740,7 +735,7 @@ WallCology = {
 		        		average:$('#new-counts .count-predator4').val(),
 		        		multiplier:$('#new-counts .count-predator5').val(),
 		        		final_count:$('#new-counts .count-predator6').val()
-		        		} //FIX THIS AND PIRATENPAD
+		        	}
 	        	},
 	        	date:$('#new-counts-datepicker').datepicker('getDate'),
 	        	hour:$('#new-counts .hour').val(),
