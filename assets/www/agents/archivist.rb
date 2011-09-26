@@ -15,13 +15,13 @@ class Archivist < Sail::Agent
       pres.to = agent_jid_in_room
       pres.state = :chat
       
-      puts "Joining #{agent_jid_in_room.inspect}..."
+      log "Joining #{agent_jid_in_room.inspect}..."
       
       client.write(pres)
     end
     
     event :new_observation? do |stanza, data|
-      store_payload_in_mongo('wallcology', data['payload'], data['origin'])
+      store_payload_in_mongo('wallcology', data['payload'], data['origin'], data['timestamp'])
     end
     
     message :error? do |err|
@@ -29,11 +29,13 @@ class Archivist < Sail::Agent
       puts "!" * 80
       puts "GOT ERROR MESSAGE: #{err.inspect}"
       puts "!" * 80
+      log err, :ERROR
     end
     
     disconnected do
       # automatically reconnect
       puts "DISCONNECTED!"
+      log "disconnected", :WARN
       puts "attempting to reconnect..."
       client.connect
     end
@@ -42,9 +44,10 @@ class Archivist < Sail::Agent
   
   protected
   
-  def store_payload_in_mongo(collection, payload, origin)
-    log "Storing payload in collection #{collection.inspect}: #{payload.inspect}"
+  def store_payload_in_mongo(collection, payload, origin, timestamp)
     payload['origin'] = origin
+    payload['timestamp'] = timestamp
+    log "Storing payload in collection #{collection.inspect}: #{payload.inspect}"
     @mongo.collection('observations').save(payload)
   end
 end
