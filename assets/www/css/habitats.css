@@ -132,7 +132,8 @@ table#aggregate-habitat-table td {
 
 
 div#what-others-said-habitat div.action-buttons {
-	width: 720px;               
+	margin-top: 35px;
+	width: 730px;               
 }
 
 div#what-others-said-habitat button.back-button {

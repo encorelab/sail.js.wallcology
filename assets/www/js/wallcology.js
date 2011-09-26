@@ -535,7 +535,8 @@ WallCology = {
 				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
 /*				criteria={"type"%3A"relationship"}
 				sort={"energy_transfer.to":1}
-*/				$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"}, sort:{"energy_transfer.to":"-1"} },
+*/				$.get("/mongoose/wallcology/observations/_find", { limit: 100, criteria:{"type":"relationship"} },
+				//$.get("/mongoose/wallcology/observations/_count",
 				  function(data) {
 					var resultArray
 				    if (data.ok === 1) {
