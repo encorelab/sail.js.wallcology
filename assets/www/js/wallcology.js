@@ -535,7 +535,7 @@ WallCology = {
 				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
 /*				criteria={"type"%3A"relationship"}
 				sort={"energy_transfer.to":1}
-*/				$.get("/mongoose/wallcology/observations/_find", { limit: 100, criteria:{"type":"relationship"} },
+*/				$.get("/mongoose/wallcology/observations/_find", { batch_size: 100, criteria:{"type":"relationship"} },
 				//$.get("/mongoose/wallcology/observations/_count",
 				  function(data) {
 					var resultArray
@@ -562,47 +562,34 @@ WallCology = {
 				//})
 			})
             
-/*			oTable = $('#aggregate-relationships-table').dataTable({
-				"bAutoWidth": false,  
-				
-				"bDestroy" : true,  
-				  				
-				"aoColumns": [ 
-					{ "sWidth": "700px" },
-					null,
-					null
-				],
-				
-				"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-					if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
-					{
-						$(nRow).addClass('row_selected');
-					}
-					return nRow;
-				}
-			}); 
-
-
-			// We need to handle the clicking of the table rows
-			 Click event handler 
-			$('#aggregate-relationships-table tbody tr').live('click', function () {
-				var aData = oTable.fnGetData( this );
-				var iId = aData[0];
-	
-				if ( jQuery.inArray(iId, gaiSelected) == -1 )
-				{
-					gaiSelected[gaiSelected.length++] = iId;
-				}
-				else
-				{
-					gaiSelected = jQuery.grep(gaiSelected, function(value) {
-						return value != iId;
-					});
-				}
-	
-				$(this).toggleClass('row_selected');
-			});*/
 			
+			//work in progress... don't touch!
+			//why doesn't criteria work?
+			//do I need to use an array?
+			
+			$('#view-relationships .view-relationships-title').click(function() {
+				$.get("/mongoose/wallcology/observations/_find", { batch_size: 5, criteria:{"type":"relationship"} },
+					function(data) {
+						var resultArray2
+				    	if (data.ok === 1) {
+				    		resultArray2 = data.results
+				    		
+							$('#relationships-datatable').dataTable({
+								"aaData": [
+								           ["D", resultArray2[0].type, resultArray2[0].type, "TBD"],
+								           ["D", resultArray2[1].type, resultArray2[1].type, "TBD"],
+								           ["D", resultArray2[2].type, resultArray2[2].type, "TBD"]							           
+								           ]
+							});
+				    	}
+				    	else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}, "json")
+			})
+
+					
             
             
 //**********COUNTS******************************************************************************************			
@@ -681,9 +668,9 @@ WallCology = {
 			})  			
 	        WallCology.groupchat.sendEvent(sev)
 	        //clear fields
-	        $('#new-organism .textarea').val('')
+/*	        $('#new-organism .textarea').val('')
 	        $('#new-organism .organism-blank-cell').html("")
-        },
+*/        },
         
         newRelationshipContent: function() {
 	        sev = new Sail.Event('new_observation', {

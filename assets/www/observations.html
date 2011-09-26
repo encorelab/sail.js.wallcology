@@ -1,8 +1,8 @@
 <!-- TODO
--style jquery ui buttons to correct colors
--get text input to do new lines, not centered
-
-
+- style jquery ui buttons to correct colors
+- add .predator-reveal class, to be turned on (.show?) in week X
+- the css of view organisms needs to be finished
+- we need to start on Microworlds, particularly the graphing
  -->
 
 
@@ -257,15 +257,15 @@
 				</div>
 
 				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
-				<div id="habitat-aggregate-results"> 
-					<table id="aggregate-habitat-table">   
+ 				<div id="habitat-aggregate-results-test">
+ 					<table id="aggregate-habitat-table">   
 						<thead>
 							<tr> 
 								<th id="dynamic-column-aggregate-habitat"> </th>
 								<th> Author(s)</th>
 								<th> Last Updated</th>
 							</tr>                               
-						<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
+						<!-- TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids -->
 					   </thead>
 						<tbody> 
 							<script type="text/javascript">  
@@ -437,7 +437,7 @@
 				 		</div>
 				
 						<div>                                                                               
-							<div class='section-title'> <b> Behavior </b> (what it does) </div> 					
+							<div class='section-title'> <b> Behaviour </b> (what it does) </div> 					
 							<div id="organism-behavior">
 								<textarea rows="4" cols="70"></textarea>
 							</div>
@@ -530,8 +530,9 @@
 							<input id="chosen-organism-filter" type="hidden" value="null">
 						</div> 
 					
-						<div id="organism-comment-filters">
-							<table>
+ 						<div id="organism-comment-filters">	
+
+ 							<table>
 								<tr>
 								<td class='organism-comment-filter' value="Morphology">
 									Morphology
@@ -548,10 +549,11 @@
 								<td class='organism-comment-filter' value="Comments">
 									Comments
 								</td>       
-							</tr>
-						</table>    
-						<input id="chosen-organism-comment-filter" type="hidden" value="null">						
-					</div>  
+								</tr>
+							</table>    
+						<input id="chosen-organism-comment-filter" type="hidden" value="null">
+						</div>						
+
 					
 					<div id="organism-what-others-said-aggregate-table">
 						<h4> If you want to add a note to discussions, check off the notes that apply to it:</h4>
@@ -759,6 +761,44 @@
 					</div>
 					<br/>
 					
+					<div id="view-relationships-table">
+						<table cellpadding="0" cellspacing="0" border="0" class="display" id="relationships-datatable">
+							<thead>
+								<tr>
+									<th>D</th>
+									<th>Description of Relationship</th>						
+									<th>Author(s)</th>
+									<th>Last Updated</th>
+								</tr>
+							</thead>
+							<tbody>						
+								<tr class="table-row">
+									<td></td>
+									<td class="r1c2"></td>
+									<td class="r1c3"></td>
+									<td class="r1c4"></td>
+								</tr>
+								<tr class="table-row">
+									<td></td>
+									<td class="r2c2"></td>
+									<td class="r2c3"></td>
+									<td class="r2c4"></td>
+								</tr>
+								<tr class="table-row">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								
+							</tbody>
+							<tfoot>
+								<tr>
+
+								</tr>							
+							</tfoot>
+						</table>
+					</div>
 									
 					<div id="action-buttons">
 						<button class="back-button">BACK</button>
