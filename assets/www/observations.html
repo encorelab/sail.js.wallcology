@@ -1,8 +1,8 @@
 <!-- TODO
--style jquery ui buttons to correct colors
--get text input to do new lines, not centered
-
-
+- style jquery ui buttons to correct colors
+- add .predator-reveal class, to be turned on (.show?) in week X
+- the css of view organisms needs to be finished
+- we need to start on Microworlds, particularly the graphing
  -->
 
 
@@ -34,6 +34,8 @@
             .then('js/sail.js/rollcall.js')
             .then('js/sail.js/deps/jquery.dataTables.js')
             .then('js/wallcology.js')
+			// loading sleepy mongoose jQuery plugin (for now we don't do it)
+			//.then('js/sail.js/deps/jquery-sleepy-mongoose-0.0.2.js')
             .thenRun(function() { 
                 return Sail.init(WallCology) 
             })
@@ -70,7 +72,7 @@
 					<div id="inner-habitat-menu-page">	
 						<button type="button" id="describe-habitat-button" class="new-page-button"><b>I want to describe a HABITAT</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others observed</b></button>
+						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>
 			
@@ -255,15 +257,15 @@
 				</div>
 
 				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
-				<div id="habitat-aggregate-results"> 
-					<table id="aggregate-habitat-table">   
+ 				<div id="habitat-aggregate-results-test">
+ 					<table id="aggregate-habitat-table">   
 						<thead>
 							<tr> 
 								<th id="dynamic-column-aggregate-habitat"> </th>
 								<th> Author(s)</th>
 								<th> Last Updated</th>
 							</tr>                               
-						<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
+						<!-- TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids -->
 					   </thead>
 						<tbody> 
 							<script type="text/javascript">  
@@ -345,8 +347,7 @@
 		
 
 <!-- ************************************ ORGANISMS *********************************************  -->
-
-		
+                                  
 		
 		<div id="tabs-2">  
 			<div id="open-organism">
@@ -355,39 +356,40 @@
 					<div id="inner-organism-menu-page">	
 						<button type="button" id="describe-organism-button" class="new-page-button"><b>I want to describe an ORGANISM</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-organism-button" class="new-page-button"><b>I want to see what others  said</b></button>
+						<button type="button" id="what-others-said-organism-button" class="new-page-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>
 	
 				<div id="new-organism">
 					<div id="organism-page-image">
-						<img src="/resources/new_organism.png"/>   
-						<div class='section-title'> <b> Below are the fully formed organisms. Choose one to describe. </b> </div> 			  
+						<img src="/images/new_organism.png"/>   
+						<div class='section-title describe-title'> <b> Below are the fully formed organisms. Choose one to describe. </b></div> 			  
 					</div>         
 					<!-- This div contains the two tables of organisms where students can select from-->                                                                                                           
 					<div id="organism-tables">
+						<div class='section-title'> <b>Adult forms</b> </div>
 						<table id="organism-table">
 							<tr>
 								<td id="scum">
-									<img src="/images/icon_scum_small.png" /> 					
+									<img src="/images/icon_0007_scum.png" class="image"/> 					
 								</td>
 								<td id="fuzzy-mold"> 
-									<img src="/images/icon_mold_small.png" /> 						
+									<img src="/images/icon_0006_fuzzy-mold.png" class="image" /> 						
 								</td>					
 							</tr>
 					
 							<tr> 
-								<td id="blue-bug">    
-									<img src="/images/icon_blue_small.png" />						
+								<td id="blue-bug">
+									<img src="/images/icon_0000_blue-bug.png" class="image" />						
 								</td>
-								<td id="turtle">
-									<img src="/images/icon_turtle_small.png" />						
+								<td id="green-bug">
+									<img src="/images/icon_0008_green-bug.png" class="image" />						
 								</td>					
 							</tr> 
 					
 							<tr>
 								<td id="predator">
-									<img src="/images/icon_predator_small.png" />   					
+									<img src="/images/icon_0005_predator.png" class="image" />   					
 								</td>					
 							</tr>
 						</table>          
@@ -395,29 +397,29 @@
 					
 						<!-- Table for Juveniles -->
 				         
-						<div class='section-title'> <b>Juvenile Form</b> </div> 
+						<div class='section-title'> <b>Juvenile forms</b> </div> 
 						<table id="juvenile-organism-table"> 
 							<tr>
-						 		<td id="eggblue">
-									<img src="/images/icon_eggblue_small.png" />						
+						 		<td id="green-bug-stage-1">
+									<img src="/images/icon_0004_green-bug-stage-1.png" class="image" />						
 								</td>
-								<td id="tealegg"> 
-									<img src="/images/icon_tealegg_small.png" />
+								<td id="blue-bug-stage-1"> 
+									<img src="/images/icon_0001_blue-bug-stage-1.png" class="image" />
 								</td> 				
 							</tr>
 					 
 							<tr>
-						 		<td id="blue-bug-stage-1">
-									<img src="/images/icon_blue_bug_small.png" /> 						
+						 		<td id="blue-bug-stage-2">
+									<img src="/images/icon_0002_blue-bug-stage-2.png" class="image" /> 						
 								</td>
-								<td id="pupa"> 
-									<img src="/images/icon_pupa2_small.png" /> 	
+								<td id="blue-bug-stage-3"> 
+									<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 	
 								</td>   											
 							</tr>
 						  				
 							<tr>
 								<td id="predator-stage-1">
-									<img src="/images/icon_predator_small.png" />						
+									<img src="/images/icon_0011_predator-stage-1.png" class="image" />						
 								</td>
 							</tr>
 						</table>
@@ -429,50 +431,62 @@
 						<div> 
 							<div class='section-title'> <b> Morphology </b> (what it looks like) </div> 					
 							<div id="organism-morphology"> 
-								<textarea rows="3" cols="50"></textarea>							
+								<textarea rows="4" cols="70"></textarea>							
 							</div>
 				 		</div>
 				
 						<div>                                                                               
-							<div class='section-title'> <b> Behavior </b> (what it does) </div> 					
+							<div class='section-title'> <b> Behaviour </b> (what it does) </div> 					
 							<div id="organism-behavior">
-								<textarea rows="3" cols="50"></textarea>
+								<textarea rows="4" cols="70"></textarea>
 							</div>
 						</div>    
 				
 						<div> 
 							<div class='section-title'> <b> Habitat </b> (where they live) </div> 					
 							<div id="organism-habitat">
-								<textarea rows="3" cols="50"></textarea>
+								<textarea rows="4" cols="70"></textarea>
 							</div>
 						</div>     
 				
 						<div>        
 							<div class='section-title'> <b> Comments </b></div> 					
 							<div id="organism-comments">
-								<textarea rows="3" cols="50"></textarea>
+								<textarea rows="4" cols="70"></textarea>
 							</div>
 						</div>
 					</div>												
-				
-                
+					
 					<div id="organism-life-cycle-text" class='section-title'> <b> Life Cycle </b> (Tap on an organism image, then tap on the box to fill it in. Each adult organism will have either one, two or three juvenile forms.) </div>  
-				
+					<div class="divider"></div>
 					<div id="organism-evolution">
-						<span class='organism-blank-cell juvenile-only' value="null"></span>
-				
-						<div class="arrow"><img src="/resources/arrow.png"></div>
-				
-						<span class='organism-blank-cell juvenile-only' value="null"></span>
-				
-						<div class="arrow"><img src="/resources/arrow.png"></div>					 
-				
-						<span class='organism-blank-cell juvenile-only' value="null"></span>
-				   		   
-						<div class="arrow"><img src="/resources/arrow.png"></div>
-				
-						<span class='organism-blank-cell organism-only' value="null"></span> 
-					</div>
+						<table id="organism-evolution-table"> 
+							<tr>
+						 		<td>
+									<span class='organism-blank-cell juvenile-only' value="null"></span>						
+								</td>
+								<td> 
+									<img src="/images/arrow_relationships.png" class="arrow-image">
+								</td>
+								<td> 
+									<span class='organism-blank-cell juvenile-only' value="null"></span>
+								</td> 
+								<td> 
+									<img src="/images/arrow_relationships.png" class="arrow-image">
+								</td> 
+								<td> 
+									<span class='organism-blank-cell juvenile-only' value="null"></span>
+								</td> 
+								<td> 
+									<img src="/images/arrow_relationships.png" class="arrow-image">
+								</td>
+								<td> 
+									<span class='organism-blank-cell organism-only' value="null"></span>
+								</td> 
+								 			
+							</tr>
+						</table>
+					</div>				
 				      
 					<div id="organism-action-buttons">
 						<button class="back-button">BACK</button>
@@ -481,9 +495,9 @@
 				</div>
 			
 			 
-				<!-- What others said about organisms page -->
+				<!-- What others said about organisms page. V helpful comment :)-->
 				<div id="what-others-said-about-organisms">
-				
+					<br/>
 			    	<div class="organism-page-heading"><h2>What others said about ORGANISMS</h2></div> 
 			    	<div id="aggregate-organism-filters">
 						<h4>Pick from the two sets of criteria to show community results:</h4>
@@ -492,34 +506,35 @@
 							<table>
 								<tr>
 									<td value="scum">
-										<img src="/images/icon_scum_small.png">
+										<img src="/images/icon_0007_scum.png" class="image">
 									</td>
 								
 									<td value="mold">
-										<img src="/images/icon_mold_small.png">
+										<img src="/images/icon_0006_fuzzy-mold.png" class="image">
 									</td>                                      								
 								
 									<td value="blue">
-										<img src="/images/icon_blue_small.png">
+										<img src="/images/icon_0000_blue-bug.png" class="image">
 									</td>
 								    
 									<td value="turtle">
-										<img src="/images/icon_turtle_small.png">
+										<img src="/images/icon_0008_green-bug.png" class="image">
 									</td>
 								
 									<td value="predator">
-										<img src="/images/icon_predator_small.png">
+										<img src="/images/icon_0005_predator.png" class="image">
 									</td>								
 								</tr>
 							</table> 
 							<input id="chosen-organism-filter" type="hidden" value="null">
 						</div> 
 					
-						<div id="organism-comment-filters">
-							<table>
+ 						<div id="organism-comment-filters">	
+
+ 							<table>
 								<tr>
-									<td class='organism-comment-filter' value="Morphology">
-										Morphology
+								<td class='organism-comment-filter' value="Morphology">
+									Morphology
 								</td>
 								
 								<td class='organism-comment-filter' value="Behavior">
@@ -533,10 +548,11 @@
 								<td class='organism-comment-filter' value="Comments">
 									Comments
 								</td>       
-							</tr>
-						</table>    
-						<input id="chosen-organism-comment-filter" type="hidden" value="null">						
-					</div>  
+								</tr>
+							</table>    
+						<input id="chosen-organism-comment-filter" type="hidden" value="null">
+						</div>						
+
 					
 					<div id="organism-what-others-said-aggregate-table">
 						<h4> If you want to add a note to discussions, check off the notes that apply to it:</h4>
@@ -592,9 +608,9 @@
 				</div>
 			</div>
            
-		</div> 
+			</div> 
 		
-		
+		</div>
 		
 		
 		
@@ -742,55 +758,46 @@
 							</tr>
 						</table>
 					</div>
-					<br/><br/>
+					<br/>
 					
-<!-- 					<div id="relationships-results"> 
-						<table id="aggregate-relationships-table">   
+					<div id="view-relationships-table">
+						<table cellpadding="0" cellspacing="0" border="0" class="display" id="relationships-datatable">
 							<thead>
-								<tr> 
-									<th id="dynamic-column"> </th>
-									<th> Author(s)</th>
-									<th> Last Updated</th>
-								</tr>                               
-							TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids
-						   </thead>
-							<tbody> 
-								<script type="text/javascript">  
-									//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
-									dummyData = [
-										[
-											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-											"Beatrice S, Jeffery G",
-											"10/1/2011 2:34pm"
-										],
-										
-										[
-											"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-											"Louis B, Naomi C",
-											"10/1/2011 2:45pm"
-										],
-																			
-									];
-									for (i=0; i<= dummyData.length; i++) {
-										
-									}
-								</script>
 								<tr>
-									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
-									</td>
-									<td> Louis B, Naomi C </td>
-									<td> 10/1/2011 2:45 pm </td>
-								</tr> 							
-								<tr>
-									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Beatrice S, Jeffery G </td>
-									<td> 10/1/2011 2:34 pm </td>
+									<th>D</th>
+									<th>Description of Relationship</th>						
+									<th>Author(s)</th>
+									<th>Last Updated</th>
 								</tr>
+							</thead>
+							<tbody>						
+								<tr class="table-row">
+									<td></td>
+									<td class="r1c2"></td>
+									<td class="r1c3"></td>
+									<td class="r1c4"></td>
+								</tr>
+								<tr class="table-row">
+									<td></td>
+									<td class="r2c2"></td>
+									<td class="r2c3"></td>
+									<td class="r2c4"></td>
+								</tr>
+								<tr class="table-row">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								
 							</tbody>
-						</table>   					
-				    </div> -->
-					
+							<tfoot>
+								<tr>
+
+								</tr>							
+							</tfoot>
+						</table>
+					</div>
 									
 					<div id="action-buttons">
 						<button class="back-button">BACK</button>
@@ -912,7 +919,7 @@
 		</div>
 		
 
-	</div>    
+	</div>   
 
 
     <footer> 

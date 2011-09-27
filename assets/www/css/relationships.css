@@ -74,7 +74,7 @@ div#tabs {
 }
 
 #new-relationship .organism-box {
-	margin-top: 55px;
+	margin-top: 25px;
 	height: 102px;
 	width: 102px;
 	border: solid 1px white;
@@ -84,7 +84,6 @@ div#tabs {
 	display: inline-block;
 	vertical-align: baseline;
 }
-
 
 #new-relationship .selectable {
 	background-color: transparent;
@@ -112,7 +111,7 @@ div#tabs {
 
 #new-relationship .back-button {
 	margin-top: 30px;
-	margin-left: 10px;
+	margin-left: 15px;
 }
 
 #new-relationship .save-button {
