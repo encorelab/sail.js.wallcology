@@ -362,7 +362,8 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-filter').attr('value', 'null');
 				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
 				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
-			   
+			
+			
 				// We create a table with the second column being 500px
 				// TODO: we need to feed the data to the table to be inserted
 				oTableOrganism = $('#aggregate-organism-table').dataTable({
@@ -374,23 +375,15 @@ WallCology = {
 					
 					"bDestroy" : true,  
 					  				
-					"aoColumns": [ 
+					"aoColumns": [        
 						{ "sWidth": "500px" },
 						null,
 						null
-					],
-					
-					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
-						{
-							$(nRow).addClass('row_selected');
-						}
-						return nRow;
-					}
+					],  
 				 });
             })
 
-
+           
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
        			Sail.app.observations.newOrganismContent(); 
@@ -615,7 +608,8 @@ WallCology = {
 		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
 		$('#new-organism div#organism-descriptions textarea').val('');          
 		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
-		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
+		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
+		$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
 	},
 
 
