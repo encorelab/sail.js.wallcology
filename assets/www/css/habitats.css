@@ -1,7 +1,8 @@
-div#open-habitat {
+div#new-habitat {
 	margin-left: 20px;
 	height: 100%;
 }
+
 
 html{
 	height: 100%; 
@@ -73,11 +74,11 @@ div.habitat-page-heading {
 }
 
 div#new-habitat div.habitat-form-fields {
-	margin-bottom: 30px;	
+	margin-bottom: 22px;	
 }
 
 div#new-habitat .text-box {
-	height: 110px;
+	height: 90px;
 	width: 680px;
 	margin-top: -12px;
 }
@@ -131,7 +132,8 @@ table#aggregate-habitat-table td {
 
 
 div#what-others-said-habitat div.action-buttons {
-	width: 720px;               
+	margin-top: 35px;
+	width: 730px;               
 }
 
 div#what-others-said-habitat button.back-button {

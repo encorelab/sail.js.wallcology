@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
     $("div#new-organism table#organism-table tr td").click(function(event) {
                                                                                    
 		// Mark the chosen cell as selected to draw a border around the selected cell
@@ -18,4 +18,4 @@ $(function (){
 		$(this).parent().find("div.description-content").toggle()
 	}); 	
 });  
-    
+    */
