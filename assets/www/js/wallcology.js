@@ -522,29 +522,17 @@ WallCology = {
 
 			//$('#view-relationships .sun1')
 			
-			$('#view-relationships .sun1').click(function() {
-				// Trying to call the following URL
-				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={"type"%3A"relationship"}
-				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
-/*				criteria={"type"%3A"relationship"}
-				sort={"energy_transfer.to":1}*/
-				//$.get("/mongoose/wallcology/observations/_find", { batch_size: 100, criteria:{"type":"relationship"} },
-				
-				// The following get call counts all elements in observation
-				// TODO: add arguments that just count what I need
-  				//$.get("/mongoose/wallcology/observations/_count?criteria=%7B%22type%22%3A%22relationship%22%7D",
-				//http://proto.encorelab.org/mongoose/wallcology/observations/_count?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
-				//$.get("/mongoose/wallcology/observations/_count?criteria%3D%7B%22type%22%253A%22relationship%22%2C%20%22energy_transfer.from%22%253A%22blue-bug%22%2C%20%22energy_transfer.to%22%253A%22green-bug%22%7D",
-				
-				// "type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"
-				$.get("/mongoose/wallcology/observations/_count?criteria%3D%7B%22type%22%253A%22relationship%22%2C%20%22energy_transfer.from%22%253A%22sun%22%2C%20%22energy_transfer.to%22%253A%22scum%22%7D",
+			$('#view-relationships .save-button').click(function() {
+				// The following get call counts observations with the following criteria=
+				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
+				$.get("/mongoose/wallcology/observations/_count", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"}) },
 				  function(data) {
 					var resultArray
 				    if (data.ok === 1) {
 						console.log("Mongoose returned a data set")
 						console.log("There are " + data.count + " relationships with energy transfer from sun to scum")
 	
-						// now I want to put the value into the HTML
+						// writing the count value into the HTML
 						$('#view-relationships .sun1').html(data.count)
 												
 						return true
@@ -554,10 +542,26 @@ WallCology = {
 						return false
 					}
 				  }, "json")
+				
+				// The following get call counts observations with the following criteria=
+				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
+				$.get("/mongoose/wallcology/observations/_count", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"fuzzy-mold"}) },
+				  function(data) {
+					var resultArray
+				    if (data.ok === 1) {
+						console.log("Mongoose returned a data set")
+						console.log("There are " + data.count + " relationships with energy transfer from sun to scum")
 
-				//observations.find({}, function(data) {
-					//alert("Mongo data: " +data)
-				//})
+						// writing the count value into the HTML
+						$('#view-relationships .sun2').html(data.count)
+
+						return true
+					}
+					else {
+						console.log("Mongoose request failed")
+						return false
+					}
+				  }, "json")
 			})
             
 					
