@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -64,10 +64,8 @@ WallCology = {
             $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
-            
-            $('.reload-button').click(function(){
-            	location.reload()
-            })
+           
+
 
 //**********HABITAT*************************************************************************************************
             $('#landing-habitat .new-button').click(function(){
@@ -488,7 +486,9 @@ WallCology = {
             $('#landing-relationships .view-button').click(function(){
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
+            	
             })
+           $('#landing-relationships .view-button').click(Sail.app.observations.generateRelationshipsDT)
             
 //**********NEW RELATIONSHIP***********************************************************************************          
 
@@ -560,34 +560,11 @@ WallCology = {
 				//})
 			})
             
-			
-			//work in progress... don't touch!
-			//why doesn't criteria work?
-			//do I need to use an array?
-			
-			$('#view-relationships .view-relationships-title').click(function() {
-				$.get("/mongoose/wallcology/observations/_find", { batch_size: 5, criteria:{"type":"relationship"} },
-					function(data) {
-						var resultArray2
-				    	if (data.ok === 1) {
-				    		resultArray2 = data.results
-				    		
-							$('#relationships-datatable').dataTable({
-								"aaData": [
-								           ["D", resultArray2[0].type, resultArray2[0].type, "TBD"],
-								           ["D", resultArray2[1].type, resultArray2[1].type, "TBD"],
-								           ["D", resultArray2[2].type, resultArray2[2].type, "TBD"]							           
-								           ]
-							});
-				    	}
-				    	else {
-							console.log("Mongoose request failed")
-							return false
-						}
-					}, "json")
-			})
-
 					
+			$('#view-relationships .view-relationships-title').click(function() {
+				
+			})
+				
             
             
 //**********COUNTS******************************************************************************************			
@@ -602,22 +579,58 @@ WallCology = {
 
 // ******************************************   HELPER FUNCTIONS *************************************************
 
-	clearNewOrganismPage: function () {
-		$('#new-organism table#organism-table td').css('border', 'none');
-		$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
-		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
-		$('#new-organism div#organism-descriptions textarea').val('');          
-		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
-		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
-		$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
-	},
+		clearNewOrganismPage: function () {
+			$('#new-organism table#organism-table td').css('border', 'none');
+			$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
+			$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
+			$('#new-organism div#organism-descriptions textarea').val('');          
+			$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
+			$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
+			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
+		},
 
+		//Data table population functions
+		generateRelationshipsDT: function() {
+			// _find?criteria[type]=relationship
+			// _find?criteria={type:relationship}
+			//$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"} },
+			//  $.get("mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22}",
+			//$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
 
+			//skip: 10,
+			
+/*			var xRel
+			for (xRel=0;xRel<5;xRel++) {
+				"aaDate": ["D", data.results[0].comments, data.results[0].origin, data.results[0].timestamp],
+			}
+			"aaData": [ data.results.map(function(result){ return ["D", result.comments, result.origin, result.timestamp] }) ]
+*/
+
+			$.get("/mongoose/wallcology/observations/_find", { batch_size: 5, limit: 5, criteria: JSON.stringify({"type":"relationship"}) },
+				function(data) {
+			    	if (data.ok === 1) {			    		
+						$('#relationships-datatable').dataTable({
+							"bLengthChange": false,
+							"aaData": [
+							           ["D", data.results[0].comments, data.results[0].origin, data.results[0].timestamp],
+							           ["D", data.results[1].comments, data.results[1].origin, data.results[1].timestamp],
+							           ["D", data.results[2].comments, data.results[2].origin, data.results[2].timestamp],
+							           ["D", data.results[3].comments, data.results[3].origin, data.results[3].timestamp],
+							           ["D", data.results[4].comments, data.results[4].origin, data.results[4].timestamp]
+							           ]
+
+						});
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},
 
 
 
 // ***************************************************************************************************************
-
 
     	
         newHabitatContent: function() {
