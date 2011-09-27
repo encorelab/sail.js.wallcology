@@ -585,10 +585,13 @@ WallCology = {
 					}) // end of ajax
 				}) // end of each	
 			})
-            
-					
-			$('#view-relationships .view-relationships-title').click(function() {
-				
+
+			//row selector for dataTables
+			$('#relationships-datatable tr').live('click', function() {
+				if ( $(this).hasClass('row_selected') )
+					$(this).removeClass('row_selected')
+				else
+					$(this).addClass('row_selected')
 			})
 				
             
@@ -615,37 +618,34 @@ WallCology = {
 			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
 		},
 
+		dateString: function(d) {
+			 function pad(n){return n<10 ? '0'+n : n}
+			 return d.getFullYear()+'-'
+			      + pad(d.getMonth()+1)+'-'
+			      + pad(d.getDate())+' '
+			      + pad(d.getHours())+':'
+			      + pad(d.getMinutes())+':'
+			      + pad(d.getSeconds())
+		},
+		
 		//Data table population functions
 		generateRelationshipsDT: function() {
-			// _find?criteria[type]=relationship
-			// _find?criteria={type:relationship}
-			//$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"} },
-			//  $.get("mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22}",
-			//$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
-
-			//skip: 10,
-			
-/*			var xRel
-			for (xRel=0;xRel<5;xRel++) {
-				"aaDate": ["D", data.results[0].comments, data.results[0].origin, data.results[0].timestamp],
-			}
-			"aaData": [ data.results.map(function(result){ return ["D", result.comments, result.origin, result.timestamp] }) ]
-*/
-
-			$.get("/mongoose/wallcology/observations/_find", { batch_size: 5, limit: 5, criteria: JSON.stringify({"type":"relationship"}) },
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
 				function(data) {
+					relationshipResultsArray = []
+					for (i=0;i<data.results.length;i++) {
+						var d = new Date(data.results[i].timestamp)
+						relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+					}
+
 			    	if (data.ok === 1) {			    		
 						$('#relationships-datatable').dataTable({
+							"iDisplayLength": 6,
 							"bLengthChange": false,
-							"aaData": [
-							           ["D", data.results[0].comments, data.results[0].origin, data.results[0].timestamp],
-							           ["D", data.results[1].comments, data.results[1].origin, data.results[1].timestamp],
-							           ["D", data.results[2].comments, data.results[2].origin, data.results[2].timestamp],
-							           ["D", data.results[3].comments, data.results[3].origin, data.results[3].timestamp],
-							           ["D", data.results[4].comments, data.results[4].origin, data.results[4].timestamp]
-							           ]
+							"bDestroy" : true,
 
-						});
+							"aaData": relationshipResultsArray	
+						})
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
@@ -654,6 +654,18 @@ WallCology = {
 			}, "json")
 		},
 
+
+		//(new Date(data.results[i].timestamp)).dateString()
+		// _find?criteria[type]=relationship
+		// _find?criteria={type:relationship}
+		//$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"} },
+		//  $.get("mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22}",
+		//$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
+
+		//skip: 10,
+		
+		
+		//"aaData": [ data.results.map(function(result){ return ["D", result.comments, result.origin, result.timestamp] }) ]
 
 
 // ***************************************************************************************************************
