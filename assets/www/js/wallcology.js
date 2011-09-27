@@ -525,7 +525,7 @@ WallCology = {
 			$('#view-relationships .save-button').click(function() {
 				// The following get call counts observations with the following criteria=
 				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
-				$.get("/mongoose/wallcology/observations/_count", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"}) },
+				/*$.get("/mongoose/wallcology/observations/_count", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"}) },
 				  function(data) {
 					var resultArray
 				    if (data.ok === 1) {
@@ -542,7 +542,7 @@ WallCology = {
 						return false
 					}
 				  }, "json")
-				
+				*/
 				// do a sleepy mongoose GET call for each display-box item
 				/*$('.display-box').each(function() {
 
@@ -559,30 +559,31 @@ WallCology = {
 				
 				// The following get call counts observations with the following criteria=
 				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
-				
-				$.ajax({
-					type: "GET",
-					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"fuzzy-mold"}) },
-					context: $(this),
-				  	success: function(data) {
-						var resultArray
-					    if (data.ok === 1) {
-							console.log("Mongoose returned a data set")
-		//					console.log("There are " + data.count + " relationships with energy transfer from " +relationshipsArray[i][0] +" to " +relationshipsArray[i][1])
+				$('.data-box').each(function () {
+					//alert($(this).data('from'))
+					$.ajax({
+						type: "GET",
+						url: "/mongoose/wallcology/observations/_count",
+						data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+						context: $(this),
+					  	success: function(data) {
+							var resultArray
+						    if (data.ok === 1) {
+								console.log("Mongoose returned a data set")
+								console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
 
-							// writing the count value into the HTML
-							$('#view-relationships .sun2').html(data.count)
+								// writing the count value into the HTML
+								$(this).html(data.count)
 
-							return true
+								return true
+							}
+							else {
+								console.log("Mongoose request failed")
+								return false
+							}
 						}
-						else {
-							console.log("Mongoose request failed")
-							return false
-						}
-					}
-				})
-				
+					}) // end of ajax
+				}) // end of each	
 			})
             
 					
