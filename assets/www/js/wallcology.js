@@ -603,7 +603,8 @@ WallCology = {
 		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
 		$('#new-organism div#organism-descriptions textarea').val('');          
 		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
-		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');
+		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
+		$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
 	},
 
 
