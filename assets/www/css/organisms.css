@@ -10,7 +10,7 @@ body {
 	height: 100%;
 }
            
-div#organism-menu-page {
+div#open-organism div#organism-menu-page {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
 	margin-right: auto;     
@@ -19,7 +19,13 @@ div#organism-menu-page {
 	_position: relative; 
 	overflow: hidden;    
 	margin-top: 160px;
-}   
+}     
+
+div#open-organism .organism-button{
+	background: url('');
+	background-color: #669933;
+	border: 1px solid #669933;	
+}
 
 div#inner-organism-menu-page {
 	_position: absolute; 
@@ -136,15 +142,25 @@ div#new-organism div#organism-action-buttons {
 	float: left;
 }   
 
-div#new-organism button.back-button {
+div#new-organism div#organism-action-buttons button.back-button {
 	width: 100px;
-	margin-left: 20px;
+	margin-left: 20px;       
 }
 
-div#new-organism button.save-button {
+div#new-organism div#organism-action-buttons button.save-button {
 	width: 100px;
-	margin-left: 465px;       
-}                                                             
+	margin-left: 465px;     
+}  
+
+div#open-organism div#organism-what-others-said-action-buttons button.back-button {
+	width: 100px;
+	margin-left: 20px;       
+}
+
+div#open-organism div#organism-what-others-said-action-buttons button.add-to-discussion-button {
+	width: 200px;
+} 
+                                         
 
 div.organism-page-heading {
 	color: #0CA958;
@@ -160,7 +176,7 @@ div#open-organism div#what-others-said-about-organisms div#organism-filters {
 div#open-organism div#what-others-said-about-organisms div#organism-comment-filters {
 	margin-left: auto;
 	margin-right: auto;
-	width: 65%;        
+	width: 55%;        
 }     
 
 

@@ -8,6 +8,12 @@
 	background-image:url('/images/bkgd_relationship.png');  
 	background-repeat: no-repeat;
 	height: 1200px;
+}                 
+
+div#tabs-3 div#relationships .relationship-button {
+	background: url('');
+	background-color: #F2690F;
+	border: 1px solid #F2690F;
 }
 
 #relationships .standard-button {
