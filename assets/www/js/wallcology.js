@@ -117,11 +117,22 @@ WallCology = {
 				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
 				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
 				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
-				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
+				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);
+				Sail.app.observations.generateHabitatsDT()	//creates and populates the data table... but only with type:habitat
+				//next step is to pass arguments through so create the table with specific criteria (ie Habitat 1)
+				//something like:
+				//selectedHabitat = $('input:radio[name=habitat-filter-set]:checked').val()
+				//selectedType = $('input:radio[name=note-filter-set]:checked').val()
+				//Sail.app.observations.generateHabitatsDT(selectedHabitat, selectedType)
+				
+				//habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+				
+			})
 				           
 				// We create a table with the second column being 500px
 				// TODO: we need to feed the data to the table to be inserted
-				oTable = $('#aggregate-habitat-table').dataTable({
+				 
+/*				oTable = $('#aggregate-habitat-table').dataTable({
 					"bAutoWidth": false,  
 
 					"bJQueryUI" : true,					
@@ -143,11 +154,25 @@ WallCology = {
 						return nRow;
 					}
 				 });
-            })  
+              
 
-
+				oTableOrganism = $('#aggregate-organism-table').dataTable({
+					"bAutoWidth": false, 
+					
+					"bJQueryUI" : true,    
+					
+					"sPaginationType": "full_numbers",                          
+					
+					"bDestroy" : true,  
+					  				
+					"aoColumns": [        
+						{ "sWidth": "500px" },
+						null,
+						null
+					],  
+				 });
 			// We need to handle the clicking of the table rows
-			/* Click event handler */
+			 Click event handler 
 			$('#aggregate-habitat-table tbody tr').live('click', function () {
 				var aData = oTable.fnGetData( this );
 				var iId = aData[0];
@@ -164,78 +189,7 @@ WallCology = {
 				}
 
 				$(this).toggleClass('row_selected');
-			} );
-            
-
-/* 			$.get("/mongoose/foo/bar/_find", 
-			  function(data) {
-				var resultArray
-			    if (data.ok === 1) {
-					console.log("Mongoose returned a data set")
-					
-					resultArray = data.results
-					// TODO: loop over result and use it to change content of table
-					for (var i = 0; i<resultArray.size(); i++) {
-						resultArray[i]
-					}
-					
-					return true
-				}
-				else {
-					console.log("Mongoose request failed")
-					return false
-				}
-			  }, "json")
-*/			
-			$('#table_id').dataTable()
-            
-/*            $('#open-habitat .habitat-table').dataTable({
-					"aaData": [
-						[ "Trident", "Internet Explorer 4.0", "Win 95+", 4, "X" ],
-						[ "Trident", "Internet Explorer 5.0", "Win 95+", 5, "C" ],
-						[ "Trident", "Internet Explorer 5.5", "Win 95+", 5.5, "A" ],
-						[ "Trident", "Internet Explorer 6.0", "Win 98+", 6, "A" ],
-						[ "Trident", "Internet Explorer 7.0", "Win XP SP2+", 7, "A" ],
-						[ "Gecko", "Firefox 1.5", "Win 98+ / OSX.2+", 1.8, "A" ],
-						[ "Gecko", "Firefox 2", "Win 98+ / OSX.2+", 1.8, "A" ],
-						[ "Gecko", "Firefox 3", "Win 2k+ / OSX.3+", 1.9, "A" ],
-						[ "Webkit", "Safari 1.2", "OSX.3", 125.5, "A" ],
-						[ "Webkit", "Safari 1.3", "OSX.3", 312.8, "A" ],
-						[ "Webkit", "Safari 2.0", "OSX.4+", 419.3, "A" ],
-						[ "Webkit", "Safari 3.0", "OSX.4+", 522.1, "A" ]
-					],
-					"aoColumns": [
-						{ "sTitle": "Engine" },
-						{ "sTitle": "Browser" },
-						{ "sTitle": "Platform" },
-						{ "sTitle": "Version", "sClass": "center" },
-						{
-							"sTitle": "Grade",
-							"sClass": "center",
-							"fnRender": function(obj) {
-								var sReturn = obj.aData[ obj.iDataColumn ];
-								if ( sReturn == "A" ) {
-									sReturn = "<b>A</b>";
-								}
-								return sReturn;
-							}
-						}
-					]
-			} )
-*/          
-			
-			//these aren't working, correctly... TODO
-/*            $(".select-habitat input[type='radio']").click(function(){
-            	console.log("radio1")
-            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
-            	//do your database queries here
-            })
-
-            $(".select-criteria input[type='radio']").click(function(){
-            	console.log("radio2")
-            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
-            	//do your database queries here
-            })*/
+			} );*/
 
             
 //**********ADD TO DISCUSSION HABITAT*****************************************************************************************
@@ -260,8 +214,7 @@ WallCology = {
 		            $(inContainer || 'body').append(picker)
 
     	            })
-            })
-            
+            })          
             
             $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
 			$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
@@ -365,6 +318,8 @@ WallCology = {
 				// We create a table with the second column being 500px
 				// TODO: we need to feed the data to the table to be inserted
 				oTableOrganism = $('#aggregate-organism-table').dataTable({
+					"iDisplayLength": 10,
+					"bLengthChange": false,
 					"bAutoWidth": false, 
 					
 					"bJQueryUI" : true,    
@@ -380,6 +335,8 @@ WallCology = {
 					],  
 				 });
             })
+
+            
 
            
                           	
@@ -407,8 +364,7 @@ WallCology = {
 				$('div#tabs-2 table#juvenile-organism-table td').css('border', 'none');
 				$(this).css('border', '1px solid black');
 				$('div#tabs-2 input#selected-juvenile').attr('value', this.id);
-			})
-			
+			})			
 			
 			// if an organism is selected
 			$('div#tabs-2 div#organism-evolution span.organism-only').click (function(){
@@ -486,9 +442,8 @@ WallCology = {
             $('#landing-relationships .view-button').click(function(){
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	
+            	Sail.app.observations.generateRelationshipsDT()
             })
-           $('#landing-relationships .view-button').click(Sail.app.observations.generateRelationshipsDT)
             
 //**********NEW RELATIONSHIP***********************************************************************************          
 
@@ -607,20 +562,63 @@ WallCology = {
 		},
 		
 		//Data table population functions
+		generateHabitatsDT: function(h, t) {
+			
+			//do some shit with h and t
+			
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"habitat"}) },
+				function(data) {
+					habitatResultsArray = []
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+					}
+
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-habitat-table').dataTable({
+							"bAutoWidth": false,
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+
+							"aaData": habitatResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},
+		
 		generateRelationshipsDT: function() {
 			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
 				function(data) {
 					relationshipResultsArray = []
 					for (i=0;i<data.results.length;i++) {
-						var d = new Date(data.results[i].timestamp)
+						d = new Date(data.results[i].timestamp)
 						relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
 					}
 
 			    	if (data.ok === 1) {			    		
 						$('#relationships-datatable').dataTable({
-							"iDisplayLength": 6,
+							"iDisplayLength": 5,
 							"bLengthChange": false,
-							"bDestroy" : true,
+							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
 
 							"aaData": relationshipResultsArray	
 						})

@@ -74,116 +74,7 @@
 						<br/><br/>
 						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others said</b></button>
 					</div>
-				</div>
-			
-			
-			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin
-					This can be deleted, as far as I know-->	
-		    <div id="temporarily-hidden" style="display:none">
-				<h4>HABITAT</h4>
-				            			
-				<p>Pick from the two sets of criteria below to show community results:</p>
-				            
-				<!-- TODO: Fix theming on al radio buttons as per http://jqueryui.com/demos/button/#radio -->
-   				<form>
-					<div class="select-habitat">
-						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
-						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
-						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
-						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
-					</div>
-				</form>
-				<br/>			
- 				<form>
-					<div class="select-criteria">
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="organisms">Organisms</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="environmental-conditions">Environmental Conditions</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="structural-features">Structural Features</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="comments">Comments</label>
-					</div>
-				</form>
-				<br/>		
- 			
-  				<div class="data-table">
-<!-- TODO: Table should be filled by call to sleepy mongoose to retrieve data, e.g. http://proto.encorelab.org:27080/foo/bar/_find-->
-					<table cellpadding="0" cellspacing="0" border="0" class="display" id="table_id">
-						<thead>
-							<tr>
-								<th>Column 1</th>
-								<th>Column 2</th>
-								<th>etc</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Row 1 Data 1</td>
-								<td>Row 1 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Row 2 Data 1</td>
-								<td>Row 2 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Hello</td>
-								<td>World</td>
-								<td>22</td>
-							</tr>
-							<tr>
-								<td>Row 4 Data 1</td>
-								<td>Row 4 Data 2</td>
-								<td>22</td>
-							</tr>
-							<tr>
-								<td>Row 5 Data 1</td>
-								<td>Row 5 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Row 6 Data 1</td>
-								<td>Row 6 Data 2</td>
-								<td>9</td>
-							</tr>
-							<tr>
-								<td>Row 7 Data 1</td>
-								<td>Row 7 Data 2</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Row 8 Data 1</td>
-								<td>Row 8 Data 2</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>Row 9 Data 1</td>
-								<td>Row 9 Data 2</td>
-								<td>4</td>
-							</tr>
-							<tr>
-								<td>Row 10 Data 1</td>
-								<td>Row 10 Data 2</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>Row 11 Data 1</td>
-								<td>Row 11 Data 2</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>Row 12 Data 1</td>
-								<td>Row 12 Data 2</td>
-								<td>1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div> 
-				
-			
-				Or add a new habitat page:
-				<button class="new-page-button">ADD NEW HABITAT PAGE</button> 
- 			 </div>
-			
+				</div>			
 			</div>
 				
 		
@@ -256,65 +147,17 @@
 					</div>
 				</div>
 
-				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
+				<div> <h4>If you want to add a note to discussions, select the entries you want added to it: </h4></div>
  				<div id="habitat-aggregate-results-test">
  					<table id="aggregate-habitat-table">   
 						<thead>
 							<tr> 
-								<th id="dynamic-column-aggregate-habitat"> </th>
+								<th id="dynamic-column-aggregate-habitat">test </th>
 								<th> Author(s)</th>
 								<th> Last Updated</th>
 							</tr>                               
-						<!-- TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids -->
 					   </thead>
-						<tbody> 
-							<script type="text/javascript">  
-								//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
-								dummyData = [
-									[
-										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-										"Beatrice S, Jeffery G",
-										"10/1/2011 2:34pm"
-									],
-									
-									[
-										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-										"Louis B, Naomi C",
-										"10/1/2011 2:45pm"
-									],
-																		
-								];
-								for (i=0; i<= dummyData.length; i++) {
-									
-								}
-							</script>
-							<tr>
-								<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
-								</td>
-								<td> Louis B, Naomi C </td>
-								<td> 10/1/2011 2:45 pm </td>
-							</tr> 
-							
-							<tr>
-								<td> lorm lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Ali B, Sally T </td>
-								<td> 10/1/2011 12:34 pm </td>
-							</tr>
-							
-							<tr>
-								<td> looooo loooo orem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Jelly F, Kelly M </td>
-								<td> 10/1/2011 18:34 pm </td>
-							</tr>
-							
-							<tr>
-								<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Beatrice S, Jeffery G </td>
-								<td> 10/1/2011 2:34 pm </td>
-							</tr>
+						<tbody>
 						</tbody>
 					</table>   					
 			    </div>
@@ -555,7 +398,7 @@
 
 					
 					<div id="organism-what-others-said-aggregate-table">
-						<h4> If you want to add a note to discussions, check off the notes that apply to it:</h4>
+						<h4> If you want to add a note to discussions, select the entries that apply to it:</h4>
 						
 						<table id="aggregate-organism-table">   
 							<thead>
@@ -677,8 +520,8 @@
 					</div>
 	                                                           				
 					<div id="action-buttons">
-						<button class="back-button">BACK</button>
-						<button class="save-button">SAVE</button>
+						<button class="back-button standard-button">BACK</button>
+						<button class="save-button standard-button">SAVE</button>
 					</div>
 				</div>
 	
@@ -775,8 +618,8 @@
 					</div>
 									
 					<div id="action-buttons">
-						<button class="back-button">BACK</button>
-						<button class="save-button">Refresh</button>
+						<button class="back-button standard-button">BACK</button>
+						<button class="save-button standard-button">Refresh</button>
 					</div>
 				</div>
 				
