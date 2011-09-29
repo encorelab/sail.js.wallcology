@@ -9,7 +9,7 @@ require 'sail/agent'
 class Archivist < Sail::Agent
   def behaviour
     when_ready do
-      @mongo = Mongo::Connection.new.db('wallcology')
+      @mongo = Mongo::Connection.new.db(config[:database])
       
       pres = Blather::Stanza::Presence::Status.new
       pres.to = agent_jid_in_room
