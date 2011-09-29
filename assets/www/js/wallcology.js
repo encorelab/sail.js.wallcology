@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab
+            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -118,15 +118,13 @@ WallCology = {
 				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
 				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
 				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);
-				//Sail.app.observations.generateHabitatsDT()	//creates and populates the data table with type:habitat
-				//next step is to pass arguments through so create the table with specific criteria (ie Habitat 1)
-				//something like:
-				//selectedHabitat = $('input:radio[name=habitat-filter-set]:checked').val()
-				//selectedType = $('input:radio[name=note-filter-set]:checked').val()
-				//Sail.app.observations.generateHabitatsDT(selectedHabitat, selectedType)
+
+				// TODO These below aren't working yet
+				$('input:radio[name="habitat-filter-set"]').filter('[value="1"]').attr('checked', true);
+				$('input:radio[name="note-filter-set"]').filter('[value="organisms"]').attr('checked', true);
 				
-				//habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-				
+				// populate the datatable with default values 
+				Sail.app.observations.generateHabitatsDT({habitat: "1", note: "organism"})
 			})
 				           
 				// We create a table with the second column being 500px
@@ -224,19 +222,7 @@ WallCology = {
             	$('#open-habitat').show()
             })
             
-            
-////////////AUTHOR SELECT POPUP///////////////////////////////////////////////////////////////
-            
-//            Sail.app.rollcall.fetchAllUsers(function(data) {
-//            $(data).each(function() {
-//                u = this['user']
-//                li = $("<li id='user-"+u.account.login+"'>"+u.account.login+"</li> ")
-//                li.data('account', u.account)
-//                li.click(function() { Rollcall.Authenticator.pickLogin($(this).data('account')) })
-//                picker.children(".users").append(li)
-//            })
-//            
-//            $(inContainer || 'body').append(picker)
+
 
             
 			$('#what-others-said-habitat .back-button').click(function(){
@@ -282,10 +268,6 @@ WallCology = {
 				}				
 			})                      
 			
-			// Actions that need to be taken when filters in the Habitat's aggregate view are clicked
-			$("div#aggregate-habitat-filters input").click(function() { 
-
-			})
 
 
 			// Selected filters in the Aggregate view for Habitats page
@@ -296,13 +278,15 @@ WallCology = {
 			
 
 			$("input[name=habitat-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice})
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, type: typeChoice})
 			})
 			
 			$("input[name=note-filter-set]").click(function() {
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
-				Sail.app.observations.generateHabitatsDT({type: typeChoice})
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, type: typeChoice})
 			})
 
 
@@ -567,21 +551,31 @@ WallCology = {
 		
 		//Data table population functions
 		// Example criteria:
-		//   { habitat: '1', type: 'habitat' }
+		//   { habitat: '1', note: 'organism' }
 		generateHabitatsDT: function(criteria) {
-			criteria = criteria || {}
-			
+			//criteria = criteria || {}
+			//Still one bug remaining - when no wallscope is selected, the note types don't change when filters are clicked
 			$.ajax({
+				type: "GET",
 				url: '/mongoose/wallcology/observations/_find',
-				data: { criteria: JSON.stringify(criteria) },
+				data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: 200 },
 				context: criteria,
 				success: function(data) {
-					//this
 					habitatResultsArray = []
-					if (!this.type) {
-						for (i=0;i<data.results.length;i++) {
-							d = new Date(data.results[i].timestamp)
-							habitatResultsArray[i] = [(data.results[i][this.type]), data.results[i].origin, Sail.app.observations.dateString(d)]
+
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						if (this.note == "comments") {
+							habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else if (this.note == "structural_features") {
+							habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else if (this.note == "environmental_conditions") {
+							habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else {
+							habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
 						}
 					}
 			    	if (data.ok === 1) {			    		
@@ -644,7 +638,7 @@ WallCology = {
 		},*/
 		
 		generateRelationshipsDT: function() {
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 100 },
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 200 },
 				function(data) {
 					relationshipResultsArray = []
 					for (i=0;i<data.results.length;i++) {
