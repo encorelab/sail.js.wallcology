@@ -455,6 +455,8 @@ WallCology = {
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
+				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
+				Sail.app.observations.fillRelationshipsTable()
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
             	Sail.app.observations.generateRelationshipsDT()
@@ -489,72 +491,6 @@ WallCology = {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
-
-			//$('#view-relationships .sun1')
-			
-			$('#view-relationships .save-button').click(function() {
-				// The following get call counts observations with the following criteria=
-				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
-				/*$.get("/mongoose/wallcology/observations/_count", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"}) },
-				  function(data) {
-					var resultArray
-				    if (data.ok === 1) {
-						console.log("Mongoose returned a data set")
-						console.log("There are " + data.count + " relationships with energy transfer from sun to scum")
-	
-						// writing the count value into the HTML
-						$('#view-relationships .sun1').html(data.count)
-												
-						return true
-					}
-					else {
-						console.log("Mongoose request failed")
-						return false
-					}
-				  }, "json")
-				*/
-				// do a sleepy mongoose GET call for each display-box item
-				/*$('.display-box').each(function() {
-
-				   $.ajax({
-				       url: "lasjklfkjaslkfd",
-				       params: { alskdjflksdjf }
-				       context: this,
-				       success: function() {
-				               x = $(this).data('x')
-				              y = $(this).data('y')
-				      })
-				})*/
-				
-				
-				// The following get call counts observations with the following criteria=
-				// {"type"%3A"relationship", "energy_transfer.from"%3A"sun", "energy_transfer.to"%3A"scum"}
-				$('.data-box').each(function () {
-					//alert($(this).data('from'))
-					$.ajax({
-						type: "GET",
-						url: "/mongoose/wallcology/observations/_count",
-						data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
-						context: $(this),
-					  	success: function(data) {
-							var resultArray
-						    if (data.ok === 1) {
-								console.log("Mongoose returned a data set")
-								console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
-
-								// writing the count value into the HTML
-								$(this).html(data.count)
-
-								return true
-							}
-							else {
-								console.log("Mongoose request failed")
-								return false
-							}
-						}
-					}) // end of ajax
-				}) // end of each	
-			})
 
 			//row selector for dataTables
 			$('#relationships-datatable tr').live('click', function() {
@@ -598,9 +534,36 @@ WallCology = {
 			      + pad(d.getSeconds())
 		},
 		
-		
-		
-		//NEED TO QUERY RUN!!!!
+		// function that retrieves counts for each relationship via sleepy mongoose GET calls
+		fillRelationshipsTable: function() {
+			// do this for each table field that has the class .data-box
+			$('.data-box').each(function () {
+				// ajax GET call to sleepy mongoose
+				$.ajax({
+					type: "GET",
+					url: "/mongoose/wallcology/observations/_count",
+					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
+					context: $(this),
+				  	success: function(data) {
+						var resultArray
+					    if (data.ok === 1) {
+							console.log("Mongoose returned a data set")
+							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
+
+							// writing the count value into the HTML
+							$(this).html(data.count)
+
+							return true
+						}
+						else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}
+				}) // end of ajax
+			}) // end of each
+		},
 		
 		//Data table population functions
 		// Example criteria:
@@ -681,7 +644,7 @@ WallCology = {
 		},*/
 		
 		generateRelationshipsDT: function() {
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 100 },
 				function(data) {
 					relationshipResultsArray = []
 					for (i=0;i<data.results.length;i++) {
