@@ -118,7 +118,7 @@ WallCology = {
 				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
 				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
 				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);
-				Sail.app.observations.generateHabitatsDT()	//creates and populates the data table... but only with type:habitat
+				//Sail.app.observations.generateHabitatsDT()	//creates and populates the data table with type:habitat
 				//next step is to pass arguments through so create the table with specific criteria (ie Habitat 1)
 				//something like:
 				//selectedHabitat = $('input:radio[name=habitat-filter-set]:checked').val()
@@ -244,11 +244,12 @@ WallCology = {
             	$('#open-habitat').show()
             })  
 
-        	 $('#add-to-discussions-habitat .back-button').click(function(){
+			$('#add-to-discussions-habitat .back-button').click(function(){
 				$('#add-to-discussions-habitat').hide()
 				$('#what-others-said-habitat').show()
-	         })   
+			})   
 	
+			//do we still need this TODO
 			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
 				// Check to see if all required filters/comments are selected
 				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
@@ -270,19 +271,20 @@ WallCology = {
 			// Send selected filters for the agents to pull them back
 			$("div#aggregate-habitat-filters input").click(function(){
 				totalFiltersSelected = $("div#aggregate-habitat-filters input").attr("checked");
-				// A filter from each category is selected so we can send them to the agents
+				// A filter from each category is selected so we can send them to the agents (TODO? Still need?)
 				if (totalFiltersSelected == 2){
 				   alert ('woohoo');
-				}                         				
+				}           
+				
+				// Set the table header for the dynamic column
+				if (this.name == "note-filter-set"){               
+					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
+				}				
 			})                      
 			
 			// Actions that need to be taken when filters in the Habitat's aggregate view are clicked
 			$("div#aggregate-habitat-filters input").click(function() { 
-						
-				// Set the table header for the dynamic column
-				if (this.name == "note-filter-set"){               
-					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
-				}
+
 			})
 
 
@@ -291,6 +293,19 @@ WallCology = {
 			// 				$('div#what-others-said-habitat button').removeClass('ui-state-active');
 			// 				$(this).addClass('ui-state-active');
 			// 			})
+			
+
+			$("input[name=habitat-filter-set]").click(function() {
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice})
+			})
+			
+			$("input[name=note-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({type: typeChoice})
+			})
+
+
 
 //**********ORGANISM****************************************************************************************    
 
@@ -583,25 +598,70 @@ WallCology = {
 			      + pad(d.getSeconds())
 		},
 		
+		
+		
+		//NEED TO QUERY RUN!!!!
+		
 		//Data table population functions
-		generateHabitatsDT: function(h, t) {
+		// Example criteria:
+		//   { habitat: '1', type: 'habitat' }
+		generateHabitatsDT: function(criteria) {
+			criteria = criteria || {}
 			
-			//do some shit with h and t
-			
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"habitat"}) },
-				function(data) {
+			$.ajax({
+				url: '/mongoose/wallcology/observations/_find',
+				data: { criteria: JSON.stringify(criteria) },
+				context: criteria,
+				success: function(data) {
+					//this
 					habitatResultsArray = []
-					for (i=0;i<data.results.length;i++) {
-						d = new Date(data.results[i].timestamp)
-						habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+					if (!this.type) {
+						for (i=0;i<data.results.length;i++) {
+							d = new Date(data.results[i].timestamp)
+							habitatResultsArray[i] = [(data.results[i][this.type]), data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
 					}
-
 			    	if (data.ok === 1) {			    		
 						$('#aggregate-habitat-table').dataTable({
 							"bAutoWidth": false,
 							"iDisplayLength": 10,
 							"bLengthChange": false,
-							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bDestroy" : true,
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+							"aaData": habitatResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+				}
+			})
+
+		},
+
+			
+/*			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"habitat"}) },
+				function(data) {
+					habitatResultsArray = []
+					if (t !== null && t !== undefined) {
+						for (i=0;i<data.results.length;i++) {
+							d = new Date(data.results[i].timestamp)
+							habitatResultsArray[i] = [(data.results[i][type]), data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+					}
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-habitat-table').dataTable({
+							"bAutoWidth": false,
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,
 							"bJQueryUI": true,
 							"sPaginationType": "full_numbers",
 							"aoColumns": [        
@@ -618,7 +678,7 @@ WallCology = {
 						return false
 					}
 			}, "json")
-		},
+		},*/
 		
 		generateRelationshipsDT: function() {
 			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },

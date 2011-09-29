@@ -1,7 +1,7 @@
 <!-- TODO
-- style jquery ui buttons to correct colors
+- finish the data tables
 - add .predator-reveal class, to be turned on (.show?) in week X
-- the css of view organisms needs to be finished
+- redo all the radio button colors (if we're going to do the filters in View Organisms...)
 - we need to start on Microworlds, particularly the graphing
  -->
 
@@ -133,17 +133,17 @@
 				<div id="aggregate-habitat-filters">
 					<h4>Pick from the two sets of criteria below to show community results:</h4>
 					<div id="aggregate-view-habitat-filter"> 
-						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" /><label for="habitat-filter-1">Habitat 1</label> 
-						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" /><label for="habitat-filter-2">Habitat 2</label> 
-						<input type="radio" id="habitat-filter-3" name="habitat-filter-set" /><label for="habitat-filter-3">Habitat 3</label>
-						<input type="radio" id="habitat-filter-4" name="habitat-filter-set" /><label for="habitat-filter-4">Habitat 4</label> 
+						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" value="1" /><label for="habitat-filter-1">Habitat 1</label> 
+						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" value="2"/><label for="habitat-filter-2">Habitat 2</label> 
+						<input type="radio" id="habitat-filter-3" name="habitat-filter-set" value="3" /><label for="habitat-filter-3">Habitat 3</label>
+						<input type="radio" id="habitat-filter-4" name="habitat-filter-set" value="4" /><label for="habitat-filter-4">Habitat 4</label> 
 					</div>
 
 					<div id="aggregate-view-note-type-filter">  						
-						<input type="radio" id="habitat-note-filter-1" name="note-filter-set" /><label for="habitat-note-filter-1">Organisms</label> 
-						<input type="radio" id="habitat-note-filter-2" name="note-filter-set" /><label for="habitat-note-filter-2">Environmental Conditions</label> 
-						<input type="radio" id="habitat-note-filter-3" name="note-filter-set" /><label for="habitat-note-filter-3">Structural Features</label>
-						<input type="radio" id="habitat-note-filter-4" name="note-filter-set" /><label for="habitat-note-filter-4">Comments</label>
+						<input type="radio" id="habitat-note-filter-1" name="note-filter-set" value="organisms" /><label for="habitat-note-filter-1">Organisms</label> 
+						<input type="radio" id="habitat-note-filter-2" name="note-filter-set" value="environmental_conditions" /><label for="habitat-note-filter-2">Environmental Conditions</label> 
+						<input type="radio" id="habitat-note-filter-3" name="note-filter-set" value="structural_features" /><label for="habitat-note-filter-3">Structural Features</label>
+						<input type="radio" id="habitat-note-filter-4" name="note-filter-set" value="comments" /><label for="habitat-note-filter-4">Comments</label>
 					</div>
 				</div>
 
@@ -350,8 +350,7 @@
 								<tr>
 									<td value="scum">
 										<img src="/images/icon_0007_scum.png" class="image">
-									</td>
-								
+									</td>								
 									<td value="mold">
 										<img src="/images/icon_0006_fuzzy-mold.png" class="image">
 									</td>                                      								
