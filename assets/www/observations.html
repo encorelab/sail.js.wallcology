@@ -1,7 +1,7 @@
 <!-- TODO
-- style jquery ui buttons to correct colors
+- finish the data tables
 - add .predator-reveal class, to be turned on (.show?) in week X
-- the css of view organisms needs to be finished
+- redo all the radio button colors (if we're going to do the filters in View Organisms...)
 - we need to start on Microworlds, particularly the graphing
  -->
 
@@ -74,116 +74,7 @@
 						<br/><br/>
 						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others said</b></button>
 					</div>
-				</div>
-			
-			
-			<!-- Temporarily hiding the form on the main page. We might have to move this to some other page. Ask Colin
-					This can be deleted, as far as I know-->	
-		    <div id="temporarily-hidden" style="display:none">
-				<h4>HABITAT</h4>
-				            			
-				<p>Pick from the two sets of criteria below to show community results:</p>
-				            
-				<!-- TODO: Fix theming on al radio buttons as per http://jqueryui.com/demos/button/#radio -->
-   				<form>
-					<div class="select-habitat">
-						<input type="radio" name="radio" value="1" /><label for="habitat-1">Habitat 1</label>
-						<input type="radio" name="radio" value="2" /><label for="habitat-2">Habitat 2</label>
-						<input type="radio" name="radio" value="3" /><label for="habitat-3">Habitat 3</label>
-						<input type="radio" name="radio" value="4" /><label for="habitat-4">Habitat 4</label>
-					</div>
-				</form>
-				<br/>			
- 				<form>
-					<div class="select-criteria">
-						<input type="radio" id="radio1" name="radio" value="1" /><label for="organisms">Organisms</label>
-						<input type="radio" id="radio2" name="radio" value="2" /><label for="environmental-conditions">Environmental Conditions</label>
-						<input type="radio" id="radio3" name="radio" value="3" /><label for="structural-features">Structural Features</label>
-						<input type="radio" id="radio4" name="radio" value="4" /><label for="comments">Comments</label>
-					</div>
-				</form>
-				<br/>		
- 			
-  				<div class="data-table">
-<!-- TODO: Table should be filled by call to sleepy mongoose to retrieve data, e.g. http://proto.encorelab.org:27080/foo/bar/_find-->
-					<table cellpadding="0" cellspacing="0" border="0" class="display" id="table_id">
-						<thead>
-							<tr>
-								<th>Column 1</th>
-								<th>Column 2</th>
-								<th>etc</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Row 1 Data 1</td>
-								<td>Row 1 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Row 2 Data 1</td>
-								<td>Row 2 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Hello</td>
-								<td>World</td>
-								<td>22</td>
-							</tr>
-							<tr>
-								<td>Row 4 Data 1</td>
-								<td>Row 4 Data 2</td>
-								<td>22</td>
-							</tr>
-							<tr>
-								<td>Row 5 Data 1</td>
-								<td>Row 5 Data 2</td>
-								<td>11</td>
-							</tr>
-							<tr>
-								<td>Row 6 Data 1</td>
-								<td>Row 6 Data 2</td>
-								<td>9</td>
-							</tr>
-							<tr>
-								<td>Row 7 Data 1</td>
-								<td>Row 7 Data 2</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Row 8 Data 1</td>
-								<td>Row 8 Data 2</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>Row 9 Data 1</td>
-								<td>Row 9 Data 2</td>
-								<td>4</td>
-							</tr>
-							<tr>
-								<td>Row 10 Data 1</td>
-								<td>Row 10 Data 2</td>
-								<td>0</td>
-							</tr>
-							<tr>
-								<td>Row 11 Data 1</td>
-								<td>Row 11 Data 2</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>Row 12 Data 1</td>
-								<td>Row 12 Data 2</td>
-								<td>1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div> 
-				
-			
-				Or add a new habitat page:
-				<button class="new-page-button">ADD NEW HABITAT PAGE</button> 
- 			 </div>
-			
+				</div>			
 			</div>
 				
 		
@@ -198,10 +89,10 @@
 				</div>
 
 				<div class="select-wallscope jquery-radios">
-					<input type="radio" id="radio1" class="radio-button" name="radio" value="1" /><label for="radio1">Wallscope 1</label>
-					<input type="radio" id="radio2" class="radio-button" name="radio" value="2" /><label for="radio2">Wallscope 2</label>
-					<input type="radio" id="radio3" class="radio-button" name="radio" value="3" /><label for="radio3">Wallscope 3</label>
-					<input type="radio" id="radio4" class="radio-button" name="radio" value="4" /><label for="radio4">Wallscope 4</label>
+					<input type="radio" id="radio1" class="radio-button" name="radio" value="1" /><label for="radio1">Habitat 1</label>
+					<input type="radio" id="radio2" class="radio-button" name="radio" value="2" /><label for="radio2">Habitat 2</label>
+					<input type="radio" id="radio3" class="radio-button" name="radio" value="3" /><label for="radio3">Habitat 3</label>
+					<input type="radio" id="radio4" class="radio-button" name="radio" value="4" /><label for="radio4">Habitat 4</label>
 				</div>
 				<br/>
 				<div class="divider"></div>
@@ -242,79 +133,31 @@
 				<div id="aggregate-habitat-filters">
 					<h4>Pick from the two sets of criteria below to show community results:</h4>
 					<div id="aggregate-view-habitat-filter"> 
-						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" /><label for="habitat-filter-1">Habitat 1</label> 
-						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" /><label for="habitat-filter-2">Habitat 2</label> 
-						<input type="radio" id="habitat-filter-3" name="habitat-filter-set" /><label for="habitat-filter-3">Habitat 3</label>
-						<input type="radio" id="habitat-filter-4" name="habitat-filter-set" /><label for="habitat-filter-4">Habitat 4</label> 
+						<input type="radio" id="habitat-filter-1" name="habitat-filter-set" value="1" /><label for="habitat-filter-1">Habitat 1</label> 
+						<input type="radio" id="habitat-filter-2" name="habitat-filter-set" value="2" /><label for="habitat-filter-2">Habitat 2</label> 
+						<input type="radio" id="habitat-filter-3" name="habitat-filter-set" value="3" /><label for="habitat-filter-3">Habitat 3</label>
+						<input type="radio" id="habitat-filter-4" name="habitat-filter-set" value="4" /><label for="habitat-filter-4">Habitat 4</label> 
 					</div>
 
 					<div id="aggregate-view-note-type-filter">  						
-						<input type="radio" id="habitat-note-filter-1" name="note-filter-set" /><label for="habitat-note-filter-1">Organisms</label> 
-						<input type="radio" id="habitat-note-filter-2" name="note-filter-set" /><label for="habitat-note-filter-2">Environmental Conditions</label> 
-						<input type="radio" id="habitat-note-filter-3" name="note-filter-set" /><label for="habitat-note-filter-3">Structural Features</label>
-						<input type="radio" id="habitat-note-filter-4" name="note-filter-set" /><label for="habitat-note-filter-4">Comments</label>
+						<input type="radio" id="habitat-note-filter-1" name="note-filter-set" value="organisms" /><label for="habitat-note-filter-1">Organisms</label> 
+						<input type="radio" id="habitat-note-filter-2" name="note-filter-set" value="environmental_conditions" /><label for="habitat-note-filter-2">Environmental Conditions</label> 
+						<input type="radio" id="habitat-note-filter-3" name="note-filter-set" value="structural_features" /><label for="habitat-note-filter-3">Structural Features</label>
+						<input type="radio" id="habitat-note-filter-4" name="note-filter-set" value="comments" /><label for="habitat-note-filter-4">Comments</label>
 					</div>
 				</div>
 
-				<div> <h4>If you want to add a note to discussions, check off the entries you want added to it: </h4></div>
+				<div> <h4>If you want to add a note to discussions, select the entries you want added to it: </h4></div>
  				<div id="habitat-aggregate-results-test">
  					<table id="aggregate-habitat-table">   
 						<thead>
 							<tr> 
-								<th id="dynamic-column-aggregate-habitat"> </th>
+								<th id="dynamic-column-aggregate-habitat">Organisms</th>	<!--by default select on page entry  -->
 								<th> Author(s)</th>
 								<th> Last Updated</th>
 							</tr>                               
-						<!-- TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids -->
 					   </thead>
-						<tbody> 
-							<script type="text/javascript">  
-								//TODO: this is the dummy data for now, but it should be filled with data returned from the server after the filters are chosen
-								dummyData = [
-									[
-										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-										"Beatrice S, Jeffery G",
-										"10/1/2011 2:34pm"
-									],
-									
-									[
-										"lorem ipsum. sdwefo wmqpekqf qi qpofknqi bpoqiewfjiqe fiqefpqoqef qepkofq q qiqpqpfwof eiei wijfwoeweofi weo o",
-										"Louis B, Naomi C",
-										"10/1/2011 2:45pm"
-									],
-																		
-								];
-								for (i=0; i<= dummyData.length; i++) {
-									
-								}
-							</script>
-							<tr>
-								<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
-								</td>
-								<td> Louis B, Naomi C </td>
-								<td> 10/1/2011 2:45 pm </td>
-							</tr> 
-							
-							<tr>
-								<td> lorm lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Ali B, Sally T </td>
-								<td> 10/1/2011 12:34 pm </td>
-							</tr>
-							
-							<tr>
-								<td> looooo loooo orem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Jelly F, Kelly M </td>
-								<td> 10/1/2011 18:34 pm </td>
-							</tr>
-							
-							<tr>
-								<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-								</td>
-								<td> Beatrice S, Jeffery G </td>
-								<td> 10/1/2011 2:34 pm </td>
-							</tr>
+						<tbody>
 						</tbody>
 					</table>   					
 			    </div>
@@ -354,20 +197,27 @@
 	
 				<div id="organism-menu-page">  
 					<div id="inner-organism-menu-page">	
-						<button type="button" id="describe-organism-button" class="new-page-button"><b>I want to describe an ORGANISM</b></button>							
+						<button type="button" id="describe-organism-button" class="new-page-button organism-button"><b>I want to describe an ORGANISM</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-organism-button" class="new-page-button"><b>I want to see what others said</b></button>
+						<button type="button" id="what-others-said-organism-button" class="new-page-button organism-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>
 	
 				<div id="new-organism">
 					<div id="organism-page-image">
 						<img src="/images/new_organism.png"/>   
-						<div class='section-title describe-title'> <b> Below are the fully formed organisms. Choose one to describe. </b></div> 			  
-					</div>         
-					<!-- This div contains the two tables of organisms where students can select from-->                                                                                                           
-					<div id="organism-tables">
-						<div class='section-title'> <b>Adult forms</b> </div>
+						<div class='section-title describe-title'> <b> Choose an organism to describe. </b></div> 			  
+					</div>                                                                              
+					
+				
+					<!-- This div contains the table of all organisms where students can select from-->                                                                                                           
+					<div id="organism-tables">     
+						
+						<div id="chosen-organism">
+                        	<span class='organism-blank-cell organism-only' value="null"></span>
+						</div>
+						
+						<div class='section-title'> <b>Organisms</b> </div>
 						<table id="organism-table">
 							<tr>
 								<td id="scum">
@@ -390,41 +240,31 @@
 							<tr>
 								<td id="predator">
 									<img src="/images/icon_0005_predator.png" class="image" />   					
-								</td>					
+								</td> 
+								<td id="predator-stage-1">
+									<img src="/images/icon_0011_predator-stage-1.png" class="image" />						
+								</td>   				
 							</tr>
-						</table>          
-					                            
-					
-						<!-- Table for Juveniles -->
-				         
-						<div class='section-title'> <b>Juvenile forms</b> </div> 
-						<table id="juvenile-organism-table"> 
-							<tr>
-						 		<td id="green-bug-stage-1">
+						   	<tr>
+								<td id="green-bug-stage-1">
 									<img src="/images/icon_0004_green-bug-stage-1.png" class="image" />						
 								</td>
 								<td id="blue-bug-stage-1"> 
 									<img src="/images/icon_0001_blue-bug-stage-1.png" class="image" />
 								</td> 				
 							</tr>
-					 
+
 							<tr>
-						 		<td id="blue-bug-stage-2">
+								<td id="blue-bug-stage-2">
 									<img src="/images/icon_0002_blue-bug-stage-2.png" class="image" /> 						
 								</td>
 								<td id="blue-bug-stage-3"> 
 									<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 	
 								</td>   											
-							</tr>
-						  				
-							<tr>
-								<td id="predator-stage-1">
-									<img src="/images/icon_0011_predator-stage-1.png" class="image" />						
-								</td>
-							</tr>
-						</table>
+							</tr> 
+						</table>          
+					                            					   
 						<input type="hidden" id="selected-organism" value=""/>
-						<input type="hidden" id="selected-juvenile" value=""/>					
 					</div> 
 			          
 					<div id="organism-descriptions">
@@ -489,8 +329,8 @@
 					</div>				
 				      
 					<div id="organism-action-buttons">
-						<button class="back-button">BACK</button>
-						<button class="save-button">SAVE</button>      
+						<button class="back-button organism-button">BACK</button>
+						<button class="save-button organism-button">SAVE</button>      
 					</div>
 				</div>
 			
@@ -505,19 +345,19 @@
 						<div id="organism-filters">
 							<table>
 								<tr>
-									<td value="scum">
+									<td class ="organism-filter-selected" value="scum">
 										<img src="/images/icon_0007_scum.png" class="image">
 									</td>
 								
-									<td value="mold">
+									<td value="fuzzy-mold">
 										<img src="/images/icon_0006_fuzzy-mold.png" class="image">
 									</td>                                      								
 								
-									<td value="blue">
+									<td value="blue-bug">
 										<img src="/images/icon_0000_blue-bug.png" class="image">
 									</td>
 								    
-									<td value="turtle">
+									<td value="green-bug">
 										<img src="/images/icon_0008_green-bug.png" class="image">
 									</td>
 								
@@ -529,88 +369,46 @@
 							<input id="chosen-organism-filter" type="hidden" value="null">
 						</div> 
 					
- 						<div id="organism-comment-filters">	
-
- 							<table>
-								<tr>
-								<td class='organism-comment-filter' value="Morphology">
-									Morphology
-								</td>
-								
-								<td class='organism-comment-filter' value="Behavior">
-									Behavior
-								</td>                                      								
-								
-								<td class='organism-comment-filter' value="Habitat">
-									Habitat
-								</td>
-								    
-								<td class='organism-comment-filter' value="Comments">
-									Comments
-								</td>       
-								</tr>
-							</table>    
-						<input id="chosen-organism-comment-filter" type="hidden" value="null">
+					
+ 						<div class="organism-comment-filters jquery-radios">	
+							<input type="radio" id="organism-comment-filter-1" class="radio-button" name="organism-comment-filter-set" value="morphology" />
+							<label for="organism-comment-filter-1">Morphology</label> 
+							<input type="radio" id="organism-comment-filter-2" class="radio-button" name="organism-comment-filter-set" value="behaviour" />
+							<label for="organism-comment-filter-2">Behaviour</label> 
+							<input type="radio" id="organism-comment-filter-3" class="radio-button" name="organism-comment-filter-set" value="habitat" />
+							<label for="organism-comment-filter-3">Habitat</label>
+							<input type="radio" id="organism-comment-filter-4" class="radio-button" name="organism-comment-filter-set" value="comments" />
+							<label for="organism-comment-filter-4">Comments</label>
 						</div>						
-
-					
-					<div id="organism-what-others-said-aggregate-table">
-						<h4> If you want to add a note to discussions, check off the notes that apply to it:</h4>
 						
-						<table id="aggregate-organism-table">   
-							<thead>
-								<tr> 
-									<th id="dynamic-column-aggregate-organism"> </th>
-									<th> Author(s)</th>
-									<th> Last Updated</th>
-								</tr>                               
-							<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
-						   </thead>   
-						
-						   <tbody>
-						   		<tr>
-									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
-									</td>
-									<td> Louis B, Naomi C </td>
-									<td> 10/1/2011 2:45 pm </td>
-								</tr> 
-
-								<tr>
-									<td> lorm lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Ali B, Sally T </td>
-									<td> 10/1/2011 12:34 pm </td>
-								</tr>
-
-								<tr>
-									<td> looooo loooo orem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Jelly F, Kelly M </td>
-									<td> 10/1/2011 18:34 pm </td>
-								</tr>
-
-								<tr>
-									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Beatrice S, Jeffery G </td>
-									<td> 10/1/2011 2:34 pm </td>
-								</tr>
-							</tbody>				
-						</table>
-						
-					</div>
 					
-					<div id="organism-what-others-said-action-buttons">
-						<button class="back-button">BACK</button>
-						<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>    
-					</div>
+						<div id="organism-what-others-said-aggregate-table">
+							<h4> If you want to add a note to discussions, select the entries that apply to it:</h4>
 					
-				</div>
-			</div>
-           
-			</div> 
-		
-		</div>
+							<div class="datatable">
+								<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-organism-table">
+									<thead>
+										<tr>
+											<th id="dynamic-column-aggregate-organism"> </th>						
+											<th>Author(s)</th>
+											<th>Last Updated</th>
+										</tr>
+									</thead>
+									<tbody>						
+									</tbody>
+								</table>
+							</div>
+						</div>
+					
+						<div id="organism-what-others-said-action-buttons">
+							<button class="back-button organism-button">BACK</button>
+							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
+						</div>
+					
+					</div> <!-- aggregate-organism-filters -->
+				</div> <!-- what-others-said-about-organisms -->
+			</div> <!-- open-organsim-->
+		</div> <!-- tabs-2 -->
 		
 		
 		
@@ -622,9 +420,9 @@
 			<div id="relationships">
 				<div id="landing-relationships">
 					<div id="inner-landing-relationships">
-						<button type="button" class="new-button landing-relationships-button"><b>I want to describe a RELATIONSHIP</b></button>
+						<button type="button" class="new-button landing-relationships-button relationship-button"><b>I want to describe a RELATIONSHIP</b></button>
 						<br/><br/>
-						<button type="button" class="view-button landing-relationships-button"><b>I want to see what others said</b></button>
+						<button type="button" class="view-button landing-relationships-button relationship-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>
 
@@ -677,8 +475,8 @@
 					</div>
 	                                                           				
 					<div id="action-buttons">
-						<button class="back-button">BACK</button>
-						<button class="save-button">SAVE</button>
+						<button class="back-button standard-button relationship-button">BACK</button>
+						<button class="save-button standard-button relationship-button">SAVE</button>
 					</div>
 				</div>
 	
@@ -705,102 +503,77 @@
 								<!-- data for display boxes to be pulled from the DB -->
 								<td><img src="/images/icon_0009_sun.png" class="image sun" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box sun1">1</td>
-								<td class="display-box sun2">2</td>
-								<td class="display-box sun3">3</td>
-								<td class="display-box sun4">4</td>
-								<td class="display-box sun5">5</td>
+								<td class="display-box data-box" data-from="sun" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="sun" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="sun" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="sun" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="sun" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0007_scum.png" class="image scum" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box scum1">1</td>
-								<td class="display-box scum2">2</td>
-								<td class="display-box scum3">3</td>
-								<td class="display-box scum4">4</td>
-								<td class="display-box scum5">5</td>
+								<td class="display-box data-box" data-from="scum" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="scum" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="scum" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="scum" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="scum" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box mold1">1</td>
-								<td class="display-box mold2">2</td>
-								<td class="display-box mold3">3</td>
-								<td class="display-box mold4">4</td>
-								<td class="display-box mold5">5</td>
+								<td class="display-box data-box" data-from="fuzzy-mold" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="fuzzy-mold" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="fuzzy-mold" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="fuzzy-mold" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="fuzzy-mold" data-to="predator">0</td>	
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box blue-bug1">1</td>
-								<td class="display-box blue-bug2">2</td>
-								<td class="display-box blue-bug3">3</td>
-								<td class="display-box blue-bug4">4</td>
-								<td class="display-box blue-bug5">5</td>
+								<td class="display-box data-box" data-from="blue-bug" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="blue-bug" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="blue-bug" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="blue-bug" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="blue-bug" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box green-bug1">1</td>
-								<td class="display-box green-bug2">2</td>
-								<td class="display-box green-bug3">3</td>
-								<td class="display-box green-bug4">4</td>
-								<td class="display-box green-bug5">5</td>
+								<td class="display-box data-box" data-from="green-bug" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="green-bug" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="green-bug" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="green-bug" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="green-bug" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
-								<td class="display-box predator1">1</td>
-								<td class="display-box predator2">2</td>
-								<td class="display-box predator3">3</td>
-								<td class="display-box predator4">4</td>
-								<td class="display-box predator5">5</td>
+								<td class="display-box data-box" data-from="predator" data-to="scum">0</td>
+								<td class="display-box data-box" data-from="predator" data-to="fuzzy-mold">0</td>
+								<td class="display-box data-box" data-from="predator" data-to="blue-bug">0</td>
+								<td class="display-box data-box" data-from="predator" data-to="green-bug">0</td>
+								<td class="display-box data-box" data-from="predator" data-to="predator">0</td>
 							</tr>
 						</table>
 					</div>
 					<br/>
 					
-					<div id="view-relationships-table">
+					<div class="datatable">
 						<table cellpadding="0" cellspacing="0" border="0" class="display" id="relationships-datatable">
 							<thead>
 								<tr>
-									<th>D</th>
 									<th>Description of Relationship</th>						
 									<th>Author(s)</th>
 									<th>Last Updated</th>
 								</tr>
 							</thead>
 							<tbody>						
-								<tr class="table-row">
-									<td></td>
-									<td class="r1c2"></td>
-									<td class="r1c3"></td>
-									<td class="r1c4"></td>
-								</tr>
-								<tr class="table-row">
-									<td></td>
-									<td class="r2c2"></td>
-									<td class="r2c3"></td>
-									<td class="r2c4"></td>
-								</tr>
-								<tr class="table-row">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								
 							</tbody>
-							<tfoot>
-								<tr>
-
-								</tr>							
-							</tfoot>
 						</table>
 					</div>
 									
 					<div id="action-buttons">
-						<button class="back-button">BACK</button>
+						<button class="back-button standard-button relationship-button">BACK</button>
 					</div>
 				</div>
 				

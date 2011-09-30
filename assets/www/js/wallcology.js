@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab to 4th tab
+            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -64,10 +64,8 @@ WallCology = {
             $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
-            
-            $('.reload-button').click(function(){
-            	location.reload()
-            })
+           
+
 
 //**********HABITAT*************************************************************************************************
             $('#landing-habitat .new-button').click(function(){
@@ -119,11 +117,20 @@ WallCology = {
 				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
 				$("#what-others-said-habitat label").removeClass("ui-state-active");                          
 				$("#habitat-aggregate-results th#dynamic-column-aggregate-habitat").html('');
-				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);  
+				$("#what-others-said-habitat #aggregate-habitat-table input:checkbox").attr("checked", false);
+
+				// TODO These below aren't working yet
+				$('input:radio[name="habitat-filter-set"]').filter('[value="1"]').attr('checked', true);
+				$('input:radio[name="note-filter-set"]').filter('[value="organisms"]').attr('checked', true);
+				
+				// populate the datatable with default values 
+				Sail.app.observations.generateHabitatsDT({habitat: "1", note: "organism"})
+			})
 				           
 				// We create a table with the second column being 500px
 				// TODO: we need to feed the data to the table to be inserted
-				oTable = $('#aggregate-habitat-table').dataTable({
+				 
+/*				oTable = $('#aggregate-habitat-table').dataTable({
 					"bAutoWidth": false,  
 
 					"bJQueryUI" : true,					
@@ -145,11 +152,25 @@ WallCology = {
 						return nRow;
 					}
 				 });
-            })  
+              
 
-
+				oTableOrganism = $('#aggregate-organism-table').dataTable({
+					"bAutoWidth": false, 
+					
+					"bJQueryUI" : true,    
+					
+					"sPaginationType": "full_numbers",                          
+					
+					"bDestroy" : true,  
+					  				
+					"aoColumns": [        
+						{ "sWidth": "500px" },
+						null,
+						null
+					],  
+				 });
 			// We need to handle the clicking of the table rows
-			/* Click event handler */
+			 Click event handler 
 			$('#aggregate-habitat-table tbody tr').live('click', function () {
 				var aData = oTable.fnGetData( this );
 				var iId = aData[0];
@@ -166,78 +187,7 @@ WallCology = {
 				}
 
 				$(this).toggleClass('row_selected');
-			} );
-            
-
-/* 			$.get("/mongoose/foo/bar/_find", 
-			  function(data) {
-				var resultArray
-			    if (data.ok === 1) {
-					console.log("Mongoose returned a data set")
-					
-					resultArray = data.results
-					// TODO: loop over result and use it to change content of table
-					for (var i = 0; i<resultArray.size(); i++) {
-						resultArray[i]
-					}
-					
-					return true
-				}
-				else {
-					console.log("Mongoose request failed")
-					return false
-				}
-			  }, "json")
-*/			
-			$('#table_id').dataTable()
-            
-/*            $('#open-habitat .habitat-table').dataTable({
-					"aaData": [
-						[ "Trident", "Internet Explorer 4.0", "Win 95+", 4, "X" ],
-						[ "Trident", "Internet Explorer 5.0", "Win 95+", 5, "C" ],
-						[ "Trident", "Internet Explorer 5.5", "Win 95+", 5.5, "A" ],
-						[ "Trident", "Internet Explorer 6.0", "Win 98+", 6, "A" ],
-						[ "Trident", "Internet Explorer 7.0", "Win XP SP2+", 7, "A" ],
-						[ "Gecko", "Firefox 1.5", "Win 98+ / OSX.2+", 1.8, "A" ],
-						[ "Gecko", "Firefox 2", "Win 98+ / OSX.2+", 1.8, "A" ],
-						[ "Gecko", "Firefox 3", "Win 2k+ / OSX.3+", 1.9, "A" ],
-						[ "Webkit", "Safari 1.2", "OSX.3", 125.5, "A" ],
-						[ "Webkit", "Safari 1.3", "OSX.3", 312.8, "A" ],
-						[ "Webkit", "Safari 2.0", "OSX.4+", 419.3, "A" ],
-						[ "Webkit", "Safari 3.0", "OSX.4+", 522.1, "A" ]
-					],
-					"aoColumns": [
-						{ "sTitle": "Engine" },
-						{ "sTitle": "Browser" },
-						{ "sTitle": "Platform" },
-						{ "sTitle": "Version", "sClass": "center" },
-						{
-							"sTitle": "Grade",
-							"sClass": "center",
-							"fnRender": function(obj) {
-								var sReturn = obj.aData[ obj.iDataColumn ];
-								if ( sReturn == "A" ) {
-									sReturn = "<b>A</b>";
-								}
-								return sReturn;
-							}
-						}
-					]
-			} )
-*/          
-			
-			//these aren't working, correctly... TODO
-/*            $(".select-habitat input[type='radio']").click(function(){
-            	console.log("radio1")
-            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
-            	//do your database queries here
-            })
-
-            $(".select-criteria input[type='radio']").click(function(){
-            	console.log("radio2")
-            	var TEMP = $('#radio .select-habitat input[type='radio']:checked').val()
-            	//do your database queries here
-            })*/
+			} );*/
 
             
 //**********ADD TO DISCUSSION HABITAT*****************************************************************************************
@@ -262,8 +212,7 @@ WallCology = {
 		            $(inContainer || 'body').append(picker)
 
     	            })
-            })
-            
+            })          
             
             $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
 			$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
@@ -273,19 +222,7 @@ WallCology = {
             	$('#open-habitat').show()
             })
             
-            
-////////////AUTHOR SELECT POPUP///////////////////////////////////////////////////////////////
-            
-//            Sail.app.rollcall.fetchAllUsers(function(data) {
-//            $(data).each(function() {
-//                u = this['user']
-//                li = $("<li id='user-"+u.account.login+"'>"+u.account.login+"</li> ")
-//                li.data('account', u.account)
-//                li.click(function() { Rollcall.Authenticator.pickLogin($(this).data('account')) })
-//                picker.children(".users").append(li)
-//            })
-//            
-//            $(inContainer || 'body').append(picker)
+
 
             
 			$('#what-others-said-habitat .back-button').click(function(){
@@ -293,11 +230,12 @@ WallCology = {
             	$('#open-habitat').show()
             })  
 
-        	 $('#add-to-discussions-habitat .back-button').click(function(){
+			$('#add-to-discussions-habitat .back-button').click(function(){
 				$('#add-to-discussions-habitat').hide()
 				$('#what-others-said-habitat').show()
-	         })   
+			})   
 	
+			//do we still need this TODO
 			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
 				// Check to see if all required filters/comments are selected
 				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
@@ -319,20 +257,17 @@ WallCology = {
 			// Send selected filters for the agents to pull them back
 			$("div#aggregate-habitat-filters input").click(function(){
 				totalFiltersSelected = $("div#aggregate-habitat-filters input").attr("checked");
-				// A filter from each category is selected so we can send them to the agents
+				// A filter from each category is selected so we can send them to the agents (TODO? Still need?)
 				if (totalFiltersSelected == 2){
 				   alert ('woohoo');
-				}                         				
-			})                      
-			
-			// Actions that need to be taken when filters in the Habitat's aggregate view are clicked
-			$("div#aggregate-habitat-filters input").click(function() { 
-						
+				}           
+				
 				// Set the table header for the dynamic column
 				if (this.name == "note-filter-set"){               
 					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
-				}
-			})
+				}				
+			})                      
+			
 
 
 			// Selected filters in the Aggregate view for Habitats page
@@ -340,6 +275,21 @@ WallCology = {
 			// 				$('div#what-others-said-habitat button').removeClass('ui-state-active');
 			// 				$(this).addClass('ui-state-active');
 			// 			})
+			
+
+			$("input[name=habitat-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, type: typeChoice})
+			})
+			
+			$("input[name=note-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, type: typeChoice})
+			})
+
+
 
 //**********ORGANISM****************************************************************************************    
 
@@ -357,33 +307,11 @@ WallCology = {
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').show();
 				
-				// clear all the Selected Filters
-				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none'); 
-				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-filter').attr('value', 'null');
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
-				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
-			
-			
-				// We create a table with the second column being 500px
-				// TODO: we need to feed the data to the table to be inserted
-				oTableOrganism = $('#aggregate-organism-table').dataTable({
-					"bAutoWidth": false, 
-					
-					"bJQueryUI" : true,    
-					
-					"sPaginationType": "full_numbers",                          
-					
-					"bDestroy" : true,  
-					  				
-					"aoColumns": [        
-						{ "sWidth": "500px" },
-						null,
-						null
-					],  
-				 });
+				// HACK: preselect scum - looking for more elegant solution also .css() is no good add and remove class instead
+				$('#what-others-said-about-organisms .organism-filter-selected').css('border', '1px solid black'); 
+				$('#chosen-organism-filter').attr('value', 'scum');
             })
 
-           
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
        			Sail.app.observations.newOrganismContent(); 
@@ -395,13 +323,21 @@ WallCology = {
             	$('#new-organism').hide()
             	$('#open-organism #organism-menu-page').show()
             })   
-           
+                       
+			
+			// Clearing the chosen organism
+			$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').click(function(){
+				$(this).html('');
+				$('div#tabs-2 table#organism-table td').css('border', 'none'); 
+				$('div#tabs-2 input#selected-organism').attr('value', 'null');   			
+			})
             
 
 			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
 			$('div#tabs-2 table#organism-table td').click(function(){    
 				$('div#tabs-2 table#organism-table td').css('border', 'none');
-				$(this).css('border', '1px solid black');
+				$(this).css('border', '1px solid black');                      
+				$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').html($(this).html());
 				$('div#tabs-2 input#selected-organism').attr('value', this.id);
 			})    
 			
@@ -409,8 +345,7 @@ WallCology = {
 				$('div#tabs-2 table#juvenile-organism-table td').css('border', 'none');
 				$(this).css('border', '1px solid black');
 				$('div#tabs-2 input#selected-juvenile').attr('value', this.id);
-			})
-			
+			})			
 			
 			// if an organism is selected
 			$('div#tabs-2 div#organism-evolution span.organism-only').click (function(){
@@ -459,11 +394,11 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
 			})  
 			 
-			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){ 		
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#CCCCCC', 'color':'black'});
-				$(this).css({'background-color':'#669933', 'color':'white'}); 
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters input#chosen-organism-comment-filter').attr('value', $(this).attr('value'));
-				$("table#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value'));
+			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
+				// setting the header of the datatable according to selected criteria
+				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				// calling function to fill data-table via ajax call
+				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
 			})
 			
 			
@@ -486,8 +421,11 @@ WallCology = {
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
+				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
+				Sail.app.observations.fillRelationshipsTable()
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
+            	Sail.app.observations.generateRelationshipsDT()
             })
             
 //**********NEW RELATIONSHIP***********************************************************************************          
@@ -520,74 +458,14 @@ WallCology = {
             	$('#landing-relationships').show()
             })
 
-			//$('#view-relationships .sun1')
-			
-			$('#view-relationships .sun1').click(function() {
-				// Trying to call the following URL
-				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={"type"%3A"relationship"}
-				// http://proto.encorelab.org/mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
-/*				criteria={"type"%3A"relationship"}
-				sort={"energy_transfer.to":1}*/
-				//$.get("/mongoose/wallcology/observations/_find", { batch_size: 100, criteria:{"type":"relationship"} },
-				
-				// The following get call counts all elements in observation
-				// TODO: add arguments that just count what I need
-  				//$.get("/mongoose/wallcology/observations/_count?criteria=%7B%22type%22%3A%22relationship%22%7D",
-				//http://proto.encorelab.org/mongoose/wallcology/observations/_count?criteria={%22type%22%3A%22relationship%22,%20%22energy_transfer.from%22%3A%22blue-bug%22,%20%22energy_transfer.to%22%3A%22green-bug%22}
-				//$.get("/mongoose/wallcology/observations/_count?criteria%3D%7B%22type%22%253A%22relationship%22%2C%20%22energy_transfer.from%22%253A%22blue-bug%22%2C%20%22energy_transfer.to%22%253A%22green-bug%22%7D",
-				
-				// "type":"relationship", "energy_transfer.from":"sun", "energy_transfer.to":"scum"
-				$.get("/mongoose/wallcology/observations/_count?criteria%3D%7B%22type%22%253A%22relationship%22%2C%20%22energy_transfer.from%22%253A%22sun%22%2C%20%22energy_transfer.to%22%253A%22scum%22%7D",
-				  function(data) {
-					var resultArray
-				    if (data.ok === 1) {
-						console.log("Mongoose returned a data set")
-						console.log("There are " + data.count + " relationships with energy transfer from sun to scum")
-	
-						// now I want to put the value into the HTML
-						$('#view-relationships .sun1').html(data.count)
-												
-						return true
-					}
-					else {
-						console.log("Mongoose request failed")
-						return false
-					}
-				  }, "json")
-
-				//observations.find({}, function(data) {
-					//alert("Mongo data: " +data)
-				//})
+			//row selector for dataTables
+			$('#relationships-datatable tr').live('click', function() {
+				if ( $(this).hasClass('row_selected') )
+					$(this).removeClass('row_selected')
+				else
+					$(this).addClass('row_selected')
 			})
-            
-			
-			//work in progress... don't touch!
-			//why doesn't criteria work?
-			//do I need to use an array?
-			
-			$('#view-relationships .view-relationships-title').click(function() {
-				$.get("/mongoose/wallcology/observations/_find", { batch_size: 5, criteria:{"type":"relationship"} },
-					function(data) {
-						var resultArray2
-				    	if (data.ok === 1) {
-				    		resultArray2 = data.results
-				    		
-							$('#relationships-datatable').dataTable({
-								"aaData": [
-								           ["D", resultArray2[0].type, resultArray2[0].type, "TBD"],
-								           ["D", resultArray2[1].type, resultArray2[1].type, "TBD"],
-								           ["D", resultArray2[2].type, resultArray2[2].type, "TBD"]							           
-								           ]
-							});
-				    	}
-				    	else {
-							console.log("Mongoose request failed")
-							return false
-						}
-					}, "json")
-			})
-
-					
+				
             
             
 //**********COUNTS******************************************************************************************			
@@ -602,22 +480,225 @@ WallCology = {
 
 // ******************************************   HELPER FUNCTIONS *************************************************
 
-	clearNewOrganismPage: function () {
-		$('#new-organism table#organism-table td').css('border', 'none');
-		$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
-		$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
-		$('#new-organism div#organism-descriptions textarea').val('');          
-		$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
-		$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
-		$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
-	},
+		clearNewOrganismPage: function () {
+			$('#new-organism table#organism-table td').css('border', 'none');
+			$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
+			$('#new-organism div#organism-evolution .organism-blank-cell').html('');				
+			$('#new-organism div#organism-descriptions textarea').val('');          
+			$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
+			$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
+			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
+		},
+
+		dateString: function(d) {
+			 function pad(n){return n<10 ? '0'+n : n}
+			 return d.getFullYear()+'-'
+			      + pad(d.getMonth()+1)+'-'
+			      + pad(d.getDate())+' '
+			      + pad(d.getHours())+':'
+			      + pad(d.getMinutes())+':'
+			      + pad(d.getSeconds())
+		},
+		
+		// function that retrieves counts for each relationship via sleepy mongoose GET calls
+		fillRelationshipsTable: function() {
+			// do this for each table field that has the class .data-box
+			$('.data-box').each(function () {
+				// ajax GET call to sleepy mongoose
+				$.ajax({
+					type: "GET",
+					url: "/mongoose/wallcology/observations/_count",
+					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
+					context: $(this),
+				  	success: function(data) {
+						var resultArray
+					    if (data.ok === 1) {
+							console.log("Mongoose returned a data set")
+							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
+
+							// writing the count value into the HTML
+							$(this).html(data.count)
+
+							return true
+						}
+						else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}
+				}) // end of ajax
+			}) // end of each
+		},
+		
+		//Data table population functions
+		// Example criteria:
+		//   { habitat: '1', note: 'organism' }
+		generateHabitatsDT: function(criteria) {
+			//criteria = criteria || {}
+			//Still one bug remaining - when no wallscope is selected, the note types don't change when filters are clicked
+			$.ajax({
+				type: "GET",
+				url: '/mongoose/wallcology/observations/_find',
+				data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: 200 },
+				context: criteria,
+				success: function(data) {
+					habitatResultsArray = []
+
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						if (this.note == "comments") {
+							habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else if (this.note == "structural_features") {
+							habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else if (this.note == "environmental_conditions") {
+							habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+						else {
+							habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+					}
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-habitat-table').dataTable({
+							"bAutoWidth": false,
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+							"aaData": habitatResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+				}
+			})
+
+		},
+
+			
+/*			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"habitat"}) },
+				function(data) {
+					habitatResultsArray = []
+					if (t !== null && t !== undefined) {
+						for (i=0;i<data.results.length;i++) {
+							d = new Date(data.results[i].timestamp)
+							habitatResultsArray[i] = [(data.results[i][type]), data.results[i].origin, Sail.app.observations.dateString(d)]
+						}
+					}
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-habitat-table').dataTable({
+							"bAutoWidth": false,
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+
+							"aaData": habitatResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},*/
+		
+		generateOrganismsDT: function(selectedOrganism, aspect) {
+			$.get("/mongoose/wallcology/observations/_find",
+				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: 100 },
+				function(data) {
+					organismResultsArray = []
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+					}
+
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-organism-table').dataTable({
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+
+							"aaData": organismResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},
+
+		generateRelationshipsDT: function() {
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 200 },
+				function(data) {
+					relationshipResultsArray = []
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+					}
+
+			    	if (data.ok === 1) {			    		
+						$('#relationships-datatable').dataTable({
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+
+							"aaData": relationshipResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},
 
 
+		//(new Date(data.results[i].timestamp)).dateString()
+		// _find?criteria[type]=relationship
+		// _find?criteria={type:relationship}
+		//$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"} },
+		//  $.get("mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22}",
+		//$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
 
+		//skip: 10,
+		
+		
+		//"aaData": [ data.results.map(function(result){ return ["D", result.comments, result.origin, result.timestamp] }) ]
 
 
 // ***************************************************************************************************************
-
 
     	
         newHabitatContent: function() {

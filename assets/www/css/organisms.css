@@ -1,5 +1,5 @@
            
-div#organism-menu-page {
+div#open-organism div#organism-menu-page {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
 	margin-right: auto;     
@@ -8,7 +8,13 @@ div#organism-menu-page {
 	_position: relative; 
 	overflow: hidden;    
 	margin-top: 160px;
-}   
+}     
+
+div#open-organism .organism-button{
+	background: url('');
+	background-color: #0CA958;
+	border: 1px solid #0CA958;	
+}
 
 div#inner-organism-menu-page {
 	_position: absolute; 
@@ -37,7 +43,8 @@ div#tabs-2 {
 
 div#tabs-2 img#organism-page-image {
 	float: left;
-}
+}                
+
 
 #new-organism #organism-page-image {
 	margin-bottom: 15px;
@@ -45,7 +52,14 @@ div#tabs-2 img#organism-page-image {
                             
 div#tabs-2 div#organism-tables {
 	width: 25%;
-	float: left;  
+	float: left;
+	margin-top: 15px;  
+}     
+
+div#open-organism div#organism-tables div#chosen-organism {  
+	width: 100px;
+	height: 60px;
+	margin-bottom: 10px;
 }
                 
 div#tabs-2 div#organism-descriptions {
@@ -124,15 +138,25 @@ div#new-organism div#organism-action-buttons {
 	float: left;
 }   
 
-div#new-organism button.back-button {
+div#new-organism div#organism-action-buttons button.back-button {
 	width: 100px;
-	margin-left: 20px;
+	margin-left: 20px;       
 }
 
-div#new-organism button.save-button {
+div#new-organism div#organism-action-buttons button.save-button {
 	width: 100px;
-	margin-left: 465px;       
-}                                                             
+	margin-left: 465px;     
+}  
+
+div#open-organism div#organism-what-others-said-action-buttons button.back-button {
+	width: 100px;
+	margin-left: 20px;       
+}
+
+div#open-organism div#organism-what-others-said-action-buttons button.add-to-discussion-button {
+	width: 200px;
+} 
+                                         
 
 div.organism-page-heading {
 	color: #0CA958;
@@ -145,10 +169,10 @@ div#open-organism div#what-others-said-about-organisms div#organism-filters {
 	width: 50%;
 }
 
-div#open-organism div#what-others-said-about-organisms div#organism-comment-filters {
+#what-others-said-about-organisms div.organism-comment-filters {
 	margin-left: auto;
 	margin-right: auto;
-	width: 65%;        
+	width: 55%;        
 }     
 
 
@@ -158,6 +182,8 @@ div#open-organism div#what-others-said-about-organisms div#organism-comment-filt
 	/* background-color: #ccc; */ 
 	text-align: center; 
 	padding: 10px;
+	border-radius: 4px;
+	margin: 5px;
 }         
               
 div#open-organism div#what-others-said-about-organisms div#organism-what-others-said-aggregate-table {
@@ -172,7 +198,7 @@ div#open-organism div#what-others-said-about-organisms table#aggregate-organism-
 	margin-bottom: 25px;     
 	width: 750px;
 	float: left;    
-	font-size: 12px;
+	font-size: 14px;
 }                        
 
 
