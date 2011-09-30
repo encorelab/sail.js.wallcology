@@ -604,59 +604,58 @@ WallCology = {
 		// Example criteria:
 		//   { habitat: '1', note: 'organism' }
 		generateHabitatsDT: function(criteria) {
+			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
 			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}) },
 				function(data) {
 			    	if (data.ok === 1) {
 						batchSize = 0
 						batchSize = data.count
-						if (batchSize > 0) {
-							$.ajax({
-								type: "GET",
-								url: '/mongoose/wallcology/observations/_find',
-								data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
-								context: criteria,
-								success: function(data) {
-									habitatResultsArray = []
+						$.ajax({
+							type: "GET",
+							url: '/mongoose/wallcology/observations/_find',
+							data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
+							context: criteria,
+							success: function(data) {
+								habitatResultsArray = []
 
-									for (i=0;i<data.results.length;i++) {
-										d = new Date(data.results[i].timestamp)
-										if (this.note == "comments") {
-											habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-										}
-										else if (this.note == "structural_features") {
-											habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
-										}
-										else if (this.note == "environmental_conditions") {
-											habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
-										}
-										else {
-											habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
-										}
+								for (i=0;i<data.results.length;i++) {
+									d = new Date(data.results[i].timestamp)
+									if (this.note == "comments") {
+										habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
-							    	if (data.ok === 1) {			    		
-										$('#aggregate-habitat-table').dataTable({
-											"bAutoWidth": false,
-											"iDisplayLength": 6,
-											"bLengthChange": false,
-											"bDestroy" : true,
-											"bJQueryUI": true,
-											"sPaginationType": "full_numbers",
-											"aoColumns": [        
-															{ "sWidth": "500px" },
-															null,
-															null
-														],
-											"aaData": habitatResultsArray	
-										})
-							    	}
-							    	else {
-										console.log("Mongoose request failed")
-										return false
+									else if (this.note == "structural_features") {
+										habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									else if (this.note == "environmental_conditions") {
+										habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									else {
+										habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 								}
-							})
-						}
+						    	if (data.ok === 1) {			    		
+									$('#aggregate-habitat-table').dataTable({
+										"bAutoWidth": false,
+										"iDisplayLength": 6,
+										"bLengthChange": false,
+										"bDestroy" : true,
+										"bJQueryUI": true,
+										"sPaginationType": "full_numbers",
+										"aoColumns": [        
+														{ "sWidth": "500px" },
+														null,
+														null
+													],
+										"aaData": habitatResultsArray	
+									})
+						    	}
+						    	else {
+									console.log("Mongoose request failed")
+									return false
+								}
+							}
+						})
 			    	}
 			    	else {
 						console.log("Mongoose request count failed")
@@ -667,77 +666,90 @@ WallCology = {
 		},
 		
 		generateOrganismsDT: function(selectedOrganism, aspect) {
-			$.get("/mongoose/wallcology/observations/_find",
-				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: 5000 },
+			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
+			$.get("/mongoose/wallcology/observations/_count",
+				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}) },
 				function(data) {
-					organismResultsArray = []
-					for (i=0;i<data.results.length;i++) {
-						d = new Date(data.results[i].timestamp)
-						organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
-					}
-
 			    	if (data.ok === 1) {			    		
-						$('#aggregate-organism-table').dataTable({
-							"iDisplayLength": 6,
-							"bLengthChange": false,
-							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
-							"bJQueryUI": true,
-							"sPaginationType": "full_numbers",
-							"aoColumns": [        
-											{ "sWidth": "500px" },
-											null,
-											null
-										],
+						batchSize = 0
+						batchSize = data.count
+						$.get("/mongoose/wallcology/observations/_find",
+							{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: batchSize },
+							function(data) {
+								organismResultsArray = []
+								for (i=0;i<data.results.length;i++) {
+									d = new Date(data.results[i].timestamp)
+									organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+								}
 
-							"aaData": organismResultsArray	
-						})
+						    	if (data.ok === 1) {			    		
+									$('#aggregate-organism-table').dataTable({
+										"iDisplayLength": 6,
+										"bLengthChange": false,
+										"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+										"bJQueryUI": true,
+										"sPaginationType": "full_numbers",
+										"aoColumns": [        
+														{ "sWidth": "500px" },
+														null,
+														null
+													],
+
+										"aaData": organismResultsArray	
+									})
+						    	}
+						    	else {
+									console.log("Mongoose request failed")
+									return false
+								}
+						}, "json")	
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
 			}, "json")
+			
 		},
 
 		generateRelationshipsDT: function(from, to) {
+			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
 			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
 				function(data) {
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
-						if (batchSize > 0) {
-							$.get("/mongoose/wallcology/observations/_find",
-								{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
-								function(data) {
-									relationshipResultsArray = []
-									for (i=0;i<data.results.length;i++) {
-										d = new Date(data.results[i].timestamp)
-										relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
+						$.get("/mongoose/wallcology/observations/_find",
+							{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
+							function(data) {
+								relationshipResultsArray = []
+								for (i=0;i<data.results.length;i++) {
+									d = new Date(data.results[i].timestamp)
+									relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+								}
 
-							    	if (data.ok === 1) {			    		
-										$('#relationships-datatable').dataTable({
-											"iDisplayLength": 6,
-											"bLengthChange": false,
-											"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
-											"bJQueryUI": true,
-											"sPaginationType": "full_numbers",
-											"aoColumns": [        
-															{ "sWidth": "500px" },
-															null,
-															null
-														],
+						    	if (data.ok === 1) {			    		
+									$('#relationships-datatable').dataTable({
+										"iDisplayLength": 6,
+										"bLengthChange": false,
+										"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+										"bJQueryUI": true,
+										"sPaginationType": "full_numbers",
+										"aoColumns": [        
+														{ "sWidth": "500px" },
+														null,
+														null
+													],
 
-											"aaData": relationshipResultsArray	
-										})
-							    	}
-							    	else {
-										console.log("Mongoose request failed")
-										return false
-									}
-							}, "json")
-						}
+										"aaData": relationshipResultsArray	
+									})
+						    	}
+						    	else {
+									console.log("Mongoose request failed")
+									return false
+								}
+						}, "json")
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
