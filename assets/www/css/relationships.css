@@ -1,5 +1,4 @@
 #relationships {
-	height: 100%;
 	margin-left: 20px;
 	font-size: 14px;
 }
@@ -18,19 +17,6 @@ div#tabs-3 div#relationships .relationship-button {
 
 #relationships .standard-button {
 	width: 100px;
-}
-
-/* Rokham's magical css */
-html{
-	height: 100%; 
-}    
-
-body {
-	height: 100%;
-}
-
-div#tabs {
-	height: 100%;
 }
 
 #landing-relationships {

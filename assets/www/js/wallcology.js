@@ -1,7 +1,7 @@
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
-    xmppDomain: 'proto.encorelab.org',
+    xmppDomain: 'glint',
     groupchatRoom: null,
     
     init: function() {
@@ -306,9 +306,6 @@ WallCology = {
 				$('#chosen-organism-filter').attr('value', 'scum');
             })
 
-            
-
-           
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
        			Sail.app.observations.newOrganismContent(); 
@@ -320,13 +317,21 @@ WallCology = {
             	$('#new-organism').hide()
             	$('#open-organism #organism-menu-page').show()
             })   
-           
+                       
+			
+			// Clearing the chosen organism
+			$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').click(function(){
+				$(this).html('');
+				$('div#tabs-2 table#organism-table td').css('border', 'none'); 
+				$('div#tabs-2 input#selected-organism').attr('value', 'null');   			
+			})
             
 
 			// Allowing the student to select from the organisms and their Juvenile form to display the evolution of the organism
 			$('div#tabs-2 table#organism-table td').click(function(){    
 				$('div#tabs-2 table#organism-table td').css('border', 'none');
-				$(this).css('border', '1px solid black');
+				$(this).css('border', '1px solid black');                      
+				$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').html($(this).html());
 				$('div#tabs-2 input#selected-organism').attr('value', this.id);
 			})    
 			
