@@ -544,6 +544,37 @@ WallCology = {
 		},
 		
 		// function that retrieves counts for each relationship via sleepy mongoose GET calls
+		fillLifecycleCount: function() {
+			// do this for each table field that has the class .data-box
+			$('.relationship-count').each(function () {
+				// ajax GET call to sleepy mongoose
+				$.ajax({
+					type: "GET",
+					url: "/mongoose/wallcology/observations/_count",
+					data: { criteria: JSON.stringify({"type":"life_cycle", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
+					context: this,
+				  	success: function(data) {
+						var resultArray
+					    if (data.ok === 1) {
+							console.log("Mongoose returned a data set")
+							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
+
+							// writing the count value into the HTML
+							$(this).html(data.count)
+
+							return true
+						}
+						else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}
+				}) // end of ajax
+			}) // end of each
+		},
+		
+		// function that retrieves counts for each relationship via sleepy mongoose GET calls
 		fillRelationshipsTable: function() {
 			// do this for each table field that has the class .data-box
 			$('.data-box').each(function () {
@@ -553,7 +584,7 @@ WallCology = {
 					url: "/mongoose/wallcology/observations/_count",
 					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
 					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
-					context: $(this),
+					context: this,
 				  	success: function(data) {
 						var resultArray
 					    if (data.ok === 1) {
@@ -578,52 +609,66 @@ WallCology = {
 		// Example criteria:
 		//   { habitat: '1', note: 'organism' }
 		generateHabitatsDT: function(criteria) {
-			$.ajax({
-				type: "GET",
-				url: '/mongoose/wallcology/observations/_find',
-				data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: 5000 },
-				context: criteria,
-				success: function(data) {
-					habitatResultsArray = []
+			$.get("/mongoose/wallcology/observations/_count",
+				{ criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}) },
+				function(data) {
+			    	if (data.ok === 1) {
+						batchSize = 0
+						batchSize = data.count
+						if (batchSize > 0) {
+							$.ajax({
+								type: "GET",
+								url: '/mongoose/wallcology/observations/_find',
+								data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
+								context: criteria,
+								success: function(data) {
+									habitatResultsArray = []
 
-					for (i=0;i<data.results.length;i++) {
-						d = new Date(data.results[i].timestamp)
-						if (this.note == "comments") {
-							habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+									for (i=0;i<data.results.length;i++) {
+										d = new Date(data.results[i].timestamp)
+										if (this.note == "comments") {
+											habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+										}
+										else if (this.note == "structural_features") {
+											habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
+										}
+										else if (this.note == "environmental_conditions") {
+											habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
+										}
+										else {
+											habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
+										}
+									}
+							    	if (data.ok === 1) {			    		
+										$('#aggregate-habitat-table').dataTable({
+											"bAutoWidth": false,
+											"iDisplayLength": 6,
+											"bLengthChange": false,
+											"bDestroy" : true,
+											"bJQueryUI": true,
+											"sPaginationType": "full_numbers",
+											"aoColumns": [        
+															{ "sWidth": "500px" },
+															null,
+															null
+														],
+											"aaData": habitatResultsArray	
+										})
+							    	}
+							    	else {
+										console.log("Mongoose request failed")
+										return false
+									}
+								}
+							})
 						}
-						else if (this.note == "structural_features") {
-							habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
-						}
-						else if (this.note == "environmental_conditions") {
-							habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
-						}
-						else {
-							habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
-						}
-					}
-			    	if (data.ok === 1) {			    		
-						$('#aggregate-habitat-table').dataTable({
-							"bAutoWidth": false,
-							"iDisplayLength": 10,
-							"bLengthChange": false,
-							"bDestroy" : true,
-							"bJQueryUI": true,
-							"sPaginationType": "full_numbers",
-							"aoColumns": [        
-											{ "sWidth": "500px" },
-											null,
-											null
-										],
-							"aaData": habitatResultsArray	
-						})
 			    	}
 			    	else {
-						console.log("Mongoose request failed")
+						console.log("Mongoose request count failed")
 						return false
 					}
-				}
-			})
-
+			}, "json")
+			
 		},
 		
 		generateOrganismsDT: function(selectedOrganism, aspect) {
@@ -638,7 +683,7 @@ WallCology = {
 
 			    	if (data.ok === 1) {			    		
 						$('#aggregate-organism-table').dataTable({
-							"iDisplayLength": 7,
+							"iDisplayLength": 6,
 							"bLengthChange": false,
 							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
 							"bJQueryUI": true,
@@ -659,36 +704,52 @@ WallCology = {
 			}, "json")
 		},
 
-		generateRelationshipsDT: function() {
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 5000 },
+		generateRelationshipsDT: function(from, to) {
+			$.get("/mongoose/wallcology/observations/_count",
+				{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
 				function(data) {
-					relationshipResultsArray = []
-					for (i=0;i<data.results.length;i++) {
-						d = new Date(data.results[i].timestamp)
-						relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-					}
-
 			    	if (data.ok === 1) {			    		
-						$('#relationships-datatable').dataTable({
-							"iDisplayLength": 10,
-							"bLengthChange": false,
-							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
-							"bJQueryUI": true,
-							"sPaginationType": "full_numbers",
-							"aoColumns": [        
-											{ "sWidth": "500px" },
-											null,
-											null
-										],
+						batchSize = 0
+						batchSize = data.count
+						if (batchSize > 0) {
+							$.get("/mongoose/wallcology/observations/_find",
+								{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
+								function(data) {
+									relationshipResultsArray = []
+									for (i=0;i<data.results.length;i++) {
+										d = new Date(data.results[i].timestamp)
+										relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
 
-							"aaData": relationshipResultsArray	
-						})
+							    	if (data.ok === 1) {			    		
+										$('#relationships-datatable').dataTable({
+											"iDisplayLength": 6,
+											"bLengthChange": false,
+											"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+											"bJQueryUI": true,
+											"sPaginationType": "full_numbers",
+											"aoColumns": [        
+															{ "sWidth": "500px" },
+															null,
+															null
+														],
+
+											"aaData": relationshipResultsArray	
+										})
+							    	}
+							    	else {
+										console.log("Mongoose request failed")
+										return false
+									}
+							}, "json")
+						}
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
 			}, "json")
+			
 		},
 
 
