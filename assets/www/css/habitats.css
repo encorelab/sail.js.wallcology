@@ -101,12 +101,9 @@ div#aggregate-view-note-type-filter {
 }                             
                              
 table#aggregate-habitat-table {   
-	/* width: 750px; */
+	width: 750px;
+	border-collapse: collapse;
 }
-
-/* table#aggregate-habitat-table th {
-	padding-left: 5px;
-}  */
 
 table#aggregate-habitat-table td {
 	font-size: 14px;

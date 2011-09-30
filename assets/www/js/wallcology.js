@@ -1,7 +1,7 @@
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
-    xmppDomain: 'glint',
+    xmppDomain: 'proto.encorelab.org',
     groupchatRoom: null,
     
     init: function() {
