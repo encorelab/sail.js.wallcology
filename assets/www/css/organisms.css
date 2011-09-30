@@ -23,8 +23,8 @@ div#open-organism div#organism-menu-page {
 
 div#open-organism .organism-button{
 	background: url('');
-	background-color: #669933;
-	border: 1px solid #669933;	
+	background-color: #0CA958;
+	border: 1px solid #0CA958;	
 }
 
 div#inner-organism-menu-page {
@@ -173,7 +173,7 @@ div#open-organism div#what-others-said-about-organisms div#organism-filters {
 	width: 50%;
 }
 
-div#open-organism div#what-others-said-about-organisms div#organism-comment-filters {
+#what-others-said-about-organisms div.organism-comment-filters {
 	margin-left: auto;
 	margin-right: auto;
 	width: 55%;        
@@ -186,6 +186,8 @@ div#open-organism div#what-others-said-about-organisms div#organism-comment-filt
 	/* background-color: #ccc; */ 
 	text-align: center; 
 	padding: 10px;
+	border-radius: 4px;
+	margin: 5px;
 }         
               
 div#open-organism div#what-others-said-about-organisms div#organism-what-others-said-aggregate-table {
