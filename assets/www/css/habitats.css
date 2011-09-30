@@ -1,27 +1,11 @@
 div#new-habitat {
 	margin-left: 20px;
 	height: 100%;
-}
-
-
-html{
-	height: 100%; 
-}    
-
-body {
-	height: 100%;
-}             
+}           
 
 div#tabs div#tabs-1 {
-	background-image: url('/images/bkgd_habitat.png');
-	background-repeat: no-repeat;
-	height: 1200px;
- 	font-size: 14px;		     
+	background-image: url('/images/bkgd_habitat.png');	     
 }                  
-
-div#open-habitat {
-	height: 100%;
-}
                       
 div#habitat-menu-page {
 	background-image: url('/images/transparent_bkg.png');
