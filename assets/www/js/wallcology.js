@@ -364,9 +364,24 @@ WallCology = {
             $('#landing-relationships .view-button').click(function(){
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
+				
+				$('#relationships-datatable').dataTable({
+					"iDisplayLength": 7,
+					"bLengthChange": false,
+					"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers",
+					"aoColumns": [        
+									{ "sWidth": "500px" },
+									null,
+									null
+								]	
+				})
+				
+				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	Sail.app.observations.generateRelationshipsDT()
+            	//Sail.app.observations.generateRelationshipsDT()
             })
             
 //**********NEW RELATIONSHIP***********************************************************************************          
@@ -391,6 +406,10 @@ WallCology = {
             	$(this).append(clone)
             	$('.selectable').removeClass('selected')
             })
+
+			$('#relationships .data-box').click(function(){
+				Sail.app.observations.generateRelationshipsDT($(this).data('from'), $(this).data('to'))
+			})
             
 //**********VIEW RELATIONSHIPS**********************************************************************************            
             
@@ -591,8 +610,8 @@ WallCology = {
 			}, "json")
 		},
 
-		generateRelationshipsDT: function() {
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 200 },
+		generateRelationshipsDT: function(from, to) {
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: 200 },
 				function(data) {
 					relationshipResultsArray = []
 					for (i=0;i<data.results.length;i++) {
