@@ -695,7 +695,6 @@ WallCology = {
     	
         newHabitatContent: function() {
         	sev = new Sail.Event('new_observation', {
-				run:Sail.app.run,
         		type:'habitat',
         		wallscope:$('input:radio[name=radio]:checked').val(),
         		environmental_conditions:$('#new-habitat .environmental-conditions').val(),
@@ -725,7 +724,6 @@ WallCology = {
 			third_juvenile =  $(chosen_juveniles[2]).attr('value') === 'undefined' ? 'null' : $(chosen_juveniles[2]).attr('value');
 						
 			sev = new Sail.Event('new_observation', {
-				run:Sail.app.run,
 				type:'organism',
 				morphology:morphology,
 		        behaviour:behavior,
@@ -746,7 +744,6 @@ WallCology = {
         
         newRelationshipContent: function() {
 	        sev = new Sail.Event('new_observation', {
-	        	run:Sail.app.run,
 	        	type:'relationship',
 	        	energy_transfer:{
 	        		"from":$('#box1').children().attr("id"),
@@ -763,7 +760,6 @@ WallCology = {
 
         newCountsContent: function() {
 	        sev = new Sail.Event('new_observation', {
-	        	run:Sail.app.run,
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
 	        	temperature:$('input:radio[name=temp]:checked').val(),
