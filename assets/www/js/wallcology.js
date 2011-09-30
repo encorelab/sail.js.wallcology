@@ -423,6 +423,14 @@ WallCology = {
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
+            
+            $('#view-relationships .add-to-discussion-button').click(function() {
+           		// $('#view-relationships .row_selected')
+           		// do other stuff
+           		// clear the tags: $('#view-relationships .row_selected').removeClass('row_selected')
+            	$('#view-relationships').hide()
+            	$('#landing-relationships').show()
+            })            
 
 			//row selector for dataTables
 			$('#relationships-datatable tr').live('click', function() {
