@@ -23,7 +23,6 @@ Xoom dimensions:
 	background-color: #669999;
 	border-color: #669999;
 	color: white;
-/*   font-family: DroidSans; */
 	font-weight: bold;
 	font-size: 25px;
 	padding-left: 10px;
@@ -67,7 +66,6 @@ div#tabs .tab-pane {
 
 .datatable {
 	border-collapse: collapse;
-	
 }
 
 /***************************************************************************************************************/

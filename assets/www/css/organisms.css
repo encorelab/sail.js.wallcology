@@ -214,7 +214,34 @@ div#what-others-said-about-organisms .back-button {
 
 div#what-others-said-about-organisms button.add-to-discussion-button {
 	float: right;
+}                      
+
+
+div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.save-button{
+	float: right;
 }
+
+  
+div#describe-lifecycle-organism table#organism-lifecycle-table {
+	margin-left: auto;
+	margin-right: auto;   
+	margin-bottom: 25px; 
+	background-color: white;
+}          
+
+div#describe-lifecycle-organism table#organism-lifecycle-relation {  
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell {
+	width: 60px;
+	height: 60px;
+	background-color: white;
+}
+
+
 
 
 
