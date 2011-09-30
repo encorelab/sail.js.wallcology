@@ -116,9 +116,8 @@ div#aggregate-view-note-type-filter {
 	text-align: center;
 }                             
                              
-table#aggregate-habitat-table {
-	margin-bottom: 25px;     
-	width: 750px;
+table#aggregate-habitat-table {   
+	/* width: 750px; */
 }
 
 /* table#aggregate-habitat-table th {
@@ -128,8 +127,6 @@ table#aggregate-habitat-table {
 table#aggregate-habitat-table td {
 	font-size: 14px;
 }
-
-
 
 div#what-others-said-habitat div.action-buttons {
 	margin-top: 35px;
