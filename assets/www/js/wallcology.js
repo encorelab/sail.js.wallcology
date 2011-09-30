@@ -137,75 +137,9 @@ WallCology = {
 			})
 				           
 				// We create a table with the second column being 500px
-				// TODO: we need to feed the data to the table to be inserted
-				 
-/*				oTable = $('#aggregate-habitat-table').dataTable({
-					"bAutoWidth": false,  
 
-					"bJQueryUI" : true,					
-					"sPaginationType": "full_numbers",                          
-					
-					"bDestroy" : true,  
-					  				
-					"aoColumns": [ 
-						{ "sWidth": "500px" },
-						null,
-						null
-					],
-					
-					"fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-						if ( jQuery.inArray(aData[0], gaiSelected) != -1 )
-						{
-							$(nRow).addClass('row_selected');
-						}
-						return nRow;
-					}
-				 });
-              
-
-				oTableOrganism = $('#aggregate-organism-table').dataTable({
-					"bAutoWidth": false, 
-					
-					"bJQueryUI" : true,    
-					
-					"sPaginationType": "full_numbers",                          
-					
-					"bDestroy" : true,  
-					  				
-					"aoColumns": [        
-						{ "sWidth": "500px" },
-						null,
-						null
-					],  
-				 });
-			// We need to handle the clicking of the table rows
-			 Click event handler 
-			$('#aggregate-habitat-table tbody tr').live('click', function () {
-				var aData = oTable.fnGetData( this );
-				var iId = aData[0];
-
-				if ( jQuery.inArray(iId, gaiSelected) == -1 )
-				{
-					gaiSelected[gaiSelected.length++] = iId;
-				}
-				else
-				{
-					gaiSelected = jQuery.grep(gaiSelected, function(value) {
-						return value != iId;
-					} );
-				}
-
-				$(this).toggleClass('row_selected');
-			} );*/
-
-                        
-
-
-            $('#add-to-discussion-habitat .choose-keywords-button').click(function(){
-            	//pop up with all keywords, pulled from discussion area
-            })
             
-            $('#add-to-discussion-habitat .author-search-button').click(function(){
+/*            $('#add-to-discussion-habitat .author-search-button').click(function(){
             	$('#author-search-habitat').show()
     	            Sail.app.rollcall.fetchAllUsers(function(data) {
     	            	$(data).each(function() {
@@ -219,7 +153,7 @@ WallCology = {
 		            $(inContainer || 'body').append(picker)
 
     	            })
-            })          
+            })         */ 
             
             $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
 			$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
@@ -240,7 +174,7 @@ WallCology = {
 				$('#what-others-said-habitat').show()
 			})   
 	
-			//do we still need this TODO
+			//do we still need this? TODO
 			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
 				// Check to see if all required filters/comments are selected
 				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
@@ -253,7 +187,6 @@ WallCology = {
 					alert ("Please select at least 2 filters!");
 				}
 			})
-
 
 			    
 			// Send selected filters for the agents to pull them back

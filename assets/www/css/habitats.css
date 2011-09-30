@@ -102,7 +102,6 @@ div#aggregate-view-note-type-filter {
                              
 table#aggregate-habitat-table {   
 	width: 750px;
-	border-collapse: collapse;
 }
 
 table#aggregate-habitat-table td {

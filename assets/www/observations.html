@@ -3,6 +3,9 @@
 - add .predator-reveal class, to be turned on (.show?) in week X
 - redo all the radio button colors (if we're going to do the filters in View Organisms...)
 - we need to start on Microworlds, particularly the graphing
+
+
+- set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff 
  -->
 
 
@@ -100,6 +103,11 @@
 				<form action="" class="content-form"> 
 					<div class="content">     						
 						<div class="habitat-form-fields"> 
+							<h4>Organisms</h4>
+							<textarea class="text-box organisms"></textarea> 						
+						</div> 
+						
+						<div class="habitat-form-fields"> 
 							<h4>Environment Conditions (temperature, humidity, light)</h4>
 							<textarea class="text-box environmental-conditions"></textarea> 
 						</div>
@@ -108,12 +116,7 @@
 							<h4>Structural Features</h4>
 							<textarea class="text-box structural-features"></textarea> 
 						</div>
-						
-						<div class="habitat-form-fields"> 
-							<h4>Organisms</h4>
-							<textarea class="text-box organisms"></textarea> 						
-						</div> 
-						
+					
 						<div class="habitat-form-fields"> 
 							<h4>Comments</h4>
 							<textarea class="text-box comments"></textarea>  							
@@ -149,7 +152,7 @@
 
 				<div><h4>If you want to add a note to discussions, select the entries you want added to it: </h4></div>
  				<div id="habitat-aggregate-results">
- 					<table id="aggregate-habitat-table">   
+ 					<table id="aggregate-habitat-table" class="datatable">   
 						<thead>
 							<tr> 
 								<th id="dynamic-column-aggregate-habitat">Organisms</th>	<!--by default select on page entry  -->
@@ -431,7 +434,6 @@
 	
 	 			<div id="new-relationship">
 					<img class="new-relationship-image" src="/images/new_relationship.png" />
-
 					<br/>
 	
 					<table class="organism-selectables table-header">
