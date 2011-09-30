@@ -539,6 +539,37 @@ WallCology = {
 		},
 		
 		// function that retrieves counts for each relationship via sleepy mongoose GET calls
+		fillLifecycleCount: function() {
+			// do this for each table field that has the class .data-box
+			$('.relationship-count').each(function () {
+				// ajax GET call to sleepy mongoose
+				$.ajax({
+					type: "GET",
+					url: "/mongoose/wallcology/observations/_count",
+					data: { criteria: JSON.stringify({"type":"life_cycle", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
+					context: this,
+				  	success: function(data) {
+						var resultArray
+					    if (data.ok === 1) {
+							console.log("Mongoose returned a data set")
+							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
+
+							// writing the count value into the HTML
+							$(this).html(data.count)
+
+							return true
+						}
+						else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}
+				}) // end of ajax
+			}) // end of each
+		},
+		
+		// function that retrieves counts for each relationship via sleepy mongoose GET calls
 		fillRelationshipsTable: function() {
 			// do this for each table field that has the class .data-box
 			$('.data-box').each(function () {
@@ -548,7 +579,7 @@ WallCology = {
 					url: "/mongoose/wallcology/observations/_count",
 					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
 					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
-					context: $(this),
+					context: this,
 				  	success: function(data) {
 						var resultArray
 					    if (data.ok === 1) {
