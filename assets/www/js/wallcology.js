@@ -58,7 +58,8 @@ WallCology = {
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
             $('#new-organism').hide()
-            $('#what-others-said-about-organisms').hide()
+            $('#what-others-said-about-organisms').hide() 
+			$('#describe-lifecycle-organism').hide()
             $('#open-organism').show()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
@@ -295,7 +296,9 @@ WallCology = {
 
 			// When I want to Describe an ORGANISM is clicked 
 			$('div#open-organism button#describe-organism-button').click(function(){
-				$("#organism-menu-page").hide();
+				$("#organism-menu-page").hide();    
+				$('#describe-lifecycle-organism').show(); 
+				$('#what-others-said-about-organisms').hide();				
 				$('#new-organism').show();    
 				// Clear all selections and text areas
 				Sail.app.observations.clearNewOrganismPage();			
@@ -304,13 +307,25 @@ WallCology = {
 			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){ 
 				$("#organism-menu-page").hide();
-				$('#new-organism').hide(); 
+				$('#new-organism').hide();                     
+				$('#describe-lifecycle-organism').hide();
 				$('#what-others-said-about-organisms').show();
 				
 				// HACK: preselect scum - looking for more elegant solution also .css() is no good add and remove class instead
 				$('#what-others-said-about-organisms .organism-filter-selected').css('border', '1px solid black'); 
 				$('#chosen-organism-filter').attr('value', 'scum');
+            })  
+
+			// When I want to describe a LIFECYCLE is clicked, this page page should be loaded
+			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
+				$("#organism-menu-page").hide();
+				$('#new-organism').hide(); 
+				$('#what-others-said-about-organisms').hide();
+				$('#describe-lifecycle-organism').show(); 
+				                                 
+				Sail.app.observations.clearOrganismLifecycle();				
             })
+
 
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
@@ -322,7 +337,13 @@ WallCology = {
 				$('#open-organism').show()
             	$('#new-organism').hide()
             	$('#open-organism #organism-menu-page').show()
-            })   
+            })    
+
+			$('#open-organism div#describe-lifecycle-action-buttons .back-button').click(function(){
+            	$('#describe-lifecycle-organism').hide()
+				$('#open-organism').show()
+            	$('#open-organism #organism-menu-page').show()
+            })
                        
 			
 			// Clearing the chosen organism
@@ -399,7 +420,43 @@ WallCology = {
 				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+			})      
+			
+			// Handling all the events for Organism Lifecycle Page
+			$('div#describe-lifecycle-organism table#organism-lifecycle-table td.selectable').click(function() {  
+				$('div#describe-lifecycle-organism table#organism-lifecycle-table td.selectable').css('border', 'none');
+				$('div#describe-lifecycle-organism table#organism-lifecycle-table td.selected').removeClass('selected');
+				$(this).css("border", "1px solid black");  
+				$(this).addClass('selected');
+			})    
+			
+			// When the save button is clicked we need to to save the organism relations
+			$('div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.save-button').click(function() {
+				// Do not let the student submit the relationship if any of the two slots are empty
+				if ($("div#describe-lifecycle-organism table#organism-lifecycle-relation td#from-organism").html() == '' ||
+					   $("div#describe-lifecycle-organism table#organism-lifecycle-relation td#to-organism").html() == '') {
+						alert("You must fill in both cells with the appropriate organism.");
+				} else { // Save the selections and clear them after  					     
+					Sail.app.observations.newOrganismLifecycle(); 
+					Sail.app.observations.clearOrganismLifecycle();
+				}
 			})
+			                                 
+			// When the student wants to paste the selected organism to show the relationships between them
+			$('div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell').click(function() { 
+				
+				// Check to see if we need to fill the cell or empty it
+				if ($(this).html() != ''){ // clear the cell
+					$(this).html('');
+					$(this).attr('value', 'null');
+				} else {				
+					// We need to see which organism was selected to be copied over here   
+					selectedOrganismValue = $('div#describe-lifecycle-organism table#organism-lifecycle-table td.selected').attr('value');
+					selectedOrganismHTML = $('div#describe-lifecycle-organism table#organism-lifecycle-table td.selected').html();
+					$(this).html(selectedOrganismHTML);
+					$(this).attr('value', selectedOrganismValue);
+				}
+			}) 
 			
 			
 			// When we 
@@ -487,7 +544,8 @@ WallCology = {
 			$('#new-organism div#organism-descriptions textarea').val('');          
 			$('#new-organism div#organism-tables input#selected-organism').attr('value', 'null');
 			$('#new-organism div#organism-tables input#selected-juvenile').attr('value', 'null');   
-			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null');
+			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null'); 
+			$('#new-organism div#organism-tables div#chosen-organism span.organism-only').html('');
 		},
 
 		dateString: function(d) {
@@ -498,6 +556,14 @@ WallCology = {
 			      + pad(d.getHours())+':'
 			      + pad(d.getMinutes())+':'
 			      + pad(d.getSeconds())
+		},   
+		
+		clearOrganismLifecycle: function () {
+			// clear all previous selections                                                  
+			$("div#describe-lifecycle-organism table#organism-lifecycle-table td.selected").css('border', 'none');
+			$("div#describe-lifecycle-organism table#organism-lifecycle-table td.selected").removeClass('selected');
+			$("div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell").html('');
+			$("div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell").attr('value', 'null');
 		},
 		
 		// function that retrieves counts for each relationship via sleepy mongoose GET calls
@@ -740,17 +806,34 @@ WallCology = {
 		        habitat:habitat,
 		        comments:comments,
 		        organism:chosen_organism,
+				/** This piece is commented out because the designers changed their mind. DO NOT REMOVE THIS CODE as they might change their minds
+				once again
 				lifecycle:{ 
 					slot1: first_juvenile,
 					slot2: second_juvenile,
 					slot3: third_juvenile
-				}
+				} 
+				*/
 			})  			
 	        WallCology.groupchat.sendEvent(sev)
 	        //clear fields
 /*	        $('#new-organism .textarea').val('')
 	        $('#new-organism .organism-blank-cell').html("")
-*/        },
+*/        },   
+
+		newOrganismLifecycle: function() {    
+			
+			fromOrganism = $('div#describe-lifecycle-organism table#organism-lifecycle-relation td#from-organism').attr('value');
+			toOrganism = $('div#describe-lifecycle-organism table#organism-lifecycle-relation td#to-organism').attr('value');
+			
+			sev = new Sail.Event('new_observation', {
+				run:Sail.app.run,
+				type:'organism',
+				from: fromOrganism,
+				to: toOrganism,
+			})
+			WallCology.groupchat.sendEvent(sev)
+		},
         
         newRelationshipContent: function() {
 	        sev = new Sail.Event('new_observation', {
