@@ -189,8 +189,6 @@ WallCology = {
 				$(this).toggleClass('row_selected');
 			} );*/
 
-            
-//**********ADD TO DISCUSSION HABITAT*****************************************************************************************
                         
 			$('#radio').buttonset()
 
@@ -554,7 +552,7 @@ WallCology = {
 		//   { habitat: '1', note: 'organism' }
 		generateHabitatsDT: function(criteria) {
 			//criteria = criteria || {}
-			//Still one bug remaining - when no wallscope is selected, the note types don't change when filters are clicked
+			//Still one bug BUG remaining - when no wallscope is selected, the note types don't change when filters are clicked
 			$.ajax({
 				type: "GET",
 				url: '/mongoose/wallcology/observations/_find',
