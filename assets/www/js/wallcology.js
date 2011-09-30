@@ -368,9 +368,26 @@ WallCology = {
             $('#landing-relationships .view-button').click(function(){
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
+				/*
+				$('#relationships-datatable').dataTable({
+					"iDisplayLength": 7,
+					"bLengthChange": false,
+					"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers",
+					"aoColumns": [        
+									{ "sWidth": "500px" },
+									null,
+									null
+								],
+
+					"aaData": ["nothing selected", "no origin", "no date"]	
+				})
+				*/
+				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	Sail.app.observations.generateRelationshipsDT()
+            	//Sail.app.observations.generateRelationshipsDT()
             })
             
 //**********NEW RELATIONSHIP***********************************************************************************          
@@ -395,6 +412,10 @@ WallCology = {
             	$(this).append(clone)
             	$('.selectable').removeClass('selected')
             })
+
+			$('#relationships .data-box').click(function(){
+				Sail.app.observations.generateRelationshipsDT($(this).data('from'), $(this).data('to'))
+			})
             
 //**********VIEW RELATIONSHIPS**********************************************************************************            
             
