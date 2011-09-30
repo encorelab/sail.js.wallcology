@@ -21,7 +21,7 @@ class Archivist < Sail::Agent
     end
     
     event :new_observation? do |stanza, data|
-      store_payload_in_mongo('wallcology', data['payload'], data['origin'], data['timestamp'])
+      store_observation_in_mongo(data)
     end
     
     message :error? do |err|
@@ -44,10 +44,8 @@ class Archivist < Sail::Agent
   
   protected
   
-  def store_payload_in_mongo(collection, payload, origin, timestamp)
-    payload['origin'] = origin
-    payload['timestamp'] = timestamp
-    log "Storing payload in collection #{collection.inspect}: #{payload.inspect}"
-    @mongo.collection('observations').save(payload)
+  def store_observation_in_mongo(data)
+    log "Storing observation: #{data.inspect}"
+    @mongo.collection('observations').save(data)
   end
 end
