@@ -49,7 +49,7 @@ WallCology = {
         
         init: function() {     
 			var oTable;
-			var gaiSelected =  [];
+			var gaiSelected =  [];		// do we still need these?
 			
             $('#tabs').tabs()
             $('#tabs').show()
@@ -76,11 +76,16 @@ WallCology = {
             	$('#new-habitat').hide()
             	$('#open-habitat').show()
             })       
-            
+
             $('#new-habitat .save-button').click(function(){
-				Sail.app.observations.newHabitatContent()
-            	$('#new-habitat').hide()
-            	$('#open-habitat').show()
+            	if ( $('input:radio').is(':checked') ) {
+					Sail.app.observations.newHabitatContent()
+	            	$('#new-habitat').hide()
+	            	$('#open-habitat').show()
+            	}
+	            else {
+	            	alert("Please select a habitat")
+	            }
 			})
 
      		
@@ -379,7 +384,7 @@ WallCology = {
 				// Do not let the student submit the relationship if any of the two slots are empty
 				if ($("div#describe-lifecycle-organism table#organism-lifecycle-relation td#from-organism").html() == '' ||
 					   $("div#describe-lifecycle-organism table#organism-lifecycle-relation td#to-organism").html() == '') {
-						alert("You must fill in both cells with the appropriate organism.");
+						alert("You must fill in both cells with the appropriate organism");
 				} else { // Save the selections and clear them after  					     
 					Sail.app.observations.newOrganismLifecycle(); 
 					Sail.app.observations.clearOrganismLifecycle();
@@ -488,7 +493,7 @@ WallCology = {
             	$('#landing-relationships').show()
             })            
 
-			//row selector for dataTables
+			// row selector for dataTables
 			$('#relationships-datatable tr').live('click', function() {
 				if ( $(this).hasClass('row_selected') )
 					$(this).removeClass('row_selected')
