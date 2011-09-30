@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			//for testing, sets default open tab
+            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -236,9 +236,22 @@ WallCology = {
 				
 				// HACK: preselect scum - looking for more elegant solution also .css() is no good add and remove class instead
 				$('#what-others-said-about-organisms .organism-filter-selected').css('border', '1px solid black'); 
+				$('#what-others-said-about-organisms .organism-filter').css('border', 'none'); 
 				$('#chosen-organism-filter').attr('value', 'scum');
+				
+				// unchecking all radio buttons
+				$('input:radio[name="organism-comment-filter-set"]').attr('checked', false);
+				// removing active state from all jQuery styled radio buttons
+				$('.organism-comment-filters label').removeClass('ui-state-active');
+				
+				// Pre-select the morphology radio buttton
+				$('input:radio[name="organism-comment-filter-set"]').filter('[value="morphology"]').attr('checked', true);
+				$("#organism-comment-filter-1 + label").addClass("ui-state-active");
+				// setting the header of the datatable according to selected criteria
+				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				// calling function to fill data-table via ajax call
+				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
             })
-
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
        			Sail.app.observations.newOrganismContent(); 
@@ -319,6 +332,7 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
 				$(this).css('border', '1px solid black');     
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
+				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
 			})  
 			 
 			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
@@ -556,7 +570,7 @@ WallCology = {
 
 			    	if (data.ok === 1) {			    		
 						$('#aggregate-organism-table').dataTable({
-							"iDisplayLength": 10,
+							"iDisplayLength": 7,
 							"bLengthChange": false,
 							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
 							"bJQueryUI": true,
