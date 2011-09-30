@@ -46,6 +46,30 @@ body {
   width: 100%;
 }
 
+div#tabs {
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+div#tabs .tab-pane { 
+  background-size: 100%;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  top: 50px;
+  overflow: auto;
+}
+
+.datatable {
+	border-collapse: collapse;
+	
+}
+
 /***************************************************************************************************************/
 
 

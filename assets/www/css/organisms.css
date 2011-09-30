@@ -1,14 +1,3 @@
-div#open-organism {
-	height: 100%;
-}
-
-html{
-	height: 100%; 
-}    
-
-body {
-	height: 100%;
-}
            
 div#open-organism div#organism-menu-page {
 	background-image: url('/images/transparent_bkg.png');
@@ -49,7 +38,6 @@ div#inner-organism-menu-page {
 div#tabs-2 {
 	background-image: url('/images/bkgd_organism.png');
 	padding-left: 25px; 
-	height: 1200px;
 	font-size: 14px;
 }
 
