@@ -364,7 +364,7 @@ WallCology = {
             $('#landing-relationships .view-button').click(function(){
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
-				
+				/*
 				$('#relationships-datatable').dataTable({
 					"iDisplayLength": 7,
 					"bLengthChange": false,
@@ -375,9 +375,11 @@ WallCology = {
 									{ "sWidth": "500px" },
 									null,
 									null
-								]	
+								],
+
+					"aaData": ["nothing selected", "no origin", "no date"]	
 				})
-				
+				*/
 				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
