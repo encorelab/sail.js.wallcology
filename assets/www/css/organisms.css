@@ -225,7 +225,8 @@ div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.sav
 div#describe-lifecycle-organism table#organism-lifecycle-table {
 	margin-left: auto;
 	margin-right: auto;   
-	margin-bottom: 25px;
+	margin-bottom: 25px; 
+	background-color: white;
 }          
 
 div#describe-lifecycle-organism table#organism-lifecycle-relation {  
