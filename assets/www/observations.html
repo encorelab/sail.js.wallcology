@@ -348,19 +348,19 @@
 						<div id="organism-filters">
 							<table>
 								<tr>
-									<td value="scum">
+									<td class ="organism-filter-selected" value="scum">
 										<img src="/images/icon_0007_scum.png" class="image">
 									</td>
 								
-									<td value="mold">
+									<td value="fuzzy-mold">
 										<img src="/images/icon_0006_fuzzy-mold.png" class="image">
 									</td>                                      								
 								
-									<td value="blue">
+									<td value="blue-bug">
 										<img src="/images/icon_0000_blue-bug.png" class="image">
 									</td>
 								    
-									<td value="turtle">
+									<td value="green-bug">
 										<img src="/images/icon_0008_green-bug.png" class="image">
 									</td>
 								
@@ -372,88 +372,46 @@
 							<input id="chosen-organism-filter" type="hidden" value="null">
 						</div> 
 					
- 						<div id="organism-comment-filters">	
-
- 							<table>
-								<tr>
-								<td class='organism-comment-filter' value="Morphology">
-									Morphology
-								</td>
-								
-								<td class='organism-comment-filter' value="Behavior">
-									Behavior
-								</td>                                      								
-								
-								<td class='organism-comment-filter' value="Habitat">
-									Habitat
-								</td>
-								    
-								<td class='organism-comment-filter' value="Comments">
-									Comments
-								</td>       
-								</tr>
-							</table>    
-						<input id="chosen-organism-comment-filter" type="hidden" value="null">
+					
+ 						<div class="organism-comment-filters jquery-radios">	
+							<input type="radio" id="organism-comment-filter-1" class="radio-button" name="organism-comment-filter-set" value="morphology" />
+							<label for="organism-comment-filter-1">Morphology</label> 
+							<input type="radio" id="organism-comment-filter-2" class="radio-button" name="organism-comment-filter-set" value="behaviour" />
+							<label for="organism-comment-filter-2">Behaviour</label> 
+							<input type="radio" id="organism-comment-filter-3" class="radio-button" name="organism-comment-filter-set" value="habitat" />
+							<label for="organism-comment-filter-3">Habitat</label>
+							<input type="radio" id="organism-comment-filter-4" class="radio-button" name="organism-comment-filter-set" value="comments" />
+							<label for="organism-comment-filter-4">Comments</label>
 						</div>						
-
-					
-					<div id="organism-what-others-said-aggregate-table">
-						<h4> If you want to add a note to discussions, select the entries that apply to it:</h4>
 						
-						<table id="aggregate-organism-table">   
-							<thead>
-								<tr> 
-									<th id="dynamic-column-aggregate-organism"> </th>
-									<th> Author(s)</th>
-									<th> Last Updated</th>
-								</tr>                               
-							<!--TODO: Iterate through all the results returned based on the chosen filters above and create checkboxes with the appropriate ids-->
-						   </thead>   
-						
-						   <tbody>
-						   		<tr>
-									<td> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  
-									</td>
-									<td> Louis B, Naomi C </td>
-									<td> 10/1/2011 2:45 pm </td>
-								</tr> 
-
-								<tr>
-									<td> lorm lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Ali B, Sally T </td>
-									<td> 10/1/2011 12:34 pm </td>
-								</tr>
-
-								<tr>
-									<td> looooo loooo orem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Jelly F, Kelly M </td>
-									<td> 10/1/2011 18:34 pm </td>
-								</tr>
-
-								<tr>
-									<td> This is the second entry with a lot of lorem ipsum, lorem ipsum.. what was that? lorem ipsum? 
-									</td>
-									<td> Beatrice S, Jeffery G </td>
-									<td> 10/1/2011 2:34 pm </td>
-								</tr>
-							</tbody>				
-						</table>
-						
-					</div>
 					
-					<div id="organism-what-others-said-action-buttons">
-						<button class="back-button organism-button">BACK</button>
-						<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
-					</div>
+						<div id="organism-what-others-said-aggregate-table">
+							<h4> If you want to add a note to discussions, select the entries that apply to it:</h4>
 					
-				</div>
-			</div>
-           
-			</div> 
-		
-		</div>
+							<div class="datatable">
+								<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-organism-table">
+									<thead>
+										<tr>
+											<th id="dynamic-column-aggregate-organism"> </th>						
+											<th>Author(s)</th>
+											<th>Last Updated</th>
+										</tr>
+									</thead>
+									<tbody>						
+									</tbody>
+								</table>
+							</div>
+						</div>
+					
+						<div id="organism-what-others-said-action-buttons">
+							<button class="back-button organism-button">BACK</button>
+							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
+						</div>
+					
+					</div> <!-- aggregate-organism-filters -->
+				</div> <!-- what-others-said-about-organisms -->
+			</div> <!-- open-organsim-->
+		</div> <!-- tabs-2 -->
 		
 		
 		

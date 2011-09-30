@@ -50,7 +50,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 2 });			//for testing, sets default open tab
+            $('#tabs').tabs({ selected: 1 });			//for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -308,32 +308,9 @@ WallCology = {
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').show();
 				
-				// clear all the Selected Filters
-				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none'); 
-				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-filter').attr('value', 'null');
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#cccccc', 'color':'black'});
-				$('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value', 'null');				
-			
-			
-				// We create a table with the second column being 500px
-				// TODO: we need to feed the data to the table to be inserted
-				oTableOrganism = $('#aggregate-organism-table').dataTable({
-					"iDisplayLength": 10,
-					"bLengthChange": false,
-					"bAutoWidth": false, 
-					
-					"bJQueryUI" : true,    
-					
-					"sPaginationType": "full_numbers",                          
-					
-					"bDestroy" : true,  
-					  				
-					"aoColumns": [        
-						{ "sWidth": "500px" },
-						null,
-						null
-					],  
-				 });
+				// HACK: preselect scum - looking for more elegant solution also .css() is no good add and remove class instead
+				$('#what-others-said-about-organisms .organism-filter-selected').css('border', '1px solid black'); 
+				$('#chosen-organism-filter').attr('value', 'scum');
             })
 
             
@@ -413,11 +390,11 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
 			})  
 			 
-			$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').click(function(){ 		
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter').css({'border':'none', 'background-color':'#CCCCCC', 'color':'black'});
-				$(this).css({'background-color':'#669933', 'color':'white'}); 
-				$('div#open-organism div#what-others-said-about-organisms div#organism-comment-filters input#chosen-organism-comment-filter').attr('value', $(this).attr('value'));
-				$("table#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('div#open-organism div#what-others-said-about-organisms input#chosen-organism-comment-filter').attr('value'));
+			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
+				// setting the header of the datatable according to selected criteria
+				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				// calling function to fill data-table via ajax call
+				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
 			})
 			
 			
@@ -587,6 +564,39 @@ WallCology = {
 			}, "json")
 		},
 		
+		generateOrganismsDT: function(selectedOrganism, aspect) {
+			$.get("/mongoose/wallcology/observations/_find",
+				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: 100 },
+				function(data) {
+					organismResultsArray = []
+					for (i=0;i<data.results.length;i++) {
+						d = new Date(data.results[i].timestamp)
+						organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+					}
+
+			    	if (data.ok === 1) {			    		
+						$('#aggregate-organism-table').dataTable({
+							"iDisplayLength": 10,
+							"bLengthChange": false,
+							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
+							"bJQueryUI": true,
+							"sPaginationType": "full_numbers",
+							"aoColumns": [        
+											{ "sWidth": "500px" },
+											null,
+											null
+										],
+
+							"aaData": organismResultsArray	
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			}, "json")
+		},
+
 		generateRelationshipsDT: function() {
 			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 100 },
 				function(data) {
@@ -598,7 +608,7 @@ WallCology = {
 
 			    	if (data.ok === 1) {			    		
 						$('#relationships-datatable').dataTable({
-							"iDisplayLength": 5,
+							"iDisplayLength": 10,
 							"bLengthChange": false,
 							"bDestroy" : true,		//you need this so that the table will be refreshed without errors each time entering the page
 							"bJQueryUI": true,
