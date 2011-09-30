@@ -1,3 +1,6 @@
+// batch sizes for queries cap at 5000. Ctrl-f for batch size and change as required
+
+
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
@@ -66,22 +69,6 @@ WallCology = {
 
             $('.jquery-radios').buttonset()
            
-
-
-//**********HABITAT*************************************************************************************************
-            $('#landing-habitat .new-button').click(function(){
-            	$('#open-habitat').hide()   
-				$('#add-to-discussions-habitat').hide();
-				$('#landing-habitat').hide()
-            	$('#new-habitat').show()
-
-				//we need to clear all the fields here (TODO)
-				$('textarea.text-box').val();
-            })
-            $('#landing-habitat .view-button').click(function(){
-            	$('#landing-habitat').hide()
-            	$('#open-habitat').show()
-            })
             
 //**********NEW HABITAT*****************************************************************************************
 
@@ -89,6 +76,12 @@ WallCology = {
             	$('#new-habitat').hide()
             	$('#open-habitat').show()
             })       
+            
+            $('#new-habitat .save-button').click(function(){
+				Sail.app.observations.newHabitatContent()
+            	$('#new-habitat').hide()
+            	$('#open-habitat').show()
+			})
 
      		
 //**********OPEN HABITAT*********************************************************************************************            
@@ -104,20 +97,19 @@ WallCology = {
 			// When I want to Describe a Habitat is clicked 
 			$('div#open-habitat button#describe-habitat-button').click(function(){
 				$('#open-habitat').hide()           
-				$("#add-to-discussions-habitat").hide();
-            	$('#what-others-said-habitat').hide();
-				$('#new-habitat').show();
+				$('#new-habitat').show()
 			})
 
 			$('#radio').buttonset()
 
+			
+//**********VIEW HABITAT*********************************************************************************************
 			$("div#aggregate-view-habitat-filter").buttonset();
 			$("div#aggregate-view-note-type-filter").buttonset();
 			
 			// When See What Others Said for Habitat is clicked, this page page should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
             	$('#open-habitat').hide()           
-				$("#add-to-discussions-habitat").hide();
             	$('#what-others-said-habitat').show() 
                 // Uncheck all selected filters and the chosen notes
 				$("#what-others-said-habitat input:radio:checked").attr("checked", false);
@@ -136,10 +128,41 @@ WallCology = {
  
 				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
 			})
-				           
-				// We create a table with the second column being 500px
-
+			
+			$('#what-others-said-habitat .back-button').click(function(){
+            	$('#what-others-said-habitat').hide()
+            	$('#open-habitat').show()
+            })
             
+            $("input[name=habitat-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
+			})
+			
+			$("input[name=note-filter-set]").click(function() {
+				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
+				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
+			})
+
+           	$('#aggregate-habitat-table tr').live('click', function() {
+				if ( $(this).hasClass('row_selected') )
+					$(this).removeClass('row_selected')
+				else
+					$(this).addClass('row_selected')
+           	})
+           	
+           	// To hand off to MATT
+           	$('#what-others-said-habitat .add-to-discussion-button').click(function(){
+           		// $('#what-others-said-habitat .row_selected')
+           		// do other stuff
+           		// clear the tags: $('#what-others-said-habitat .row_selected').removeClass('row_selected')
+            	$('#what-others-said-habitat').hide()
+            	$('#open-habitat').show()
+            })
+
+					
 /*            $('#add-to-discussion-habitat .author-search-button').click(function(){
             	$('#author-search-habitat').show()
     	            Sail.app.rollcall.fetchAllUsers(function(data) {
@@ -156,27 +179,18 @@ WallCology = {
     	            })
             })         */ 
             
-            $('#add-to-discussion-habitat .save-button').click(Sail.app.observations.newDiscussionContent)
-			$('#new-habitat .save-button').click(Sail.app.observations.newHabitatContent)
-            $('#add-to-discussion-habitat .back-button').click(function(){
-				$('#new-habitat').hide()
+/*          This doesn't actually do anything  
+ * 			$('#add-to-discussion-habitat .save-button').click(function(){
+            	Sail.app.observations.newDiscussionContent()
             	$('#add-to-discussion-habitat').hide()
+            	$('#new-habitat').hide()
             	$('#open-habitat').show()
-            })
-
+            })*/
             
-			$('#what-others-said-habitat .back-button').click(function(){
-            	$('#what-others-said-habitat').hide()
-            	$('#open-habitat').show()
-            })  
 
-			$('#add-to-discussions-habitat .back-button').click(function(){
-				$('#add-to-discussions-habitat').hide()
-				$('#what-others-said-habitat').show()
-			})   
 	
 			//do we still need this? TODO
-			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
+/*			$("#what-others-said-habitat .add-to-discussion-button").click(function(){
 				// Check to see if all required filters/comments are selected
 				if ($("#what-others-said-habitat input:radio:checked").size() == 2){
 					// TODO: send the data to the server to be saved
@@ -189,6 +203,10 @@ WallCology = {
 				}
 			})
 
+            $('#add-to-discussion-habitat .back-button').click(function(){
+				$('#new-habitat').hide()
+            	$('#open-habitat').show()
+            })
 			    
 			// Send selected filters for the agents to pull them back
 			$("div#aggregate-habitat-filters input").click(function(){
@@ -202,21 +220,7 @@ WallCology = {
 				if (this.name == "note-filter-set"){               
 					$("table#aggregate-habitat-table th#dynamic-column-aggregate-habitat").html($(this).button("option", "label"));
 				}				
-			})                      
-			
-
-			$("input[name=habitat-filter-set]").click(function() {
-				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
-				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
-			})
-			
-			$("input[name=note-filter-set]").click(function() {
-				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
-				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
-			})
-
+			})  */                    			
 
 
 //**********ORGANISM****************************************************************************************    
@@ -483,8 +487,7 @@ WallCology = {
 				else
 					$(this).addClass('row_selected')
 			})
-				
-            
+				          
             
 //**********COUNTS******************************************************************************************			
 
@@ -565,7 +568,7 @@ WallCology = {
 			$.ajax({
 				type: "GET",
 				url: '/mongoose/wallcology/observations/_find',
-				data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: 200 },
+				data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: 5000 },
 				context: criteria,
 				success: function(data) {
 					habitatResultsArray = []
@@ -609,44 +612,10 @@ WallCology = {
 			})
 
 		},
-
-			
-/*			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"habitat"}) },
-				function(data) {
-					habitatResultsArray = []
-					if (t !== null && t !== undefined) {
-						for (i=0;i<data.results.length;i++) {
-							d = new Date(data.results[i].timestamp)
-							habitatResultsArray[i] = [(data.results[i][type]), data.results[i].origin, Sail.app.observations.dateString(d)]
-						}
-					}
-			    	if (data.ok === 1) {			    		
-						$('#aggregate-habitat-table').dataTable({
-							"bAutoWidth": false,
-							"iDisplayLength": 10,
-							"bLengthChange": false,
-							"bDestroy" : true,
-							"bJQueryUI": true,
-							"sPaginationType": "full_numbers",
-							"aoColumns": [        
-											{ "sWidth": "500px" },
-											null,
-											null
-										],
-
-							"aaData": habitatResultsArray	
-						})
-			    	}
-			    	else {
-						console.log("Mongoose request failed")
-						return false
-					}
-			}, "json")
-		},*/
 		
 		generateOrganismsDT: function(selectedOrganism, aspect) {
 			$.get("/mongoose/wallcology/observations/_find",
-				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: 100 },
+				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: 5000 },
 				function(data) {
 					organismResultsArray = []
 					for (i=0;i<data.results.length;i++) {
@@ -677,8 +646,8 @@ WallCology = {
 			}, "json")
 		},
 
-		generateRelationshipsDT: function(from, to) {
-			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: 200 },
+		generateRelationshipsDT: function() {
+			$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}), batch_size: 5000 },
 				function(data) {
 					relationshipResultsArray = []
 					for (i=0;i<data.results.length;i++) {
@@ -708,19 +677,6 @@ WallCology = {
 					}
 			}, "json")
 		},
-
-
-		//(new Date(data.results[i].timestamp)).dateString()
-		// _find?criteria[type]=relationship
-		// _find?criteria={type:relationship}
-		//$.get("/mongoose/wallcology/observations/_find", { criteria:{"type":"relationship"} },
-		//  $.get("mongoose/wallcology/observations/_find?criteria={%22type%22%3A%22relationship%22}",
-		//$.get("/mongoose/wallcology/observations/_find", { criteria: JSON.stringify({"type":"relationship"}) },
-
-		//skip: 10,
-		
-		
-		//"aaData": [ data.results.map(function(result){ return ["D", result.comments, result.origin, result.timestamp] }) ]
 
 
 // ***************************************************************************************************************
