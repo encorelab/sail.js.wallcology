@@ -1,0 +1,55 @@
+div#investigation-pages {
+	height: 100%;
+}
+
+html{
+	height: 100%; 
+}    
+
+body {
+	height: 100%;
+}
+
+
+/********************************* INVESTIGATION MENU PAGE *****************************/   
+   
+div#investigation-pages {
+	background-image: url('/images/bkgd_habitat.png');
+	background-repeat: no-repeat;
+	height: 1200px;
+ 	font-size: 14px;
+}
+           
+div#investigation-pages div#investigation-menu-page {
+	background-image: url('/images/transparent_bkg.png');
+	height: 100%;
+	display: table-cell; 
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 160px;
+	overflow: hidden;
+}      
+
+div#investigation-pages div#investigation-menu-page div#inner-investigation-menu-page {
+	_position: absolute; 
+	_top: 50%; 
+	display: table-cell; 
+	vertical-align: middle; 
+	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
+}
+
+
+/********************************* INVESTIGATION MOTIVATION *****************************/
+
+/********************************* INVESTIGATION SETUP *****************************/
+
+
+/********************************* INVESTIGATION RESULTS *****************************/
+
+
+/********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/
+
+
+/********************************* INDIVIDUAL INVESTIGATION RESULT *****************************/

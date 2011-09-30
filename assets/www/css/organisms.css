@@ -173,7 +173,7 @@ div#open-organism div#what-others-said-about-organisms div#organism-filters {
 	width: 50%;
 }
 
-div#open-organism div#what-others-said-about-organisms div#organism-comment-filters {
+#what-others-said-about-organisms div.organism-comment-filters {
 	margin-left: auto;
 	margin-right: auto;
 	width: 55%;        
