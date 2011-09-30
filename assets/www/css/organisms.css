@@ -55,7 +55,8 @@ div#tabs-2 {
 
 div#tabs-2 img#organism-page-image {
 	float: left;
-}
+}                
+
 
 #new-organism #organism-page-image {
 	margin-bottom: 15px;
@@ -63,7 +64,14 @@ div#tabs-2 img#organism-page-image {
                             
 div#tabs-2 div#organism-tables {
 	width: 25%;
-	float: left;  
+	float: left;
+	margin-top: 15px;  
+}     
+
+div#open-organism div#organism-tables div#chosen-organism {  
+	width: 100px;
+	height: 60px;
+	margin-bottom: 10px;
 }
                 
 div#tabs-2 div#organism-descriptions {
