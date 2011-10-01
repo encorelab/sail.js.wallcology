@@ -239,6 +239,77 @@ div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cel
 	width: 60px;
 	height: 60px;
 	background-color: white;
+} 
+
+/** THE CODE FOR WHAT OTHERS SAID ABOUT THE LIFE CYCLES **/
+div#what-others-said-organism-lifecycle .section-title {
+	color: #669933;
+}      
+
+div#what-others-said-organism-lifecycle p.section-title {   
+	margin-left: auto;
+	margin-right: auto;  
+	width: 40%;
+}  
+
+div#what-others-said-organism-lifecycle table#organism-life-cycle-table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+}  
+
+div#what-others-said-organism-lifecycle div#what-others-said-organism-lifecycle-action-buttons button.save-button {
+	float: right;
+}                                                   
+
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 {
+	float: left;
+	width: 300px; 
+	margin-bottom: 25px;
+}                                                                               
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 {
+	float: right;  
+	width: 300px;
+
+}
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td {
+	width: 60px;
+	height: 60px;
+}                                                                             
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 img {
+	width: 60px;
+}
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 img {
+	width: 60px;
+}
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td {
+	width: 60px;
+	height: 60px;
+}
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.selected-organism-relationship {
+	background-color: #cccccc;
+}       
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.relationship-count {
+	background-color: #cccccc;          
+	text-align: center;
+}
+
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.selected-organism-relationship {
+	background-color: #cccccc;
+}       
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.relationship-count {
+	background-color: #cccccc;          
+	text-align: center;
 }
 
 
