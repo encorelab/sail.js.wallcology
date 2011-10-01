@@ -2,8 +2,9 @@ $: << "sail.rb/lib"
 require 'sail/daemon'
 
 require 'archivist'
+require 'notetaker'
 
-AGENT_PASSWORD = "329eb6a50e0b7ff71fed77dd876f4847e7cd2020"
+AGENT_PASSWORD = "1d6f760bc95729166e551d7bee1d75c69b133015"
 XMPP_DOMAIN = `hostname`.strip # assuming that the current hostname is also the xmpp domain
 
 @daemon = Sail::Daemon.spawn(
@@ -13,9 +14,11 @@ XMPP_DOMAIN = `hostname`.strip # assuming that the current hostname is also the 
 )
 
 # Julia's run
-@daemon << Archivist.new(:room => "wallcology-julia-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD)
+@daemon << Archivist.new(:room => "wallcology-julia-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD, :database => 'wallcology')
+@daemon << Notetaker.new(:room => "wallcology-julia-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD, :database => 'wallcology')
 
 # Ben's run
-@daemon << Archivist.new(:room => "wallcology-ben-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD)
+@daemon << Archivist.new(:room => "wallcology-ben-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD, :database => 'wallcology')
+@daemon << Notetaker.new(:room => "wallcology-ben-fall2011", :host => XMPP_DOMAIN, :password => AGENT_PASSWORD, :database => 'wallcology')
 
 @daemon.start
