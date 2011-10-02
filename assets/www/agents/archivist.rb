@@ -21,6 +21,8 @@ class Archivist < Sail::Agent
     end
     
     event :new_observation? do |stanza, data|
+      observation = data['payload']
+      ['origin', 'run', 'timestamp'].each{|meta| observation[meta] = data[meta]}
       store_observation_in_mongo(data)
     end
     
@@ -44,8 +46,8 @@ class Archivist < Sail::Agent
   
   protected
   
-  def store_observation_in_mongo(data)
-    log "Storing observation: #{data.inspect}"
-    @mongo.collection('observations').save(data)
+  def store_observation_in_mongo(observation)
+    log "Storing observation: #{observation.inspect}"
+    @mongo.collection('observations').save(observation)
   end
 end
