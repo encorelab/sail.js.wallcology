@@ -4,6 +4,9 @@ WallCology = {
     xmppDomain: 'glint',
     groupchatRoom: null,
     
+    // all Sail events generated in this app must have a run
+    allowRunlessEvents: false,
+    
     init: function() {
         console.log("Initializing...")
         
