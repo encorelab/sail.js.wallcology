@@ -60,8 +60,10 @@ WallCology = {
             $('#open-habitat').show()
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
-            $('#new-organism').hide()
-            $('#what-others-said-about-organisms').hide() 
+            $('#new-organism').hide()      
+			$('#describe-lifecycle-organism').hide();
+            $('#what-others-said-about-organisms').hide();
+ 			$('#what-others-said-organism-lifecycle').hide();
 			$('#describe-lifecycle-organism').hide()
             $('#open-organism').show()
             $('#new-relationship').hide()
@@ -233,7 +235,7 @@ WallCology = {
 			// When I want to Describe an ORGANISM is clicked 
 			$('div#open-organism button#describe-organism-button').click(function(){
 				$("#organism-menu-page").hide();    
-				$('#describe-lifecycle-organism').show(); 
+				$('#describe-lifecycle-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
 				$('#new-organism').show();    
 				// Clear all selections and text areas
@@ -244,7 +246,7 @@ WallCology = {
 			$('div#open-organism #what-others-said-organism-button').click(function(){ 
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
-				$('#describe-lifecycle-organism').hide();
+				$('#describe-lifecycle-organism').hide(); 
 				$('#what-others-said-about-organisms').show();
 				
 				// HACK: preselect scum - looking for more elegant solution also .css() is no good add and remove class instead
@@ -270,11 +272,20 @@ WallCology = {
 			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
-				$('#what-others-said-about-organisms').hide();
+				$('#what-others-said-about-organisms').hide();				
 				$('#describe-lifecycle-organism').show(); 
 				                                 
 				Sail.app.observations.clearOrganismLifecycle();				
-            })
+            })   
+             
+			// When I want to see what others said about LIFECYCLES is clicked, this page page should be loaded
+			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
+				$("#organism-menu-page").hide();
+				$('#new-organism').hide(); 
+				$('#what-others-said-about-organisms').hide();				
+				$('#describe-lifecycle-organism').hide();  
+				$('#what-others-said-organism-lifecycle').show();
+			})
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
        			Sail.app.observations.newOrganismContent(); 
@@ -291,7 +302,24 @@ WallCology = {
             	$('#describe-lifecycle-organism').hide()
 				$('#open-organism').show()
             	$('#open-organism #organism-menu-page').show()
-            })
+            }) 
+
+ 			$('#open-organism div#what-others-said-organism-lifecycle table#organism-life-cycle-table td.selectable').click(function() {
+	        	// We first need to fill the "TO" part of the relationship tables with the selected organism. Then we need to update
+	 			// the "data-to" value on TDs with "relationship-count" class. Then we make a call to the server and get the counts. 
+	                                                     
+				$('#open-organism div#what-others-said-organism-lifecycle table#organism-life-cycle-table td.selectable').css("border", "none");
+				$(this).css("border", "1px solid black");
+	
+				$('div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.selected-organism-relationship').html($(this).html());
+				$('div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.selected-organism-relationship').html($(this).html());
+			})
+
+			$('#open-organism div#what-others-said-organism-lifecycle .back-button').click(function(){
+				$('#what-others-said-organism-lifecycle').hide()
+				$('#open-organism').show()
+            	$('#open-organism #organism-menu-page').show()
+			})
                        
 			
 			// Clearing the chosen organism

@@ -503,7 +503,133 @@
 						<button class="back-button organism-button">BACK</button>
 						<button class="save-button organism-button">SAVE</button>      
 					</div>					
-				</div> <!-- describe-lifecycle -->	
+				</div> <!-- describe-lifecycle --> 
+				
+				<div id="what-others-said-organism-lifecycle">
+					<div class='section-title describe-title'> <b> What others said about the LIFE CYCLES </b></div> 
+					
+					<p class='section-title'> Select the organism you wish you view</p>
+					<table id="organism-life-cycle-table">
+						<tr>
+							<td class="selectable" value="scum">
+								<img src="/images/icon_0007_scum.png" class="image"/>
+							</td>
+							<td class="selectable" value="fuzzy-mold">
+								<img src="/images/icon_0006_fuzzy-mold.png" class="image" />
+							</td>
+							<td class="selectable" value="blue-bug">
+								<img src="/images/icon_0000_blue-bug.png" class="image" />
+							</td>
+							<td class="selectable" value="green-bug">
+								<img src="/images/icon_0008_green-bug.png" class="image" />	
+							</td>
+							<td class="selectable" value="predator">
+								<img src="/images/icon_0005_predator.png" class="image" />
+							</td>
+						</tr> 
+						<tr>
+							<td class="selectable" value="predator-stage-1">
+								<img src="/images/icon_0011_predator-stage-1.png" class="image" />
+							</td>
+							<td class="selectable" value="green-bug-stage-1">
+								<img src="/images/icon_0004_green-bug-stage-1.png" class="image" />
+							</td>
+							<td class="selectable" value="blue-bug-stage-1">
+								<img src="/images/icon_0001_blue-bug-stage-1.png" class="image" /> 
+							</td>
+							<td class="selectable" value="blue-bug-stage-2">
+								<img src="/images/icon_0002_blue-bug-stage-2.png" class="image" />
+							</td>
+							<td class="selectable" value="blue-bug-stage-3">
+								<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 
+							</td>
+						</tr>
+					</table>  
+					
+					
+					<p class='section-title'> How others represented the LIFE CYCLE</p>
+					<div style="width: 100%; float: left; clear:both">
+						<table id="organism-lifecycle-count-table-1">
+							<tr>
+								<td value="no-organism"> <img src="/images/icon_x.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="no-organism" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="scum"> <img src="/images/icon_0007_scum.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="scum" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png"  /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="fuzzy-mold" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png"  /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="blue-bug" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="green-bug"> <img src="/images/icon_0008_green-bug.png"  />	 </td> 
+								<td> <img src="/images/arrow_relationships.png" /> </td>							
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="green-bug" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="predator"> <img src="/images/icon_0005_predator.png"  /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="predator" data-to=""> </td>
+							</tr>  					
+						</table>        
+					             
+					
+						<!--************************************************ SECOND TABLE *********************-->
+						<table id="organism-lifecycle-count-table-2">
+							<tr>
+								<td value="predator-stage-1"> <img src="/images/icon_0011_predator-stage-1.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="scum" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="green-bug-stage-1"> <img src="/images/icon_0004_green-bug-stage-1.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="fuzzy-mold" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="blue-bug-stage-1"> <img src="/images/icon_0001_blue-bug-stage-1.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="blue-bug" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="blue-bug-stage-2"> <img src="/images/icon_0002_blue-bug-stage-2.png" />  </td> 
+								<td> <img src="/images/arrow_relationships.png" /> </td>							
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="green-bug" data-to=""> </td>
+							</tr>
+							<tr>
+								<td value="blue-bug-stage-3"> <img src="/images/icon_0003_blue-bug-stage-3.png" /> </td>
+								<td> <img src="/images/arrow_relationships.png" /> </td>
+								<td class="selected-organism-relationship"> </td>
+								<td class="relationship-count" data-from="predator" data-to=""> </td>
+							</tr>						
+						</table>
+					</div>
+					
+
+					<div id="what-others-said-organism-lifecycle-action-buttons">
+						<button class="back-button organism-button">BACK</button>
+						<button class="save-button organism-button">SAVE</button>      
+					</div>
+				</div>	   
 			</div> <!-- open-organsim-->  
 		</div> <!-- tabs-2 -->
 		
