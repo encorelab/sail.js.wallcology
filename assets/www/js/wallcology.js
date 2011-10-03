@@ -2,7 +2,7 @@
 
 
 WallCology = {
-    rollcallURL: '/rollcall', // 'http://rollcall.proto.encorelab.org',
+    rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
     xmppDomain: 'proto.encorelab.org',
     groupchatRoom: null,
@@ -19,6 +19,7 @@ WallCology = {
             .load('Rollcall.Authenticator', {mode: 'multi-picker'})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
+            .load('CommonKnowledge', {buttonContainer: '#tabs'})
             .thenRun(function () {
                 Sail.autobindEvents(WallCology)
                 
@@ -29,8 +30,14 @@ WallCology = {
                         console.log("Reloading "+location+"...")
                         location.reload()
                     })
-
-                    $('#connecting').show()
+                    
+                    // this is only on the index (class selection) page
+                    $('#loading').hide()
+                    $('#class-selection').show()
+                    if ($('#class-selection').length > 0) // dumb way to check that we're on the class selection page
+                        $('#connecting').hide()
+                    else 
+                        $('#connecting').show()
                     
                     $('#class-selection button').click(function() {
                         runName = $(this).data('run')
@@ -51,6 +58,8 @@ WallCology = {
     observations: {
         
         init: function() {     
+			var oTable;
+			var gaiSelected =  [];		// do we still need these?
 			
             $('#tabs').tabs()
             $('#tabs').show()
@@ -71,6 +80,14 @@ WallCology = {
             $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
+            
+            $(Sail.app).trigger('context_switch', {selectableTags: [
+                "Theory",
+                "Question",
+                "Observation",
+                "Investigation",
+                "Other Idea"
+            ]})
            
             
 // **********NEW HABITAT*****************************************************************************************
@@ -104,6 +121,8 @@ WallCology = {
 
 			// When I want to Describe a Habitat is clicked
 			$('div#open-habitat button#describe-habitat-button').click(function(){
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Habitat']})
+                
 				$('#open-habitat').hide()           
 				$('#new-habitat').show()
 			})
@@ -118,6 +137,8 @@ WallCology = {
 			// When See What Others Said for Habitat is clicked, this page page
 			// should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Habitat']})
+			    
             	$('#open-habitat').hide()           
             	$('#what-others-said-habitat').show() 
                 // Uncheck all selected filters and the chosen notes
@@ -224,6 +245,8 @@ WallCology = {
 
 			// When I want to Describe an ORGANISM is clicked
 			$('div#open-organism button#describe-organism-button').click(function(){
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Organisms']})
+			    
 				$("#organism-menu-page").hide();    
 				$('#describe-lifecycle-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
@@ -234,6 +257,8 @@ WallCology = {
 
 			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){ 
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Organisms']})
+			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
 				$('#describe-lifecycle-organism').hide(); 
@@ -262,6 +287,8 @@ WallCology = {
 
 			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
 			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Lifecycle']})
+			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
@@ -273,6 +300,8 @@ WallCology = {
 			// When I want to see what others said about LIFECYCLES is clicked,
 			// this page page should be loaded
 			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
+			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Lifecycle']})
+			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
@@ -477,12 +506,15 @@ WallCology = {
         	
 // **********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
+                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                
             	$('#landing-relationships').hide()
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
-				// call function that retrieves counts for each relationship via
-				// sleepy mongoose GET calls
+                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                
+				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
 				/*
 				 * $('#relationships-datatable').dataTable({ "iDisplayLength":
@@ -540,6 +572,8 @@ WallCology = {
 // **********VIEW RELATIONSHIPS**********************************************************************************
             
             $('#view-relationships .back-button').click(function() {
+                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
             })
@@ -1046,7 +1080,7 @@ WallCology = {
         
         connected: function(ev) {
             $('#username').text(session.account.login)
-      	    // $('#connecting').hide()
+      	    					
         	jQuery('#top-level-dropdown').change(function(e){
         		window.location.href = jQuery('#top-level-dropdown').val();
         	})
@@ -1062,7 +1096,7 @@ WallCology = {
         },
         
         authenticated: function(ev) {
-            $('#connecting').hide()
+            
         },
         
         unauthenticated: function(ev) {

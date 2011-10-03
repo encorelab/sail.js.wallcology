@@ -27,18 +27,12 @@ class Archivist < Sail::Agent
     end
     
     message :error? do |err|
-      puts "\n\n\n"
-      puts "!" * 80
-      puts "GOT ERROR MESSAGE: #{err.inspect}"
-      puts "!" * 80
       log err, :ERROR
     end
     
     disconnected do
       # automatically reconnect
-      puts "DISCONNECTED!"
-      log "disconnected", :WARN
-      puts "attempting to reconnect..."
+      log "disconnected... will attempt to reconnect", :WARN
       client.connect
     end
   end
