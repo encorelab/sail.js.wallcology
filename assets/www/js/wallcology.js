@@ -54,8 +54,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			// for testing, sets
-														// default open tab
+            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -378,7 +377,8 @@ WallCology = {
 					// input#selected-organism').attr('value');
 					if (selectedOrganismId === ""){
 						alert ("You must first choose an organism and then click this cell");
-					}else {
+					}
+					else {
 						$(this).html(selectedImageHTML);  				
 					}
 				}
@@ -436,7 +436,7 @@ WallCology = {
 				// two slots are empty
 				if ($("div#describe-lifecycle-organism table#organism-lifecycle-relation td#from-organism").html() == '' ||
 					   $("div#describe-lifecycle-organism table#organism-lifecycle-relation td#to-organism").html() == '') {
-						alert("Please fill in both cells");
+						alert("Please select two organisms");
 				} else { // Save the selections and clear them after
 					Sail.app.observations.newOrganismLifecycle(); 
 					Sail.app.observations.clearOrganismLifecycle();

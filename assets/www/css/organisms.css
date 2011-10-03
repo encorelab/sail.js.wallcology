@@ -32,7 +32,7 @@ div#inner-organism-menu-page {
 }
 
 #inner-organism-menu-page #what-others-said-organism-button {
-	margin-top: 50px;
+	margin-top: 30px; 
 }
 
 div#tabs-2 {
@@ -45,13 +45,12 @@ div#tabs-2 img#organism-page-image {
 	float: left;
 }                
 
-
 #new-organism #organism-page-image {
 	margin-bottom: 15px;
 }
                             
 div#tabs-2 div#organism-tables {
-	width: 25%;
+	width: 24%;
 	float: left;
 	margin-top: 15px;  
 }     
@@ -136,21 +135,23 @@ div#tabs-2 span.organism-blank-cell {
 div#new-organism div#organism-action-buttons {
 	width: 100%;
 	float: left;
+	margin-top: 35px;
 }   
 
 div#new-organism div#organism-action-buttons button.back-button {
 	width: 100px;
-	margin-left: 20px;       
+	margin-left: 30px;       
 }
 
 div#new-organism div#organism-action-buttons button.save-button {
 	width: 100px;
-	margin-left: 465px;     
+	float: right;
+	margin-right: 45px;    
 }  
 
 div#open-organism div#organism-what-others-said-action-buttons button.back-button {
 	width: 100px;
-	margin-left: 20px;       
+	margin-left: 30px;       
 }
 
 div#open-organism div#organism-what-others-said-action-buttons button.add-to-discussion-button {
@@ -200,9 +201,8 @@ div#open-organism div#what-others-said-about-organisms table#aggregate-organism-
 	font-size: 14px;
 }                        
 
-
 div#organism-what-others-said-action-buttons {
-	margin-top: 35px;
+	margin-top: 50px;
 	width: 730px;
 }
 
@@ -212,14 +212,20 @@ div#what-others-said-about-organisms .back-button {
 }	
 
 div#what-others-said-about-organisms button.add-to-discussion-button {
+	margin-right: 20px;
 	float: right;
 }                      
 
-
-div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.save-button{
+div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.save-button {
+	width: 100px;
+	margin-right: 30px;
 	float: right;
 }
 
+div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.back-button {
+	width: 100px;
+	margin-left: 30px;
+}
   
 div#describe-lifecycle-organism table#organism-lifecycle-table {
 	margin-left: auto;
@@ -315,6 +321,15 @@ div#what-others-said-organism-lifecycle div#organism-lifecycle-count-tables-cont
 	width: 100%; 
 	float: left; 
 	clear:both;
+}
+
+div#what-others-said-organism-lifecycle-action-buttons button.save-button{
+	margin-right: 20px;
+	float: right;
+}
+
+div#what-others-said-organism-lifecycle-action-buttons button.back-button{
+	margin-left: 20px;
 }
 
 
