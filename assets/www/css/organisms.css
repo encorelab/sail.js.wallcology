@@ -311,6 +311,12 @@ div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 t
 	background-color: #cccccc;          
 	text-align: center;
 }
+                   
+div#what-others-said-organism-lifecycle div#organism-lifecycle-count-tables-container {
+	width: 100%; 
+	float: left; 
+	clear:both;
+}
 
 
 

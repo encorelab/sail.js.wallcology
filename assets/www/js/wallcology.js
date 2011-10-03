@@ -284,7 +284,10 @@ WallCology = {
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
 				$('#describe-lifecycle-organism').hide();  
-				$('#what-others-said-organism-lifecycle').show();
+				$('#what-others-said-organism-lifecycle').show();    
+
+				Sail.app.observations.clearOrganismLifecycleAggregate();
+				
 			})
                           	
         	$('#open-organism div#organism-action-buttons .save-button').click(function() {
@@ -313,6 +316,16 @@ WallCology = {
 	
 				$('div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.selected-organism-relationship').html($(this).html());
 				$('div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.selected-organism-relationship').html($(this).html());
+				 
+				toOrganism = $(this).attr('value');   
+				cellListToUpdate =  $("div#organism-lifecycle-count-tables-container td.relationship-count");
+				$.each(cellListToUpdate, function() {
+					$(this).attr('data-to', toOrganism);
+				});
+				
+				// Make a call to back-end (database) to get the counts and populate the table with them
+				Sail.app.observations.fillLifecycleCount(); 
+				
 			})
 
 			$('#open-organism div#what-others-said-organism-lifecycle .back-button').click(function(){
@@ -571,26 +584,30 @@ WallCology = {
 			$("div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell").attr('value', 'null');
 		},
 		
-		// function that retrieves counts for each relationship via sleepy mongoose GET calls
+		clearOrganismLifecycleAggregate: function () {
+			$("div#what-others-said-organism-lifecycle table#organism-life-cycle-table td.selectable").css('border', 'none');
+			$("div#organism-lifecycle-count-tables-container td.selected-organism-relationship").html('');
+			$("div#organism-lifecycle-count-tables-container td.relationship-count").html('');
+		},
+		
+		// function that retrieves counts for each lifecycle relationship via sleepy mongoose GET calls
 		fillLifecycleCount: function() {
-			// do this for each table field that has the class .data-box
+			// do this for each table field that has the class .relationship-count
 			$('.relationship-count').each(function () {
 				// ajax GET call to sleepy mongoose
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"type":"life_cycle", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					data: { criteria: JSON.stringify({"run_name":Sail.app.run.name, "type":"life_cycle", "from":$(this).data('from'), "to":$(this).data('to')}) },
 					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
 					context: this,
-				  	success: function(data) {
-						var resultArray
-					    if (data.ok === 1) {
-							console.log("Mongoose returned a data set")
-							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
-
+				  	success: function(data) { 
+						if (data.ok === 1) {                            
+							console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count)
+						
 							// writing the count value into the HTML
 							$(this).html(data.count)
-
+						
 							return true
 						}
 						else {
@@ -812,7 +829,7 @@ WallCology = {
 	        $('#new-habitat .radio-button').button('refresh')		//both lines are necessary to clear radios (first changes state, second refreshes screen)
         },
                 
-        //this is broken right now, waiting on Rokham... #radio-org is wrong (unlabelled)
+
         newOrganismContent: function() {       
 	                                                     
 			morphology = $('div#new-organism div#organism-descriptions div#organism-morphology textarea').val();
@@ -855,7 +872,8 @@ WallCology = {
 			
 			sev = new Sail.Event('new_observation', {
 				run:Sail.app.run,
-				type:'organism',
+				run_name: Sail.app.run.name,
+				type:'life_cycle',
 				from: fromOrganism,
 				to: toOrganism,
 			})
