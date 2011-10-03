@@ -121,7 +121,7 @@ WallCology = {
 
 			// When I want to Describe a Habitat is clicked
 			$('div#open-habitat button#describe-habitat-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Habitat']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Habitat']})
                 
 				$('#open-habitat').hide()           
 				$('#new-habitat').show()
@@ -137,7 +137,7 @@ WallCology = {
 			// When See What Others Said for Habitat is clicked, this page page
 			// should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Habitat']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Habitat']})
 			    
             	$('#open-habitat').hide()           
             	$('#what-others-said-habitat').show() 
@@ -245,7 +245,7 @@ WallCology = {
 
 			// When I want to Describe an ORGANISM is clicked
 			$('div#open-organism button#describe-organism-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Organisms']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Organisms']})
 			    
 				$("#organism-menu-page").hide();    
 				$('#describe-lifecycle-organism').hide(); 
@@ -257,7 +257,7 @@ WallCology = {
 
 			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){ 
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Organisms']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Organisms']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
@@ -287,7 +287,7 @@ WallCology = {
 
 			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
 			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Lifecycle']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Lifecycle']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
@@ -300,7 +300,7 @@ WallCology = {
 			// When I want to see what others said about LIFECYCLES is clicked,
 			// this page page should be loaded
 			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {hiddenTags: ['Lifecycle']})
+			    $(Sail.app).trigger('context_switch', {autoTags: ['Lifecycle']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
@@ -506,13 +506,13 @@ WallCology = {
         	
 // **********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
-                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
                 
             	$('#landing-relationships').hide()
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
-                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
@@ -572,7 +572,7 @@ WallCology = {
 // **********VIEW RELATIONSHIPS**********************************************************************************
             
             $('#view-relationships .back-button').click(function() {
-                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
+                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
                 
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
