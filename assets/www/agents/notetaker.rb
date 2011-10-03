@@ -27,7 +27,7 @@ class Notetaker < Sail::Agent
         :timestamp => sev['timestamp'],
         # use the note's id as the mongo id 
         # (in theory this could eventually fail -- id's are pseudo-randomly generated and there is a 1 in 1e50 chance of a clash)
-        :_id => sev['payload']['id']
+        :_id => sev['payload'].delete('id')
       }
       
       store_note_in_mongo(note)
