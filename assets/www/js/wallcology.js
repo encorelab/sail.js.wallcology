@@ -74,8 +74,7 @@ WallCology = {
             $('.jquery-radios').buttonset()
            
             
-// **********NEW
-// HABITAT*****************************************************************************************
+// **********NEW HABITAT*****************************************************************************************
 
             $('#new-habitat .back-button').click(function(){
             	$('#new-habitat').hide()
@@ -94,8 +93,7 @@ WallCology = {
 			})
 
      		
-// **********OPEN
-// HABITAT*********************************************************************************************
+// **********OPEN HABITAT*********************************************************************************************
             $('#open-habitat .back-button').click(function(){
             	$('#open-habitat').hide()
             	$('#landing-habitat').show()
@@ -114,8 +112,7 @@ WallCology = {
 			$('#radio').buttonset()
 
 			
-// **********VIEW
-// HABITAT*********************************************************************************************
+// **********VIEW HABITAT*********************************************************************************************
 			$("div#aggregate-view-habitat-filter").buttonset();
 			$("div#aggregate-view-note-type-filter").buttonset();
 			
@@ -236,8 +233,7 @@ WallCology = {
 				Sail.app.observations.clearNewOrganismPage();			
 			})
 
-			// When See What Others Said is clicked, this page page should be
-			// loaded
+			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){ 
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
@@ -265,8 +261,7 @@ WallCology = {
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
             })
 
-			// When I want to describe a LIFECYCLE is clicked, this page page
-			// should be loaded
+			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
 			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
@@ -306,10 +301,7 @@ WallCology = {
             	$('#new-organism').hide()
             	$('#open-organism #organism-menu-page').show()
             })    
-            
-            
-            
-            
+        
 
 			$('#open-organism div#describe-lifecycle-action-buttons .back-button').click(function(){
             	$('#describe-lifecycle-organism').hide()
@@ -479,8 +471,7 @@ WallCology = {
 	        })
 			
 
-// **********OPEN
-// ORGANISM***************************************************************************************
+// **********OPEN ORGANISM***************************************************************************************
         	
                       	
         	
@@ -509,8 +500,7 @@ WallCology = {
             	// Sail.app.observations.generateRelationshipsDT()
             })
             
-// **********NEW
-// RELATIONSHIP***********************************************************************************
+// **********NEW RELATIONSHIP***********************************************************************************
 
             $('#new-relationship .save-button').click(function() {           	
             	if (($('#box1').children().size() == 0) || ($('#box2').children().size() == 0)) {
@@ -547,8 +537,7 @@ WallCology = {
 				Sail.app.observations.generateRelationshipsDT($(this).data('from'), $(this).data('to'))
 			})
             
-// **********VIEW
-// RELATIONSHIPS**********************************************************************************
+// **********VIEW RELATIONSHIPS**********************************************************************************
             
             $('#view-relationships .back-button').click(function() {
             	$('#view-relationships').hide()
@@ -587,11 +576,9 @@ WallCology = {
 			})
     	},
 
-// ***************************************************************************************************************
 
 
-// ****************************************** HELPER FUNCTIONS
-// *************************************************
+// ****************************************** HELPER FUNCTIONS *************************************************
 
 		clearNewOrganismPage: function () {
 			$('#new-organism table#organism-table td').css('border', 'none');
@@ -782,14 +769,7 @@ WallCology = {
 									$('#aggregate-organism-table').dataTable({
 										"iDisplayLength": 6,
 										"bLengthChange": false,
-										"bDestroy" : true,		// you need this
-																// so that the
-																// table will be
-																// refreshed
-																// without
-																// errors each
-																// time entering
-																// the page
+										"bDestroy" : true,		
 										"bJQueryUI": true,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
