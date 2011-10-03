@@ -27,8 +27,14 @@ WallCology = {
                         console.log("Reloading "+location+"...")
                         location.reload()
                     })
-
-                    $('#connecting').show()
+                    
+                    // this is only on the index (class selection) page
+                    $('#loading').hide()
+                    $('#class-selection').show()
+                    if ($('#class-selection').length > 0) // dumb way to check that we're on the class selection page
+                        $('#connecting').hide()
+                    else 
+                        $('#connecting').show()
                     
                     $('#class-selection button').click(function() {
                         runName = $(this).data('run')

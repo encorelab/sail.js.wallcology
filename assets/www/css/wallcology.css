@@ -50,13 +50,14 @@ body {
 #class-selection {
   margin: 0 auto;
   margin-top: 10%;
-  width: 200px;
+  width: 400px;
   text-align: center;
+  padding: 30px;
 }
 
 #class-selection button {
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 1em;
+  margin-bottom: 1em;
   width: 100%;
 }
 
