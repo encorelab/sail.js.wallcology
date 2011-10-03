@@ -75,6 +75,9 @@ div#tabs-3 div#relationships .relationship-button {
 	color: white;
 	display: inline-block;
 	vertical-align: baseline;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
 }
 
 #new-relationship .selectable {

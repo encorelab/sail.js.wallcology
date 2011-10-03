@@ -216,6 +216,12 @@ div#what-others-said-about-organisms button.add-to-discussion-button {
 	float: right;
 }                      
 
+/******************************************NEW LIFE CYCLE**************************************/
+
+#describe-lifecycle-organism div#describe-lifecycle-action-buttons {
+	margin-top: 70px;
+}
+
 div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.save-button {
 	width: 100px;
 	margin-right: 30px;
@@ -225,6 +231,15 @@ div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.sav
 div#describe-lifecycle-organism div#describe-lifecycle-action-buttons button.back-button {
 	width: 100px;
 	margin-left: 30px;
+}
+
+#describe-lifecycle-organism .section-title {
+	margin-top: 80px;
+}
+	
+#describe-lifecycle-organism .describe-title {
+	margin-left: 60px;
+	display: inline;
 }
   
 div#describe-lifecycle-organism table#organism-lifecycle-table {
@@ -238,15 +253,28 @@ div#describe-lifecycle-organism table#organism-lifecycle-relation {
 	margin-top: 15px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 20px;
 }
 
 div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell {
-	width: 60px;
-	height: 60px;
+	width: 99px;
+	height: 99px;
 	background-color: white;
-} 
+	border-radius: 7px;
+	border: 1px;
+	border-style: solid;
+}
 
-/** THE CODE FOR WHAT OTHERS SAID ABOUT THE LIFE CYCLES **/
+/* div#describe-lifecycle-organism .selectable {
+	border-width: 1px;
+	border-color: transparent;
+	border-style: solid;
+} */
+
+
+
+/********************************************VIEW LIFE CYCLE********************************************/
+
 div#what-others-said-organism-lifecycle .section-title {
 	color: #0CA958;
 }      
@@ -318,6 +346,7 @@ div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 t
 }
                    
 div#what-others-said-organism-lifecycle div#organism-lifecycle-count-tables-container {
+	font-size: 24px;
 	width: 100%; 
 	float: left; 
 	clear:both;
