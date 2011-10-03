@@ -58,8 +58,6 @@ WallCology = {
     observations: {
         
         init: function() {     
-			var oTable;
-			var gaiSelected =  [];		// do we still need these?
 			
             $('#tabs').tabs()
             $('#tabs').show()
