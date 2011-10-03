@@ -80,6 +80,14 @@ WallCology = {
             $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
+            
+            CommonKnowledge.context.tags = [
+                "Theory",
+                "Question",
+                "Observation",
+                "Investigation",
+                "Other Idea"
+            ]
            
             
 //**********NEW HABITAT*****************************************************************************************
