@@ -630,7 +630,7 @@ WallCology = {
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":$(this).data('from'), "energy_transfer.to":$(this).data('to')}) },
 					// handing in the context is very important to fill the right table cell with the corresponding result - async call in loop!!
 					context: this,
 				  	success: function(data) {
@@ -659,7 +659,7 @@ WallCology = {
 		generateHabitatsDT: function(criteria) {
 			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
 			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}) },
+				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat","wallscope":criteria.habitat}) },
 				function(data) {
 			    	if (data.ok === 1) {
 						batchSize = 0
@@ -667,7 +667,7 @@ WallCology = {
 						$.ajax({
 							type: "GET",
 							url: '/mongoose/wallcology/observations/_find',
-							data: { criteria: JSON.stringify({"type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
+							data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
 							context: criteria,
 							success: function(data) {
 								habitatResultsArray = []
@@ -721,13 +721,13 @@ WallCology = {
 		generateOrganismsDT: function(selectedOrganism, aspect) {
 			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
 			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}) },
+				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}) },
 				function(data) {
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
 						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify({"type":"organism","organism":selectedOrganism}), batch_size: batchSize },
+							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}), batch_size: batchSize },
 							function(data) {
 								organismResultsArray = []
 								for (i=0;i<data.results.length;i++) {
@@ -768,13 +768,13 @@ WallCology = {
 		generateRelationshipsDT: function(from, to) {
 			// we do a count REST call to determine how many results to expect (setting batch_size in _find)
 			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
+				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
 				function(data) {
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
 						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify({"type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
+							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
 							function(data) {
 								relationshipResultsArray = []
 								for (i=0;i<data.results.length;i++) {
