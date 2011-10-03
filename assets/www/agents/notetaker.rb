@@ -25,6 +25,7 @@ class Notetaker < Sail::Agent
         :content => sev['payload'],
         :author  => sev['origin'],
         :timestamp => sev['timestamp'],
+        :run => sev['run'],
         # use the note's id as the mongo id 
         # (in theory this could eventually fail -- id's are pseudo-randomly generated and there is a 1 in 1e50 chance of a clash)
         :_id => sev['payload'].delete('id')
