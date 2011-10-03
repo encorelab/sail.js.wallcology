@@ -179,7 +179,6 @@ div#open-organism div#what-others-said-about-organisms div#organism-filters {
 div#open-organism div#what-others-said-about-organisms div#organism-comment-filters td.organism-comment-filter {
 	margin-left: auto;
 	margin-right: auto;
-	/* background-color: #ccc; */ 
 	text-align: center; 
 	padding: 10px;
 	border-radius: 4px;
@@ -243,7 +242,7 @@ div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cel
 
 /** THE CODE FOR WHAT OTHERS SAID ABOUT THE LIFE CYCLES **/
 div#what-others-said-organism-lifecycle .section-title {
-	color: #669933;
+	color: #0CA958;
 }      
 
 div#what-others-said-organism-lifecycle p.section-title {   
