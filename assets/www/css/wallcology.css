@@ -83,9 +83,41 @@ div#tabs .tab-pane {
 	border-collapse: collapse;
 }
 
+#tabs {
+	display: none;
+}
+
+/*
+===================================================================================
+ This section allows quick hiding and revealing of parts of the webpage
+===================================================================================
+*/
+
+/* Hide the predator */
 .predator-reveal {
 	display:none;
 }
+
+/* Hide organisms */
+.hide-tab-organisms {
+	/*display:none;*/
+}
+
+/* Hide relationships */
+.hide-tab-relationships {
+	/*display:none;*/
+}
+
+/* Hide counts */
+.hide-tab-counts {
+	/*display:none;*/
+}
+/*
+===================================================================================
+===================================================================================
+*/
+
+
 
 /***************************************************************************************************************/
 
