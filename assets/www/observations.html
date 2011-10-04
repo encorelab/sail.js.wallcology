@@ -858,18 +858,31 @@ TO ASK TEACHERS/RESEARCHERS
 				
 
 				<div class="record-organisms">
-					<h3>Count Organisms</h3>
-					<table class="count-vegetation">
-						<tr>
-							<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
- 						</tr>
- 						<tr class="table-body">
-	 						<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
-	 						<td><input type="text" class="text-box count-scum-percent"/> %</td>
-	 						<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
-	 						<td><input type="text" class="text-box count-mold-percent"/> %</td>
- 						</tr>
-					</table>
+					<h3>Count Organisms</h3>   
+					<div id="vegetation-count-div">
+						<table class="count-vegetation">
+							<tr>
+								<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
+ 							</tr>
+ 							<tr class="table-body">
+	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
+	 							<td><input type="text" class="text-box count-scum-percent"/> %</td>
+	 							<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
+	 							<td><input type="text" class="text-box count-mold-percent"/> %</td>      
+ 							</tr>
+						</table> 
+					
+						<table id="count-vegetation-date-time">     
+							<tr>
+								<th> Date </th>
+								<th> Time </td>
+							</tr>
+							<tr>
+								<td id="count-vegetation-date-picker"> <input type="text" id="new-counts-datepicker"> </td>						
+								<td id="count-vegetation-time"> <input type='text'/>
+							</tr>
+					    </table>
+				 </div>
 
 					<table class="count-organisms">
 						<tr>

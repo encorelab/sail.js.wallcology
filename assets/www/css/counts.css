@@ -101,11 +101,10 @@
 
 #new-counts .fuzzy-mold-image {
 	margin-top: 10px;
-	margin-left: 140px;
 }
 
 #new-counts .column-spacing {
-	margin-right: 80px;
+/*	margin-right: 80px;*/
 }
 
 #new-counts #new-counts-datepicker {
@@ -118,6 +117,24 @@
 
 #new-counts .save-button {
 	margin-left: 560px;
+}            
+
+div#new-counts div#vegetation-count-div {
+	width: 700px;
+}
+
+div#new-counts table#count-vegetation {
+	float: left;
+	width: 350px;
+}                 
+
+div#new-counts table#count-vegetation-date-time {
+	width: 100px;
+	float: right;
+}  
+
+div#new-counts table#count-vegetation-date-time td{
+	width: 60px;      
 }
 
 
