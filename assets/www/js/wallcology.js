@@ -899,17 +899,7 @@ WallCology = {
         	// clear fields
 	        $('#new-habitat .text-box').val('')
 	        $("input:radio").prop('checked', false)
-	        $('#new-habitat .radio-button').button('refresh')		// both
-																	// lines are
-																	// necessary
-																	// to clear
-																	// radios
-																	// (first
-																	// changes
-																	// state,
-																	// second
-																	// refreshes
-																	// screen)
+	        $('#new-habitat .radio-button').button('refresh')
         },
                 
 
