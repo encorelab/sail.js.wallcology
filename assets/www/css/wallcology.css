@@ -28,7 +28,7 @@ a:active {
   top: 6px !important;
 }
 
-#top-level-dropdown {
+.top-level-text {
 	height: 40px;
 	width: 280px;
 	margin-top: 5px;
