@@ -26,9 +26,15 @@ div#inner-habitat-menu-page {
 	padding-left: 40px;
 	padding-right: 40px;
 	font-size: 24px;
-}          
+}
 
-#inner-habitat-menu-page .new-page-button {
+#tabs-1 .habitat-button {
+	background: url('');
+	background-color: #007ADF;
+	border: 1px solid #007ADF;
+}	
+
+#inner-habitat-menu-page .habitat-button {
 	width: 550px;
 	height: 80px;
 }
@@ -67,7 +73,7 @@ div#new-habitat .text-box {
 	margin-top: -12px;
 }
                        
-div#new-habitat div#action-buttons {
+div#new-habitat .action-buttons {
 	width: 660px;               
 }
 

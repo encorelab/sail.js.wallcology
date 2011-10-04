@@ -87,6 +87,21 @@ div#tabs .tab-pane {
 	display: none;
 }
 
+
+/* Theming, Jquery UI overwrites */
+
+.new-page-button .ui-button-text  {
+	color: white;
+}
+
+.action-buttons .ui-button-text {
+	color: white;
+}
+
+.inner-landing-buttons .ui-button-text {
+	color: white;
+}
+
 /*
 ===================================================================================
  This section allows quick hiding and revealing of parts of the webpage
@@ -95,7 +110,7 @@ div#tabs .tab-pane {
 
 /* Hide the predator */
 .predator-reveal {
-	display:none;
+	/* display:none; */
 }
 
 /* Hide organisms */

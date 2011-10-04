@@ -117,6 +117,9 @@
 
 #new-counts .save-button {
 	margin-left: 560px;
+	background: url('');
+	background-color: #AC2790;
+	border: 1px solid #AC2790;
 }            
 
 div#new-counts div#vegetation-count-div {
