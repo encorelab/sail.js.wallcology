@@ -1,8 +1,9 @@
 <!-- TODO
-- make default behaviour for click on tabs to put us on the landing page, and make that the context for the tab creation (add counts, to make it easy?)
+- make default behaviour for click on tabs to put us on the landing page
 - default (empty?) table should load on entering the view relationships page
 - change theme to one that doesn't involve green (gray is better) (sail.js ctrlf for /start)
-
+- download and add new images
+- tag context set onClick for View buttons
 - do the autoTagging
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - test dimensions on tablet, then standardise the css so that it can be displayed on the big board
@@ -35,7 +36,7 @@ TO ASK TEACHERS/RESEARCHERS
     <link href="css/organisms.css" rel="stylesheet" type="text/css" />
 
 	<link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
-    <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="js/sail.js/css/jquery-ui/overcast/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_page.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_table_jui.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_table.css" rel="stylesheet" type="text/css" />  
@@ -61,7 +62,6 @@ TO ASK TEACHERS/RESEARCHERS
 		<div class="top-level-text">Test text</div>
 	</header>
 
-
 	<div id="tabs">
 		<ul>
 			<li class=""><a href="#tabs-1">Habitats</a></li>
@@ -81,10 +81,10 @@ TO ASK TEACHERS/RESEARCHERS
 			<div id="open-habitat">   
 				             
 				<div id="habitat-menu-page">  
-					<div id="inner-habitat-menu-page">	
-						<button type="button" id="describe-habitat-button" class="new-page-button"><b>I want to describe a HABITAT</b></button>							
+					<div id="inner-habitat-menu-page" class="inner-landing-buttons">	
+						<button type="button" id="describe-habitat-button" class="habitat-button"><b>I want to describe a HABITAT</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others said</b></button>
+						<button type="button" id="what-others-said-habitat-button" class="habitat-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>			
 			</div>
@@ -132,9 +132,9 @@ TO ASK TEACHERS/RESEARCHERS
 						</div>                                                              				
 					</div>	
 				</form>  
-				<div id="action-buttons">
-					<button class="back-button button">BACK</button>
-					<button class="save-button">SAVE</button>     
+				<div class="action-buttons">
+					<button class="back-button button habitat-button">BACK</button>
+					<button class="save-button habitat-button">SAVE</button>     
 				</div>
 			</div>
 			
@@ -175,8 +175,8 @@ TO ASK TEACHERS/RESEARCHERS
 			    </div>
 				   				
 				<div class="action-buttons">
-					<button class="back-button">BACK</button>  				
-					<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>
+					<button class="back-button habitat-button">BACK</button>  				
+					<button class="add-to-discussion-button habitat-button">ADD TO DISCUSSIONS</button>
 				</div>
 		    </div>
 		
@@ -345,7 +345,7 @@ TO ASK TEACHERS/RESEARCHERS
 											</table>
 										</div> -->				
 				      
-					<div id="organism-action-buttons">
+					<div id="organism-action-buttons" class="action-buttons">
 						<button class="back-button organism-button">BACK</button>
 						<button class="save-button organism-button">SAVE</button>      
 					</div>
@@ -437,7 +437,7 @@ TO ASK TEACHERS/RESEARCHERS
 							</div>
 						</div>
 					
-						<div id="organism-what-others-said-action-buttons">
+						<div id="organism-what-others-said-action-buttons" class="action-buttons">
 							<button class="back-button organism-button">BACK</button>
 							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
 						</div>
@@ -511,7 +511,7 @@ TO ASK TEACHERS/RESEARCHERS
 					</div>
 	
 					
-					<div id="describe-lifecycle-action-buttons">
+					<div id="describe-lifecycle-action-buttons" class="action-buttons">
 						<button class="back-button organism-button">BACK</button>
 						<button class="save-button organism-button">SAVE</button>      
 					</div>					
@@ -636,7 +636,7 @@ TO ASK TEACHERS/RESEARCHERS
 					</div>
 					
 
-					<div id="what-others-said-organism-lifecycle-action-buttons">
+					<div id="what-others-said-organism-lifecycle-action-buttons" class="action-buttons">
 						<button class="back-button organism-button">BACK</button>     
 					</div>
 				</div>	   
@@ -652,7 +652,7 @@ TO ASK TEACHERS/RESEARCHERS
 		<div id="tabs-3" class="tab-pane">
 			<div id="relationships">
 				<div id="landing-relationships">
-					<div id="inner-landing-relationships">
+					<div id="inner-landing-relationships" class="inner-landing-buttons">
 						<button type="button" class="new-button landing-relationships-button relationship-button"><b>I want to describe a RELATIONSHIP</b></button>
 						<br/><br/>
 						<button type="button" class="view-button landing-relationships-button relationship-button"><b>I want to see what others said</b></button>
@@ -706,7 +706,7 @@ TO ASK TEACHERS/RESEARCHERS
 						<textarea class="text-box comments"></textarea>  			
 					</div>
 	                                                           				
-					<div id="action-buttons">
+					<div class="action-buttons">
 						<button class="back-button standard-button relationship-button">BACK</button>
 						<button class="save-button standard-button relationship-button">SAVE</button>
 					</div>
@@ -804,7 +804,7 @@ TO ASK TEACHERS/RESEARCHERS
 						</table>
 					</div>
 									
-					<div id="action-buttons">
+					<div class="action-buttons">
 						<button class="back-button standard-button relationship-button">BACK</button>
 						<button class="add-to-discussion-button relationship-button">ADD TO DISCUSSIONS</button>
 					</div>
@@ -933,7 +933,7 @@ TO ASK TEACHERS/RESEARCHERS
 				</div>
 				<br/>
 
-				<button class="save-button">SAVE</button>
+				<button class="save-button action-buttons">SAVE</button>
 			</div>
 		</div>
 		
