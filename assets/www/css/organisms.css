@@ -279,69 +279,74 @@ div#what-others-said-organism-lifecycle .section-title {
 	color: #0CA958;
 }      
 
-div#what-others-said-organism-lifecycle p.section-title {   
+div#what-others-said-organism-lifecycle h3.section-title {   
 	margin-left: auto;
-	margin-right: auto;  
-	width: 40%;
-}  
+	margin-right: auto; 
+	margin-top: 30px; 
+	width: 50%;
+}
+
+#what-others-said-organism-lifecycle .describe-title {
+	margin-bottom: 50px;
+}
+
+#what-others-said-organism-lifecycle .image {
+	width: 80px;
+	height: 80px;
+}
 
 div#what-others-said-organism-lifecycle table#organism-life-cycle-table {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 25px;
-}  
-
-div#what-others-said-organism-lifecycle div#what-others-said-organism-lifecycle-action-buttons button.save-button {
-	float: right;
-}                                                   
-
+}                                           
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 {
 	float: left;
-	width: 300px; 
-	margin-bottom: 25px;
+	margin-left: 35px;
+	margin-bottom: 50px;
+	width: 340px;
 }                                                                               
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 {
 	float: right;  
-	width: 300px;
-
+	margin-right: 25px;
+	width: 340px;
 }
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td {
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
+	border-radius: 4px;
 }                                                                             
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 img {
-	width: 60px;
-}
-
-div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 img {
-	width: 60px;
+	width: 80px;
 }
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td {
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
+	border-radius: 4px;
+}
+
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 img {
+	width: 80px;
 }
 
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.selected-organism-relationship {
-	background-color: #cccccc;
+	background-color: #D4D6D6;
 }       
 
-div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.relationship-count {
-	background-color: #cccccc;          
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-1 td.relationship-count {         
 	text-align: center;
 }
 
-
 div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.selected-organism-relationship {
-	background-color: #cccccc;
+	background-color: #D4D6D6;
 }       
 
-div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.relationship-count {
-	background-color: #cccccc;          
+div#what-others-said-organism-lifecycle table#organism-lifecycle-count-table-2 td.relationship-count {    
 	text-align: center;
 }
                    
@@ -352,13 +357,9 @@ div#what-others-said-organism-lifecycle div#organism-lifecycle-count-tables-cont
 	clear:both;
 }
 
-div#what-others-said-organism-lifecycle-action-buttons button.save-button{
-	margin-right: 20px;
-	float: right;
-}
-
 div#what-others-said-organism-lifecycle-action-buttons button.back-button{
-	margin-left: 20px;
+	margin-left: 35px;
+	width: 100px;
 }
 
 

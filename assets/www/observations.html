@@ -1,20 +1,20 @@
 <!-- TODO
-- add .predator-reveal class, to be turned on (.show?) in week X, and other reveal classes
-- make default behaviour for click on tabs to put us on the landing page
+- add .predator-reveal class, to be turned on (.show?)
+- make default behaviour for click on tabs to put us on the landing page, and make that the context for the tab creation (add counts, to make it easy?)
 - default (empty?) table should load on entering the view relationships page
-- change theme to one that doesn't involve green (gray is better)
+- change theme to one that doesn't involve green (gray is better) (sail.js ctrlf for /start)
 
 - do the autoTagging
-- remove the top dropdown
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - test dimensions on tablet, then standardise the css so that it can be displayed on the big board
 
+- figure out a way to log all of the XMPP data in each room
+- get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
 - add colors to Discussion bubbles
 - set max returned items on queries (currently 5000)
 - fix loader.gif image issues
 - we need to start on Microworlds, particularly the graphing
 - add PIC -> X 
-- figure out a way to log all of the XMPP data in each room
 
 
 TO ASK TEACHERS/RESEARCHERS
@@ -58,12 +58,8 @@ TO ASK TEACHERS/RESEARCHERS
     </script>
 </head>
 <body>
-    <header>
-        <select id="top-level-dropdown">
-			<option value="observations.html">OBSERVATIONS</option>
-			<option value="disussions.html">DISCUSSIONS</option>
-			<option value="microworlds.html">INVESTIGATIONS</option>
-		</select>
+    <header style="color: black">
+    	TODO Fill in either Julia's or Ben's run FIXIFIXIFIXIFIX CSS
     </header>
 
 	<div id="tabs" style="display: none">
@@ -524,7 +520,7 @@ TO ASK TEACHERS/RESEARCHERS
 				<div id="what-others-said-organism-lifecycle">
 					<div class='section-title describe-title'> <h2> What others said about the LIFE CYCLES </h2></div> 
 					
-					<p class='section-title'> Select the organism you wish you view</p>
+					<h3 class='section-title'> Select the organism you wish to view</h3>
 					<table id="organism-life-cycle-table">
 						<tr>
 							<td class="selectable" value="scum">
@@ -562,7 +558,7 @@ TO ASK TEACHERS/RESEARCHERS
 						</tr>
 					</table>  
 									
-					<p class='section-title'> How others represented the LIFE CYCLE</p>
+					<h3 class='section-title'>How others represented the LIFE CYCLE</h3>
 					<div id="organism-lifecycle-count-tables-container">
 						<table id="organism-lifecycle-count-table-1">
 							<tr>
@@ -641,8 +637,7 @@ TO ASK TEACHERS/RESEARCHERS
 					
 
 					<div id="what-others-said-organism-lifecycle-action-buttons">
-						<button class="back-button organism-button">BACK</button>
-						<button class="save-button organism-button">SAVE</button>      
+						<button class="back-button organism-button">BACK</button>     
 					</div>
 				</div>	   
 			</div> <!-- open-organsim-->  
@@ -827,7 +822,7 @@ TO ASK TEACHERS/RESEARCHERS
 				<div class="divider"></div>
 				
 				<div class="select-habitat-title">
-					<h4>Habitat Number</h4>
+					<h3>Habitat Number</h3>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
 					<input type="radio" name="select-habitat" id="new-count-r1" class="radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>

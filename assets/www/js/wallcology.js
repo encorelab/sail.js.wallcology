@@ -400,8 +400,7 @@ WallCology = {
 					$(this).html(""); 
 					$(this).attr('value', "null");
 				} else {
-					// selectedOrganismId = $('div#tabs-2
-					// input#selected-organism').attr('value');
+					// selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');
 					if (selectedOrganismId === ""){
 						alert ("You must first choose an organism and then click this cell");
 					}
@@ -490,16 +489,13 @@ WallCology = {
 			
 			
 			// When we
-			$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+			//$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
 			$('#open-organism div#organism-what-others-said-action-buttons .back-button').click(function(){
 				$('#open-organism').show()
 	           	$('#open-organism #what-others-said-about-organisms').hide()
 	           	$('#open-organism #organism-menu-page').show()
 	        })
-			
 
-// **********OPEN ORGANISM***************************************************************************************
-        	
                       	
         	
 // **********RELATIONSHIPS***********************************************************************************
@@ -1028,19 +1024,6 @@ WallCology = {
    
 // **********************************************************************************************************************************
      
-    discussion: {
-    	init: function() {
-    		
-    	}
-    },
-    
-    investigation: {
-    	init: function() {
-    		
-    	}
-    },
-    
-
     authenticate: function() {
         console.log("Authenticating...")
         
@@ -1071,19 +1054,7 @@ WallCology = {
         
         connected: function(ev) {
             $('#username').text(session.account.login)
-      	    					
-        	jQuery('#top-level-dropdown').change(function(e){
-        		window.location.href = jQuery('#top-level-dropdown').val();
-        	})
-            
-            if (true) {
-            	Sail.app.observations.init()
-            } else if (false) {
-            	Sail.app.discussions.init()
-            } else if (false) {
-            	Sail.app.experiment.init()
-            }
-             
+            Sail.app.observations.init()
         },
         
         authenticated: function(ev) {
