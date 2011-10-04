@@ -1,5 +1,4 @@
 <!-- TODO
-- add .predator-reveal class, to be turned on (.show?)
 - make default behaviour for click on tabs to put us on the landing page, and make that the context for the tab creation (add counts, to make it easy?)
 - default (empty?) table should load on entering the view relationships page
 - change theme to one that doesn't involve green (gray is better) (sail.js ctrlf for /start)
@@ -269,7 +268,7 @@ TO ASK TEACHERS/RESEARCHERS
 									<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 	
 								</td>   											
 							</tr>
-							<tr>
+							<tr class="predator-reveal">
 								<td id="predator">
 									<img src="/images/icon_0005_predator.png" class="image" />   					
 								</td> 
@@ -394,11 +393,11 @@ TO ASK TEACHERS/RESEARCHERS
 										<img src="/images/icon_0004_green-bug-stage-1.png" class="image">
 									</td>
 								
-									<td value="predator">
+									<td value="predator" class="predator-reveal">
 										<img src="/images/icon_0005_predator.png" class="image">
 									</td>
 									
-									<td value="predator-stage-1">
+									<td value="predator-stage-1" class="predator-reveal">
 										<img src="/images/icon_0011_predator-stage-1.png" class="image">
 									</td>								
 								</tr>
@@ -484,7 +483,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<img src="/images/icon_0003_blue-bug-stage-3.png" class="lifecycle-image" /> 
 							</td>
 						</tr>
-						<tr>
+						<tr class="predator-reveal">
 							<td class="selectable" value="predator-stage-1">
 								<img src="/images/icon_0011_predator-stage-1.png" class="lifecycle-image" />
 							</td>
@@ -535,7 +534,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td class="selectable" value="green-bug">
 								<img src="/images/icon_0008_green-bug.png" class="image" />	
 							</td>
-							<td class="selectable" value="predator">
+							<td class="selectable predator-reveal" value="predator">
 								<img src="/images/icon_0005_predator.png" class="image" />
 							</td>
 						</tr> 
@@ -552,7 +551,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td class="selectable" value="blue-bug-stage-3">
 								<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 
 							</td>
-							<td class="selectable" value="predator-stage-1">
+							<td class="selectable predator-reveal" value="predator-stage-1">
 								<img src="/images/icon_0011_predator-stage-1.png" class="image" />
 							</td>
 						</tr>
@@ -591,7 +590,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="selected-organism-relationship"> </td>
 								<td class="relationship-count" data-from="green-bug" data-to=""> </td>
 							</tr>
-							<tr>
+							<tr class="predator-reveal">
 								<td value="predator"> <img src="/images/icon_0005_predator.png"  /> </td>
 								<td> <img src="/images/arrow_relationships.png" /> </td>
 								<td class="selected-organism-relationship"> </td>
@@ -626,7 +625,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="selected-organism-relationship"> </td>
 								<td class="relationship-count" data-from="blue-bug-stage-3" data-to=""> </td>
 							</tr>		
-							<tr>
+							<tr class="predator-reveal">
 								<td value="predator-stage-1"> <img src="/images/icon_0011_predator-stage-1.png" /> </td>
 								<td> <img src="/images/arrow_relationships.png" /> </td>
 								<td class="selected-organism-relationship"> </td>
@@ -686,7 +685,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td id="green-bug" class="image selectable">
 								<img src="/images/icon_0008_green-bug.png" />						
 							</td>
-							<td id="predator" class="image selectable"> 
+							<td id="predator" class="image selectable predator-reveal">
 								<img src="/images/icon_0005_predator.png" />
 							</td>
 						</tr>
@@ -729,7 +728,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
 								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td> 
 								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
-								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
+								<td class="predator-reveal"><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 							</tr>
 							<tr>
 								<!-- data for display boxes to be pulled from the DB -->
@@ -739,7 +738,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="sun" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="sun" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="sun" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="sun" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="sun" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0007_scum.png" class="image scum" /></td>
@@ -748,7 +747,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="scum" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="scum" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="scum" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="scum" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="scum" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
@@ -757,7 +756,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="fuzzy-mold" data-to="predator">0</td>	
+								<td class="display-box data-box predator-reveal" data-from="fuzzy-mold" data-to="predator">0</td>	
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td>
@@ -766,7 +765,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="blue-bug" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="blue-bug" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="blue-bug" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="blue-bug" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="blue-bug" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
@@ -775,9 +774,9 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="green-bug" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="green-bug" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="green-bug" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="green-bug" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="green-bug" data-to="predator">0</td>
 							</tr>
-							<tr>
+							<tr  class="predator-reveal">
 								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
 								<td class="display-box data-box" data-from="predator" data-to="scum">0</td>
@@ -904,7 +903,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td>x <input type="text" class="text-box count-green-bug5"/></td>
 							<td>= <input type="text" class="text-box count-green-bug6"/></td>
 						</tr>							
-						<tr class="table-body">
+						<tr class="table-body  predator-reveal">
 							<td><img src="/images/icon_0005_predator.png" class="image"/></td>
 							<td><input type="text" class="text-box predator1"/> +</td>
 							<td><input type="text" class="text-box predator2"/> +</td>

@@ -1,6 +1,3 @@
-// batch sizes for queries cap at 5000. Ctrl-f for batch size and change as required
-
-
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
