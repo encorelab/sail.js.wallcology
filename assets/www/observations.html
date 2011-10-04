@@ -1,24 +1,19 @@
 <!-- TODO
 - make default behaviour for click on tabs to put us on the landing page
 - default (empty?) table should load on entering the view relationships page
-- change theme to one that doesn't involve green (gray is better) (sail.js ctrlf for /start)
-- download and add new images
 - tag context set onClick for View buttons
 - do the autoTagging
-- set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - test dimensions on tablet, then standardise the css so that it can be displayed on the big board
-
 - figure out a way to log all of the XMPP data in each room
+
+- when discussion part is revealed, either hide or lock the tabs
+- set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
 - add colors to Discussion bubbles
 - set max returned items on queries (currently 5000)
 - fix loader.gif image issues
 - we need to start on Microworlds, particularly the graphing
 - add PIC -> X 
-
-
-TO ASK TEACHERS/RESEARCHERS
-- which sections want alerts to trigger when text/radios not entered? (text fields on new hab, text fields on new rel, all radios on counts. etc)
  -->
 
 
@@ -825,10 +820,10 @@ TO ASK TEACHERS/RESEARCHERS
 					<h3>Habitat Number</h3>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
-					<input type="radio" name="select-habitat" id="new-count-r1" class="radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
-					<input type="radio" name="select-habitat" id="new-count-r2" class="radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
-					<input type="radio" name="select-habitat" id="new-count-r3" class="radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
-					<input type="radio" name="select-habitat" id="new-count-r4" class="radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
+					<input type="radio" name="select-habitat" id="new-count-r1" class="counts-habitat-radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="new-count-r2" class="counts-habitat-radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="new-count-r3" class="counts-habitat-radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="new-count-r4" class="counts-habitat-radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
 				<div class="divider"></div>
@@ -836,18 +831,18 @@ TO ASK TEACHERS/RESEARCHERS
 				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
 						<h3>Record Temperature</h3>
-						<input type="radio" name="temp" value="low" id="new-count-r5" class="radio-button" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" class="radio-button" /><label for="new-count-r6">High</label>
+						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
 						<h3>Record Light Levels</h3>
-						<input type="radio" name="light" value="low" id="new-count-r7" class="radio-button" /><label for="new-count-r7">Low</label>
-						<input type="radio" name="light" value="high" id="new-count-r8" class="radio-button" /><label for="new-count-r8">High</label>
+						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button" /><label for="new-count-r7">Low</label>
+						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
 						<h3>Record Humidity</h3>
-						<input type="radio" name="humidity" value="low" id="new-count-r9" class="radio-button" /><label for="new-count-r9">Low</label>
-						<input type="radio" name="humidity" value="high" id="new-count-r10" class="radio-button" /><label for="new-count-r10">High</label>
+						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button" /><label for="new-count-r9">Low</label>
+						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
 				

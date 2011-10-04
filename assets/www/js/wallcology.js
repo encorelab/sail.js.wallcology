@@ -595,11 +595,14 @@ WallCology = {
 			$('#new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(function() {
-            	if ( $('input:r').is(':checked') ) {
+            	//if ( $('input:radio').is(':checked') ) {
+				if ( $('.counts-habitat-radio-button').is(':checked') && $('.counts-temperature-radio-button').is(':checked')
+						&& $('.counts-light-radio-button').is(':checked') && $('.counts-humidity-radio-button').is(':checked') ) { 
             		Sail.app.observations.newCountsContent()
+            		alert("Count submitted")
             	}
 	            else {
-	            	alert("Please select a habitat to count")
+	            	alert("Please record habitat, temperature, light levels and humidity")
 	            }							
 			})
     	},
