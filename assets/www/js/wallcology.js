@@ -704,7 +704,7 @@ WallCology = {
 							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
 
 							// writing the count value into the HTML
-							$(this).html(data.count)
+							$(this).text(data.count)
 
 							return true
 						}
