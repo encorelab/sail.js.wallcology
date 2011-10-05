@@ -1,23 +1,19 @@
 <!-- TODO
-
-- There's no real indication that you've completed a lifecycle (it just flashes) - this isn't a huge problem, but it seems to be the only one that doesn't jump you back a page which make the behaviour "odd" in that it's not consistent.
-Good call. We've added an alert on counts (something like "Count submitted") for this reason. Will do the same for lifecycle.
-Or maybe have it return to laning screen, as with others
-
-- make default behaviour for click on tabs to put us on the landing page
-- default (empty?) table should load on entering the view relationships page
 - tag context set onClick for View buttons
 - do the autoTagging
+- hide the Add to Discussion buttons, remove text pointing to it
+- turn off Investigation tags 
 - test dimensions on tablet, then standardise the css so that it can be displayed on the big board
-- figure out a way to log all of the XMPP data in each room
 
+- default (empty?) table should load on entering the view relationships page
 - when discussion part is revealed, either hide or lock the tabs
+- make default behaviour for click on tabs to put us on the landing page
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
 - add colors to Discussion bubbles
 - set max returned items on queries (currently 5000)
 - fix loader.gif image issues
-- finish counts page
+- finish counts page (clear buttons on submit, etc)
 - we need to start on Microworlds, particularly the graphing
 - add PIC -> X 
  -->
@@ -65,11 +61,13 @@ Or maybe have it return to laning screen, as with others
 
 	<div id="tabs">
 		<ul>
-			<li class=""><a href="#tabs-1">Habitats</a></li>
-			<li class="hide-tab-organisms"><a href="#tabs-2">Organisms</a></li>
-			<li class="hide-tab-relationships"><a href="#tabs-3">Relationships</a></li>
-			<li class="hide-tab-counts"><a href="#tabs-4">Counts</a></li>			
+			<li id="habitat-tab" class="tab-click"><a href="#tabs-1">Habitats</a></li>
+			<li id="organisms-tab" class="hide-tab-organisms tab-click"><a href="#tabs-2">Organisms</a></li>
+			<li id="relationships-tab" class="hide-tab-relationships tab-click"><a href="#tabs-3">Relationships</a></li>
+			<li id="counts-tab" class="hide-tab-counts tab-click"><a href="#tabs-4">Counts</a></li>			
 		</ul>
+		
+
 		
 		
 <!-- ********************************** HABITAT *********************************  -->		
