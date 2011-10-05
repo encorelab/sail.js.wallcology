@@ -1,6 +1,3 @@
-// batch sizes for queries cap at 5000. Ctrl-f for batch size and change as required
-
-
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
@@ -58,12 +55,10 @@ WallCology = {
     observations: {
         
         init: function() {     
-			var oTable;
-			var gaiSelected =  [];		// do we still need these?
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
             
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
@@ -382,7 +377,7 @@ WallCology = {
 				$('div#tabs-2 table#organism-table td').css('border', 'none');
 				$(this).css('border', '1px solid black');                      
 				$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').html($(this).html());
-				$('div#tabs-2 input#selected-organism').attr('value', this.id);
+				$('div#tabs-2 input#selected-organism').attr('value', $(this).attr('value'));
 			})    
 			
 			$('div#tabs-2 table#juvenile-organism-table td').click(function(){    
@@ -402,8 +397,7 @@ WallCology = {
 					$(this).html(""); 
 					$(this).attr('value', "null");
 				} else {
-					// selectedOrganismId = $('div#tabs-2
-					// input#selected-organism').attr('value');
+					// selectedOrganismId = $('div#tabs-2 input#selected-organism').attr('value');
 					if (selectedOrganismId === ""){
 						alert ("You must first choose an organism and then click this cell");
 					}
@@ -492,16 +486,13 @@ WallCology = {
 			
 			
 			// When we
-			$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
+			//$('#open-organism div#organism-what-others-said-action-buttons .save-button').click(Sail.app.observations.newOrganismContent)
 			$('#open-organism div#organism-what-others-said-action-buttons .back-button').click(function(){
 				$('#open-organism').show()
 	           	$('#open-organism #what-others-said-about-organisms').hide()
 	           	$('#open-organism #organism-menu-page').show()
 	        })
-			
 
-// **********OPEN ORGANISM***************************************************************************************
-        	
                       	
         	
 // **********RELATIONSHIPS***********************************************************************************
@@ -597,15 +588,21 @@ WallCology = {
 				          
             
 // **********COUNTS******************************************************************************************
-
-			$('#new-counts-datepicker').datepicker()
+                                                    
+			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
+				alert ('hello');
+			});
+			$('.new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(function() {
-            	if ( $('input:r').is(':checked') ) {
+            	//if ( $('input:radio').is(':checked') ) {
+				if ( $('.counts-habitat-radio-button').is(':checked') && $('.counts-temperature-radio-button').is(':checked')
+						&& $('.counts-light-radio-button').is(':checked') && $('.counts-humidity-radio-button').is(':checked') ) { 
             		Sail.app.observations.newCountsContent()
+            		alert("Count submitted")
             	}
 	            else {
-	            	alert("Please select a habitat to count")
+	            	alert("Please record habitat, temperature, light levels and humidity")
 	            }							
 			})
     	},
@@ -655,23 +652,28 @@ WallCology = {
 			// do this for each table field that has the class
 			// .relationship-count
 			$('.relationship-count').each(function () {
-				// ajax GET call to sleepy mongoose
+				// ajax GET call to sleepy mongoose 
+				console.log($(this).data('to'));
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"run_name":Sail.app.run.name, "type":"life_cycle", "from":$(this).data('from'), "to":$(this).data('to')}) },
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"life_cycle", "from":$(this).data('from'), "to":$(this).data('to')}) },
 					// handing in the context is very important to fill the
 					// right table cell with the corresponding result - async
 					// call in loop!!
 					context: this,
 				  	success: function(data) { 
 						if (data.ok === 1) {                            
-							console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count)
-						
+							// console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count);
+						                                                                                      
+							if ($("div#organism-lifecycle-count-tables-container td.relationship-count:empty").size() == 0){
+								$("div#organism-lifecycle-count-tables-container td.relationship-count").html('');
+							}
 							// writing the count value into the HTML
-							$(this).html(data.count)
+							$(this).html(data.count);
+							                   							
 						
-							return true
+							return true;
 						}
 						else {
 							console.log("Mongoose request failed")
@@ -901,17 +903,7 @@ WallCology = {
         	// clear fields
 	        $('#new-habitat .text-box').val('')
 	        $("input:radio").prop('checked', false)
-	        $('#new-habitat .radio-button').button('refresh')		// both
-																	// lines are
-																	// necessary
-																	// to clear
-																	// radios
-																	// (first
-																	// changes
-																	// state,
-																	// second
-																	// refreshes
-																	// screen)
+	        $('#new-habitat .radio-button').button('refresh')
         },
                 
 
@@ -952,7 +944,7 @@ WallCology = {
 			
 			sev = new Sail.Event('new_observation', {
 				run:Sail.app.run,
-				run_name: Sail.app.run.name,
+				// run_name: Sail.app.run.name,
 				type:'life_cycle',
 				from: fromOrganism,
 				to: toOrganism,
@@ -984,7 +976,9 @@ WallCology = {
 	        	light_level:$('input:radio[name=light]:checked').val(),
 	        	humidity:$('input:radio[name=humidity]:checked').val(),
 	        	scum_percent:$('#new-counts .count-scum-percent').val(),
-	        	mold_percent:$('#new-counts .count-mold-percent').val(),
+	        	mold_percent:$('#new-counts .count-mold-percent').val(), 
+				vegetation_date:$('#new-counts .vegatation_date').val(),
+				vegatation_time:$('#new-counts .vegatation_time').val(),
 	        	organism_counts:{
 		        	blue_bug:{
 		        		count1:$('#new-counts .count-blue-bug1').val(),
@@ -993,7 +987,7 @@ WallCology = {
 		        		average:$('#new-counts .count-blue-bug4').val(),
 		        		multiplier:$('#new-counts .count-blue-bug5').val(),
 		        		final_count:$('#new-counts .count-blue-bug6').val()
-		        		},
+					},
 		        	green_bug:{
 		        		count1:$('#new-counts .count-green-bug1').val(),
 		        		count2:$('#new-counts .count-green-bug2').val(),
@@ -1001,7 +995,7 @@ WallCology = {
 		        		average:$('#new-counts .count-green-bug4').val(),
 		        		multiplier:$('#new-counts .count-green-bug5').val(),
 		        		final_count:$('#new-counts .count-green-bug6').val()
-		        		},
+					},
 		        	predator:{
 		        		count1:$('#new-counts .count-predator1').val(),
 		        		count2:$('#new-counts .count-predator2').val(),
@@ -1009,18 +1003,30 @@ WallCology = {
 		        		average:$('#new-counts .count-predator4').val(),
 		        		multiplier:$('#new-counts .count-predator5').val(),
 		        		final_count:$('#new-counts .count-predator6').val()
-		        	}
-	        	},
-	        	date:$('#new-counts-datepicker').datepicker('getDate'),
-	        	hour:$('#new-counts .hour').val(),
-	        	minute:$('#new-counts .minute').val(),
-	        	ampm:$('input:radio[name=ampm]:checked').val()
-	        	})
+					}
+				},
+				organism_date:{
+					count1_date:$('#new-counts .count1-date').val(),
+					count2_date:$('#new-counts .count2-date').val(),
+					count3_date:$('#new-counts .count3-date').val()
+				},
+				organism_time:{
+					count1_time:$('#new-counts .count1-time').val(),
+					count2_time:$('#new-counts .count2-time').val(), 
+					count3_time:$('#new-counts .count3-time').val()
+				}
+			})
+	        	// date:$('#new-counts-datepicker').datepicker('getDate'),
+	        	// 	        	hour:$('#new-counts .hour').val(),
+	        	// 	        	minute:$('#new-counts .minute').val(),
+	        	// 	        	ampm:$('input:radio[name=ampm]:checked').val()  
+
 	        WallCology.groupchat.sendEvent(sev)
 	        // clear fields
-	        $('#new-counts .text-box').val('')
-	        $("input:radio").prop('checked', false)
-	        $('#new-counts .radio-button').button('refresh')		// both
+	        $('#new-counts .text-box').val('') 
+			$('#new-counts .count-organism-data-cell').val('')
+	        // $("input:radio").prop('checked', false)
+	        // 	        $('#new-counts .radio-button').button('refresh')		// both
 																	// lines are
 																	// necessary
 																	// to clear
@@ -1037,19 +1043,6 @@ WallCology = {
    
 // **********************************************************************************************************************************
      
-    discussion: {
-    	init: function() {
-    		
-    	}
-    },
-    
-    investigation: {
-    	init: function() {
-    		
-    	}
-    },
-    
-
     authenticate: function() {
         console.log("Authenticating...")
         
@@ -1080,19 +1073,7 @@ WallCology = {
         
         connected: function(ev) {
             $('#username').text(session.account.login)
-      	    					
-        	jQuery('#top-level-dropdown').change(function(e){
-        		window.location.href = jQuery('#top-level-dropdown').val();
-        	})
-            
-            if (true) {
-            	Sail.app.observations.init()
-            } else if (false) {
-            	Sail.app.discussions.init()
-            } else if (false) {
-            	Sail.app.experiment.init()
-            }
-             
+            Sail.app.observations.init()
         },
         
         authenticated: function(ev) {

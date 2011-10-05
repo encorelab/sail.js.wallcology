@@ -93,6 +93,8 @@
 
 #new-counts .count-vegetation {
 	margin-bottom: 20px;
+	float: left;
+	width: 400px;
 }
 
 #new-counts .scum-image {
@@ -101,11 +103,10 @@
 
 #new-counts .fuzzy-mold-image {
 	margin-top: 10px;
-	margin-left: 140px;
 }
 
 #new-counts .column-spacing {
-	margin-right: 80px;
+/*	margin-right: 80px;*/
 }
 
 #new-counts #new-counts-datepicker {
@@ -118,7 +119,49 @@
 
 #new-counts .save-button {
 	margin-left: 560px;
+	background: url('');
+	background-color: #AC2790;
+	border: 1px solid #AC2790;
+}            
+
+div#new-counts div#vegetation-count-div {
+	width: 700px;
 }
+              
+
+div#new-counts table#count-vegetation-date-time {
+	margin-top: 25px;
+}  
+                                                    
+div#new-counts table#count-vegetation-date-time th{
+    float: left;       
+	width: 120px;                                 
+	text-align: left;
+}
+
+div#new-counts table#count-vegetation-date-time td{
+    float: left;       
+	width: 120px;
+}       
+                                
+
+div#new-counts table#count-organisms {
+	border-collapse: collapse;
+}
+
+div#new-counts table#count-organisms td.dotted-bottom-border {
+	border-bottom: 2px dotted black;  
+	padding-bottom: 10px;
+}
+
+div#new-counts table#count-organisms td.dotted-top-border {
+	padding-top: 10px;
+}
+
+div#new-counts table#count-organisms td{
+	width: 60px;
+}  
+          
 
 
 /* #new-counts div.symbols {

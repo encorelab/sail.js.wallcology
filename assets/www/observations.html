@@ -1,22 +1,19 @@
 <!-- TODO
-- add .predator-reveal class, to be turned on (.show?) in week X, and other reveal classes
-- add run (run.wallcology-julia-fall2011?) for pushes and pulls from db
 - make default behaviour for click on tabs to put us on the landing page
 - default (empty?) table should load on entering the view relationships page
-- change theme to one that doesn't involve green (gray is better)
-
-- remove the top dropdown
-- set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
+- tag context set onClick for View buttons
+- do the autoTagging
 - test dimensions on tablet, then standardise the css so that it can be displayed on the big board
+- figure out a way to log all of the XMPP data in each room
 
+- when discussion part is revealed, either hide or lock the tabs
+- set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
+- get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
+- add colors to Discussion bubbles
 - set max returned items on queries (currently 5000)
 - fix loader.gif image issues
 - we need to start on Microworlds, particularly the graphing
 - add PIC -> X 
-
-
-TO ASK TEACHERS/RESEARCHERS
-- which sections want alerts to trigger when text/radios not entered? (text fields on new hab, text fields on new rel, all radios on counts. etc)
  -->
 
 
@@ -34,7 +31,7 @@ TO ASK TEACHERS/RESEARCHERS
     <link href="css/organisms.css" rel="stylesheet" type="text/css" />
 
 	<link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
-    <link href="js/sail.js/css/jquery-ui/start/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="js/sail.js/css/jquery-ui/overcast/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_page.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_table_jui.css" rel="stylesheet" type="text/css" />
 	<link href="js/sail.js/css/dataTables/demo_table.css" rel="stylesheet" type="text/css" />  
@@ -57,19 +54,15 @@ TO ASK TEACHERS/RESEARCHERS
 </head>
 <body>
     <header>
-        <select id="top-level-dropdown">
-			<option value="observations.html">OBSERVATIONS</option>
-			<option value="disussions.html">DISCUSSIONS</option>
-			<option value="microworlds.html">INVESTIGATIONS</option>
-		</select>
-    </header>
+		<div class="top-level-text">Test text</div>
+	</header>
 
-	<div id="tabs" style="display: none">
+	<div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">Habitats</a></li>
-			<li><a href="#tabs-2">Organisms</a></li>
-			<li><a href="#tabs-3">Relationships</a></li>
-			<li><a href="#tabs-4">Counts</a></li>			
+			<li class=""><a href="#tabs-1">Habitats</a></li>
+			<li class="hide-tab-organisms"><a href="#tabs-2">Organisms</a></li>
+			<li class="hide-tab-relationships"><a href="#tabs-3">Relationships</a></li>
+			<li class="hide-tab-counts"><a href="#tabs-4">Counts</a></li>			
 		</ul>
 		
 		
@@ -83,10 +76,10 @@ TO ASK TEACHERS/RESEARCHERS
 			<div id="open-habitat">   
 				             
 				<div id="habitat-menu-page">  
-					<div id="inner-habitat-menu-page">	
-						<button type="button" id="describe-habitat-button" class="new-page-button"><b>I want to describe a HABITAT</b></button>							
+					<div id="inner-habitat-menu-page" class="inner-landing-buttons">	
+						<button type="button" id="describe-habitat-button" class="habitat-button"><b>I want to describe a HABITAT</b></button>							
 						<br/><br/>
-						<button type="button" id="what-others-said-habitat-button" class="new-page-button"><b>I want to see what others said</b></button>
+						<button type="button" id="what-others-said-habitat-button" class="habitat-button"><b>I want to see what others said</b></button>
 					</div>
 				</div>			
 			</div>
@@ -134,9 +127,9 @@ TO ASK TEACHERS/RESEARCHERS
 						</div>                                                              				
 					</div>	
 				</form>  
-				<div id="action-buttons">
-					<button class="back-button button">BACK</button>
-					<button class="save-button">SAVE</button>     
+				<div class="action-buttons">
+					<button class="back-button button habitat-button">BACK</button>
+					<button class="save-button habitat-button">SAVE</button>     
 				</div>
 			</div>
 			
@@ -177,8 +170,8 @@ TO ASK TEACHERS/RESEARCHERS
 			    </div>
 				   				
 				<div class="action-buttons">
-					<button class="back-button">BACK</button>  				
-					<button class="add-to-discussion-button">ADD TO DISCUSSIONS</button>
+					<button class="back-button habitat-button">BACK</button>  				
+					<button class="add-to-discussion-button habitat-button">ADD TO DISCUSSIONS</button>
 				</div>
 		    </div>
 		
@@ -238,44 +231,44 @@ TO ASK TEACHERS/RESEARCHERS
 						<div class='section-title'> <b>Organisms</b> </div>
 						<table id="organism-table">
 							<tr>
-								<td id="scum">
+								<td value="scum">
 									<img src="/images/icon_0007_scum.png" class="image"/> 					
 								</td>
-								<td id="fuzzy-mold"> 
+								<td value="fuzzy-mold"> 
 									<img src="/images/icon_0006_fuzzy-mold.png" class="image" /> 						
 								</td>					
 							</tr>
 					
 							<tr> 
-								<td id="blue-bug">
+								<td value="blue-bug">
 									<img src="/images/icon_0000_blue-bug.png" class="image" />						
 								</td>
-								<td id="green-bug">
+								<td value="green-bug">
 									<img src="/images/icon_0008_green-bug.png" class="image" />						
 								</td>					
 							</tr> 
 						   	<tr>
-								<td id="green-bug-stage-1">
+								<td value="green-bug-stage-1">
 									<img src="/images/icon_0004_green-bug-stage-1.png" class="image" />						
 								</td>
-								<td id="blue-bug-stage-1"> 
+								<td value="blue-bug-stage-1"> 
 									<img src="/images/icon_0001_blue-bug-stage-1.png" class="image" />
 								</td> 				
 							</tr>
 
 							<tr>
-								<td id="blue-bug-stage-2">
+								<td value="blue-bug-stage-2">
 									<img src="/images/icon_0002_blue-bug-stage-2.png" class="image" /> 						
 								</td>
-								<td id="blue-bug-stage-3"> 
+								<td value="blue-bug-stage-3"> 
 									<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 	
 								</td>   											
 							</tr>
-							<tr>
-								<td id="predator">
+							<tr class="predator-reveal">
+								<td value="predator">
 									<img src="/images/icon_0005_predator.png" class="image" />   					
 								</td> 
-								<td id="predator-stage-1">
+								<td value="predator-stage-1">
 									<img src="/images/icon_0011_predator-stage-1.png" class="image" />						
 								</td>   				
 							</tr> 
@@ -347,7 +340,7 @@ TO ASK TEACHERS/RESEARCHERS
 											</table>
 										</div> -->				
 				      
-					<div id="organism-action-buttons">
+					<div id="organism-action-buttons" class="action-buttons">
 						<button class="back-button organism-button">BACK</button>
 						<button class="save-button organism-button">SAVE</button>      
 					</div>
@@ -396,11 +389,11 @@ TO ASK TEACHERS/RESEARCHERS
 										<img src="/images/icon_0004_green-bug-stage-1.png" class="image">
 									</td>
 								
-									<td value="predator">
+									<td value="predator" class="predator-reveal">
 										<img src="/images/icon_0005_predator.png" class="image">
 									</td>
 									
-									<td value="predator-stage-1">
+									<td value="predator-stage-1" class="predator-reveal">
 										<img src="/images/icon_0011_predator-stage-1.png" class="image">
 									</td>								
 								</tr>
@@ -439,7 +432,7 @@ TO ASK TEACHERS/RESEARCHERS
 							</div>
 						</div>
 					
-						<div id="organism-what-others-said-action-buttons">
+						<div id="organism-what-others-said-action-buttons" class="action-buttons">
 							<button class="back-button organism-button">BACK</button>
 							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
 						</div>
@@ -486,7 +479,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<img src="/images/icon_0003_blue-bug-stage-3.png" class="lifecycle-image" /> 
 							</td>
 						</tr>
-						<tr>
+						<tr class="predator-reveal">
 							<td class="selectable" value="predator-stage-1">
 								<img src="/images/icon_0011_predator-stage-1.png" class="lifecycle-image" />
 							</td>
@@ -513,7 +506,7 @@ TO ASK TEACHERS/RESEARCHERS
 					</div>
 	
 					
-					<div id="describe-lifecycle-action-buttons">
+					<div id="describe-lifecycle-action-buttons" class="action-buttons">
 						<button class="back-button organism-button">BACK</button>
 						<button class="save-button organism-button">SAVE</button>      
 					</div>					
@@ -522,7 +515,7 @@ TO ASK TEACHERS/RESEARCHERS
 				<div id="what-others-said-organism-lifecycle">
 					<div class='section-title describe-title'> <h2> What others said about the LIFE CYCLES </h2></div> 
 					
-					<p class='section-title'> Select the organism you wish you view</p>
+					<h3 class='section-title'> Select the organism you wish to view</h3>
 					<table id="organism-life-cycle-table">
 						<tr>
 							<td class="selectable" value="scum">
@@ -537,7 +530,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td class="selectable" value="green-bug">
 								<img src="/images/icon_0008_green-bug.png" class="image" />	
 							</td>
-							<td class="selectable" value="predator">
+							<td class="selectable predator-reveal" value="predator">
 								<img src="/images/icon_0005_predator.png" class="image" />
 							</td>
 						</tr> 
@@ -554,13 +547,13 @@ TO ASK TEACHERS/RESEARCHERS
 							<td class="selectable" value="blue-bug-stage-3">
 								<img src="/images/icon_0003_blue-bug-stage-3.png" class="image" /> 
 							</td>
-							<td class="selectable" value="predator-stage-1">
+							<td class="selectable predator-reveal" value="predator-stage-1">
 								<img src="/images/icon_0011_predator-stage-1.png" class="image" />
 							</td>
 						</tr>
 					</table>  
 									
-					<p class='section-title'> How others represented the LIFE CYCLE</p>
+					<h3 class='section-title'>How others represented the LIFE CYCLE</h3>
 					<div id="organism-lifecycle-count-tables-container">
 						<table id="organism-lifecycle-count-table-1">
 							<tr>
@@ -593,7 +586,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="selected-organism-relationship"> </td>
 								<td class="relationship-count" data-from="green-bug" data-to=""> </td>
 							</tr>
-							<tr>
+							<tr class="predator-reveal">
 								<td value="predator"> <img src="/images/icon_0005_predator.png"  /> </td>
 								<td> <img src="/images/arrow_relationships.png" /> </td>
 								<td class="selected-organism-relationship"> </td>
@@ -628,7 +621,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="selected-organism-relationship"> </td>
 								<td class="relationship-count" data-from="blue-bug-stage-3" data-to=""> </td>
 							</tr>		
-							<tr>
+							<tr class="predator-reveal">
 								<td value="predator-stage-1"> <img src="/images/icon_0011_predator-stage-1.png" /> </td>
 								<td> <img src="/images/arrow_relationships.png" /> </td>
 								<td class="selected-organism-relationship"> </td>
@@ -638,9 +631,8 @@ TO ASK TEACHERS/RESEARCHERS
 					</div>
 					
 
-					<div id="what-others-said-organism-lifecycle-action-buttons">
-						<button class="back-button organism-button">BACK</button>
-						<button class="save-button organism-button">SAVE</button>      
+					<div id="what-others-said-organism-lifecycle-action-buttons" class="action-buttons">
+						<button class="back-button organism-button">BACK</button>     
 					</div>
 				</div>	   
 			</div> <!-- open-organsim-->  
@@ -655,7 +647,7 @@ TO ASK TEACHERS/RESEARCHERS
 		<div id="tabs-3" class="tab-pane">
 			<div id="relationships">
 				<div id="landing-relationships">
-					<div id="inner-landing-relationships">
+					<div id="inner-landing-relationships" class="inner-landing-buttons">
 						<button type="button" class="new-button landing-relationships-button relationship-button"><b>I want to describe a RELATIONSHIP</b></button>
 						<br/><br/>
 						<button type="button" class="view-button landing-relationships-button relationship-button"><b>I want to see what others said</b></button>
@@ -689,7 +681,7 @@ TO ASK TEACHERS/RESEARCHERS
 							<td id="green-bug" class="image selectable">
 								<img src="/images/icon_0008_green-bug.png" />						
 							</td>
-							<td id="predator" class="image selectable"> 
+							<td id="predator" class="image selectable predator-reveal">
 								<img src="/images/icon_0005_predator.png" />
 							</td>
 						</tr>
@@ -709,7 +701,7 @@ TO ASK TEACHERS/RESEARCHERS
 						<textarea class="text-box comments"></textarea>  			
 					</div>
 	                                                           				
-					<div id="action-buttons">
+					<div class="action-buttons">
 						<button class="back-button standard-button relationship-button">BACK</button>
 						<button class="save-button standard-button relationship-button">SAVE</button>
 					</div>
@@ -732,7 +724,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
 								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td> 
 								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
-								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
+								<td class="predator-reveal"><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 							</tr>
 							<tr>
 								<!-- data for display boxes to be pulled from the DB -->
@@ -742,7 +734,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="sun" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="sun" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="sun" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="sun" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="sun" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0007_scum.png" class="image scum" /></td>
@@ -751,7 +743,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="scum" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="scum" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="scum" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="scum" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="scum" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0006_fuzzy-mold.png" class="image fuzzy-mold" /></td>
@@ -760,7 +752,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="fuzzy-mold" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="fuzzy-mold" data-to="predator">0</td>	
+								<td class="display-box data-box predator-reveal" data-from="fuzzy-mold" data-to="predator">0</td>	
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0000_blue-bug.png" class="image blue-bug" /></td>
@@ -769,7 +761,7 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="blue-bug" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="blue-bug" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="blue-bug" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="blue-bug" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="blue-bug" data-to="predator">0</td>
 							</tr>
 							<tr>
 								<td><img src="/images/icon_0008_green-bug.png" class="image green-bug" /></td>
@@ -778,9 +770,9 @@ TO ASK TEACHERS/RESEARCHERS
 								<td class="display-box data-box" data-from="green-bug" data-to="fuzzy-mold">0</td>
 								<td class="display-box data-box" data-from="green-bug" data-to="blue-bug">0</td>
 								<td class="display-box data-box" data-from="green-bug" data-to="green-bug">0</td>
-								<td class="display-box data-box" data-from="green-bug" data-to="predator">0</td>
+								<td class="display-box data-box predator-reveal" data-from="green-bug" data-to="predator">0</td>
 							</tr>
-							<tr>
+							<tr  class="predator-reveal">
 								<td><img src="/images/icon_0005_predator.png" class="image predator" /></td>
 								<td><img src="/images/arrow_relationships.png" class="arrow-image" /></td>
 								<td class="display-box data-box" data-from="predator" data-to="scum">0</td>
@@ -807,7 +799,7 @@ TO ASK TEACHERS/RESEARCHERS
 						</table>
 					</div>
 									
-					<div id="action-buttons">
+					<div class="action-buttons">
 						<button class="back-button standard-button relationship-button">BACK</button>
 						<button class="add-to-discussion-button relationship-button">ADD TO DISCUSSIONS</button>
 					</div>
@@ -825,13 +817,13 @@ TO ASK TEACHERS/RESEARCHERS
 				<div class="divider"></div>
 				
 				<div class="select-habitat-title">
-					<h4>Habitat Number</h4>
+					<h3>Habitat Number</h3>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
-					<input type="radio" name="select-habitat" id="new-count-r1" class="radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
-					<input type="radio" name="select-habitat" id="new-count-r2" class="radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
-					<input type="radio" name="select-habitat" id="new-count-r3" class="radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
-					<input type="radio" name="select-habitat" id="new-count-r4" class="radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
+					<input type="radio" name="select-habitat" id="new-count-r1" class="counts-habitat-radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="new-count-r2" class="counts-habitat-radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="new-count-r3" class="counts-habitat-radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="new-count-r4" class="counts-habitat-radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
 				<div class="divider"></div>
@@ -839,91 +831,165 @@ TO ASK TEACHERS/RESEARCHERS
 				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
 						<h3>Record Temperature</h3>
-						<input type="radio" name="temp" value="low" id="new-count-r5" class="radio-button" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" class="radio-button" /><label for="new-count-r6">High</label>
+						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
 						<h3>Record Light Levels</h3>
-						<input type="radio" name="light" value="low" id="new-count-r7" class="radio-button" /><label for="new-count-r7">Low</label>
-						<input type="radio" name="light" value="high" id="new-count-r8" class="radio-button" /><label for="new-count-r8">High</label>
+						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button" /><label for="new-count-r7">Low</label>
+						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
 						<h3>Record Humidity</h3>
-						<input type="radio" name="humidity" value="low" id="new-count-r9" class="radio-button" /><label for="new-count-r9">Low</label>
-						<input type="radio" name="humidity" value="high" id="new-count-r10" class="radio-button" /><label for="new-count-r10">High</label>
+						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button" /><label for="new-count-r9">Low</label>
+						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
 				
 
 				<div class="record-organisms">
-					<h3>Count Organisms</h3>
-					<table class="count-vegetation">
+					<h3>Count Organisms</h3>   
+					<div id="vegetation-count-div">
+						<table class="count-vegetation">
+							<tr>
+								<th colspan="4" class="table-header">Enter % of WallScope covered by vegetation</th>
+ 							</tr>
+ 							<tr class="table-body">
+	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
+	 							<td><input type="text" class="text-box count-scum-percent"/> %</td>
+	 							<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
+	 							<td><input type="text" class="text-box count-mold-percent"/> %</td>      
+ 							</tr>
+						</table> 
+					
+						<table id="count-vegetation-date-time">     
+							<tr>
+								<th> Date </th>
+								<th> Time </td>
+							</tr>
+							<tr>
+								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegatation_date"> </td>						
+								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegatation_time"/>
+							</tr>
+					    </table>
+				 </div>
+                               
+					<table id="count-organisms">  
 						<tr>
-							<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
- 						</tr>
- 						<tr class="table-body">
-	 						<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
-	 						<td><input type="text" class="text-box count-scum-percent"/> %</td>
-	 						<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
-	 						<td><input type="text" class="text-box count-mold-percent"/> %</td>
- 						</tr>
+						    <th> </th>
+							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
+							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
+							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
+							<th> Date</th> 
+							<th> Time</th> 
+						</tr> 
+						
+						<tr>
+							<td> Count 1 </td>
+						    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-predator1" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
+							<td> <input class="count-organism-data-cell count1-time" /> </td>
+						</tr>
+						
+						<tr>
+							<td> Count 2</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-predator2" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
+							<td> <input class="count-organism-data-cell count2-time" /> </td>
+						</tr>
+						
+						<tr>
+							<td class="dotted-bottom-border"> Count 3</td>
+						    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
+							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
+						</tr>  
+											
+						<tr>
+							<td> Average</td>
+						    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
+						</tr>
+						
+						<tr>
+							<td> Multiplier</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-predator5" /> </td>
+						</tr>
+						
+						<tr>
+							<td> Final Count</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
+						 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
+							<td> <input class="count-organism-data-cell count-predator6" /> </td>
+						</tr>
+						
 					</table>
 
-					<table class="count-organisms">
-						<tr>
-							<th colspan="4" class="table-header">Enter up to three counts</th>  <!-- removed 'for each organism' for space concerns -->
-							<th colspan="1" class="table-header-center">Average counts</th>
-							<th colspan="1" class="table-header">Multiplier</th>
-							<th colspan="1">Final count</th>
-						</tr>
-						<tr class="table-body">
-							<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
-							<td><input type="text" class="text-box count-blue-bug1"/> +</td>
-							<td><input type="text" class="text-box count-blue-bug2"/> +</td>
-							<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
-							<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
-							<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
-							<td>= <input type="text" class="text-box count-blue-bug6"/></td>
-						</tr>
-						<tr class="table-body">
-							<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
-							<td><input type="text" class="text-box count-green-bug1"/> +</td>
-							<td><input type="text" class="text-box count-green-bug2"/> +</td>
-							<td><input type="text" class="text-box count-green-bug3"/></td>
-							<td><input type="text" class="text-box count-green-bug4"/></td>
-							<td>x <input type="text" class="text-box count-green-bug5"/></td>
-							<td>= <input type="text" class="text-box count-green-bug6"/></td>
-						</tr>							
-						<tr class="table-body">
-							<td><img src="/images/icon_0005_predator.png" class="image"/></td>
-							<td><input type="text" class="text-box predator1"/> +</td>
-							<td><input type="text" class="text-box predator2"/> +</td>
-							<td><input type="text" class="text-box predator3"/></td>
-							<td><input type="text" class="text-box predator4"/></td>
-							<td>x <input type="text" class="text-box predator5"/></td>
-							<td>= <input type="text" class="text-box predator6"/></td>
-						</tr>						
+
+					<!-- <table class="count-organisms">
+											<tr>
+												<th colspan="4" class="table-header">Enter up to three counts</th>  
+												<th colspan="1" class="table-header-center">Average counts</th>
+												<th colspan="1" class="table-header">Multiplier</th>
+												<th colspan="1">Final count</th>
+											</tr>
+											<tr class="table-body">
+												<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
+												<td><input type="text" class="text-box count-blue-bug1"/> +</td>
+												<td><input type="text" class="text-box count-blue-bug2"/> +</td>
+												<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
+												<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
+												<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
+												<td>= <input type="text" class="text-box count-blue-bug6"/></td>
+											</tr>
+											<tr class="table-body">
+												<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
+												<td><input type="text" class="text-box count-green-bug1"/> +</td>
+												<td><input type="text" class="text-box count-green-bug2"/> +</td>
+												<td><input type="text" class="text-box count-green-bug3"/></td>
+												<td><input type="text" class="text-box count-green-bug4"/></td>
+												<td>x <input type="text" class="text-box count-green-bug5"/></td>
+												<td>= <input type="text" class="text-box count-green-bug6"/></td>
+											</tr>							
+											<tr class="table-body  predator-reveal">
+												<td><img src="/images/icon_0005_predator.png" class="image"/></td>
+												<td><input type="text" class="text-box predator1"/> +</td>
+												<td><input type="text" class="text-box predator2"/> +</td>
+												<td><input type="text" class="text-box predator3"/></td>
+												<td><input type="text" class="text-box predator4"/></td>
+												<td>x <input type="text" class="text-box predator5"/></td>
+												<td>= <input type="text" class="text-box predator6"/></td>
+											</tr> -->						
 					</table>
 				</div>
 				
-				<div class="record-date">		
-					<table class="enter-time">
-						<tr>
-							<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
-							<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
-						</tr>
-						<tr>
-							<td>Date <input type="text" id="new-counts-datepicker"></td>
-							<td>Hour <input type="text" class="text-box hour" /></td>
-							<td>Minute <input type="text" class="text-box minute" /></td>
-							<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
-							<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
-						</tr>
-					</table>
-				</div>
+				<!-- <div class="record-date">		
+									<table class="enter-time">
+										<tr>
+											<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
+											<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
+										</tr>
+										<tr>
+											<td>Date <input type="text" id="new-counts-datepicker"></td>
+											<td>Hour <input type="text" class="text-box hour" /></td>
+											<td>Minute <input type="text" class="text-box minute" /></td>
+											<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
+											<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
+										</tr>
+									</table>
+								</div> -->
 				<br/>
 
-				<button class="save-button">SAVE</button>
+				<button class="save-button action-buttons">SAVE</button>
 			</div>
 		</div>
 		

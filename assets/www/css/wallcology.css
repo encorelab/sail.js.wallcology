@@ -28,7 +28,7 @@ a:active {
   top: 6px !important;
 }
 
-#top-level-dropdown {
+.top-level-text {
 	height: 40px;
 	width: 280px;
 	margin-top: 5px;
@@ -82,6 +82,57 @@ div#tabs .tab-pane {
 .datatable {
 	border-collapse: collapse;
 }
+
+#tabs {
+	display: none;
+}
+
+
+/* Theming, Jquery UI overwrites */
+
+.new-page-button .ui-button-text  {
+	color: white;
+}
+
+.action-buttons .ui-button-text {
+	color: white;
+}
+
+.inner-landing-buttons .ui-button-text {
+	color: white;
+}
+
+/*
+===================================================================================
+ This section allows quick hiding and revealing of parts of the webpage
+===================================================================================
+*/
+
+/* Hide the predator */
+.predator-reveal {
+	/* display:none; */
+}
+
+/* Hide organisms */
+.hide-tab-organisms {
+	/*display:none;*/
+}
+
+/* Hide relationships */
+.hide-tab-relationships {
+	/*display:none;*/
+}
+
+/* Hide counts */
+.hide-tab-counts {
+	/*display:none;*/
+}
+/*
+===================================================================================
+===================================================================================
+*/
+
+
 
 /***************************************************************************************************************/
 
