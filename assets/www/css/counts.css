@@ -9,7 +9,8 @@
 }
 
 #tabs div#tabs-4 {
-	background-image:url('/images/bkgd_count.png'); 
+	background-image:url('/images/bkgd_count.png');
+	background-repeat: no-repeat;
 }   
  
 #new-counts .ui-button {

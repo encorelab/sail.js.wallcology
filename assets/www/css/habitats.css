@@ -4,7 +4,8 @@ div#new-habitat {
 }           
 
 div#tabs div#tabs-1 {
-	background-image: url('/images/bkgd_habitat.png');	     
+	background-image: url('/images/bkgd_habitat.png');	
+	background-repeat: no-repeat;  
 }                  
                       
 div#habitat-menu-page {

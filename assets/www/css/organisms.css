@@ -37,6 +37,7 @@ div#inner-organism-menu-page {
 
 div#tabs-2 {
 	background-image: url('/images/bkgd_organism.png');
+	background-repeat: no-repeat;
 	padding-left: 25px; 
 	font-size: 14px;
 }
