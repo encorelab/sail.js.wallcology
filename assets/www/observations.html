@@ -852,7 +852,7 @@
 					<div id="vegetation-count-div">
 						<table class="count-vegetation">
 							<tr>
-								<th colspan="4" class="table-header">Enter percentage of WallScope covered by vegetation</th>
+								<th colspan="4" class="table-header">Enter % of WallScope covered by vegetation</th>
  							</tr>
  							<tr class="table-body">
 	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
@@ -868,64 +868,125 @@
 								<th> Time </td>
 							</tr>
 							<tr>
-								<td id="count-vegetation-date-picker"> <input type="text" id="new-counts-datepicker"> </td>						
-								<td id="count-vegetation-time"> <input type='text'/>
+								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegatation_date"> </td>						
+								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegatation_time"/>
 							</tr>
 					    </table>
 				 </div>
-
-					<table class="count-organisms">
+                               
+					<table id="count-organisms">  
 						<tr>
-							<th colspan="4" class="table-header">Enter up to three counts</th>  <!-- removed 'for each organism' for space concerns -->
-							<th colspan="1" class="table-header-center">Average counts</th>
-							<th colspan="1" class="table-header">Multiplier</th>
-							<th colspan="1">Final count</th>
+						    <th> </th>
+							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
+							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
+							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
+							<th> Date</th> 
+							<th> Time</th> 
+						</tr> 
+						
+						<tr>
+							<td> Count 1 </td>
+						    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-predator1" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
+							<td> <input class="count-organism-data-cell count1-time" /> </td>
 						</tr>
-						<tr class="table-body">
-							<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
-							<td><input type="text" class="text-box count-blue-bug1"/> +</td>
-							<td><input type="text" class="text-box count-blue-bug2"/> +</td>
-							<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
-							<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
-							<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
-							<td>= <input type="text" class="text-box count-blue-bug6"/></td>
+						
+						<tr>
+							<td> Count 2</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-predator2" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
+							<td> <input class="count-organism-data-cell count2-time" /> </td>
 						</tr>
-						<tr class="table-body">
-							<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
-							<td><input type="text" class="text-box count-green-bug1"/> +</td>
-							<td><input type="text" class="text-box count-green-bug2"/> +</td>
-							<td><input type="text" class="text-box count-green-bug3"/></td>
-							<td><input type="text" class="text-box count-green-bug4"/></td>
-							<td>x <input type="text" class="text-box count-green-bug5"/></td>
-							<td>= <input type="text" class="text-box count-green-bug6"/></td>
-						</tr>							
-						<tr class="table-body  predator-reveal">
-							<td><img src="/images/icon_0005_predator.png" class="image"/></td>
-							<td><input type="text" class="text-box predator1"/> +</td>
-							<td><input type="text" class="text-box predator2"/> +</td>
-							<td><input type="text" class="text-box predator3"/></td>
-							<td><input type="text" class="text-box predator4"/></td>
-							<td>x <input type="text" class="text-box predator5"/></td>
-							<td>= <input type="text" class="text-box predator6"/></td>
-						</tr>						
+						
+						<tr>
+							<td class="dotted-bottom-border"> Count 3</td>
+						    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
+							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
+						</tr>  
+											
+						<tr>
+							<td> Average</td>
+						    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
+						</tr>
+						
+						<tr>
+							<td> Multiplier</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-predator5" /> </td>
+						</tr>
+						
+						<tr>
+							<td> Final Count</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
+						 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
+							<td> <input class="count-organism-data-cell count-predator6" /> </td>
+						</tr>
+						
+					</table>
+
+
+					<!-- <table class="count-organisms">
+											<tr>
+												<th colspan="4" class="table-header">Enter up to three counts</th>  
+												<th colspan="1" class="table-header-center">Average counts</th>
+												<th colspan="1" class="table-header">Multiplier</th>
+												<th colspan="1">Final count</th>
+											</tr>
+											<tr class="table-body">
+												<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
+												<td><input type="text" class="text-box count-blue-bug1"/> +</td>
+												<td><input type="text" class="text-box count-blue-bug2"/> +</td>
+												<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
+												<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
+												<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
+												<td>= <input type="text" class="text-box count-blue-bug6"/></td>
+											</tr>
+											<tr class="table-body">
+												<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
+												<td><input type="text" class="text-box count-green-bug1"/> +</td>
+												<td><input type="text" class="text-box count-green-bug2"/> +</td>
+												<td><input type="text" class="text-box count-green-bug3"/></td>
+												<td><input type="text" class="text-box count-green-bug4"/></td>
+												<td>x <input type="text" class="text-box count-green-bug5"/></td>
+												<td>= <input type="text" class="text-box count-green-bug6"/></td>
+											</tr>							
+											<tr class="table-body  predator-reveal">
+												<td><img src="/images/icon_0005_predator.png" class="image"/></td>
+												<td><input type="text" class="text-box predator1"/> +</td>
+												<td><input type="text" class="text-box predator2"/> +</td>
+												<td><input type="text" class="text-box predator3"/></td>
+												<td><input type="text" class="text-box predator4"/></td>
+												<td>x <input type="text" class="text-box predator5"/></td>
+												<td>= <input type="text" class="text-box predator6"/></td>
+											</tr> -->						
 					</table>
 				</div>
 				
-				<div class="record-date">		
-					<table class="enter-time">
-						<tr>
-							<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
-							<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
-						</tr>
-						<tr>
-							<td>Date <input type="text" id="new-counts-datepicker"></td>
-							<td>Hour <input type="text" class="text-box hour" /></td>
-							<td>Minute <input type="text" class="text-box minute" /></td>
-							<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
-							<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
-						</tr>
-					</table>
-				</div>
+				<!-- <div class="record-date">		
+									<table class="enter-time">
+										<tr>
+											<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
+											<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
+										</tr>
+										<tr>
+											<td>Date <input type="text" id="new-counts-datepicker"></td>
+											<td>Hour <input type="text" class="text-box hour" /></td>
+											<td>Minute <input type="text" class="text-box minute" /></td>
+											<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
+											<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
+										</tr>
+									</table>
+								</div> -->
 				<br/>
 
 				<button class="save-button action-buttons">SAVE</button>
