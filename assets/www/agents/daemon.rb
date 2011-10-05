@@ -5,7 +5,7 @@ require 'archivist'
 require 'notetaker'
 
 AGENT_PASSWORD = "1d6f760bc95729166e551d7bee1d75c69b133015"
-XMPP_DOMAIN = `hostname`.strip # assuming that the current hostname is also the xmpp domain
+XMPP_DOMAIN = 'aardvark.encorelab.org'.strip # assuming that the current hostname is also the xmpp domain
 
 @daemon = Sail::Daemon.spawn(
   :name => "wallcology",
