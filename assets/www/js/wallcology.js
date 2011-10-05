@@ -166,6 +166,9 @@ WallCology = {
 
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				
+				// setting the header of the datatable according to selected criteria
+				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
  
 				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
 			})
@@ -184,6 +187,8 @@ WallCology = {
 			$("input[name=note-filter-set]").click(function() {
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				// setting the header of the datatable according to selected criteria
+				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
 				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
 			})
 
@@ -292,7 +297,7 @@ WallCology = {
 				$("#organism-comment-filter-1 + label").addClass("ui-state-active");
 				// setting the header of the datatable according to selected
 				// criteria
-				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
             })
@@ -456,7 +461,7 @@ WallCology = {
 			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
 				// setting the header of the datatable according to selected
 				// criteria
-				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
 			})      
