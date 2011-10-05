@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-     <string name="homepage_url">http://10.0.1.29:8000/</string>
-<!--     <string name="homepage_url">http://142.150.101.208:8000/</string> -->
+<!--     <string name="homepage_url">http://10.0.1.29:8000/</string> -->
+     <string name="homepage_url">http://wallcology.aardvark.encorelab.org/</string> 
 <!-- 	<string name="homepage_url"> http://wallcology.proto.encorelab.org/</string> -->
 </resources>
