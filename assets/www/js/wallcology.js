@@ -59,12 +59,12 @@ WallCology = {
             $('#tabs').tabs()
             $('#tabs').show()
             $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
-            
-    		$( "#tabs" ).bind( "tabsselect", function() {
+
+            $( "#tabs" ).bind( "tabsselect", function() {
     			$(Sail.app).trigger("context_switch", {selectableTags: [], autoTags: []})
     		})
             
-            
+
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
             $('#open-habitat').show()
