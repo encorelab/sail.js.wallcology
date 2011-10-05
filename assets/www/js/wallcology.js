@@ -377,7 +377,7 @@ WallCology = {
 				$('div#tabs-2 table#organism-table td').css('border', 'none');
 				$(this).css('border', '1px solid black');                      
 				$('div#new-organism div#organism-tables div#chosen-organism span.organism-only').html($(this).html());
-				$('div#tabs-2 input#selected-organism').attr('value', this.id);
+				$('div#tabs-2 input#selected-organism').attr('value', $(this).attr('value'));
 			})    
 			
 			$('div#tabs-2 table#juvenile-organism-table td').click(function(){    
