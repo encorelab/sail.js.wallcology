@@ -58,8 +58,13 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
+
+            $( "#tabs" ).bind( "tabsselect", function() {
+    			$(Sail.app).trigger("context_switch", {selectableTags: [], autoTags: []})
+    		})
             
+
             $('#new-habitat').hide()
 			$('#what-others-said-habitat').hide()  
             $('#open-habitat').show()
@@ -75,14 +80,25 @@ WallCology = {
             $('#view-relationships').hide()
 
             $('.jquery-radios').buttonset()
+                       
+            //TODO FIX
+            $(Sail.app).trigger("context_switch", {discussable: false})		// turn of CK (for now)
+            presetTags = ["Theory", "Question", "Observation", "Investigation", "Other Idea"]
+                       
             
-            $(Sail.app).trigger('context_switch', {selectableTags: [
+            
+/*            $(Sail.app).trigger('context_switch', {selectableTags: [
                 "Theory",
                 "Question",
                 "Observation",
                 "Investigation",
-                "Other Idea"
-            ]})
+                "Other Idea",
+                // these should be on a new line in the Discussion screen
+                "Habitats",
+                "Organism",
+                "Life Cycles",
+                "Food Web"
+            ]})*/
            
             
 // **********NEW HABITAT*****************************************************************************************
@@ -115,9 +131,7 @@ WallCology = {
             })            
 
 			// When I want to Describe a Habitat is clicked
-			$('div#open-habitat button#describe-habitat-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Habitat']})
-                
+			$('div#open-habitat button#describe-habitat-button').click(function(){                
 				$('#open-habitat').hide()           
 				$('#new-habitat').show()
 			})
@@ -132,7 +146,9 @@ WallCology = {
 			// When See What Others Said for Habitat is clicked, this page page
 			// should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Habitat']})
+				tagArray = presetTags.slice()
+				tagArray.push("Environmental Conditions", "Structural Features")
+				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Habitats']})
 			    
             	$('#open-habitat').hide()           
             	$('#what-others-said-habitat').show() 
@@ -150,6 +166,9 @@ WallCology = {
 
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				
+				// setting the header of the datatable according to selected criteria
+				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
  
 				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
 			})
@@ -168,6 +187,8 @@ WallCology = {
 			$("input[name=note-filter-set]").click(function() {
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
+				// setting the header of the datatable according to selected criteria
+				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
 				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
 			})
 
@@ -187,6 +208,7 @@ WallCology = {
             	$('#what-others-said-habitat').hide()
             	$('#open-habitat').show()
             })
+            $('#what-others-said-habitat .add-to-discussion-button').hide()
 
 					
 /*
@@ -239,9 +261,7 @@ WallCology = {
 // **********ORGANISM****************************************************************************************
 
 			// When I want to Describe an ORGANISM is clicked
-			$('div#open-organism button#describe-organism-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Organisms']})
-			    
+			$('div#open-organism button#describe-organism-button').click(function(){	    
 				$("#organism-menu-page").hide();    
 				$('#describe-lifecycle-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
@@ -251,8 +271,10 @@ WallCology = {
 			})
 
 			// When See What Others Said is clicked, this page page should be loaded
-			$('div#open-organism #what-others-said-organism-button').click(function(){ 
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Organisms']})
+			$('div#open-organism #what-others-said-organism-button').click(function(){				
+				tagArray = presetTags.slice()
+				tagArray.push("Morphology", "Behaviour")
+				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Organisms']}) 
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
@@ -275,15 +297,14 @@ WallCology = {
 				$("#organism-comment-filter-1 + label").addClass("ui-state-active");
 				// setting the header of the datatable according to selected
 				// criteria
-				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
             })
 
 			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
 			$('div#open-organism #describe-lifecycle-organism-button').click(function(){ 
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Lifecycle']})
-			    
+		    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
 				$('#what-others-said-about-organisms').hide();				
@@ -295,7 +316,8 @@ WallCology = {
 			// When I want to see what others said about LIFECYCLES is clicked,
 			// this page page should be loaded
 			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
-			    $(Sail.app).trigger('context_switch', {autoTags: ['Lifecycle']})
+				tagArray = presetTags.slice()
+				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Life Cycle']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
@@ -439,7 +461,7 @@ WallCology = {
 			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
 				// setting the header of the datatable according to selected
 				// criteria
-				$("#aggregate-organism-table th#dynamic-column-aggregate-organism").html($('input:radio[name=organism-comment-filter-set]:checked').val());
+				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
 				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
 			})      
@@ -463,9 +485,12 @@ WallCology = {
 				} else { // Save the selections and clear them after
 					Sail.app.observations.newOrganismLifecycle(); 
 					Sail.app.observations.clearOrganismLifecycle();
+	            	$('#describe-lifecycle-organism').hide()
+					$('#open-organism').show()
+					$('#open-organism #organism-menu-page').show()
 				}
 			})
-			                                 
+
 			// When the student wants to paste the selected organism to show the
 			// relationships between them
 			$('div#describe-lifecycle-organism table#organism-lifecycle-relation td.content-cell').click(function() { 
@@ -497,13 +522,17 @@ WallCology = {
         	
 // **********RELATIONSHIPS***********************************************************************************
             $('#landing-relationships .new-button').click(function(){
-                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
                 
             	$('#landing-relationships').hide()
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
-                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
+            	//$(Sail.app).trigger("context_switch", {discussable: true}
+            	//put the other stuff keyed on the tabs, then disable tabs when in CK
+            	
+				tagArray = presetTags.slice()
+				tagArray.push("Suggestion For Food Web")
+				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Relationships']})
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
@@ -576,7 +605,8 @@ WallCology = {
            		// clear the tags: $('#view-relationships .row_selected').removeClass('row_selected')
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
-            })            
+            })    
+            $('#view-relationships .add-to-discussion-button').hide()
 
 			// row selector for dataTables
 			$('#relationships-datatable tr').live('click', function() {
@@ -704,7 +734,7 @@ WallCology = {
 							console.log("There are " + data.count + " relationships with energy transfer from " +$(this).data('from') +" to " +$(this).data('to'))
 
 							// writing the count value into the HTML
-							$(this).html(data.count)
+							$(this).text(data.count)
 
 							return true
 						}
@@ -1025,18 +1055,12 @@ WallCology = {
 	        // clear fields
 	        $('#new-counts .text-box').val('') 
 			$('#new-counts .count-organism-data-cell').val('')
-	        // $("input:radio").prop('checked', false)
-	        // 	        $('#new-counts .radio-button').button('refresh')		// both
-																	// lines are
-																	// necessary
-																	// to clear
-																	// radios
-																	// (first
-																	// changes
-																	// state,
-																	// second
-																	// refreshes
-																	// screen)
+/*	        $("input:radio").prop('checked', false)
+	        $('#new-counts .radio-button').button('refresh')
+TODO 
+Clear r buttons
+Confirm correct data is going out
+*/
         },
 
     },
@@ -1082,7 +1106,23 @@ WallCology = {
         
         unauthenticated: function(ev) {
             window.location.href = "/index.html"
-        }
+        },
+        
+        // not sure why we're going this route, but whateves
+/*        context_switch: function(event, changedContext) {
+        	//alert(changedContext)
+        	// set the context
+        	// where are the contexts defined?
+        	// 
+        	//"viewing_others_habitat_observations", "viewing_others_organism_observations", "viewing_others_lifecycle_observations", "viewing_others_foodweb_observations"
+        	//and maybe "viewing_other"
+        	//$(Sail.app).trigger('context_switch', "viewing_others_habitat_observations")
+        	if (changedContext == "viewing_others_habitat_observations") {
+        		selectableTags = ["X", "Y"]
+            	alert(changedContext)
+        	} 
+        	
+        }*/
     }
 }
     /*
