@@ -61,6 +61,15 @@ WallCology = {
             $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
+            // initial context
+            $(Sail.app).trigger('context_switch', {
+    		    selectableTags: [
+    		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+    		      ['Habitats', 'Organisms', 'Food Web']
+    		    ],
+    		    defaultTags: []
+    		})
+            
             $( "#tabs" ).bind( "tabsselect", function(event, ui) {
             	if (ui.index == 0) {
             		$(Sail.app).trigger('context_switch', {
