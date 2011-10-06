@@ -159,8 +159,8 @@ div#new-counts table#count-organisms td.dotted-top-border {
 	padding-top: 10px;
 }
 
-div#new-counts table#count-organisms td{
-	width: 60px;
+div#new-counts table#count-organisms td input{
+	width: 100px;
 }  
           
 

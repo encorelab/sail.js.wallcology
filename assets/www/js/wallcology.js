@@ -13,7 +13,7 @@ WallCology = {
         Sail.app.run = JSON.parse($.cookie('run'))
         
         Sail.modules
-            .load('Rollcall.Authenticator', {mode: 'multi-picker'})
+            .load('Rollcall.Authenticator', {mode: 'multi-picker', run: function() {return Sail.app.run.name}})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
             .load('CommonKnowledge', {buttonContainer: '#tabs'})
@@ -59,9 +59,51 @@ WallCology = {
             $('#tabs').tabs()
             $('#tabs').show()
             $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
-
-            $( "#tabs" ).bind( "tabsselect", function() {
-    			$(Sail.app).trigger("context_switch", {selectableTags: [], autoTags: []})
+            var $tabs = $('#tabs').tabs()
+            
+            $( "#tabs" ).bind( "tabsselect", function(event, ui) {
+            	if (ui.index == 0) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Environmental Conditions', 'Structural Features'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Habitats']
+            		})
+            	}
+            	else if (ui.index == 1) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Morphology', 'Behaviour', 'Life Cycles'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Organisms']
+            		})
+            	}
+            	else if (ui.index == 2) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Suggestion For Food Web'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Food Web']
+            		})
+            	}
+            	else if (ui.index == 3) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      [],
+            		      []			// confirm this is the right way (or just omit?)
+            		    ],
+            		})
+            	}
+            	else {
+            		console.log('what tab are you clicking on?!')
+            	}
     		})
             
 
@@ -81,25 +123,6 @@ WallCology = {
 
             $('.jquery-radios').buttonset()
                        
-            //TODO FIX
-            $(Sail.app).trigger("context_switch", {discussable: false})		// turn of CK (for now)
-            presetTags = ["Theory", "Question", "Observation", "Investigation", "Other Idea"]
-                       
-            
-            
-/*            $(Sail.app).trigger('context_switch', {selectableTags: [
-                "Theory",
-                "Question",
-                "Observation",
-                "Investigation",
-                "Other Idea",
-                // these should be on a new line in the Discussion screen
-                "Habitats",
-                "Organism",
-                "Life Cycles",
-                "Food Web"
-            ]})*/
-           
             
 // **********NEW HABITAT*****************************************************************************************
 
@@ -146,9 +169,6 @@ WallCology = {
 			// When See What Others Said for Habitat is clicked, this page page
 			// should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
-				tagArray = presetTags.slice()
-				tagArray.push("Environmental Conditions", "Structural Features")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Habitats']})
 			    
             	$('#open-habitat').hide()           
             	$('#what-others-said-habitat').show() 
@@ -272,9 +292,6 @@ WallCology = {
 
 			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){				
-				tagArray = presetTags.slice()
-				tagArray.push("Morphology", "Behaviour")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Organisms']}) 
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
@@ -316,8 +333,6 @@ WallCology = {
 			// When I want to see what others said about LIFECYCLES is clicked,
 			// this page page should be loaded
 			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
-				tagArray = presetTags.slice()
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Life Cycle']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
@@ -527,12 +542,6 @@ WallCology = {
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
-            	//$(Sail.app).trigger("context_switch", {discussable: true}
-            	//put the other stuff keyed on the tabs, then disable tabs when in CK
-            	
-				tagArray = presetTags.slice()
-				tagArray.push("Suggestion For Food Web")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Relationships']})
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
@@ -592,7 +601,6 @@ WallCology = {
 // **********VIEW RELATIONSHIPS**********************************************************************************
             
             $('#view-relationships .back-button').click(function() {
-                $(Sail.app).trigger('context_switch', {hiddenTags: ['Relationships']})
                 
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
@@ -683,26 +691,26 @@ WallCology = {
 			// .relationship-count
 			$('.relationship-count').each(function () {
 				// ajax GET call to sleepy mongoose 
-				console.log($(this).data('to'));
+				// console.log($(this).data('to'));   
+				console.log($(this));
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"life_cycle", "from":$(this).data('from'), "to":$(this).data('to')}) },
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"life_cycle", "from":$(this).attr('data-from'), "to":$(this).attr('data-to')}) },
 					// handing in the context is very important to fill the
 					// right table cell with the corresponding result - async
 					// call in loop!!
 					context: this,
 				  	success: function(data) { 
 						if (data.ok === 1) {                            
-							// console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count);
+							 console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count);
 						                                                                                      
 							if ($("div#organism-lifecycle-count-tables-container td.relationship-count:empty").size() == 0){
 								$("div#organism-lifecycle-count-tables-container td.relationship-count").html('');
 							}
 							// writing the count value into the HTML
-							$(this).html(data.count);
-							                   							
-						
+							$(this).text(data.count);
+							 
 							return true;
 						}
 						else {
@@ -883,14 +891,7 @@ WallCology = {
 									$('#relationships-datatable').dataTable({
 										"iDisplayLength": 6,
 										"bLengthChange": false,
-										"bDestroy" : true,		// you need this
-																// so that the
-																// table will be
-																// refreshed
-																// without
-																// errors each
-																// time entering
-																// the page
+										"bDestroy" : true,		
 										"bJQueryUI": true,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
