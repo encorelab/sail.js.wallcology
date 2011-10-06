@@ -59,9 +59,51 @@ WallCology = {
             $('#tabs').tabs()
             $('#tabs').show()
             $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
-
-            $( "#tabs" ).bind( "tabsselect", function() {
-    			$(Sail.app).trigger("context_switch", {selectableTags: [], autoTags: []})
+            var $tabs = $('#tabs').tabs()
+            
+            $( "#tabs" ).bind( "tabsselect", function(event, ui) {
+            	if (ui.index == 0) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Environmental Conditions', 'Structural Features'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Habitats']
+            		})
+            	}
+            	else if (ui.index == 1) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Morphology', 'Behaviour', 'Life Cycles'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Organisms']
+            		})
+            	}
+            	else if (ui.index == 2) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Suggestion For Food Web'],
+            		      ['Habitats', 'Organisms', 'Food Web']
+            		    ],
+            		    defaultTags: ['Food Web']
+            		})
+            	}
+            	else if (ui.index == 3) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      [],
+            		      []			// confirm this is the right way (or just omit?)
+            		    ],
+            		})
+            	}
+            	else {
+            		console.log('what tab are you clicking on?!')
+            	}
     		})
             
 
@@ -81,25 +123,6 @@ WallCology = {
 
             $('.jquery-radios').buttonset()
                        
-            //TODO FIX
-            $(Sail.app).trigger("context_switch", {discussable: false})		// turn of CK (for now)
-            presetTags = ["Theory", "Question", "Observation", "Investigation", "Other Idea"]
-                       
-            
-            
-/*            $(Sail.app).trigger('context_switch', {selectableTags: [
-                "Theory",
-                "Question",
-                "Observation",
-                "Investigation",
-                "Other Idea",
-                // these should be on a new line in the Discussion screen
-                "Habitats",
-                "Organism",
-                "Life Cycles",
-                "Food Web"
-            ]})*/
-           
             
 // **********NEW HABITAT*****************************************************************************************
 
@@ -146,9 +169,6 @@ WallCology = {
 			// When See What Others Said for Habitat is clicked, this page page
 			// should be loaded
 			$('div#open-habitat #what-others-said-habitat-button').click(function(){
-				tagArray = presetTags.slice()
-				tagArray.push("Environmental Conditions", "Structural Features")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Habitats']})
 			    
             	$('#open-habitat').hide()           
             	$('#what-others-said-habitat').show() 
@@ -272,9 +292,6 @@ WallCology = {
 
 			// When See What Others Said is clicked, this page page should be loaded
 			$('div#open-organism #what-others-said-organism-button').click(function(){				
-				tagArray = presetTags.slice()
-				tagArray.push("Morphology", "Behaviour")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Organisms']}) 
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide();                     
@@ -316,8 +333,6 @@ WallCology = {
 			// When I want to see what others said about LIFECYCLES is clicked,
 			// this page page should be loaded
 			$('div#open-organism #what-others-said-organism-lifecycle-button').click(function(){
-				tagArray = presetTags.slice()
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Life Cycle']})
 			    
 				$("#organism-menu-page").hide();
 				$('#new-organism').hide(); 
