@@ -1,7 +1,7 @@
 WallCology = {
     rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
 	mongooseURL: '/mongoose',
-    xmppDomain: 'proto.encorelab.org',
+    xmppDomain: 'aardvark.encorelab.org',
     groupchatRoom: null,
     
     // all Sail events generated in this app must have a run
