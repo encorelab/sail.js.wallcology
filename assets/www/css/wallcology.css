@@ -30,7 +30,7 @@ a:active {
 
 .top-level-text {
 	height: 40px;
-	width: 280px;
+	width: 190px;
 	margin-top: 5px;
 	margin-bottom: 3px;
 	border-radius: 4px;
@@ -110,23 +110,27 @@ div#tabs .tab-pane {
 
 /* Hide the predator */
 .predator-reveal {
-	/* display:none; */
-}
-
-/* Hide organisms */
-.hide-tab-organisms {
-	/*display:none;*/
+	 display:none; 
 }
 
 /* Hide relationships */
 .hide-tab-relationships {
-	/*display:none;*/
+	display:none;
 }
 
 /* Hide counts */
 .hide-tab-counts {
-	/*display:none;*/
+	display:none;
 }
+
+#describe-lifecycle-organism-button {
+	display:none;
+}
+
+#what-others-said-organism-lifecycle-button {
+	display:none;
+}
+
 /*
 ===================================================================================
 ===================================================================================

@@ -1,17 +1,22 @@
 <!-- TODO
-- make default behaviour for click on tabs to put us on the landing page
-- default (empty?) table should load on entering the view relationships page
-- tag context set onClick for View buttons
-- do the autoTagging
-- test dimensions on tablet, then standardise the css so that it can be displayed on the big board
-- figure out a way to log all of the XMPP data in each room
+- tag context set onClick for View buttons, disable clicking on tabs while in there?
+		- the tags are now keyed on hitting the tab, always true
+- unselect the tags
+- decrease font size on tags or make a third row (second is better)
+- Rokham's changes. Make sure they're done (and then hide the 3 and 4 life cycle buttons)
 
+- change % to units in counts
+
+- test dimensions on tablet, then standardise the css so that it can be displayed on the big board
+- default (empty?) table should load on entering the view relationships page
 - when discussion part is revealed, either hide or lock the tabs
+- make default behaviour for click on tabs to put us on the landing page
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
 - add colors to Discussion bubbles
 - set max returned items on queries (currently 5000)
 - fix loader.gif image issues
+- finish counts page (clear buttons on submit, etc)
 - we need to start on Microworlds, particularly the graphing
 - add PIC -> X 
  -->
@@ -54,16 +59,18 @@
 </head>
 <body>
     <header>
-		<div class="top-level-text">Test text</div>
+		<div class="top-level-text">WallCology</div>
 	</header>
 
 	<div id="tabs">
 		<ul>
-			<li class=""><a href="#tabs-1">Habitats</a></li>
-			<li class="hide-tab-organisms"><a href="#tabs-2">Organisms</a></li>
-			<li class="hide-tab-relationships"><a href="#tabs-3">Relationships</a></li>
-			<li class="hide-tab-counts"><a href="#tabs-4">Counts</a></li>			
+			<li id="habitat-tab" class="tab-click"><a href="#tabs-1">Habitats</a></li>
+			<li id="organisms-tab" class="hide-tab-organisms tab-click"><a href="#tabs-2">Organisms</a></li>
+			<li id="relationships-tab" class="hide-tab-relationships tab-click"><a href="#tabs-3">Relationships</a></li>
+			<li id="counts-tab" class="hide-tab-counts tab-click"><a href="#tabs-4">Counts</a></li>			
 		</ul>
+		
+
 		
 		
 <!-- ********************************** HABITAT *********************************  -->		
@@ -154,7 +161,7 @@
 					</div>
 				</div>
 
-				<div><h4>If you want to add a note to discussions, select the entries you want added to it: </h4></div>
+				<div><h4><!-- If you want to add a note to discussions, select the entries you want added to it:  --></h4></div>
  				<div id="habitat-aggregate-results">
  					<table id="aggregate-habitat-table" class="datatable display">   
 						<thead>
@@ -415,7 +422,7 @@
 						
 					
 						<div id="organism-what-others-said-aggregate-table">
-							<h4> If you want to add a note to discussions, select the entries that apply to it:</h4>
+							<h4> <!-- If you want to add a note to discussions, select the entries that apply to it: --></h4>
 					
 							<div class="datatable">
 								<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-organism-table">
@@ -434,7 +441,7 @@
 					
 						<div id="organism-what-others-said-action-buttons" class="action-buttons">
 							<button class="back-button organism-button">BACK</button>
-							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>    
+<!-- 							<button class="add-to-discussion-button organism-button">ADD TO DISCUSSIONS</button>   -->  
 						</div>
 					
 					</div> <!-- aggregate-organism-filters -->
