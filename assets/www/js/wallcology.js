@@ -68,7 +68,7 @@ WallCology = {
                     ['Environmental Conditions', 'Structural Features'],
                     ['Habitats', 'Organisms', 'Food Web']
     		    ],
-    		    defaultTags: []
+    		    defaultTags: ['Habitats']
     		})
             
             $( "#tabs" ).bind( "tabsselect", function(event, ui) {
