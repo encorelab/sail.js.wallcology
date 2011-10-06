@@ -542,12 +542,6 @@ WallCology = {
             	$('#new-relationship').show()
             })
             $('#landing-relationships .view-button').click(function(){
-            	//$(Sail.app).trigger("context_switch", {discussable: true}
-            	//put the other stuff keyed on the tabs, then disable tabs when in CK
-            	
-				tagArray = presetTags.slice()
-				tagArray.push("Suggestion For Food Web")
-				$(Sail.app).trigger("context_switch", {discussable: true, selectableTags: tagArray, autoTags: ['Relationships']})
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
@@ -607,7 +601,6 @@ WallCology = {
 // **********VIEW RELATIONSHIPS**********************************************************************************
             
             $('#view-relationships .back-button').click(function() {
-                $(Sail.app).trigger('context_switch', {autoTags: ['Relationships']})
                 
             	$('#view-relationships').hide()
             	$('#landing-relationships').show()
@@ -710,7 +703,7 @@ WallCology = {
 					context: this,
 				  	success: function(data) { 
 						if (data.ok === 1) {                            
-							// console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count);
+							 console.log("from " +$(this).data('from') +" to " +$(this).data('to') + ": " + data.count);
 						                                                                                      
 							if ($("div#organism-lifecycle-count-tables-container td.relationship-count:empty").size() == 0){
 								$("div#organism-lifecycle-count-tables-container td.relationship-count").html('');
@@ -898,14 +891,7 @@ WallCology = {
 									$('#relationships-datatable').dataTable({
 										"iDisplayLength": 6,
 										"bLengthChange": false,
-										"bDestroy" : true,		// you need this
-																// so that the
-																// table will be
-																// refreshed
-																// without
-																// errors each
-																// time entering
-																// the page
+										"bDestroy" : true,		
 										"bJQueryUI": true,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
