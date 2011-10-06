@@ -13,7 +13,7 @@ WallCology = {
         Sail.app.run = JSON.parse($.cookie('run'))
         
         Sail.modules
-            .load('Rollcall.Authenticator', {mode: 'multi-picker'})
+            .load('Rollcall.Authenticator', {mode: 'multi-picker', run: function() {return Sail.app.run.name}})
             .load('Strophe.AutoConnector')
             .load('AuthStatusWidget')
             .load('CommonKnowledge', {buttonContainer: '#tabs'})
