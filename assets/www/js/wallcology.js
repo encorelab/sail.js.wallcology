@@ -64,8 +64,9 @@ WallCology = {
             // initial context
             $(Sail.app).trigger('context_switch', {
     		    selectableTags: [
-    		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
-    		      ['Habitats', 'Organisms', 'Food Web']
+                    ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+                    ['Environmental Conditions', 'Structural Features'],
+                    ['Habitats', 'Organisms', 'Food Web']
     		    ],
     		    defaultTags: []
     		})
