@@ -653,11 +653,12 @@ WallCology = {
 			// .relationship-count
 			$('.relationship-count').each(function () {
 				// ajax GET call to sleepy mongoose 
-				console.log($(this).data('to'));
+				// console.log($(this).data('to'));   
+				console.log($(this));
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_count",
-					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"life_cycle", "from":$(this).data('from'), "to":$(this).data('to')}) },
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"life_cycle", "from":$(this).attr('data-from'), "to":$(this).attr('data-to')}) },
 					// handing in the context is very important to fill the
 					// right table cell with the corresponding result - async
 					// call in loop!!
@@ -670,9 +671,8 @@ WallCology = {
 								$("div#organism-lifecycle-count-tables-container td.relationship-count").html('');
 							}
 							// writing the count value into the HTML
-							$(this).html(data.count);
-							                   							
-						
+							$(this).text(data.count);
+							 
 							return true;
 						}
 						else {
