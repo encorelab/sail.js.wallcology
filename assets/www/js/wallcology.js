@@ -329,7 +329,7 @@ WallCology = {
 				// criteria
 				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
             })
 
 			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
@@ -483,7 +483,8 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
 				$(this).css('border', '1px solid black');     
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
 			})  
 			 
 			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
@@ -491,7 +492,7 @@ WallCology = {
 				// criteria
 				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
 			})      
 			
 			// Handling all the events for Organism Lifecycle Page
@@ -771,14 +772,14 @@ WallCology = {
 		// Data table population functions
 		// Example criteria:
 		// { wallscope: '1', note: 'organism' }
-		generateHabitatsDT: function(userSelections) {
+		generateHabitatsDT: function(userHabitatSelections) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
 			$.ajax({
 				type: "GET",
 				url: "/mongoose/wallcology/observations/_count",
-				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat", "wallscope":userSelections.wallscope})},
-				context: userSelections,
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat", "wallscope":userHabitatSelections.wallscope})},
+				context: userHabitatSelections,
 				success: function(data) {
 /*			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat", "wallscope":wallscope}) },
@@ -793,7 +794,7 @@ WallCology = {
 							type: "GET",
 							url: "/mongoose/wallcology/observations/_find",
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
-							context: userSelections,
+							context: userHabitatSelections,
 							success: function(data) {
 
 /*						$.get("/mongoose/wallcology/observations/_find",
@@ -835,26 +836,39 @@ WallCology = {
 			})//, "json")
 		},
 		
-		generateOrganismsDT: function(selectedOrganism, aspect) {
+		// Example criteria:
+		// { selectedOrganism: 'blue-bug', aspect: 'morphology' }
+		generateOrganismsDT: function(userOrganismSelections) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			$.get("/mongoose/wallcology/observations/_count",
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism", "organism":userOrganismSelections.selectedOrganism})},
+				context: userOrganismSelections,
+				success: function(data) {
+/*			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}) },
-				function(data) {
-					criteria = {"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}
-					criteria[aspect] = {$ne: ""}
+				function(data) {*/
+					criteria = {"run.name":Sail.app.run.name, "type":"organism","organism":this.selectedOrganism}
+					criteria[this.aspect] = {$ne: ""}
 						
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
-						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify(criteria), batch_size: batchSize },
-							
-							function(data) {
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: userOrganismSelections,
+							success: function(data) {
+/*						$.get("/mongoose/wallcology/observations/_find",
+							{ criteria: JSON.stringify(criteria), batch_size: batchSize },						
+							function(data) {*/
 								organismResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
-									organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+									organismResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
 								}
 
 						    	if (data.ok === 1) {			    		
@@ -877,13 +891,15 @@ WallCology = {
 									console.log("Mongoose request failed")
 									return false
 								}
-						}, "json")	
+							}
+						})//, "json")	
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
-			}, "json")
+				}
+			})//, "json")
 			
 		},
 
