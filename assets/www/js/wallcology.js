@@ -559,20 +559,11 @@ WallCology = {
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
-				/*
-				 * $('#relationships-datatable').dataTable({ "iDisplayLength":
-				 * 7, "bLengthChange": false, "bDestroy" : true, //you need this
-				 * so that the table will be refreshed without errors each time
-				 * entering the page "bJQueryUI": true, "sPaginationType":
-				 * "full_numbers", "aoColumns": [ { "sWidth": "500px" }, null,
-				 * null ],
-				 * 
-				 * "aaData": ["nothing selected", "no origin", "no date"] })
-				 */
+				Sail.app.observations.generateRelationshipsDT({from:null, to:null})
 				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	// Sail.app.observations.generateRelationshipsDT()
+            	
             })
             
 // **********NEW RELATIONSHIP***********************************************************************************
@@ -1113,12 +1104,11 @@ WallCology = {
 	        // clear fields
 	        $('#new-counts .text-box').val('') 
 			$('#new-counts .count-organism-data-cell').val('')
-/*	        $("input:radio").prop('checked', false)
+			
+			// these don't actually work yet, but should once we have the landing page
+	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')
-TODO 
-Clear r buttons
-Confirm correct data is going out
-*/
+	        
         },
 
     },
