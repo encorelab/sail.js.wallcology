@@ -1,6 +1,7 @@
 {
 "xmpp": {
-    "domain": "glint"
+    "domain": "glint",
+    "port": 5222
   },
 "rollcall": {
     "url": "http://localhost:3000/"
