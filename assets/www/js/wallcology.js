@@ -129,7 +129,10 @@ WallCology = {
 			$('#describe-lifecycle-organism').hide()
             $('#open-organism').show()
             $('#new-relationship').hide()
-            $('#view-relationships').hide()
+            $('#view-relationships').hide()    
+                                                    
+			// Hide all divs in investigation pages except for the main menu page
+			$("div#investigation-pages").children().filter(":not(#investigation-menu-page)").hide();
 
             $('.jquery-radios').buttonset()
                        
@@ -656,8 +659,74 @@ WallCology = {
 	            else {
 	            	alert("Please record habitat, temperature, light levels and humidity")
 	            }							
-			})
+			}) 
+			
+
+// ********** INVESTIGATIONS ***********************************************************************************
+
+			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
+				$('div#investigation-pages div#investigation-menu-page').hide();
+				$('div#investigation-pages div#investigation-motivation').show();      
+			}); 
+			    
+			// if the back button is clicked on 'Investigation Motivation' page
+			$('div#investigation-motivation div.action-buttons button.back-button').click(function () {
+				$('div#investigation-pages div#investigation-menu-page').show();
+				$('div#investigation-pages div#investigation-motivation').hide();
+			}) 
+			
+			// In the Investigation Motivation page, this sets the value of the chosen Type
+            $('div#investigation-motivation div#investigation-type button').click(function() {    
+	            $('div#investigation-motivation div#investigation-type button').removeClass('investigation-button selected');
+				$(this).addClass('investigation-button selected');
+				$('div#investigation-motivation span#selected-investigation-type').text($(this).attr('value'));
+			});  
+			
+			
+			// Next button is clicked in "Investigation Motivation" page
+			$('div#investigation-pages div#investigation-motivation div.action-buttons button#to-investigation-setup').click(function() {  
+				  
+				// Check to make sure all fields are filled 
+			    selectedType = $('div#investigation-motivation div#investigation-type button.selected').attr('value');
+				motivationForDescription = $('div#investigation-motivation textarea#motivation-description').val();
+				headline = $('div#investigation-motivation input#headline-title').val(); 
+                selectedKeywords = [];
+				$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
+					selectedKeywords.push($(this).val());
+				}); 
+				                                         
+				if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
+					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
+				} else { // Send the filled form to be saved
+					Sail.app.observations.newInvestigationMotivation(selectedType, motivationForDescription, headline, selectedKeywords);
+					
+					// clear fields
+					$("div#investigation-motivation div#investigation-type button").removeClass('investigation-button selected');
+					$("div#investigation-motivation span#selected-investigation-type").text('...'); 
+					$('div#investigation-motivation textarea#motivation-description').val('');   
+					$('div#investigation-motivation input#headline-title').val(''); 
+					$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
+						$(this).attr('checked', false);
+					});
+					
+					//  Move to the "Investigation Setup" page	
+					$('div#investigation-motivation').hide();
+					$('div#investigation-setup').show();
+					
+				}                                                                                      
+			});
+			
+			
+			// Back button of "Investigation Setup" is clicked
+			$('div#investigation-pages div#investigation-setup div.action-buttons button#back-to-investigation-motivation').click(function() { 
+				$('div#investigation-setup').hide();				
+  				$('div#investigation-motivation').show();
+			});   		
+
+			
     	},
+                                                                   
+
 
 
 
@@ -1031,6 +1100,18 @@ WallCology = {
 	        $('#box1').html("")
 	        $('#box2').html("")		
 	        $('#new-relationship .comments').val('')
+        }, 
+
+		newInvestigationMotivation: function(selectedType, motivationForDescription, headline, selectedKeywords) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_motivation',
+				selectedType : selectedType,
+				motivationForDescription : motivationForDescription,
+				headline : headline,
+				selectedKeywords : selectedKeywords
+	        })
+	        WallCology.groupchat.sendEvent(sev)
         },
 
         newCountsContent: function() {

@@ -16,7 +16,7 @@ body {
 div#tabs-5 {
 	background-image: url('/images/bkgd_habitat.png');
 	background-repeat: no-repeat;
- 	font-size: 14px;
+/* 	font-size: 14px;*/
 }
            
 div#investigation-pages div#investigation-menu-page {
@@ -37,14 +37,35 @@ div#investigation-pages div#investigation-menu-page div#inner-investigation-menu
 	font-size: 24px;
 }
 
-
-div#tabs-5 button.investigation-button {
-	background: url("") repeat scroll 0 0 #E63F0D;
-	border: 1px solid #E63F0D;   
+div#tabs-5 button.new-page-button  {
 	margin-top: 50px;
 	height: 80px;
 	width: 570px;
 }
+
+
+div#tabs-5 button.investigation-button {
+	background: url("") repeat scroll 0 0 #E63F0D;
+	border: 1px solid #E63F0D;   
+	color: white;
+}                
+   
+div#tabs-5 div#investigation-motivation div.action-buttons {                             
+	width: 660px;
+}
+
+div#tabs-5 div#investigation-motivation div.action-buttons {
+	margin-top: 30px;
+}       
+                                                            
+
+div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigation-setup {
+   float: right;
+}
+
+
+
+
 
 
 /********************************* INVESTIGATION MOTIVATION *****************************/

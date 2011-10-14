@@ -1009,15 +1009,78 @@
 						<button type="button" id="what-others-did-investigation" class="new-page-button investigation-button"><b>I want to see what others did</b></button>		
 					</div>
 				</div> 
-				
+				 
 				<!--********************************* INVESTIGATION MOTIVATION *****************************-->
 				<div id="investigation-motivation">
+					<img src="/images/new_habitat.png">  
+					
+					<div id="investigation-type">
+						<p style="float: left; width: 200px; margin-right: 20px"> <b> Investigation Type </b></p>
+						<button class="standard-button" value="theory">Theory</button>
+						<button class="standard-button" value="question">Question</button>					
+					</div>   
+					
+					<p style="float: left; width: 100%;"> <b> Describe the motivation for your new investigation.</b> I have a <b><span id="selected-investigation-type">...</span></b> I want to investigate. </p> 
+					<br/><br/>
+					<textarea id="motivation-description" cols="103" rows="5"></textarea> 
+					 
+					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+						<span style="float: left; width: 100px"> Headline </span>
+						<input style="float: left" size="90" id="headline-title" type="text"/>
+					</div>   
+					
+					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+						<span style="float: left; width: 100px"> Keywords </span>
+						<table id="investigation-keyword-table">
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Energy Transfer" /> Energy Transfer </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Sit" /> Sit </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Risus" /> Risus </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Ipsum" /> Ipsum </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Predator" /> Predator </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Amet" /> Amet </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Ultamcopper" /> Ultamcopper </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+						</table>
+					</div>
+					
+					 <div class="action-buttons">
+						<button class="back-button standard-button investigation-button">BACK</button>
+						<button id='to-investigation-setup' class="next-button investigation-button">NEXT</button>
+					</div>
 
 				</div>		
 
 				<!--********************************* INVESTIGATION SETUP *****************************-->
 				<div id="investigation-setup">
-
+ 					<img src="/images/new_habitat.png"> 
+					should be hidden 
+					
+					<div class="action-buttons">
+						<button id="back-to-investigation-motivation" class="back-button standard-button investigation-button">BACK</button>
+						<button id='to-investigation-results' class="next-button investigation-button">NEXT</button>
+					</div>
 				</div>		 
 
 
