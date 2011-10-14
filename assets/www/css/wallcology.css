@@ -115,7 +115,7 @@ div#tabs .tab-pane {
 
 /* Hide relationships */
 .hide-tab-relationships {
-	display:none;
+	/*display:none;*/
 }
 
 /* Hide counts */
