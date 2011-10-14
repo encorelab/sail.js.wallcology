@@ -13,17 +13,16 @@ body {
 
 /********************************* INVESTIGATION MENU PAGE *****************************/   
    
-div#investigation-pages {
+div#tabs-5 {
 	background-image: url('/images/bkgd_habitat.png');
 	background-repeat: no-repeat;
-	height: 1200px;
  	font-size: 14px;
 }
            
 div#investigation-pages div#investigation-menu-page {
 	background-image: url('/images/transparent_bkg.png');
-	height: 100%;
-	display: table-cell; 
+	height: 470px;
+	display: table; 
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 160px;
@@ -31,13 +30,20 @@ div#investigation-pages div#investigation-menu-page {
 }      
 
 div#investigation-pages div#investigation-menu-page div#inner-investigation-menu-page {
-	_position: absolute; 
-	_top: 50%; 
-	display: table-cell; 
+   	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
 	padding-right: 40px;
 	font-size: 24px;
+}
+
+
+div#tabs-5 button.investigation-button {
+	background: url("") repeat scroll 0 0 #E63F0D;
+	border: 1px solid #E63F0D;   
+	margin-top: 50px;
+	height: 80px;
+	width: 570px;
 }
 
 

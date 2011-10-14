@@ -58,7 +58,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 4 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
