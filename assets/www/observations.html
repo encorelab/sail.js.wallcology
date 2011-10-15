@@ -1075,7 +1075,48 @@
 				<!--********************************* INVESTIGATION SETUP *****************************-->
 				<div id="investigation-setup">
  					<img src="/images/new_habitat.png"> 
-					should be hidden 
+ 					<p><b> Organisms </b></p>
+					<p> Select the organisms you would like to add to your experiment (choose one or more)</p>
+					
+					<table id="investigation-organism-table">
+						<tr>
+							<td value="scum"> <img src="/images/icon_0007_scum.png"> </td>
+							<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png"> </td>
+							<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png"> </td>
+							<td value="green-bug"> <img src="/images/icon_0008_green-bug.png"> </td>
+							<td value="predator"> <img src="/images/icon_0005_predator.png"> </td>							
+						</tr>
+					</table> 
+					
+					<p><b> Environmental Conditions </b></p>
+					<p> Specify the environmental conditions you would like to add to your experiment </p>
+					 
+					<div style="float: left; width: 100%; margin-bottom: 25px">
+						<div id="investigation-environment-temperature" class="investigation-environment-filter">
+							<p> <b>Temperature</b> </p>
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					      
+						<div id="investigation-environment-light-level" class="investigation-environment-filter">
+							<p> <b>Light Levels</b> </p>
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					
+						<div id="investigation-environment-humidity" class="investigation-environment-filter">
+							<p> <b>Humidity</b> </p> 
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					</div>
+					  
+					<div style="width: 100%; float: left; margin-bottom: 25px">
+						<p> <b> Hypothesis </b> </p>  
+						<p> Here's what I think will happen to my populations </p>
+					
+						<textarea id="investigation-setup-hypothesis" cols="80" rows="8"></textarea>
+					</div>
 					
 					<div class="action-buttons">
 						<button id="back-to-investigation-motivation" class="back-button standard-button investigation-button">BACK</button>
@@ -1086,13 +1127,17 @@
 
 				<!--********************************* INVESTIGATION RESULTS *****************************-->
 				<div id="investigation-results">
-
+                	<img src="/images/new_habitat.png">
+					<div class="action-buttons">
+						<button id="back-to-investigation-setup" class="back-button standard-button investigation-button">BACK</button>
+						<button id='save-investigation-results' class="save-button investigation-button">Save</button>
+					</div>
 				</div>		                                               
 
 
 				<!--********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************-->
 				<div id="investigation-what-others-did">
-
+                	
 				</div>		                                                                 
 
 

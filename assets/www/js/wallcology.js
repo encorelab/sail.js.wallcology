@@ -695,9 +695,9 @@ WallCology = {
 					selectedKeywords.push($(this).val());
 				}); 
 				                                         
-				if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
-					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
-				} else { // Send the filled form to be saved
+				// if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
+				// 					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
+				// 				} else { // Send the filled form to be saved
 					Sail.app.observations.newInvestigationMotivation(selectedType, motivationForDescription, headline, selectedKeywords);
 					
 					// clear fields
@@ -713,7 +713,7 @@ WallCology = {
 					$('div#investigation-motivation').hide();
 					$('div#investigation-setup').show();
 					
-				}                                                                                      
+				// }                                                                                      
 			});
 			
 			
@@ -722,6 +722,79 @@ WallCology = {
 				$('div#investigation-setup').hide();				
   				$('div#investigation-motivation').show();
 			});   		
+                  
+			
+			// *******************************  Investigation Setup Page **********************************
+			$('div#investigation-setup table#investigation-organism-table td').click (function () {
+				if ($(this).hasClass("selected")) {// need to uncheck the selection
+					$(this).removeClass("selected");
+					$(this).css('border', 'none');
+				}else {
+					$(this).addClass("selected");
+					$(this).css('border', '1px solid black');					
+				}
+			});
+			
+			$('div#investigation-setup div#investigation-environment-temperature button').click(function(){
+				$('div#investigation-setup div#investigation-environment-temperature button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			});
+			
+			$('div#investigation-setup div#investigation-environment-light-level button').click(function(){
+				$('div#investigation-setup div#investigation-environment-light-level button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			});
+			
+			$('div#investigation-setup div#investigation-environment-humidity button').click(function(){
+				$('div#investigation-setup div#investigation-environment-humidity button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			});     
+			
+			
+			$('div#investigation-setup div.action-buttons button#to-investigation-results').click(function() {
+			   
+				// Check to make sure all the necessary fields are selected and filled 
+				selectedOrganisms = [];
+				$('div#investigation-setup table#investigation-organism-table td.selected').each(function(){
+					selectedOrganisms.push($(this).attr('value'));
+				});
+					                                              
+				temperature = $('div#investigation-setup div#investigation-environment-temperature button.selected').attr('value');
+				lightLevel = $('div#investigation-setup div#investigation-environment-light-level button.selected').attr('value');
+				humidity = $('div#investigation-setup div#investigation-environment-humidity button.selected').attr('value');	
+				
+				hypothesis = $('div#investigation-setup textarea#investigation-setup-hypothesis').val();
+				
+				if (selectedOrganisms.length == 0 || temperature == "undefined" || lightLevel == "undefined" || humidity == "undefinied" || hypothesis == ""){
+					alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
+				} else {
+					// Submit the data
+					Sail.app.observations.newInvestigationSetup(selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
+
+					// Clear the page                                                                                   
+					$('div#investigation-setup table#investigation-organism-table td.selected').css('border', 'none');
+					$('div#investigation-setup table#investigation-organism-table td.selected').removeClass('selected');
+					
+					$('div#investigation-setup div#investigation-environment-temperature .selected').removeClass('selected investigation-button');
+					$('div#investigation-setup div#investigation-environment-light-level .selected').removeClass('selected investigation-button');
+					$('div#investigation-setup div#investigation-environment-humidity .selected').removeClass('selected investigation-button');
+					
+					$('div#investigation-setup textarea#investigation-setup-hypothesis').val('');
+
+				   	// Move to "Investigation Results" page
+				    $('div#investigation-pages div#investigation-setup').hide();
+					$('div#investigation-pages div#investigation-results').show();
+					
+					
+				}			 
+			});     
+			
+			
+			// *******************************  Investigation Results Page **********************************
+			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
+				$('div#investigation-pages div#investigation-results').hide();
+				$('div#investigation-pages div#investigation-setup').show();
+			});                                                             
 
 			
     	},
@@ -1110,6 +1183,19 @@ WallCology = {
 				motivationForDescription : motivationForDescription,
 				headline : headline,
 				selectedKeywords : selectedKeywords
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        }, 
+
+		newInvestigationSetup: function(selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_setup',
+				selectedOrganisms : selectedOrganisms,
+				temperature : temperature,
+				lightLevel : lightLevel,
+				humidity : humidity,
+				hypothesis : hypothesis
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },
