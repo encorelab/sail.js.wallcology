@@ -48,7 +48,9 @@ div#tabs-5 button.investigation-button {
 	background: url("") repeat scroll 0 0 #E63F0D;
 	border: 1px solid #E63F0D;   
 	color: white;
-}                
+}                                                   
+
+/** ********************************* Investigation Motivation Page *************************** */
    
 div#tabs-5 div#investigation-motivation div.action-buttons {                             
 	width: 660px;
@@ -61,19 +63,61 @@ div#tabs-5 div#investigation-motivation div.action-buttons {
 
 div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigation-setup {
    float: right;
+}    
+    
+
+/** ********************************* Investigation Setup Page *************************** */
+
+div#investigation-pages div#investigation-setup table#investigation-organism-table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+}          
+
+
+div#investigation-pages div#investigation-setup div.investigation-environment-filter {
+	float: left; 
+	width: 200px;
+}  
+
+div#tabs-5 div#investigation-setup div.action-buttons {                             
+	width: 660px;
+}  
+
+div#tabs-5 div#investigation-setup div.action-buttons button#to-investigation-results {
+   float: right;
+}
+
+                                  
+/** ********************************* Investigation Results Page *************************** */
+div#tabs-5 div#investigation-results div.action-buttons {                             
+	width: 660px;   
+	margin-top: 25px;
+} 
+
+div#tabs-5 div#investigation-results div.action-buttons button#save-investigation-results {
+   float: right;
+}   
+
+div#tabs-5 div#investigation-results div#investigation-results-graph {
+	width: 500px;
+	height: 300px;
+	background-color: white;
+	float: left;
+}
+
+div#tabs-5 div#investigation-results button#animate-investigation-results-button {
+	float: left;
+	font-size: 24px;
+	height: 80px;
+	width: 150px;
+	margin-left: 50px;
+	margin-top: 100px;
 }
 
 
 
 
-
-
-/********************************* INVESTIGATION MOTIVATION *****************************/
-
-/********************************* INVESTIGATION SETUP *****************************/
-
-
-/********************************* INVESTIGATION RESULTS *****************************/
 
 
 /********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/

@@ -765,9 +765,9 @@ WallCology = {
 				
 				hypothesis = $('div#investigation-setup textarea#investigation-setup-hypothesis').val();
 				
-				if (selectedOrganisms.length == 0 || temperature == "undefined" || lightLevel == "undefined" || humidity == "undefinied" || hypothesis == ""){
-					alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
-				} else {
+				// if (selectedOrganisms.length == 0 || temperature == "undefined" || lightLevel == "undefined" || humidity == "undefinied" || hypothesis == ""){
+				// 	alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
+				// } else {
 					// Submit the data
 					Sail.app.observations.newInvestigationSetup(selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
 
@@ -784,9 +784,7 @@ WallCology = {
 				   	// Move to "Investigation Results" page
 				    $('div#investigation-pages div#investigation-setup').hide();
 					$('div#investigation-pages div#investigation-results').show();
-					
-					
-				}			 
+				// }			 
 			});     
 			
 			
@@ -794,7 +792,41 @@ WallCology = {
 			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
 				$('div#investigation-pages div#investigation-results').hide();
 				$('div#investigation-pages div#investigation-setup').show();
-			});                                                             
+			}); 
+			
+			$('div#investigation-pages div#investigation-results button#animate-investigation-results-button').click(function() {
+				if ($(this).text() == "Pause"){
+					$(this).text('Resume'); 
+					// Resume the run
+					
+				} else if ($(this).text() == "Resume"){
+					$(this).text('Pause'); 
+					// Pause the run
+					
+				}
+				
+			}); 
+			
+			// When the 'SAVE' button is clicked we need to save the investigation's results
+			$('div#investigation-pages div#investigation-results div.action-buttons button#save-investigation-results').click(function() {
+				description = $('div#investigation-pages div#investigation-results textarea#investigation-results-description').val();
+				interpretation = $('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val();
+				
+				if (description == "" || interpretation == "") {
+					alert ("Please fill the Description & Interpretation sections and then hit 'SAVE'.");
+				}else {
+					// Save the reults 
+					Sail.app.observations.newInvestigationResult(description, interpretation);
+					
+					// Clear the page 
+					$('div#investigation-pages div#investigation-results textarea#investigation-results-description').val("");
+					$('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val("");
+					
+					// Move to main menu
+					$('div#investigation-pages div#investigation-results').hide();
+					$('div#investigation-pages div#investigation-menu-page').show();
+				}
+			});
 
 			
     	},
@@ -1196,6 +1228,16 @@ WallCology = {
 				lightLevel : lightLevel,
 				humidity : humidity,
 				hypothesis : hypothesis
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        },
+
+		newInvestigationResult: function(description, interpretation) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_setup',
+				description : description,
+				interpretation : interpretation
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },
