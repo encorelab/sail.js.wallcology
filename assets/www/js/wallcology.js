@@ -1,8 +1,7 @@
 WallCology = {
-    rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
+    /** Reverse-proxied URLs for rollcall and sleepy mongoose services. */
+    rollcallURL: '/rollcall',
     mongooseURL: '/mongoose',
-    xmppDomain: 'aardvark.encorelab.org',
-    groupchatRoom: null,
     
     // all Sail events generated in this app must have a run
     allowRunlessEvents: false,
@@ -559,20 +558,11 @@ WallCology = {
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
-				/*
-				 * $('#relationships-datatable').dataTable({ "iDisplayLength":
-				 * 7, "bLengthChange": false, "bDestroy" : true, //you need this
-				 * so that the table will be refreshed without errors each time
-				 * entering the page "bJQueryUI": true, "sPaginationType":
-				 * "full_numbers", "aoColumns": [ { "sWidth": "500px" }, null,
-				 * null ],
-				 * 
-				 * "aaData": ["nothing selected", "no origin", "no date"] })
-				 */
+				Sail.app.observations.generateRelationshipsDT({from:null, to:null})
 				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	// Sail.app.observations.generateRelationshipsDT()
+            	
             })
             
 // **********NEW RELATIONSHIP***********************************************************************************
@@ -609,7 +599,7 @@ WallCology = {
             })
 
 			$('#relationships .data-box').click(function(){
-				Sail.app.observations.generateRelationshipsDT($(this).data('from'), $(this).data('to'))
+				Sail.app.observations.generateRelationshipsDT( {from:$(this).data('from'), to:$(this).data('to')} )
 			})
             
 // **********VIEW RELATIONSHIPS**********************************************************************************
@@ -790,11 +780,12 @@ WallCology = {
 			    	if (data.ok === 1) {
 						batchSize = 0
 						batchSize = data.count
+						
 						$.ajax({
 							type: "GET",
 							url: "/mongoose/wallcology/observations/_find",
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
-							context: userHabitatSelections,
+							context: this,
 							success: function(data) {
 
 /*						$.get("/mongoose/wallcology/observations/_find",
@@ -856,11 +847,12 @@ WallCology = {
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
+						
 						$.ajax({
 							type: "GET",
 							url: "/mongoose/wallcology/observations/_find",
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
-							context: userOrganismSelections,
+							context: this,
 							success: function(data) {
 /*						$.get("/mongoose/wallcology/observations/_find",
 							{ criteria: JSON.stringify(criteria), batch_size: batchSize },						
@@ -903,18 +895,37 @@ WallCology = {
 			
 		},
 
-		generateRelationshipsDT: function(from, to) {
+		generateRelationshipsDT: function(userRelationshipSelection) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			$.get("/mongoose/wallcology/observations/_count",
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to})},
+				context: userRelationshipSelection,
+				success: function(data) {
+					
+					criteria = {"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to}
+					criteria["comments"] = {$ne: ""}
+					this.criteria = criteria
+/*			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
-				function(data) {
+				function(data) {*/
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
-						$.get("/mongoose/wallcology/observations/_find",
+						
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this, 
+							success: function(data) {
+								
+/*						$.get("/mongoose/wallcology/observations/_find",
 							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
 							function(data) {
+*/								
 								relationshipResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
@@ -941,13 +952,15 @@ WallCology = {
 									console.log("Mongoose request failed")
 									return false
 								}
-						}, "json")
+							}
+						})//, "json")
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
-			}, "json")
+			    }
+			})//, "json")
 			
 		},
 
@@ -1090,12 +1103,11 @@ WallCology = {
 	        // clear fields
 	        $('#new-counts .text-box').val('') 
 			$('#new-counts .count-organism-data-cell').val('')
-/*	        $("input:radio").prop('checked', false)
+			
+			// these don't actually work yet, but should once we have the landing page
+	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')
-TODO 
-Clear r buttons
-Confirm correct data is going out
-*/
+	        
         },
 
     },

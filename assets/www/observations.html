@@ -1,10 +1,9 @@
 <!-- TODO
 
-- update the image(s)
-- finish redoing the rest of the datatables
 - change % to units in counts
 - do the graphs
 
+- delay between submission and arrival in XMPP space
 - default (empty?) table should load on entering the view relationships page
 - make default behaviour for click on tabs to put us on the landing page
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
@@ -857,83 +856,85 @@
  							</tr>
  							<tr class="table-body">
 	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
-	 							<td><input type="text" class="text-box count-scum-percent"/> %</td>
+	 							<td><input type="text" class="text-box count-scum-percent"/> UNITS</td>
 	 							<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
-	 							<td><input type="text" class="text-box count-mold-percent"/> %</td>      
+	 							<td><input type="text" class="text-box count-mold-percent"/> UNITS</td>      
  							</tr>
 						</table> 
 					
 						<table id="count-vegetation-date-time">     
 							<tr>
 								<th> Date </th>
-								<th> Time </td>
+								<th> Time </th>
 							</tr>
 							<tr>
-								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegatation_date"> </td>						
-								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegatation_time"/>
+								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegetation-date"> </td>						
+								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegetation-time"/>
 							</tr>
 					    </table>
 				 </div>
+				 
+				 <div class="divider"></div>
                                
-					<table id="count-organisms">  
-						<tr>
-						    <th> </th>
-							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
-							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
-							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
-							<th> Date</th> 
-							<th> Time</th> 
-						</tr> 
-						
-						<tr>
-							<td> Count 1 </td>
-						    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
-							<td> <input class="count-organism-data-cell count-predator1" /> </td>
-							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
-							<td> <input class="count-organism-data-cell count1-time" /> </td>
-						</tr>
-						
-						<tr>
-							<td> Count 2</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
-							<td> <input class="count-organism-data-cell count-predator2" /> </td>
-							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
-							<td> <input class="count-organism-data-cell count2-time" /> </td>
-						</tr>
-						
-						<tr>
-							<td class="dotted-bottom-border"> Count 3</td>
-						    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
-							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
-						</tr>  
-											
-						<tr>
-							<td> Average</td>
-						    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
-							<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
-							<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
-						</tr>
-						
-						<tr>
-							<td> Multiplier</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
-							<td> <input class="count-organism-data-cell count-predator5" /> </td>
-						</tr>
-						
-						<tr>
-							<td> Final Count</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
-						 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
-							<td> <input class="count-organism-data-cell count-predator6" /> </td>
-						</tr>
-						
-					</table>
+				<table id="count-organisms">  
+					<tr>
+					    <th> </th>
+						<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
+						<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
+						<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
+						<th> Date</th> 
+						<th> Time</th> 
+					</tr> 
+					
+					<tr>
+						<td> Count 1 </td>
+					    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
+						<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
+						<td> <input class="count-organism-data-cell count-predator1" /> </td>
+						<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
+						<td> <input class="count-organism-data-cell count1-time" /> </td>
+					</tr>
+					
+					<tr>
+						<td> Count 2</td>
+					    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
+						<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
+						<td> <input class="count-organism-data-cell count-predator2" /> </td>
+						<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
+						<td> <input class="count-organism-data-cell count2-time" /> </td>
+					</tr>
+					
+					<tr>
+						<td class="dotted-bottom-border"> Count 3</td>
+					    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
+						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
+						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
+						<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
+						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
+					</tr>  
+										
+					<tr>
+						<td> Average</td>
+					    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
+						<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
+						<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
+					</tr>
+					
+					<tr>
+						<td> Multiplier</td>
+					    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
+						<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
+						<td> <input class="count-organism-data-cell count-predator5" /> </td>
+					</tr>
+					
+					<tr>
+						<td> Final Count</td>
+					    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
+					 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
+						<td> <input class="count-organism-data-cell count-predator6" /> </td>
+					</tr>
+					
+				</table>
 
 
 					<!-- <table class="count-organisms">

@@ -1,0 +1,15 @@
+{
+"xmpp": {
+    "domain": "glint",
+    "port": 5222
+  },
+"rollcall": {
+    "url": "http://localhost:3000/"
+  },
+"bosh": {
+    "url": "http://localhost:5280/http-bind/"
+  },
+"mongoose": {
+    "url": "http://localhost:27080/"
+  }
+}
