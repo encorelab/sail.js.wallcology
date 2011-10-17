@@ -1,8 +1,7 @@
 WallCology = {
-    rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
+    /** Reverse-proxied URLs for rollcall and sleepy mongoose services. */
+    rollcallURL: '/rollcall',
     mongooseURL: '/mongoose',
-    xmppDomain: null,
-    groupchatRoom: null,
     
     // all Sail events generated in this app must have a run
     allowRunlessEvents: false,
