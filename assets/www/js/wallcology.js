@@ -1,8 +1,7 @@
 WallCology = {
-    rollcallURL: '/rollcall', //'http://rollcall.proto.encorelab.org',
-	mongooseURL: '/mongoose',
-    xmppDomain: 'aardvark.encorelab.org',
-    groupchatRoom: null,
+    /** Reverse-proxied URLs for rollcall and sleepy mongoose services. */
+    rollcallURL: '/rollcall',
+    mongooseURL: '/mongoose',
     
     // all Sail events generated in this app must have a run
     allowRunlessEvents: false,
@@ -64,10 +63,11 @@ WallCology = {
             // initial context
             $(Sail.app).trigger('context_switch', {
     		    selectableTags: [
-    		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
-    		      ['Habitats', 'Organisms', 'Food Web']
+                    ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+                    ['Environmental Conditions', 'Structural Features'],
+                    ['Habitats', 'Organisms', 'Food Web']
     		    ],
-    		    defaultTags: []
+    		    defaultTags: ['Habitats']
     		})
             
             $( "#tabs" ).bind( "tabsselect", function(event, ui) {
@@ -199,7 +199,8 @@ WallCology = {
 				// setting the header of the datatable according to selected criteria
 				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
  
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
+				//Sail.app.observations.generateHabitatsDT(habitatChoice, typeChoice)
+				Sail.app.observations.generateHabitatsDT({ wallscope: habitatChoice, note: typeChoice })
 			})
 			
 			$('#what-others-said-habitat .back-button').click(function(){
@@ -210,7 +211,8 @@ WallCology = {
             $("input[name=habitat-filter-set]").click(function() {
 				typeChoice = $('input:radio[name=note-filter-set]:checked').val()
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
+				//Sail.app.observations.generateHabitatsDT(habitatChoice, typeChoice)
+				Sail.app.observations.generateHabitatsDT({ wallscope: habitatChoice, note: typeChoice })
 			})
 			
 			$("input[name=note-filter-set]").click(function() {
@@ -218,7 +220,8 @@ WallCology = {
 				habitatChoice = $('input:radio[name=habitat-filter-set]:checked').val()
 				// setting the header of the datatable according to selected criteria
 				$("#dynamic-column-aggregate-habitat").text($('input:radio[name=note-filter-set]:checked').val())
-				Sail.app.observations.generateHabitatsDT({habitat: habitatChoice, note: typeChoice})
+				//Sail.app.observations.generateHabitatsDT(habitatChoice, typeChoice)
+				Sail.app.observations.generateHabitatsDT({ wallscope: habitatChoice, note: typeChoice })
 			})
 
            	$('#aggregate-habitat-table tr').live('click', function() {
@@ -325,7 +328,7 @@ WallCology = {
 				// criteria
 				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
             })
 
 			// When I want to describe a LIFECYCLE is clicked, this page should be loaded
@@ -479,7 +482,8 @@ WallCology = {
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters td').css('border', 'none');
 				$(this).css('border', '1px solid black');     
 				$('div#open-organism div#what-others-said-about-organisms div#organism-filters input#chosen-organism-filter').attr('value', $(this).attr('value'));
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
 			})  
 			 
 			$('#what-others-said-about-organisms .organism-comment-filters input').click(function() {
@@ -487,7 +491,7 @@ WallCology = {
 				// criteria
 				$("#dynamic-column-aggregate-organism").text($('input:radio[name=organism-comment-filter-set]:checked').val());
 				// calling function to fill data-table via ajax call
-				Sail.app.observations.generateOrganismsDT($('#chosen-organism-filter').val(), $('input:radio[name=organism-comment-filter-set]:checked').val())
+				Sail.app.observations.generateOrganismsDT({selectedOrganism:$('#chosen-organism-filter').val(), aspect:$('input:radio[name=organism-comment-filter-set]:checked').val()})
 			})      
 			
 			// Handling all the events for Organism Lifecycle Page
@@ -554,20 +558,11 @@ WallCology = {
                 
 				// call function that retrieves counts for each relationship via sleepy mongoose GET calls
 				Sail.app.observations.fillRelationshipsTable()
-				/*
-				 * $('#relationships-datatable').dataTable({ "iDisplayLength":
-				 * 7, "bLengthChange": false, "bDestroy" : true, //you need this
-				 * so that the table will be refreshed without errors each time
-				 * entering the page "bJQueryUI": true, "sPaginationType":
-				 * "full_numbers", "aoColumns": [ { "sWidth": "500px" }, null,
-				 * null ],
-				 * 
-				 * "aaData": ["nothing selected", "no origin", "no date"] })
-				 */
+				Sail.app.observations.generateRelationshipsDT({from:null, to:null})
 				
             	$('#landing-relationships').hide()
             	$('#view-relationships').show()
-            	// Sail.app.observations.generateRelationshipsDT()
+            	
             })
             
 // **********NEW RELATIONSHIP***********************************************************************************
@@ -604,7 +599,7 @@ WallCology = {
             })
 
 			$('#relationships .data-box').click(function(){
-				Sail.app.observations.generateRelationshipsDT($(this).data('from'), $(this).data('to'))
+				Sail.app.observations.generateRelationshipsDT( {from:$(this).data('from'), to:$(this).data('to')} )
 			})
             
 // **********VIEW RELATIONSHIPS**********************************************************************************
@@ -766,38 +761,40 @@ WallCology = {
 		
 		// Data table population functions
 		// Example criteria:
-		// { habitat: '1', note: 'organism' }
-		generateHabitatsDT: function(criteria) {
+		// { wallscope: '1', note: 'organism' }
+		generateHabitatsDT: function(userHabitatSelections) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat","wallscope":criteria.habitat}) },
-				function(data) {
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat", "wallscope":userHabitatSelections.wallscope})},
+				context: userHabitatSelections,
+				success: function(data) {
+/*			$.get("/mongoose/wallcology/observations/_count",
+				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat", "wallscope":wallscope}) },
+				function(data) {*/
+					criteria = {"run.name":Sail.app.run.name, "type":"habitat", "wallscope":this.wallscope}
+					criteria[this.note] = {$ne: ""}
+					
 			    	if (data.ok === 1) {
 						batchSize = 0
 						batchSize = data.count
+						
 						$.ajax({
 							type: "GET",
-							url: '/mongoose/wallcology/observations/_find',
-							data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"habitat","wallscope":criteria.habitat}), batch_size: batchSize },
-							context: criteria,
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this,
 							success: function(data) {
-								habitatResultsArray = []
 
+/*						$.get("/mongoose/wallcology/observations/_find",
+							{ criteria: JSON.stringify(criteria), batch_size: batchSize },
+							function(data) {*/
+								habitatResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
-									if (this.note == "comments") {
-										habitatResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
-									else if (this.note == "structural_features") {
-										habitatResultsArray[i] = [data.results[i].structural_features, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
-									else if (this.note == "environmental_conditions") {
-										habitatResultsArray[i] = [data.results[i].environmental_conditions, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
-									else {
-										habitatResultsArray[i] = [data.results[i].organisms, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
+									habitatResultsArray[i] = [data.results[i][this.note], data.results[i].origin, Sail.app.observations.dateString(d)]
 								}
 						    	if (data.ok === 1) {			    		
 									$('#aggregate-habitat-table').dataTable({
@@ -820,32 +817,50 @@ WallCology = {
 									return false
 								}
 							}
-						})
+						})//, "json")
 			    	}
 			    	else {
 						console.log("Mongoose request count failed")
 						return false
 					}
-			}, "json")
-			
+				}
+			})//, "json")
 		},
 		
-		generateOrganismsDT: function(selectedOrganism, aspect) {
+		// Example criteria:
+		// { selectedOrganism: 'blue-bug', aspect: 'morphology' }
+		generateOrganismsDT: function(userOrganismSelections) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			$.get("/mongoose/wallcology/observations/_count",
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism", "organism":userOrganismSelections.selectedOrganism})},
+				context: userOrganismSelections,
+				success: function(data) {
+/*			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}) },
-				function(data) {
+				function(data) {*/
+					criteria = {"run.name":Sail.app.run.name, "type":"organism","organism":this.selectedOrganism}
+					criteria[this.aspect] = {$ne: ""}
+						
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
-						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}), batch_size: batchSize },
-							function(data) {
+						
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this,
+							success: function(data) {
+/*						$.get("/mongoose/wallcology/observations/_find",
+							{ criteria: JSON.stringify(criteria), batch_size: batchSize },						
+							function(data) {*/
 								organismResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
-									organismResultsArray[i] = [data.results[i][aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+									organismResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
 								}
 
 						    	if (data.ok === 1) {			    		
@@ -868,28 +883,49 @@ WallCology = {
 									console.log("Mongoose request failed")
 									return false
 								}
-						}, "json")	
+							}
+						})//, "json")	
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
-			}, "json")
+				}
+			})//, "json")
 			
 		},
 
-		generateRelationshipsDT: function(from, to) {
+		generateRelationshipsDT: function(userRelationshipSelection) {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			$.get("/mongoose/wallcology/observations/_count",
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to})},
+				context: userRelationshipSelection,
+				success: function(data) {
+					
+					criteria = {"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to}
+					criteria["comments"] = {$ne: ""}
+					this.criteria = criteria
+/*			$.get("/mongoose/wallcology/observations/_count",
 				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
-				function(data) {
+				function(data) {*/
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
-						$.get("/mongoose/wallcology/observations/_find",
+						
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this, 
+							success: function(data) {
+								
+/*						$.get("/mongoose/wallcology/observations/_find",
 							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
 							function(data) {
+*/								
 								relationshipResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
@@ -916,13 +952,15 @@ WallCology = {
 									console.log("Mongoose request failed")
 									return false
 								}
-						}, "json")
+							}
+						})//, "json")
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
-			}, "json")
+			    }
+			})//, "json")
 			
 		},
 
@@ -1065,12 +1103,11 @@ WallCology = {
 	        // clear fields
 	        $('#new-counts .text-box').val('') 
 			$('#new-counts .count-organism-data-cell').val('')
-/*	        $("input:radio").prop('checked', false)
+			
+			// these don't actually work yet, but should once we have the landing page
+	        $("input:radio").prop('checked', false)
 	        $('#new-counts .radio-button').button('refresh')
-TODO 
-Clear r buttons
-Confirm correct data is going out
-*/
+	        
         },
 
     },
