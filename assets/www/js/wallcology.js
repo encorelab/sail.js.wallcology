@@ -639,7 +639,9 @@ WallCology = {
             })
             $('#landing-counts .view-button').click(function() {				
             	$('#landing-counts').hide()
-            	$('#view-counts').show()           	
+            	$('#view-counts').show()   
+				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
+				$.plot($("#placeholder"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });        	
             })
             
 // **********NEW COUNTS******************************************************************************************
