@@ -1,15 +1,45 @@
-#new-counts {
-	 font-size: 14px; 
-	 margin-left: 20px;
-}
-
 #tabs div#tabs-4 {
 	background-image:url('/images/bkgd_count.png');
 	background-repeat: no-repeat;
-}   
- 
-#new-counts .ui-button {
+	font-size: 14px; 
+	margin-left: 20px;
+}
+
+#tabs-4 .counts-button {
+	background: url('');
+	background-color: #AC2790;
+	border: 1px solid #AC2790;	
 	width: 100px;
+}
+
+#landing-counts {
+	background-image: url('/images/transparent_bkg.png');
+	margin-left: auto;
+	margin-right: auto;       
+	height: 470px;  
+	display: table; 
+	_position: relative; 
+	overflow: hidden;    
+	margin-top: 160px;
+}   
+
+#inner-landing-counts {
+	_position: absolute; 
+	_top: 50%; 
+	display: table-cell; 
+	vertical-align: middle; 
+	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 24px;
+}
+
+#landing-counts .counts-button {
+	width: 550px;
+	height: 80px;
+}
+
+#landing-counts .view-button {
+	margin-top: 50px;
 }
 
 #new-counts .text-box {
@@ -37,8 +67,6 @@
 #new-counts .align-center {
 	text-align: center;
 }
-
-
 
 /*  ******************POSITIONING********************* */
 #new-counts .new-counts-image {
@@ -102,10 +130,13 @@
 }
 
 #new-counts .save-button {
-	margin-left: 560px;
-	background: url('');
-	background-color: #AC2790;
-	border: 1px solid #AC2790;
+	margin-top: 15px;
+	margin-left: 375px;
+}
+
+#new-counts .back-button {
+	margin-top: 15px;
+	margin-left: 20px;
 }
 
 div#new-counts div#vegetation-count-div {
@@ -142,6 +173,10 @@ div#new-counts .vegetation-time {
 	margin-top: 22px;
 }
 
+#new-counts .creature-table-header {
+	padding-bottom: 15px;
+}
+
 div#new-counts table#count-organisms {
 	border-collapse: collapse;
 }
@@ -160,7 +195,12 @@ div#new-counts table#count-organisms td input{
 }  
           
 
+#view-counts .save-button {
+	margin-top: 15px;
+	margin-left: 375px;
+}
 
-/* #new-counts div.symbols {
-		vertical-align: middle;
-} */
+#view-counts .back-button {
+	margin-top: 15px;
+	margin-left: 20px;
+}

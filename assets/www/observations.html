@@ -812,6 +812,16 @@
 <!-- **********************************COUNTS*****************************************************************  -->
 
 		<div id="tabs-4" class="tab-pane">
+
+			<div id="landing-counts">
+				<div id="inner-landing-counts" class="inner-landing-buttons">
+					<button type="button" class="new-button counts-button"><b>I want to add a new COUNT</b></button>
+					<br/><br/>
+					<button type="button" class="view-button counts-button"><b>I want to see our COUNTS</b></button>
+				</div>
+			</div>
+				
+		
 			<div id="new-counts">
 				<img class="new-counts-image" src="/images/new_count.png" />
 				<div class="divider"></div>
@@ -820,10 +830,10 @@
 					<h3>Habitat Number</h3>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
-					<input type="radio" name="select-habitat" id="new-count-r1" class="counts-habitat-radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
-					<input type="radio" name="select-habitat" id="new-count-r2" class="counts-habitat-radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
-					<input type="radio" name="select-habitat" id="new-count-r3" class="counts-habitat-radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
-					<input type="radio" name="select-habitat" id="new-count-r4" class="counts-habitat-radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
+					<input type="radio" name="select-habitat" id="new-count-r1" class="counts-habitat-radio-button radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="select-habitat" id="new-count-r2" class="counts-habitat-radio-button radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="select-habitat" id="new-count-r3" class="counts-habitat-radio-button radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="select-habitat" id="new-count-r4" class="counts-habitat-radio-button radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
 				<div class="divider"></div>
@@ -831,18 +841,18 @@
 				<div class="record-environment">				
 					<div class="temperature-radios jquery-radios">
 						<h3>Record Temperature</h3>
-						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button" /><label for="new-count-r6">High</label>
+						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button radio-button" /><label for="new-count-r6">High</label>
 					</div>					
 					<div class="light-level-radios jquery-radios">
 						<h3>Record Light Levels</h3>
-						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button" /><label for="new-count-r7">Low</label>
-						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button" /><label for="new-count-r8">High</label>
+						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button radio-button" /><label for="new-count-r7">Low</label>
+						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button radio-button" /><label for="new-count-r8">High</label>
 					</div>					
 					<div class="humidity-radios jquery-radios">
 						<h3>Record Humidity</h3>
-						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button" /><label for="new-count-r9">Low</label>
-						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button" /><label for="new-count-r10">High</label>
+						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button radio-button" /><label for="new-count-r9">Low</label>
+						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button radio-button" /><label for="new-count-r10">High</label>
 					</div>					
 				</div>
 				
@@ -852,7 +862,7 @@
 					<div id="vegetation-count-div">
 						<table class="count-vegetation">
 							<tr>
-								<th colspan="4" class="table-header">Enter % of WallScope covered by vegetation</th>
+								<th colspan="4" class="table-header">Enter units of Wallscope covered by vegetation</th>
  							</tr>
  							<tr class="table-body">
 	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
@@ -872,71 +882,92 @@
 								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegetation-time"/>
 							</tr>
 					    </table>
-				 </div>
+				 	</div>
 				 
-				 <div class="divider"></div>
+					<div class="divider"></div>
                                
-				<table id="count-organisms">  
-					<tr>
-					    <th> </th>
-						<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
-						<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
-						<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
-						<th> Date</th> 
-						<th> Time</th> 
-					</tr> 
+					<table id="count-organisms">
+						<tr>
+							<th colspan="6" class="table-header creature-table-header">Enter up to 3 counts for each creature</th>
+ 						</tr>
+						<tr>
+						    <th> </th>
+							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
+							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
+							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
+							<th> Date</th> 
+							<th> Time</th> 
+						</tr> 
+						
+						<tr>
+							<td> Count 1 </td>
+						    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
+							<td> <input class="count-organism-data-cell count-predator1" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
+							<td> <input class="count-organism-data-cell count1-time" /> </td>
+						</tr>
+						
+						<tr>
+							<td> Count 2</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
+							<td> <input class="count-organism-data-cell count-predator2" /> </td>
+							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
+							<td> <input class="count-organism-data-cell count2-time" /> </td>
+						</tr>
+						
+						<tr>
+							<td class="dotted-bottom-border"> Count 3</td>
+						    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
+							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
+							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
+						</tr>  
+											
+						<tr>
+							<td> Average</td>
+						    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
+							<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
+						</tr>
+						
+						<tr>
+							<td> Multiplier</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
+							<td> <input class="count-organism-data-cell count-predator5" /> </td>
+						</tr>
+						
+						<tr>
+							<td> Final Count</td>
+						    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
+						 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
+							<td> <input class="count-organism-data-cell count-predator6" /> </td>
+						</tr>
+						
+					</table>
+				</div>
+				<br/>
+
+				<button class="back-button action-buttons counts-button">BACK</button>
+				<button class="save-button action-buttons counts-button">SAVE</button>		
+			</div>
+			
 					
-					<tr>
-						<td> Count 1 </td>
-					    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
-						<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
-						<td> <input class="count-organism-data-cell count-predator1" /> </td>
-						<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
-						<td> <input class="count-organism-data-cell count1-time" /> </td>
-					</tr>
-					
-					<tr>
-						<td> Count 2</td>
-					    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
-						<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
-						<td> <input class="count-organism-data-cell count-predator2" /> </td>
-						<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
-						<td> <input class="count-organism-data-cell count2-time" /> </td>
-					</tr>
-					
-					<tr>
-						<td class="dotted-bottom-border"> Count 3</td>
-					    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
-						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
-						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
-						<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
-						<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
-					</tr>  
-										
-					<tr>
-						<td> Average</td>
-					    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
-						<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
-						<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
-					</tr>
-					
-					<tr>
-						<td> Multiplier</td>
-					    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
-						<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
-						<td> <input class="count-organism-data-cell count-predator5" /> </td>
-					</tr>
-					
-					<tr>
-						<td> Final Count</td>
-					    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
-					 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
-						<td> <input class="count-organism-data-cell count-predator6" /> </td>
-					</tr>
-					
-				</table>
+	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+						
+			<div id="view-counts">
 
 
+			
+				<button class="back-button action-buttons counts-button">BACK</button>
+				<button class="save-button action-buttons counts-button">SAVE</button>				
+			</div>
+		</div>
+
+	</div>   
 					<!-- <table class="count-organisms">
 											<tr>
 												<th colspan="4" class="table-header">Enter up to three counts</th>  
@@ -971,9 +1002,7 @@
 												<td>x <input type="text" class="text-box predator5"/></td>
 												<td>= <input type="text" class="text-box predator6"/></td>
 											</tr> -->						
-					</table>
-				</div>
-				
+		
 				<!-- <div class="record-date">		
 									<table class="enter-time">
 										<tr>
@@ -989,15 +1018,6 @@
 										</tr>
 									</table>
 								</div> -->
-				<br/>
-
-				<button class="save-button action-buttons">SAVE</button>
-			</div>
-		</div>
-		
-
-	</div>   
-
 
     <footer> 
     </footer> 

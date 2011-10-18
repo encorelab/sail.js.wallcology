@@ -129,6 +129,8 @@ WallCology = {
             $('#open-organism').show()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
+            $('#new-counts').hide()
+            $('#view-counts').hide()
 
             $('.jquery-radios').buttonset()
                        
@@ -629,8 +631,19 @@ WallCology = {
 			})
 				          
             
-// **********COUNTS******************************************************************************************
-                                                    
+// **********COUNTS*********************************************************************************************
+			
+            $('#landing-counts .new-button').click(function() {                
+            	$('#landing-counts').hide()
+            	$('#new-counts').show()
+            })
+            $('#landing-counts .view-button').click(function() {				
+            	$('#landing-counts').hide()
+            	$('#view-counts').show()           	
+            })
+            
+// **********NEW COUNTS******************************************************************************************
+            
 			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
 				alert ('hello');
 			});
@@ -642,16 +655,27 @@ WallCology = {
 						&& $('.counts-light-radio-button').is(':checked') && $('.counts-humidity-radio-button').is(':checked') ) { 
             		Sail.app.observations.newCountsContent()
             		alert("Count submitted")
+            		$('#new-counts').hide()
+            		$('#landing-counts').show()
             	}
 	            else {
 	            	alert("Please record habitat, temperature, light levels and humidity")
 	            }							
 			})
+			$('#new-counts .back-button').click(function() {                
+            	$('#new-counts').hide()
+            	$('#landing-counts').show()
+            })			
+    	
+// **********VIEW COUNTS******************************************************************************************
+    	
+            $('#view-counts .back-button').click(function() {				
+            	$('#view-counts').hide()
+            	$('#landing-counts').show()           	
+            })  
     	},
 
-
-
-// ****************************************** HELPER FUNCTIONS *************************************************
+// ****************************************** HELPER FUNCTIONS ***************************************************
 
 		clearNewOrganismPage: function () {
 			$('#new-organism table#organism-table td').css('border', 'none');
@@ -664,6 +688,7 @@ WallCology = {
 			$('#new-organism div#organism-tables div#chosen-organism span.organism-only').html('');
 		},
 
+		// this doesn't work in Safari, for some reason :/
 		dateString: function(d) {
 			 function pad(n){return n<10 ? '0'+n : n}
 			 return d.getFullYear()+'-'
@@ -1094,20 +1119,13 @@ WallCology = {
 					count3_time:$('#new-counts .count3-time').val()
 				}
 			})
-	        	// date:$('#new-counts-datepicker').datepicker('getDate'),
-	        	// 	        	hour:$('#new-counts .hour').val(),
-	        	// 	        	minute:$('#new-counts .minute').val(),
-	        	// 	        	ampm:$('input:radio[name=ampm]:checked').val()  
 
 	        WallCology.groupchat.sendEvent(sev)
 	        // clear fields
 	        $('#new-counts .text-box').val('') 
 			$('#new-counts .count-organism-data-cell').val('')
-			
-			// these don't actually work yet, but should once we have the landing page
 	        $("input:radio").prop('checked', false)
-	        $('#new-counts .radio-button').button('refresh')
-	        
+	        $('#new-counts .radio-button').button('refresh')	        
         },
 
     },
