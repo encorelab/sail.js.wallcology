@@ -57,7 +57,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
@@ -76,7 +76,7 @@ WallCology = {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
             		      ['Environmental Conditions', 'Structural Features'],
-            		      ['Habitats', 'Organisms', 'Food Web']
+            		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
             		    defaultTags: ['Habitats']
             		})
@@ -86,7 +86,7 @@ WallCology = {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
             		      ['Morphology', 'Behaviour', 'Life Cycles'],
-            		      ['Habitats', 'Organisms', 'Food Web']
+            		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
             		    defaultTags: ['Organisms']
             		})
@@ -96,7 +96,7 @@ WallCology = {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
             		      ['Suggestion For Food Web'],
-            		      ['Habitats', 'Organisms', 'Food Web']
+            		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
             		    defaultTags: ['Food Web']
             		})
@@ -105,9 +105,10 @@ WallCology = {
             		$(Sail.app).trigger('context_switch', {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
-            		      [],
-            		      []			// confirm this is the right way (or just omit?)
+            		      ['Habitat', 'Environmental Conditions'],
+            		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
+            		    defaultTags: ['Populations']
             		})
             	}
             	else {
@@ -669,14 +670,48 @@ WallCology = {
     	
 // **********VIEW COUNTS******************************************************************************************
     	
+            $("input[name=select-conditions]").click(function() {
+				envCondition = $('input:radio[name=select-conditions]:checked').val()
+				if (envCondition == 'temperature') {
+					// change colors of legend r/b
+				}
+				else if (envCondition == 'light') {
+					// change
+				}
+				else if (envCondition == 'humidity') {
+					// change
+				}
+				else {
+					alert('Error selecting environmental condition')
+				}
+			})
+			
+		    $('#view-counts .graph-button').click(function() {
+		    	habitatGraphData = $('input:radio[name=select-habitat]:checked').val()		    	
+		    	environmentalConditionGraphData = $('input:radio[name=select-conditions]:checked').val()
+		    	// send graph request, update
+		    })
+					
             $('#view-counts .back-button').click(function() {				
             	$('#view-counts').hide()
-            	$('#landing-counts').show()           	
+            	$('#landing-counts').show()     
+            	// should also clear fields here (or on entry)
             })  
     	},
 
 // ****************************************** HELPER FUNCTIONS ***************************************************
 
+		// this doesn't work in Safari, for some reason
+		dateString: function(d) {
+			 function pad(n){return n<10 ? '0'+n : n}
+			 return d.getFullYear()+'-'
+			      + pad(d.getMonth()+1)+'-'
+			      + pad(d.getDate())+' '
+			      + pad(d.getHours())+':'
+			      + pad(d.getMinutes())+':'
+			      + pad(d.getSeconds())
+		},   
+		
 		clearNewOrganismPage: function () {
 			$('#new-organism table#organism-table td').css('border', 'none');
 			$('#new-organism table#juvenile-organism-table td').css('border', 'none');  
@@ -687,17 +722,6 @@ WallCology = {
 			$('#new-organism table#organism-evolution-table span.organism-blank-cell').attr('value', 'null'); 
 			$('#new-organism div#organism-tables div#chosen-organism span.organism-only').html('');
 		},
-
-		// this doesn't work in Safari, for some reason :/
-		dateString: function(d) {
-			 function pad(n){return n<10 ? '0'+n : n}
-			 return d.getFullYear()+'-'
-			      + pad(d.getMonth()+1)+'-'
-			      + pad(d.getDate())+' '
-			      + pad(d.getHours())+':'
-			      + pad(d.getMinutes())+':'
-			      + pad(d.getSeconds())
-		},   
 		
 		clearOrganismLifecycle: function () {
 			// clear all previous selections
