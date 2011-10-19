@@ -959,12 +959,56 @@
 	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
 						
 			<div id="view-counts">
+				<br/>
+				<div>
+					<h2 class="view-counts-title">Population GRAPHS based on COUNTS</h2>
+				</div>
+				
+				<div class="select-habitat-container">
+					<div class="select-habitat-title">
+						<h3>Habitats to include in the graph</h3>
+					</div>
+					<div class="select-habitat-radios jquery-radios">
+						<input type="radio" name="select-habitat" id="view-counts-r1" class="view-counts-habitat-radio-button radio-button" value="1" /><label for="view-counts-r1">Habitat 1</label>
+						<input type="radio" name="select-habitat" id="view-counts-r2" class="view-counts-habitat-radio-button radio-button" value="2" /><label for="view-counts-r2">Habitat 2</label>
+						<input type="radio" name="select-habitat" id="view-counts-r3" class="view-counts-habitat-radio-button radio-button" value="3" /><label for="view-counts-r3">Habitat 3</label>
+						<input type="radio" name="select-habitat" id="view-counts-r4" class="view-counts-habitat-radio-button radio-button" value="4" /><label for="view-counts-r4">Habitat 4</label>
+						<input type="radio" name="select-habitat" id="view-counts-r5" class="view-counts-habitat-radio-button radio-button" value="all" /><label for="view-counts-r5">All Habitats</label>
+					</div>					
+				</div>
+				<div class="select-conditions-container">		
+					<div class="select-conditions-title">
+						<h3>Environmental Conditions to include in the graph</h3>
+					</div>
+					<div class="select-conditions-radios jquery-radios">
+						<input type="radio" name="select-conditions" id="view-counts-r6" class="view-counts-conditions-radio-button radio-button" value="temperature" /><label for="view-counts-r6">Temperature</label>
+						<input type="radio" name="select-conditions" id="view-counts-r7" class="view-counts-conditions-radio-button radio-button" value="light" /><label for="view-counts-r7">Light</label>
+						<input type="radio" name="select-conditions" id="view-counts-r8" class="view-counts-conditions-radio-button radio-button" value="humidity" /><label for="view-counts-r8">Humidity</label>
+					</div>
+					
+					<button class="graph-button action-buttons counts-button">CREATE GRAPHS</button>
+				</div>
+				
 				<!-- Adding a div with ID placeholder to draw graphs with flot library -->
 				<div id="placeholder" style="width: 600px; height: 300px; padding: 0px; position: relative;"></div>
-
-			
-				<button class="back-button action-buttons counts-button">BACK</button>
-				<button class="save-button action-buttons counts-button">SAVE</button>				
+				
+				<div class="graphs-container">
+					<div class="vegetation-graph">
+					
+					</div>
+					
+					<div class="creature-graph">
+					
+					</div>
+					
+					<div class="legend">
+					
+					</div>
+				
+					<button class="back-button action-buttons counts-button">BACK</button>				
+				</div>
+		
+>>>>>>> master
 			</div>
 		</div>
 

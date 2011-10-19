@@ -3,6 +3,7 @@
 	background-repeat: no-repeat;
 	font-size: 14px; 
 	margin-left: 20px;
+	height: 1178px;
 }
 
 #tabs-4 .counts-button {
@@ -193,12 +194,68 @@ div#new-counts table#count-organisms td.dotted-top-border {
 div#new-counts table#count-organisms td input{
 	width: 100px;
 }  
-          
-
-#view-counts .save-button {
-	margin-top: 15px;
-	margin-left: 375px;
+      
+#view-counts .view-counts-title {
+	color: #AC2790;
+	margin-left: 30px;
 }
+
+#view-counts .select-habitat-container {
+	margin-top: 35px;
+	width: 700px;
+	text-align: center;
+}
+
+#view-counts .select-conditions-container {
+	margin-top: 25px;
+	width: 700px;
+	text-align: center;
+}
+
+#view-counts .view-counts-conditions-radio-button {
+	width: 200px; 
+}
+
+#view-counts .ui-button {
+	width: 130px;
+}
+
+#view-counts .graph-button {
+	margin-top: 25px;
+	width: 200px;
+	height: 45px;
+	font-size: 16px;
+}
+
+#view-counts .graphs-container {
+	margin-top: 20px;
+	width: 700px;
+	/* text-align: center; */
+}
+
+#view-counts .vegetation-graph {
+	width: 540px;
+	height: 300px;
+	border: dotted;
+	margin-left: 76px;
+}
+
+#view-counts .creature-graph {
+	margin-top: 20px;
+	width: 540px;
+	height: 300px;
+	border: dotted;
+	margin-left: 76px;
+	margin-bottom: 30px;
+}
+
+#view-counts .legend {
+	float: right;
+	margin-right: 20px;
+	width: 500px;
+	height: 120px;
+	border: dotted;
+}	
 
 #view-counts .back-button {
 	margin-top: 15px;
