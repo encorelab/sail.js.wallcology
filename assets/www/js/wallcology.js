@@ -673,7 +673,7 @@ WallCology = {
             $("input[name=select-conditions]").click(function() {
 				envCondition = $('input:radio[name=select-conditions]:checked').val()
 				if (envCondition == 'temperature') {
-					$('.selectable').addClass('temperature-color')
+					// change colors of legend r/b
 				}
 				else if (envCondition == 'light') {
 					// change
