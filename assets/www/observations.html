@@ -976,18 +976,9 @@
 						<input type="radio" name="select-habitat" id="view-counts-r5" class="view-counts-habitat-radio-button radio-button" value="all" /><label for="view-counts-r5">All Habitats</label>
 					</div>					
 				</div>
-				<div class="select-conditions-container">		
-					<div class="select-conditions-title">
-						<h3>Environmental Conditions to include in the graph</h3>
-					</div>
-					<div class="select-conditions-radios jquery-radios">
-						<input type="radio" name="select-conditions" id="view-counts-r6" class="view-counts-conditions-radio-button radio-button" value="temperature" /><label for="view-counts-r6">Temperature</label>
-						<input type="radio" name="select-conditions" id="view-counts-r7" class="view-counts-conditions-radio-button radio-button" value="light" /><label for="view-counts-r7">Light</label>
-						<input type="radio" name="select-conditions" id="view-counts-r8" class="view-counts-conditions-radio-button radio-button" value="humidity" /><label for="view-counts-r8">Humidity</label>
-					</div>
-					
-					<button class="graph-button action-buttons counts-button">CREATE GRAPHS</button>
-				</div>
+				
+				<!-- Adding a div with ID placeholder to draw graphs with flot library 
+				<div id="placeholder" style="width: 600px; height: 300px; padding: 0px; position: relative;"></div>-->
 				
 				<div class="graphs-container">
 					<div class="vegetation-graph">
@@ -1011,6 +1002,11 @@
 							</tr>
 						</table>
 					</div>
+					<!-- Placeholder get filled by graphs with flot library -->
+					<div class="vegetation-graph"></div>
+					<div class="creature-graph"></div>
+					<div class="enviro-conditions-graph"></div>			
+					<!--<div class="legend"></div>-->
 				
 					<button class="back-button action-buttons counts-button">BACK</button>				
 				</div>

@@ -3,7 +3,11 @@
 	background-repeat: no-repeat;
 	font-size: 14px; 
 	margin-left: 20px;
+<<<<<<< HEAD
 /* 	height: 1178px; */
+=======
+	/*height: 1178px;*/
+>>>>>>> upstream/master
 }
 
 #tabs-4 .counts-button {
@@ -248,6 +252,15 @@ div#new-counts table#count-organisms td input{
 }
 
 #view-counts .creature-graph {
+	margin-top: 20px;
+	width: 540px;
+	height: 300px;
+	border: dotted;
+	margin-left: 76px;
+	margin-bottom: 30px;
+}
+
+#view-counts .enviro-conditions-graph {
 	margin-top: 20px;
 	width: 540px;
 	height: 300px;
