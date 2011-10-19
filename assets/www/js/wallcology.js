@@ -105,7 +105,7 @@ WallCology = {
             		$(Sail.app).trigger('context_switch', {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
-            		      ['Habitat', 'Environmental Conditions'],
+            		      ['Environmental Conditions'],
             		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
             		    defaultTags: ['Populations']
@@ -673,7 +673,7 @@ WallCology = {
             $("input[name=select-conditions]").click(function() {
 				envCondition = $('input:radio[name=select-conditions]:checked').val()
 				if (envCondition == 'temperature') {
-					// change colors of legend r/b
+					$('.selectable').addClass('temperature-color')
 				}
 				else if (envCondition == 'light') {
 					// change
@@ -847,17 +847,19 @@ WallCology = {
 								}
 						    	if (data.ok === 1) {			    		
 									$('#aggregate-habitat-table').dataTable({
-										"bAutoWidth": false,
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
+										"bAutoWidth": false,										
 										"bLengthChange": false,
 										"bDestroy" : true,
 										"bJQueryUI": true,
+										"iDisplayLength": 6,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
 														null,
 														null
 													],
+													
 										"aaData": habitatResultsArray	
 									})
 						    	}
@@ -914,10 +916,12 @@ WallCology = {
 
 						    	if (data.ok === 1) {			    		
 									$('#aggregate-organism-table').dataTable({
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
+										"bAutoWidth": false,										
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
+										"iDisplayLength": 6,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
@@ -983,10 +987,11 @@ WallCology = {
 
 						    	if (data.ok === 1) {			    		
 									$('#relationships-datatable').dataTable({
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
+										"iDisplayLength": 6,										
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },

@@ -3,7 +3,7 @@
 	background-repeat: no-repeat;
 	font-size: 14px; 
 	margin-left: 20px;
-	height: 1178px;
+/* 	height: 1178px; */
 }
 
 #tabs-4 .counts-button {
@@ -41,6 +41,10 @@
 
 #landing-counts .view-button {
 	margin-top: 50px;
+}
+
+#new-counts .ui-button {
+	width: 100px;
 }
 
 #new-counts .text-box {
@@ -195,6 +199,9 @@ div#new-counts table#count-organisms td input{
 	width: 100px;
 }  
       
+      
+/**********************************VIEW COUNTS***************************************/
+       
 #view-counts .view-counts-title {
 	color: #AC2790;
 	margin-left: 30px;
@@ -252,12 +259,45 @@ div#new-counts table#count-organisms td input{
 #view-counts .legend {
 	float: right;
 	margin-right: 20px;
-	width: 500px;
+	width: 480px;
 	height: 120px;
 	border: dotted;
-}	
+}
+
+#view-counts .conditions-table {
+	margin-top: 12px;
+	margin-right: 12px;
+	float: right;
+	font-size: 18px;
+}
+
+#view-counts .color-box {
+	height: 30px;
+	width: 30px;
+	margin: 6px;
+}
+
+#view-counts .color-box-high {
+	background-color: white;
+}
+
+#view-counts .color-box-low {
+	background-color: white;
+}
+
+#view-counts .temperatureColor {
+	
+}
+
+#view-counts .lightColor {
+	
+}
+
+#view-counts .humidityColor {
+	
+}
 
 #view-counts .back-button {
-	margin-top: 15px;
+	margin-top: 20px;
 	margin-left: 20px;
 }
