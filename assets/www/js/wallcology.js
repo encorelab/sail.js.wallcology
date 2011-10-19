@@ -640,9 +640,18 @@ WallCology = {
             })
             $('#landing-counts .view-button').click(function() {				
             	$('#landing-counts').hide()
-            	$('#view-counts').show()   
+            	$('#view-counts').show()
+				
+				// setup background areas
+				var markings = [
+				//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
+				//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
+				];
+
 				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
-				$.plot($("#placeholder"), [ [[0, 0], [1, 1]] ], { yaxis: { max: 1 } });        	
+				$.plot($("#view-counts .vegetation-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]] ], { yaxis: { min: 0, max: 1 }, grid: { markings: markings } })
+				$.plot($("#view-counts .creature-graph"), [ [[0, 0], [1, 4], [2, 3], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+				$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
             })
             
 // **********NEW COUNTS******************************************************************************************
@@ -998,6 +1007,54 @@ WallCology = {
 
 										"aaData": relationshipResultsArray	
 									})
+						    	}
+						    	else {
+									console.log("Mongoose request failed")
+									return false
+								}
+							}
+						})//, "json")
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			    }
+			})//, "json")
+			
+		},
+		
+		retrieveCountsGraphData: function(userRelationshipSelection) {
+			// we do a count REST call to determine how many results to expect
+			// (setting batch_size in _find)
+			criteria = {"run.name":Sail.app.run.name, "type":"count"/*, "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to*/}
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify(criteria)},
+				context: userRelationshipSelection,
+				success: function(data) {
+					criteria = {"run.name":Sail.app.run.name, "type":"count"/*, "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to*/}
+					//criteria["comments"] = {$ne: ""}
+					this.criteria = criteria
+			    	if (data.ok === 1) {			    		
+						batchSize = 0
+						batchSize = data.count
+						
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this, 
+							success: function(data) {								
+								relationshipResultsArray = []
+								for (i=0;i<data.results.length;i++) {
+									d = new Date(data.results[i].timestamp)
+									relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
+								}
+
+						    	if (data.ok === 1) {			    		
+									// do something here??
 						    	}
 						    	else {
 									console.log("Mongoose request failed")
