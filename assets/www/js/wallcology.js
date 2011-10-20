@@ -687,27 +687,31 @@ WallCology = {
     	
 // **********VIEW COUNTS******************************************************************************************
     	
-            $("input[name=select-conditions]").click(function() {
-				envCondition = $('input:radio[name=select-conditions]:checked').val()
-				if (envCondition == 'temperature') {
-					// change colors of legend r/b
-				}
-				else if (envCondition == 'light') {
-					// change
-				}
-				else if (envCondition == 'humidity') {
-					// change
-				}
-				else {
-					alert('Error selecting environmental condition')
+            $("input[name=select-habitat]").click(function() {
+				selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				
+				switch(selectedHabitat) {
+					case "all":
+						// show veg and animal graph with accumulated average counts
+						// TODO: What about temperatur???
+						//break
+					case "1":
+						// show veg, animals, and enviro cond for habitat 1
+						//break
+					case "2":
+						// show veg, animals, and enviro cond for habitat 2
+						//break
+					case "3":
+						// show veg, animals, and enviro cond for habitat 3
+						//break
+					case "4":
+						// show veg, animals, and enviro cond for habitat 4
+						alert("selected habitat: " + selectedHabitat)
+						break
+					default:
+						alert('Error selecting habitat')
 				}
 			})
-			
-		    $('#view-counts .graph-button').click(function() {
-		    	habitatGraphData = $('input:radio[name=select-habitat]:checked').val()		    	
-		    	environmentalConditionGraphData = $('input:radio[name=select-conditions]:checked').val()
-		    	// send graph request, update
-		    })
 					
             $('#view-counts .back-button').click(function() {				
             	$('#view-counts').hide()
