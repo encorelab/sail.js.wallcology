@@ -105,7 +105,7 @@ WallCology = {
             		$(Sail.app).trigger('context_switch', {
             		    selectableTags: [
             		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
-            		      ['Habitat', 'Environmental Conditions'],
+            		      ['Environmental Conditions'],
             		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
             		    ],
             		    defaultTags: ['Populations']
@@ -656,22 +656,28 @@ WallCology = {
             
 // **********NEW COUNTS******************************************************************************************
             
-			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
+/*			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
 				alert ('hello');
-			});
+			});*/
 			$('.new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(function() {
-            	//if ( $('input:radio').is(':checked') ) {
-				if ( $('.counts-habitat-radio-button').is(':checked') && $('.counts-temperature-radio-button').is(':checked')
-						&& $('.counts-light-radio-button').is(':checked') && $('.counts-humidity-radio-button').is(':checked') ) { 
+				
+				// check if the required fields are filled before submitting
+				if ( $('.counts-habitat-radio-button').is(':checked') && $('#new-counts .count-temperature').val() &&
+						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
+						$('#new-counts .count-scum').val() && $('#new-counts .count-mold').val() &&
+						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val() &&
+						$('#new-counts .count-predator6').val() ) 
+					{
+
             		Sail.app.observations.newCountsContent()
             		alert("Count submitted")
             		$('#new-counts').hide()
             		$('#landing-counts').show()
             	}
 	            else {
-	            	alert("Please record habitat, temperature, light levels and humidity")
+	            	alert("Please record habitat, temperature, light levels, humidity and organism totals")
 	            }							
 			})
 			$('#new-counts .back-button').click(function() {                
@@ -858,17 +864,19 @@ WallCology = {
 								}
 						    	if (data.ok === 1) {			    		
 									$('#aggregate-habitat-table').dataTable({
-										"bAutoWidth": false,
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
+										"bAutoWidth": false,										
 										"bLengthChange": false,
 										"bDestroy" : true,
 										"bJQueryUI": true,
+										"iDisplayLength": 6,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
 														null,
 														null
 													],
+													
 										"aaData": habitatResultsArray	
 									})
 						    	}
@@ -925,10 +933,12 @@ WallCology = {
 
 						    	if (data.ok === 1) {			    		
 									$('#aggregate-organism-table').dataTable({
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
+										"bAutoWidth": false,										
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
+										"iDisplayLength": 6,
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
@@ -994,10 +1004,11 @@ WallCology = {
 
 						    	if (data.ok === 1) {			    		
 									$('#relationships-datatable').dataTable({
-										"iDisplayLength": 6,
+										"aaSorting": [[2,'desc']],
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
+										"iDisplayLength": 6,										
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
@@ -1093,8 +1104,7 @@ WallCology = {
         },
                 
 
-        newOrganismContent: function() {       
-	                                                     
+        newOrganismContent: function() {       	                                                     
 			morphology = $('div#new-organism div#organism-descriptions div#organism-morphology textarea').val();
 			behavior = $('div#new-organism div#organism-descriptions div#organism-behavior textarea').val();
 			habitat = $('div#new-organism div#organism-descriptions div#organism-habitat textarea').val();
@@ -1123,8 +1133,7 @@ WallCology = {
 	        WallCology.groupchat.sendEvent(sev)
         },   
 
-		newOrganismLifecycle: function() {    
-			
+		newOrganismLifecycle: function() {    			
 			fromOrganism = $('div#describe-lifecycle-organism table#organism-lifecycle-relation td#from-organism').attr('value');
 			toOrganism = $('div#describe-lifecycle-organism table#organism-lifecycle-relation td#to-organism').attr('value');
 			
@@ -1158,13 +1167,13 @@ WallCology = {
 	        sev = new Sail.Event('new_observation', {
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
-	        	temperature:$('input:radio[name=temp]:checked').val(),
-	        	light_level:$('input:radio[name=light]:checked').val(),
-	        	humidity:$('input:radio[name=humidity]:checked').val(),
-	        	scum_percent:$('#new-counts .count-scum-percent').val(),
-	        	mold_percent:$('#new-counts .count-mold-percent').val(), 
-				vegetation_date:$('#new-counts .vegatation_date').val(),
-				vegatation_time:$('#new-counts .vegatation_time').val(),
+	        	temperature:$('#new-counts .count-temperature').val(),
+	        	light_level:$('#new-counts .count-light').val(),
+	        	humidity:$('#new-counts .count-humidity').val(),
+	        	scum:$('#new-counts .count-scum').val(),
+	        	mold:$('#new-counts .count-mold').val(), 
+				vegetation_date:$('#new-counts .vegetation-date').val(),
+				vegetation_time:$('#new-counts .vegetation-time').val(),
 	        	organism_counts:{
 		        	blue_bug:{
 		        		count1:$('#new-counts .count-blue-bug1').val(),
