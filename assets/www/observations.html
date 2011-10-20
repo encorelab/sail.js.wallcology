@@ -691,7 +691,7 @@
 					<h3 class="add-relationship-title">Add Relationship</h3> (the transfer of energy from one organism to another)
 					<div class="organism-dropzones">
 						<div class="organism-box" id="box1" ></div>
-						<img class="arrow-image" src="/images/arrow_relationships.png" />
+						<img class="arrow-image" src="/images/arrow_lightning.png" />
 						<div class="organism-box" id="box2"></div>
 					</div>
 					<br/>
@@ -839,21 +839,30 @@
 				<div class="divider"></div>
 
 				<div class="record-environment">				
-					<div class="temperature-radios jquery-radios">
+					<div class="temperature-input">
 						<h3>Record Temperature</h3>
-						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
+						<div>
+							<input type="number" class="count-temperature text-box"/> &#176C
+						</div>
+<!-- 						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
 						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button radio-button" /><label for="new-count-r6">High</label>
-					</div>					
-					<div class="light-level-radios jquery-radios">
+ -->				</div>					
+					<div class="light-level-input">
 						<h3>Record Light Levels</h3>
-						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button radio-button" /><label for="new-count-r7">Low</label>
+						<div>
+							<input type="number" class="count-light text-box"/> LX
+						</div>
+<!-- 						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button radio-button" /><label for="new-count-r7">Low</label>
 						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button radio-button" /><label for="new-count-r8">High</label>
-					</div>					
-					<div class="humidity-radios jquery-radios">
+ -->				</div>					
+					<div class="humidity-input">
 						<h3>Record Humidity</h3>
-						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button radio-button" /><label for="new-count-r9">Low</label>
+						<div>
+							<input type="number" class="count-humidity text-box"/> %
+						</div>
+<!-- 						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button radio-button" /><label for="new-count-r9">Low</label>
 						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button radio-button" /><label for="new-count-r10">High</label>
-					</div>					
+ -->				</div>					
 				</div>
 				
 
@@ -866,9 +875,9 @@
  							</tr>
  							<tr class="table-body">
 	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
-	 							<td><input type="number" class="text-box count-scum-percent"/> UNITS</td>
+	 							<td><input type="number" class="text-box count-scum"/> UNITS</td>
 	 							<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
-	 							<td><input type="number" class="text-box count-mold-percent"/> UNITS</td>      
+	 							<td><input type="number" class="text-box count-mold"/> UNITS</td>      
  							</tr>
 						</table> 
 					
@@ -879,7 +888,7 @@
 							</tr>
 							<tr>
 								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegetation-date"> </td>						
-								<td id="count-vegetation-time"> <input type='text' class="count-organism-data-cell vegetation-time"/>
+								<td id="count-vegetation-time"> <input type="number" class="count-organism-data-cell vegetation-time"/>
 							</tr>
 					    </table>
 				 	</div>
@@ -901,50 +910,50 @@
 						
 						<tr>
 							<td> Count 1 </td>
-						    <td> <input class="count-organism-data-cell count-blue-bug1" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug1" /> </td>
-							<td> <input class="count-organism-data-cell count-predator1" /> </td>
+						    <td> <input type="number" class="count-organism-data-cell count-blue-bug1" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-green-bug1" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator1" /> </td>
 							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
-							<td> <input class="count-organism-data-cell count1-time" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count1-time" /> </td>
 						</tr>
 						
 						<tr>
 							<td> Count 2</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug2" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug2" /> </td>
-							<td> <input class="count-organism-data-cell count-predator2" /> </td>
+						    <td> <input type="number" class="count-organism-data-cell count-blue-bug2" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-green-bug2" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator2" /> </td>
 							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
-							<td> <input class="count-organism-data-cell count2-time" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count2-time" /> </td>
 						</tr>
 						
 						<tr>
 							<td class="dotted-bottom-border"> Count 3</td>
-						    <td class="dotted-bottom-border"> <input class="count-organism-data-cell count-blue-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-green-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count-predator3" /> </td>
+						    <td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-blue-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-green-bug3" /> </td>
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-predator3" /> </td>
 							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
-							<td class="dotted-bottom-border"> <input class="count-organism-data-cell count3-time" /> </td>
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count3-time" /> </td>
 						</tr>  
 											
 						<tr>
 							<td> Average</td>
-						    <td class="dotted-top-border"> <input class="count-organism-data-cell count-blue-bug4" /> </td>
-							<td class="dotted-top-border"> <input class="count-organism-data-cell count-green-bug4" /> </td>
-							<td class="dotted-top-border"> <input class="count-organism-data-cell count-predator4" /> </td> 
+						    <td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-blue-bug4" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-green-bug4" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-predator4" /> </td> 
 						</tr>
 						
 						<tr>
 							<td> Multiplier</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug5" /> </td>
-							<td> <input class="count-organism-data-cell count-green-bug5" /> </td>
-							<td> <input class="count-organism-data-cell count-predator5" /> </td>
+						    <td> <input type="number" class="count-organism-data-cell count-blue-bug5" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-green-bug5" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator5" /> </td>
 						</tr>
 						
 						<tr>
 							<td> Final Count</td>
-						    <td> <input class="count-organism-data-cell count-blue-bug6" /> </td>
-						 	<td> <input class="count-organism-data-cell count-green-bug6" /> </td>
-							<td> <input class="count-organism-data-cell count-predator6" /> </td>
+						    <td> <input type="number" class="count-organism-data-cell count-blue-bug6" /> </td>
+						 	<td> <input type="number" class="count-organism-data-cell count-green-bug6" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator6" /> </td>
 						</tr>
 						
 					</table>
@@ -990,8 +999,7 @@
 					</div>
 					
 					<div class="legend">
-						<img src="/images/new_organism.png"/>
-						<table class="conditions-table">
+<!-- 						<table class="conditions-table">
 							<tr>
 								<td><div class="color-box color-box-high"></div></td>
 								<td><div>High</div></td>
@@ -1000,7 +1008,7 @@
 								<td><div class="color-box color-box-low"></div></td>
 								<td><div>Low</div></td>
 							</tr>
-						</table>
+						</table> -->
 					</div>
 					<!-- Placeholder get filled by graphs with flot library -->
 					<div class="vegetation-graph"></div>

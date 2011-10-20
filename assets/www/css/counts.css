@@ -3,11 +3,7 @@
 	background-repeat: no-repeat;
 	font-size: 14px; 
 	margin-left: 20px;
-<<<<<<< HEAD
 /* 	height: 1178px; */
-=======
-	/*height: 1178px;*/
->>>>>>> upstream/master
 }
 
 #tabs-4 .counts-button {
@@ -54,6 +50,13 @@
 #new-counts .text-box {
 	width: 30px;
 	height: 20px;
+	font-size: 14px;
+}
+
+#new-counts .record-environment .text-box {
+	width: 70px;
+	height: 20px;
+	font-size: 14px;
 }
 
 #new-counts .image {
@@ -62,10 +65,6 @@
 }
 
 #new-counts .table-body {
-	font-size: 14px;
-}
-
-#new-counts .text-box {
 	font-size: 14px;
 }
 
@@ -95,25 +94,25 @@
 	clear: left;
 }
 
-#new-counts div.temperature-radios {
+#new-counts div.temperature-input {
     margin-left: 0;
+    margin-top: 8px;
 	float: left;
+	margin-bottom: 30px;	
 }
 
-#new-counts div.light-level-radios {
+#new-counts div.light-level-input {
     margin-left: 20px;
+    margin-top: 8px;    
     padding: 0;
 	float: left;
 }
 
-#new-counts div.humidity-radios {
+#new-counts div.humidity-input {
     margin-left: 20px;
+    margin-top: 8px;    
     padding: 0;
 	float: left;
-}
-
-#new-counts div.temperature-radios {
-	margin-bottom: 30px;
 }
 
 #new-counts .record-organisms {
