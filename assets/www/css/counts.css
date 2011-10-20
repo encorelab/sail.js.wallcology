@@ -1,34 +1,34 @@
 #tabs div#tabs-4 {
-	background-image:url('/images/bkgd_count.png');
+	background-image: url('/images/bkgd_count.png');
 	background-repeat: no-repeat;
-	font-size: 14px; 
+	font-size: 14px;
 	margin-left: 20px;
-/* 	height: 1178px; */
+	/* 	height: 1178px; */
 }
 
 #tabs-4 .counts-button {
 	background: url('');
 	background-color: #AC2790;
-	border: 1px solid #AC2790;	
+	border: 1px solid #AC2790;
 	width: 100px;
 }
 
 #landing-counts {
 	background-image: url('/images/transparent_bkg.png');
 	margin-left: auto;
-	margin-right: auto;       
-	height: 470px;  
-	display: table; 
-	_position: relative; 
-	overflow: hidden;    
+	margin-right: auto;
+	height: 470px;
+	display: table;
+	_position: relative;
+	overflow: hidden;
 	margin-top: 160px;
-}   
+}
 
 #inner-landing-counts {
-	_position: absolute; 
-	_top: 50%; 
-	display: table-cell; 
-	vertical-align: middle; 
+	_position: absolute;
+	_top: 50%;
+	display: table-cell;
+	vertical-align: middle;
 	padding-left: 40px;
 	padding-right: 40px;
 	font-size: 24px;
@@ -80,7 +80,7 @@
 #new-counts .new-counts-image {
 	float: left;
 }
- 
+
 #new-counts div.select-habitat-title {
 	float: left;
 	margin: -13px 33px 0 0;
@@ -95,23 +95,23 @@
 }
 
 #new-counts div.temperature-input {
-    margin-left: 0;
-    margin-top: 8px;
+	margin-left: 0;
+	margin-top: 8px; float : left;
+	margin-bottom: 30px;
 	float: left;
-	margin-bottom: 30px;	
 }
 
 #new-counts div.light-level-input {
-    margin-left: 20px;
-    margin-top: 8px;    
-    padding: 0;
+	margin-left: 20px;
+	margin-top: 8px;
+	padding: 0;
 	float: left;
 }
 
 #new-counts div.humidity-input {
-    margin-left: 20px;
-    margin-top: 8px;    
-    padding: 0;
+	margin-left: 20px;
+	margin-top: 8px;
+	padding: 0;
 	float: left;
 }
 
@@ -150,16 +150,16 @@
 div#new-counts div#vegetation-count-div {
 	width: 700px;
 	float: left;
-}          
-                                                    
-div#new-counts table#count-vegetation-date-time th{
-    float: left;       
-	width: 100px;                                 
+}
+
+div#new-counts table#count-vegetation-date-time th {
+	float: left;
+	width: 100px;
 	text-align: center;
 }
 
-div#new-counts table#count-vegetation-date-time td{
-    float: left;       
+div#new-counts table#count-vegetation-date-time td {
+	float: left;
 	width: 100px;
 }
 
@@ -182,7 +182,7 @@ div#new-counts .vegetation-time {
 }
 
 #new-counts .creature-table-header {
-	padding-bottom: 15px;
+	margin-top: -8px;
 }
 
 div#new-counts table#count-organisms {
@@ -190,7 +190,7 @@ div#new-counts table#count-organisms {
 }
 
 div#new-counts table#count-organisms td.dotted-bottom-border {
-	border-bottom: 2px dotted black;  
+	border-bottom: 2px dotted black;
 	padding-bottom: 10px;
 }
 
@@ -198,13 +198,12 @@ div#new-counts table#count-organisms td.dotted-top-border {
 	padding-top: 10px;
 }
 
-div#new-counts table#count-organisms td input{
-	width: 100px;
-}  
-      
-      
+div#new-counts table#count-organisms td input {
+	width: 60px;
+	height: 28px;
+}
+
 /**********************************VIEW COUNTS***************************************/
-       
 #view-counts .view-counts-title {
 	color: #AC2790;
 	margin-left: 30px;
@@ -223,7 +222,7 @@ div#new-counts table#count-organisms td input{
 }
 
 #view-counts .view-counts-conditions-radio-button {
-	width: 200px; 
+	width: 200px;
 }
 
 #view-counts .ui-button {
