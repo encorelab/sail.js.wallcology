@@ -3,7 +3,7 @@
 	background-repeat: no-repeat;
 	font-size: 14px; 
 	margin-left: 20px;
-	/*height: 1178px;*/
+/* 	height: 1178px; */
 }
 
 #tabs-4 .counts-button {
@@ -43,9 +43,20 @@
 	margin-top: 50px;
 }
 
+#new-counts .ui-button {
+	width: 100px;
+}
+
 #new-counts .text-box {
 	width: 30px;
 	height: 20px;
+	font-size: 14px;
+}
+
+#new-counts .record-environment .text-box {
+	width: 70px;
+	height: 20px;
+	font-size: 14px;
 }
 
 #new-counts .image {
@@ -54,10 +65,6 @@
 }
 
 #new-counts .table-body {
-	font-size: 14px;
-}
-
-#new-counts .text-box {
 	font-size: 14px;
 }
 
@@ -87,25 +94,25 @@
 	clear: left;
 }
 
-#new-counts div.temperature-radios {
+#new-counts div.temperature-input {
     margin-left: 0;
+    margin-top: 8px;
 	float: left;
+	margin-bottom: 30px;	
 }
 
-#new-counts div.light-level-radios {
+#new-counts div.light-level-input {
     margin-left: 20px;
+    margin-top: 8px;    
     padding: 0;
 	float: left;
 }
 
-#new-counts div.humidity-radios {
+#new-counts div.humidity-input {
     margin-left: 20px;
+    margin-top: 8px;    
     padding: 0;
 	float: left;
-}
-
-#new-counts div.temperature-radios {
-	margin-bottom: 30px;
 }
 
 #new-counts .record-organisms {
@@ -195,6 +202,9 @@ div#new-counts table#count-organisms td input{
 	width: 100px;
 }  
       
+      
+/**********************************VIEW COUNTS***************************************/
+       
 #view-counts .view-counts-title {
 	color: #AC2790;
 	margin-left: 30px;
@@ -261,12 +271,45 @@ div#new-counts table#count-organisms td input{
 #view-counts .legend {
 	float: right;
 	margin-right: 20px;
-	width: 500px;
+	width: 480px;
 	height: 120px;
 	border: dotted;
-}	
+}
+
+#view-counts .conditions-table {
+	margin-top: 12px;
+	margin-right: 12px;
+	float: right;
+	font-size: 18px;
+}
+
+#view-counts .color-box {
+	height: 30px;
+	width: 30px;
+	margin: 6px;
+}
+
+#view-counts .color-box-high {
+	background-color: white;
+}
+
+#view-counts .color-box-low {
+	background-color: white;
+}
+
+#view-counts .temperatureColor {
+	
+}
+
+#view-counts .lightColor {
+	
+}
+
+#view-counts .humidityColor {
+	
+}
 
 #view-counts .back-button {
-	margin-top: 15px;
+	margin-top: 20px;
 	margin-left: 20px;
 }
