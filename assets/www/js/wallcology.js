@@ -716,6 +716,9 @@ WallCology = {
 			$('div#investigation-motivation div.action-buttons button.back-button').click(function () {
 				$('div#investigation-pages div#investigation-menu-page').show();
 				$('div#investigation-pages div#investigation-motivation').hide();
+				
+				// Clear all fields
+				Sail.app.observations.investigationMotivationClearFields();
 			}) 
 			
 			// In the Investigation Motivation page, this sets the value of the chosen Type
@@ -741,16 +744,10 @@ WallCology = {
 				// if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
 				// 					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
 				// 				} else { // Send the filled form to be saved
+					
 					Sail.app.observations.newInvestigationMotivation(selectedType, motivationForDescription, headline, selectedKeywords);
 					
-					// clear fields
-					$("div#investigation-motivation div#investigation-type button").removeClass('investigation-button selected');
-					$("div#investigation-motivation span#selected-investigation-type").text('...'); 
-					$('div#investigation-motivation textarea#motivation-description').val('');   
-					$('div#investigation-motivation input#headline-title').val(''); 
-					$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
-						$(this).attr('checked', false);
-					});
+					Sail.app.observations.investigationMotivationClearFields();
 					
 					//  Move to the "Investigation Setup" page	
 					$('div#investigation-motivation').hide();
@@ -760,16 +757,20 @@ WallCology = {
 			})
 			
 			
+			// *******************************  Investigation Setup Page **********************************
+			
 			// Back button of "Investigation Setup" is clicked
 			$('div#investigation-pages div#investigation-setup div.action-buttons button#back-to-investigation-motivation').click(function() { 
 				$('div#investigation-setup').hide();				
-  				$('div#investigation-motivation').show();
+  				$('div#investigation-motivation').show(); 
+
+				// Clear the page                                                                                   
+				Sail.app.observations.investigationSetupClearFields();
 			}) 		
                   
 			
-			// *******************************  Investigation Setup Page **********************************
 			$('div#investigation-setup table#investigation-organism-table td').click (function () {
-				if ($(this).hasClass("selected")) {// need to uncheck the selection
+				if ($(this).hasClass("selected")) { // need to uncheck the selection
 					$(this).removeClass("selected");
 					$(this).css('border', 'none');
 				}else {
@@ -815,14 +816,7 @@ WallCology = {
 					Sail.app.observations.newInvestigationSetup(selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
 
 					// Clear the page                                                                                   
-					$('div#investigation-setup table#investigation-organism-table td.selected').css('border', 'none');
-					$('div#investigation-setup table#investigation-organism-table td.selected').removeClass('selected');
-					
-					$('div#investigation-setup div#investigation-environment-temperature .selected').removeClass('selected investigation-button');
-					$('div#investigation-setup div#investigation-environment-light-level .selected').removeClass('selected investigation-button');
-					$('div#investigation-setup div#investigation-environment-humidity .selected').removeClass('selected investigation-button');
-					
-					$('div#investigation-setup textarea#investigation-setup-hypothesis').val('');
+					Sail.app.observations.investigationSetupClearFields();
 
 				   	// Move to "Investigation Results" page
 				    $('div#investigation-pages div#investigation-setup').hide();
@@ -834,7 +828,9 @@ WallCology = {
 			// *******************************  Investigation Results Page **********************************
 			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
 				$('div#investigation-pages div#investigation-results').hide();
-				$('div#investigation-pages div#investigation-setup').show();
+				$('div#investigation-pages div#investigation-setup').show();     
+				
+				Sail.app.observations.investigationResultClearFields();
 			})
 			
 			$('div#investigation-pages div#investigation-results button#animate-investigation-results-button').click(function() {
@@ -862,8 +858,7 @@ WallCology = {
 					Sail.app.observations.newInvestigationResult(description, interpretation);
 					
 					// Clear the page 
-					$('div#investigation-pages div#investigation-results textarea#investigation-results-description').val("");
-					$('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val("");
+					Sail.app.observations.investigationResultClearFields();
 					
 					// Move to main menu
 					$('div#investigation-pages div#investigation-results').hide();
@@ -881,7 +876,7 @@ WallCology = {
 			});        
 			 
 			// If the back-button is clicked on the "What others did page"
-			$('div#investigation-pages div.action-buttons button.back-button').click(function () {
+			$('div#investigation-pages div#investigation-what-others-did div.action-buttons button.back-button').click(function () {
 				$('div#investigation-pages div#investigation-menu-page').show();
 				$('div#investigation-pages div#investigation-what-others-did').hide();
 			})
@@ -899,7 +894,37 @@ WallCology = {
 			      + pad(d.getHours())+':'
 			      + pad(d.getMinutes())+':'
 			      + pad(d.getSeconds())
-		},   
+		},    
+		
+		
+		investigationMotivationClearFields: function () {
+			// clear fields
+			$("div#investigation-motivation div#investigation-type button").removeClass('investigation-button selected');
+			$("div#investigation-motivation span#selected-investigation-type").text('...'); 
+			$('div#investigation-motivation textarea#motivation-description').val('');   
+			$('div#investigation-motivation input#headline-title').val(''); 
+			$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
+				$(this).attr('checked', false);
+			});
+		},  
+		
+		
+		investigationSetupClearFields: function() {
+		  	$('div#investigation-setup table#investigation-organism-table td.selected').css('border', 'none');
+			$('div#investigation-setup table#investigation-organism-table td.selected').removeClass('selected');
+			
+			$('div#investigation-setup div#investigation-environment-temperature .selected').removeClass('selected investigation-button');
+			$('div#investigation-setup div#investigation-environment-light-level .selected').removeClass('selected investigation-button');
+			$('div#investigation-setup div#investigation-environment-humidity .selected').removeClass('selected investigation-button');
+			
+			$('div#investigation-setup textarea#investigation-setup-hypothesis').val('');  
+		},  
+		
+		investigationResultClearFields: function() {
+		  	$('div#investigation-pages div#investigation-results textarea#investigation-results-description').val("");
+			$('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val("");  
+		},
+	   
 		
 		clearNewOrganismPage: function () {
 			$('#new-organism table#organism-table td').css('border', 'none');
@@ -1343,7 +1368,7 @@ WallCology = {
 				selectedKeywords : selectedKeywords
 	        })
 	        WallCology.groupchat.sendEvent(sev)
-        }, 
+        },   
 
 		newInvestigationSetup: function(selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
 			
