@@ -13,17 +13,16 @@ body {
 
 /********************************* INVESTIGATION MENU PAGE *****************************/   
    
-div#investigation-pages {
+div#tabs-5 {
 	background-image: url('/images/bkgd_habitat.png');
 	background-repeat: no-repeat;
-	height: 1200px;
- 	font-size: 14px;
+/* 	font-size: 14px;*/
 }
            
 div#investigation-pages div#investigation-menu-page {
 	background-image: url('/images/transparent_bkg.png');
-	height: 100%;
-	display: table-cell; 
+	height: 470px;
+	display: table; 
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 160px;
@@ -31,22 +30,94 @@ div#investigation-pages div#investigation-menu-page {
 }      
 
 div#investigation-pages div#investigation-menu-page div#inner-investigation-menu-page {
-	_position: absolute; 
-	_top: 50%; 
-	display: table-cell; 
+   	display: table-cell; 
 	vertical-align: middle; 
 	padding-left: 40px;
 	padding-right: 40px;
 	font-size: 24px;
 }
 
+div#tabs-5 button.new-page-button  {
+	margin-top: 50px;
+	height: 80px;
+	width: 570px;
+}
 
-/********************************* INVESTIGATION MOTIVATION *****************************/
 
-/********************************* INVESTIGATION SETUP *****************************/
+div#tabs-5 button.investigation-button {
+	background: url("") repeat scroll 0 0 #E63F0D;
+	border: 1px solid #E63F0D;   
+	color: white;
+}                                                   
+
+/** ********************************* Investigation Motivation Page *************************** */
+   
+div#tabs-5 div#investigation-motivation div.action-buttons {                             
+	width: 660px;
+}
+
+div#tabs-5 div#investigation-motivation div.action-buttons {
+	margin-top: 30px;
+}       
+                                                            
+
+div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigation-setup {
+   float: right;
+}    
+    
+
+/** ********************************* Investigation Setup Page *************************** */
+
+div#investigation-pages div#investigation-setup table#investigation-organism-table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+}          
 
 
-/********************************* INVESTIGATION RESULTS *****************************/
+div#investigation-pages div#investigation-setup div.investigation-environment-filter {
+	float: left; 
+	width: 200px;
+}  
+
+div#tabs-5 div#investigation-setup div.action-buttons {                             
+	width: 660px;
+}  
+
+div#tabs-5 div#investigation-setup div.action-buttons button#to-investigation-results {
+   float: right;
+}
+
+                                  
+/** ********************************* Investigation Results Page *************************** */
+div#tabs-5 div#investigation-results div.action-buttons {                             
+	width: 660px;   
+	margin-top: 25px;
+} 
+
+div#tabs-5 div#investigation-results div.action-buttons button#save-investigation-results {
+   float: right;
+}   
+
+div#tabs-5 div#investigation-results div#investigation-results-graph {
+	width: 500px;
+	height: 300px;
+	background-color: white;
+	float: left;
+}
+
+div#tabs-5 div#investigation-results button#animate-investigation-results-button {
+	float: left;
+	font-size: 24px;
+	height: 80px;
+	width: 150px;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+
+
+
+
 
 
 /********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/

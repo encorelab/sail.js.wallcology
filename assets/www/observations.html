@@ -27,6 +27,7 @@
     <link href="css/relationships.css" rel="stylesheet" type="text/css" />  
     <link href="css/habitats.css" rel="stylesheet" type="text/css" />  
     <link href="css/organisms.css" rel="stylesheet" type="text/css" />
+    <link href="css/investigations.css" rel="stylesheet" type="text/css" />
 
 	<link href="js/sail.js/css/sail.css" rel="stylesheet" type="text/css" />
     <link href="js/sail.js/css/jquery-ui/overcast/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -60,7 +61,8 @@
 			<li id="habitat-tab" class="tab-click"><a href="#tabs-1">Habitats</a></li>
 			<li id="organisms-tab" class="hide-tab-organisms tab-click"><a href="#tabs-2">Organisms</a></li>
 			<li id="relationships-tab" class="hide-tab-relationships tab-click"><a href="#tabs-3">Relationships</a></li>
-			<li id="counts-tab" class="hide-tab-counts tab-click"><a href="#tabs-4">Counts</a></li>			
+			<li id="counts-tab" class="hide-tab-counts tab-click"><a href="#tabs-4">Counts</a></li>	
+			<li id="investigation-tab" class="hide-tab-counts tab-click"><a href="#tabs-5">Investigation</a></li>			
 		</ul>
 		
 
@@ -1005,57 +1007,195 @@
 			</div>
 		</div>
 
-	</div>   
-					<!-- <table class="count-organisms">
-											<tr>
-												<th colspan="4" class="table-header">Enter up to three counts</th>  
-												<th colspan="1" class="table-header-center">Average counts</th>
-												<th colspan="1" class="table-header">Multiplier</th>
-												<th colspan="1">Final count</th>
-											</tr>
-											<tr class="table-body">
-												<td><img src="/images/icon_0000_blue-bug.png" class="image"/></td>
-												<td><input type="text" class="text-box count-blue-bug1"/> +</td>
-												<td><input type="text" class="text-box count-blue-bug2"/> +</td>
-												<td><input type="text" class="text-box count-blue-bug3 column-spacing"/></td>
-												<td><input type="text" class="text-box count-blue-bug4 column-spacing"/></td>
-												<td>x <input type="text" class="text-box count-blue-bug5 column-spacing"/></td>
-												<td>= <input type="text" class="text-box count-blue-bug6"/></td>
-											</tr>
-											<tr class="table-body">
-												<td><img src="/images/icon_0008_green-bug.png" class="image"/></td>
-												<td><input type="text" class="text-box count-green-bug1"/> +</td>
-												<td><input type="text" class="text-box count-green-bug2"/> +</td>
-												<td><input type="text" class="text-box count-green-bug3"/></td>
-												<td><input type="text" class="text-box count-green-bug4"/></td>
-												<td>x <input type="text" class="text-box count-green-bug5"/></td>
-												<td>= <input type="text" class="text-box count-green-bug6"/></td>
-											</tr>							
-											<tr class="table-body  predator-reveal">
-												<td><img src="/images/icon_0005_predator.png" class="image"/></td>
-												<td><input type="text" class="text-box predator1"/> +</td>
-												<td><input type="text" class="text-box predator2"/> +</td>
-												<td><input type="text" class="text-box predator3"/></td>
-												<td><input type="text" class="text-box predator4"/></td>
-												<td>x <input type="text" class="text-box predator5"/></td>
-												<td>= <input type="text" class="text-box predator6"/></td>
-											</tr> -->						
-		
-				<!-- <div class="record-date">		
-									<table class="enter-time">
-										<tr>
-											<th colspan="1" class="table-header record-date-header"><h3>Record Date</h3></th>
-											<th colspan="4" class="table-header record-time-header"><h3>Record Time</h3></th>
-										</tr>
-										<tr>
-											<td>Date <input type="text" id="new-counts-datepicker"></td>
-											<td>Hour <input type="text" class="text-box hour" /></td>
-											<td>Minute <input type="text" class="text-box minute" /></td>
-											<td>a.m.<input type="radio" name="ampm" value="am" id="new-count-am" class="radio-button" /><label for="new-count-am"></label></td>
-											<td>p.m.<input type="radio" name="ampm" value="pm" id="new-count-pm" class="radio-button"/><label for="new-count-pm"></label></td>
-										</tr>
-									</table>
-								</div> -->
+	   
+		<!-- *************************************************************** INVESTIGATION PAGES *****************************************-->  
+		<div id="tabs-5" class="tab-pane">      
+			<div id="investigation-pages">
+
+				<!--********************************* INVESTIGATION MENU PAGE *****************************-->
+				<div id="investigation-menu-page">  
+					<div id="inner-investigation-menu-page">
+						<button type="button" id="start-new-investigation" class="new-page-button investigation-button"><b>I want to start a new INVESTIGATION</b></button>							
+						<br/><br/>
+						<button type="button" id="what-others-did-investigation" class="new-page-button investigation-button"><b>I want to see what others did</b></button>		
+					</div>
+				</div> 
+				 
+				<!--********************************* INVESTIGATION MOTIVATION *****************************-->
+				<div id="investigation-motivation">
+					<img src="/images/new_habitat.png">  
+					
+					<div id="investigation-type">
+						<p style="float: left; width: 200px; margin-right: 20px"> <b> Investigation Type </b></p>
+						<button class="standard-button" value="theory">Theory</button>
+						<button class="standard-button" value="question">Question</button>					
+					</div>   
+					
+					<p style="float: left; width: 100%;"> <b> Describe the motivation for your new investigation.</b> I have a <b><span id="selected-investigation-type">...</span></b> I want to investigate. </p> 
+					<br/><br/>
+					<textarea id="motivation-description" cols="103" rows="5"></textarea> 
+					 
+					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+						<span style="float: left; width: 100px"> Headline </span>
+						<input style="float: left" size="90" id="headline-title" type="text"/>
+					</div>   
+					
+					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+						<span style="float: left; width: 100px"> Keywords </span>
+						<table id="investigation-keyword-table">
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Energy Transfer" /> Energy Transfer </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Sit" /> Sit </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Risus" /> Risus </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Ipsum" /> Ipsum </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Predator" /> Predator </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Amet" /> Amet </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Ultamcopper" /> Ultamcopper </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+							<tr>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
+							</tr>
+						</table>
+					</div>
+					
+					 <div class="action-buttons">
+						<button class="back-button standard-button investigation-button">BACK</button>
+						<button id='to-investigation-setup' class="next-button investigation-button">NEXT</button>
+					</div>
+
+				</div>		
+
+				<!--********************************* INVESTIGATION SETUP *****************************-->
+				<div id="investigation-setup">
+ 					<img src="/images/new_habitat.png"> 
+ 					<p><b> Organisms </b></p>
+					<p> Select the organisms you would like to add to your experiment (choose one or more)</p>
+					
+					<table id="investigation-organism-table">
+						<tr>
+							<td value="scum"> <img src="/images/icon_0007_scum.png"> </td>
+							<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png"> </td>
+							<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png"> </td>
+							<td value="green-bug"> <img src="/images/icon_0008_green-bug.png"> </td>
+							<td value="predator"> <img src="/images/icon_0005_predator.png"> </td>							
+						</tr>
+					</table> 
+					
+					<p><b> Environmental Conditions </b></p>
+					<p> Specify the environmental conditions you would like to add to your experiment </p>
+					 
+					<div style="float: left; width: 100%; margin-bottom: 25px">
+						<div id="investigation-environment-temperature" class="investigation-environment-filter">
+							<p> <b>Temperature</b> </p>
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					      
+						<div id="investigation-environment-light-level" class="investigation-environment-filter">
+							<p> <b>Light Levels</b> </p>
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					
+						<div id="investigation-environment-humidity" class="investigation-environment-filter">
+							<p> <b>Humidity</b> </p> 
+							<button class="standard-button" value="low">Low</button>
+							<button class="standard-button" value="high">High</button>
+						</div>
+					</div>
+					  
+					<div style="width: 100%; float: left; margin-bottom: 25px">
+						<p> <b> Hypothesis </b> </p>  
+						<p> Here's what I think will happen to my populations </p>
+					
+						<textarea id="investigation-setup-hypothesis" cols="80" rows="8"></textarea>
+					</div>
+					
+					<div class="action-buttons">
+						<button id="back-to-investigation-motivation" class="back-button standard-button investigation-button">BACK</button>
+						<button id='to-investigation-results' class="next-button investigation-button">NEXT</button>
+					</div>
+				</div>		 
+
+
+				<!--********************************* INVESTIGATION RESULTS *****************************-->
+				<div id="investigation-results">
+                	<img src="/images/new_habitat.png">
+
+					
+					<div style="float: left; width: 100%; margin-bottom: 25px">
+						<div id="investigation-results-graph">	
+						
+						
+						</div>
+					
+						<button id="animate-investigation-results-button">Pause</button> 
+					
+					</div> 
+					
+					<p> <b> Description </b> What happened? </p>
+					
+					<textarea id="investigation-results-description" cols="80" rows="5"></textarea>
+						
+						
+					<p> <b> Interpretation </b> Can you explain why it happened? </p>
+
+					<textarea id="investigation-results-interpretation" cols="80" rows="5"></textarea>	
+										
+					
+					<div class="action-buttons">
+						<button id="back-to-investigation-setup" class="back-button standard-button investigation-button">BACK</button>
+						<button id='save-investigation-results' class="save-button investigation-button">Save</button>
+					</div>
+				</div>		                                               
+
+
+				<!--********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************-->
+				<div id="investigation-what-others-did">
+					<h2> What others did for their INVESTIGATION </h2>
+					<p> Select from the following criteria to view investigations you are interested in:</p>
+					
+					<div style="margin-left: auto; margin-right: auto; width: 200px; float: left; text-align: center">
+						<p> <b>Investigation Type</b> </p>
+						<table>
+							<tr> 
+								<td> <button class="standard-button"> Theory </button> </td>
+								<td> <button class="standard-button"> Question </button> </td>
+						    </tr>
+						</table>
+					</div>
+					
+                	<div class="action-buttons">
+						<button class="back-button standard-button investigation-button">BACK</button>
+					</div>
+				</div>		                                                                 
+
+
+				<!--********************************* INDIVIDUAL INVESTIGATION RESULT *****************************-->
+				<div id="investigation-individual-result">
+
+				</div>
+			</div>
+		</div>
+	</div>
 
     <footer> 
     </footer> 

@@ -126,15 +126,17 @@ WallCology = {
             $('#add-to-discussion-habitat').hide()
             $('#author-search-habitat').hide()
             $('#new-organism').hide()      
-			$('#describe-lifecycle-organism').hide();
-            $('#what-others-said-about-organisms').hide();
- 			$('#what-others-said-organism-lifecycle').hide();
+			$('#describe-lifecycle-organism').hide()
+            $('#what-others-said-about-organisms').hide()
+ 			$('#what-others-said-organism-lifecycle').hide()
 			$('#describe-lifecycle-organism').hide()
             $('#open-organism').show()
             $('#new-relationship').hide()
             $('#view-relationships').hide()
             $('#new-counts').hide()
             $('#view-counts').hide()
+			// Hide all divs in investigation pages except for the main menu page
+			$("div#investigation-pages").children().filter(":not(#investigation-menu-page)").hide()
 
             $('.jquery-radios').buttonset()
                        
@@ -702,6 +704,188 @@ WallCology = {
             	$('#landing-counts').show()     
             	// should also clear fields here (or on entry)
             })  
+
+		// ********** INVESTIGATIONS ***********************************************************************************
+
+			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
+				$('div#investigation-pages div#investigation-menu-page').hide();
+				$('div#investigation-pages div#investigation-motivation').show();      
+			})
+			    
+			// if the back button is clicked on 'Investigation Motivation' page
+			$('div#investigation-motivation div.action-buttons button.back-button').click(function () {
+				$('div#investigation-pages div#investigation-menu-page').show();
+				$('div#investigation-pages div#investigation-motivation').hide();
+			}) 
+			
+			// In the Investigation Motivation page, this sets the value of the chosen Type
+            $('div#investigation-motivation div#investigation-type button').click(function() {    
+	            $('div#investigation-motivation div#investigation-type button').removeClass('investigation-button selected');
+				$(this).addClass('investigation-button selected');
+				$('div#investigation-motivation span#selected-investigation-type').text($(this).attr('value'));
+			})
+			
+			
+			// Next button is clicked in "Investigation Motivation" page
+			$('div#investigation-pages div#investigation-motivation div.action-buttons button#to-investigation-setup').click(function() {  
+				  
+				// Check to make sure all fields are filled 
+			    selectedType = $('div#investigation-motivation div#investigation-type button.selected').attr('value');
+				motivationForDescription = $('div#investigation-motivation textarea#motivation-description').val();
+				headline = $('div#investigation-motivation input#headline-title').val(); 
+                selectedKeywords = [];
+				$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
+					selectedKeywords.push($(this).val());
+				}); 
+				                                         
+				// if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
+				// 					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
+				// 				} else { // Send the filled form to be saved
+					Sail.app.observations.newInvestigationMotivation(selectedType, motivationForDescription, headline, selectedKeywords);
+					
+					// clear fields
+					$("div#investigation-motivation div#investigation-type button").removeClass('investigation-button selected');
+					$("div#investigation-motivation span#selected-investigation-type").text('...'); 
+					$('div#investigation-motivation textarea#motivation-description').val('');   
+					$('div#investigation-motivation input#headline-title').val(''); 
+					$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
+						$(this).attr('checked', false);
+					});
+					
+					//  Move to the "Investigation Setup" page	
+					$('div#investigation-motivation').hide();
+					$('div#investigation-setup').show();
+					
+				// }                                                                                      
+			})
+			
+			
+			// Back button of "Investigation Setup" is clicked
+			$('div#investigation-pages div#investigation-setup div.action-buttons button#back-to-investigation-motivation').click(function() { 
+				$('div#investigation-setup').hide();				
+  				$('div#investigation-motivation').show();
+			}) 		
+                  
+			
+			// *******************************  Investigation Setup Page **********************************
+			$('div#investigation-setup table#investigation-organism-table td').click (function () {
+				if ($(this).hasClass("selected")) {// need to uncheck the selection
+					$(this).removeClass("selected");
+					$(this).css('border', 'none');
+				}else {
+					$(this).addClass("selected");
+					$(this).css('border', '1px solid black');					
+				}
+			})
+			
+			$('div#investigation-setup div#investigation-environment-temperature button').click(function(){
+				$('div#investigation-setup div#investigation-environment-temperature button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			})
+			
+			$('div#investigation-setup div#investigation-environment-light-level button').click(function(){
+				$('div#investigation-setup div#investigation-environment-light-level button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			})
+			
+			$('div#investigation-setup div#investigation-environment-humidity button').click(function(){
+				$('div#investigation-setup div#investigation-environment-humidity button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			})
+			
+			
+			$('div#investigation-setup div.action-buttons button#to-investigation-results').click(function() {
+			   
+				// Check to make sure all the necessary fields are selected and filled 
+				selectedOrganisms = [];
+				$('div#investigation-setup table#investigation-organism-table td.selected').each(function(){
+					selectedOrganisms.push($(this).attr('value'));
+				});
+					                                              
+				temperature = $('div#investigation-setup div#investigation-environment-temperature button.selected').attr('value');
+				lightLevel = $('div#investigation-setup div#investigation-environment-light-level button.selected').attr('value');
+				humidity = $('div#investigation-setup div#investigation-environment-humidity button.selected').attr('value');	
+				
+				hypothesis = $('div#investigation-setup textarea#investigation-setup-hypothesis').val();
+				
+				// if (selectedOrganisms.length == 0 || temperature == "undefined" || lightLevel == "undefined" || humidity == "undefinied" || hypothesis == ""){
+				// 	alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
+				// } else {
+					// Submit the data
+					Sail.app.observations.newInvestigationSetup(selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
+
+					// Clear the page                                                                                   
+					$('div#investigation-setup table#investigation-organism-table td.selected').css('border', 'none');
+					$('div#investigation-setup table#investigation-organism-table td.selected').removeClass('selected');
+					
+					$('div#investigation-setup div#investigation-environment-temperature .selected').removeClass('selected investigation-button');
+					$('div#investigation-setup div#investigation-environment-light-level .selected').removeClass('selected investigation-button');
+					$('div#investigation-setup div#investigation-environment-humidity .selected').removeClass('selected investigation-button');
+					
+					$('div#investigation-setup textarea#investigation-setup-hypothesis').val('');
+
+				   	// Move to "Investigation Results" page
+				    $('div#investigation-pages div#investigation-setup').hide();
+					$('div#investigation-pages div#investigation-results').show();
+				// }			 
+			})
+			
+			
+			// *******************************  Investigation Results Page **********************************
+			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
+				$('div#investigation-pages div#investigation-results').hide();
+				$('div#investigation-pages div#investigation-setup').show();
+			})
+			
+			$('div#investigation-pages div#investigation-results button#animate-investigation-results-button').click(function() {
+				if ($(this).text() == "Pause"){
+					$(this).text('Resume'); 
+					// Resume the run
+					
+				} else if ($(this).text() == "Resume"){
+					$(this).text('Pause'); 
+					// Pause the run
+					
+				}
+				
+			})
+			
+			// When the 'SAVE' button is clicked we need to save the investigation's results
+			$('div#investigation-pages div#investigation-results div.action-buttons button#save-investigation-results').click(function() {
+				description = $('div#investigation-pages div#investigation-results textarea#investigation-results-description').val();
+				interpretation = $('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val();
+				
+				if (description == "" || interpretation == "") {
+					alert ("Please fill the Description & Interpretation sections and then hit 'SAVE'.");
+				}else {
+					// Save the reults 
+					Sail.app.observations.newInvestigationResult(description, interpretation);
+					
+					// Clear the page 
+					$('div#investigation-pages div#investigation-results textarea#investigation-results-description').val("");
+					$('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val("");
+					
+					// Move to main menu
+					$('div#investigation-pages div#investigation-results').hide();
+					$('div#investigation-pages div#investigation-menu-page').show();
+				}
+			})
+       		
+
+			 // *******************************  Investigation What Others Did Page **********************************
+
+
+			$("div#investigation-pages button#what-others-did-investigation").click(function() {
+				$('div#investigation-pages div#investigation-menu-page').hide();
+				$('div#investigation-pages div#investigation-what-others-did').show();	
+			});        
+			 
+			// If the back-button is clicked on the "What others did page"
+			$('div#investigation-pages div.action-buttons button.back-button').click(function () {
+				$('div#investigation-pages div#investigation-menu-page').show();
+				$('div#investigation-pages div#investigation-what-others-did').hide();
+			})
+			
     	},
 
 // ****************************************** HELPER FUNCTIONS ***************************************************
@@ -1147,6 +1331,41 @@ WallCology = {
 	        $('#box1').html("")
 	        $('#box2').html("")		
 	        $('#new-relationship .comments').val('')
+        }, 
+
+		newInvestigationMotivation: function(selectedType, motivationForDescription, headline, selectedKeywords) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_motivation',
+				selectedType : selectedType,
+				motivationForDescription : motivationForDescription,
+				headline : headline,
+				selectedKeywords : selectedKeywords
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        }, 
+
+		newInvestigationSetup: function(selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_setup',
+				selectedOrganisms : selectedOrganisms,
+				temperature : temperature,
+				lightLevel : lightLevel,
+				humidity : humidity,
+				hypothesis : hypothesis
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        },
+
+		newInvestigationResult: function(description, interpretation) {   
+			
+	        sev = new Sail.Event('new_observation', {
+	        	type : 'investigation_setup',
+				description : description,
+				interpretation : interpretation
+	        })
+	        WallCology.groupchat.sendEvent(sev)
         },
 
         newCountsContent: function() {
