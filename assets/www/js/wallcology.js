@@ -5,6 +5,9 @@ WallCology = {
     
     // all Sail events generated in this app must have a run
     allowRunlessEvents: false,
+
+	// to store graph data and use it to draw and re-draw graphs via trigger
+	countsGraphData: null,
     
     init: function() {
         console.log("Initializing...")
@@ -641,17 +644,15 @@ WallCology = {
             $('#landing-counts .view-button').click(function() {				
             	$('#landing-counts').hide()
             	$('#view-counts').show()
-				
-				// setup background areas
-				var markings = [
-				//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
-				//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
-				];
 
-				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
-				$.plot($("#view-counts .vegetation-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]] ], { yaxis: { min: 0, max: 1 }, grid: { markings: markings } })
-				$.plot($("#view-counts .creature-graph"), [ [[0, 0], [1, 4], [2, 3], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
-				$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+				// reset data
+				WallCology.countsGraphData = null
+				// retrieve selected Habitat from UI
+				selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				// set selectedHabitat
+				WallCology.countsGraphData = {'selectedHabitat':selectedHabitat}
+				// retrieve counts data for graphing and trigger draw graphs and store in WallCology.countsGraphData
+				Sail.app.observations.retrieveCountsGraphData()
             })
             
 // **********NEW COUNTS******************************************************************************************
@@ -688,29 +689,12 @@ WallCology = {
 // **********VIEW COUNTS******************************************************************************************
     	
             $("input[name=select-habitat]").click(function() {
+				// retrieve selected Habitat from UI
 				selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
-				
-				switch(selectedHabitat) {
-					case "all":
-						// show veg and animal graph with accumulated average counts
-						// TODO: What about temperatur???
-						//break
-					case "1":
-						// show veg, animals, and enviro cond for habitat 1
-						//break
-					case "2":
-						// show veg, animals, and enviro cond for habitat 2
-						//break
-					case "3":
-						// show veg, animals, and enviro cond for habitat 3
-						//break
-					case "4":
-						// show veg, animals, and enviro cond for habitat 4
-						alert("selected habitat: " + selectedHabitat)
-						break
-					default:
-						alert('Error selecting habitat')
-				}
+				// set selectedHabitat
+				WallCology.countsGraphData.selectedHabitat = selectedHabitat
+				// trigger function to re-draw graphs (data should be stored in Wallcology.countsGraphData.results)
+				$(WallCology).trigger('printGraphs')
 			})
 					
             $('#view-counts .back-button').click(function() {				
@@ -1039,18 +1023,17 @@ WallCology = {
 			
 		},
 		
-		retrieveCountsGraphData: function(userRelationshipSelection) {
+		retrieveCountsGraphData: function() {
 			// we do a count REST call to determine how many results to expect
 			// (setting batch_size in _find)
-			criteria = {"run.name":Sail.app.run.name, "type":"count"/*, "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to*/}
+			criteria = {"run.name":Sail.app.run.name, "type":"count"}
 			$.ajax({
 				type: "GET",
 				url: "/mongoose/wallcology/observations/_count",
 				data: {criteria: JSON.stringify(criteria)},
-				context: userRelationshipSelection,
+				context: this,
 				success: function(data) {
-					criteria = {"run.name":Sail.app.run.name, "type":"count"/*, "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to*/}
-					//criteria["comments"] = {$ne: ""}
+					criteria = {"run.name":Sail.app.run.name, "type":"count"}
 					this.criteria = criteria
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
@@ -1062,14 +1045,13 @@ WallCology = {
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
 							context: this, 
 							success: function(data) {								
-								relationshipResultsArray = []
-								for (i=0;i<data.results.length;i++) {
-									d = new Date(data.results[i].timestamp)
-									relationshipResultsArray[i] = [data.results[i].comments, data.results[i].origin, Sail.app.observations.dateString(d)]
-								}
-
 						    	if (data.ok === 1) {			    		
-									// do something here??
+									// store data in global variable
+									WallCology.countsGraphData["results"] = data.results
+									// trigger function to draw graphs
+									$(WallCology).trigger('printGraphs')
+									
+									return true
 						    	}
 						    	else {
 									console.log("Mongoose request failed")
@@ -1268,6 +1250,22 @@ WallCology = {
         unauthenticated: function(ev) {
             window.location.href = "/index.html"
         },
+
+		printGraphs: function(ev) {
+			WallCology.countsGraphData
+			//alert("Selected Habitat: " + WallCology.countsGraphData.selectedHabitat)
+			// setup background areas
+			var markings = [
+			//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
+			//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
+			];
+
+			// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
+			$.plot($("#view-counts .vegetation-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]] ], { yaxis: { min: 0, max: 1 }, grid: { markings: markings } })
+			$.plot($("#view-counts .creature-graph"), [ [[20111008, 0], [20111009, 4], [20111010, 3], [20111011, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+			$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+			
+		}
         
         // not sure why we're going this route, but whateves
 /*        context_switch: function(event, changedContext) {
