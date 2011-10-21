@@ -49,14 +49,14 @@
 
 #new-counts .text-box {
 	width: 30px;
-	height: 20px;
+	height: 28px;
 	font-size: 14px;
 }
 
 #new-counts .record-environment .text-box {
 	width: 70px;
-	height: 20px;
-	font-size: 14px;
+	height: 28px;
+	font-size: 22px;
 }
 
 #new-counts .image {
@@ -96,26 +96,27 @@
 
 #new-counts div.temperature-input {
 	margin-left: 0;
-	margin-top: 8px; float : left;
-	margin-bottom: 30px;
+	margin-top: 18px;
+	margin-bottom: 40px;
 	float: left;
 }
 
 #new-counts div.light-level-input {
 	margin-left: 20px;
-	margin-top: 8px;
+	margin-top: 18px;
 	padding: 0;
 	float: left;
 }
 
 #new-counts div.humidity-input {
 	margin-left: 20px;
-	margin-top: 8px;
+	margin-top: 18px;
 	padding: 0;
 	float: left;
 }
 
 #new-counts .record-organisms {
+	font-size: 18px;
 	clear: left;
 }
 
@@ -147,7 +148,7 @@
 	margin-left: 20px;
 }
 
-div#new-counts div#vegetation-count-div {
+/* div#new-counts div#vegetation-count-div {
 	width: 700px;
 	float: left;
 }
@@ -180,7 +181,7 @@ div#new-counts .vegetation-time {
 	width: 100px;
 	margin-top: 22px;
 }
-
+ */
 #new-counts .creature-table-header {
 	margin-top: -8px;
 }
@@ -201,6 +202,11 @@ div#new-counts table#count-organisms td.dotted-top-border {
 div#new-counts table#count-organisms td input {
 	width: 60px;
 	height: 28px;
+	font-size: 22px;
+}
+
+#new-counts #count-organisms .table-date-adjuster {
+	width: 130px;
 }
 
 /**********************************VIEW COUNTS***************************************/
