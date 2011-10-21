@@ -827,9 +827,25 @@ WallCology = {
 					$('div#investigation-pages div#investigation-menu-page').show();
 				}
 			});
+       		
 
+			 // *******************************  Investigation What Others Did Page **********************************
+
+
+			$("div#investigation-pages button#what-others-did-investigation").click(function() {
+				$('div#investigation-pages div#investigation-menu-page').hide();
+				$('div#investigation-pages div#investigation-what-others-did').show();	
+			});        
+			 
+			// If the back-button is clicked on the "What others did page"
+			$('div#investigation-pages div.action-buttons button.back-button').click(function () {
+				$('div#investigation-pages div#investigation-menu-page').show();
+				$('div#investigation-pages div#investigation-what-others-did').hide();
+			})
 			
-    	},
+    	},      
+       
+
                                                                    
 
 
