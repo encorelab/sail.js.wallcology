@@ -669,7 +669,7 @@ WallCology = {
 				// check if the required fields are filled before submitting
 				if ( $('.counts-habitat-radio-button').is(':checked') && $('#new-counts .count-temperature').val() &&
 						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
-						$('#new-counts .count-scum').val() && $('#new-counts .count-mold').val() &&
+						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
 						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val() &&
 						$('#new-counts .count-predator6').val() ) 
 					{
@@ -1371,15 +1371,22 @@ WallCology = {
         newCountsContent: function() {
 	        sev = new Sail.Event('new_observation', {
 	        	type:'count',
-	        	chosen_habitat:$('input:radio[name=select-habitat]:checked').val(),
+	        	chosen_habitat:$('input:radio[name=new-counts-select-habitat]:checked').val(),
 	        	temperature:$('#new-counts .count-temperature').val(),
 	        	light_level:$('#new-counts .count-light').val(),
 	        	humidity:$('#new-counts .count-humidity').val(),
-	        	scum:$('#new-counts .count-scum').val(),
-	        	mold:$('#new-counts .count-mold').val(), 
-				vegetation_date:$('#new-counts .vegetation-date').val(),
-				vegetation_time:$('#new-counts .vegetation-time').val(),
+	        	date:$('#new-counts .count-date').val(),
 	        	organism_counts:{
+	        		mold:{
+	    	        	count1:$('#new-counts .count-mold').val(),	        			
+		        		multiplier:$('#new-counts .count-mold5').val(),
+		        		final_count:$('#new-counts .count-mold6').val()
+	        		},
+	        		scum:{
+	    	        	count1:$('#new-counts .count-scum').val(),	        			
+		        		multiplier:$('#new-counts .count-scum5').val(),
+		        		final_count:$('#new-counts .count-scum6').val()
+	        		},
 		        	blue_bug:{
 		        		count1:$('#new-counts .count-blue-bug1').val(),
 		        		count2:$('#new-counts .count-blue-bug2').val(),
@@ -1404,11 +1411,6 @@ WallCology = {
 		        		multiplier:$('#new-counts .count-predator5').val(),
 		        		final_count:$('#new-counts .count-predator6').val()
 					}
-				},
-				organism_date:{
-					count1_date:$('#new-counts .count1-date').val(),
-					count2_date:$('#new-counts .count2-date').val(),
-					count3_date:$('#new-counts .count3-date').val()
 				},
 				organism_time:{
 					count1_time:$('#new-counts .count1-time').val(),
