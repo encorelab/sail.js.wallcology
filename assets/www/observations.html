@@ -832,10 +832,10 @@
 					<h3>Habitat Number</h3>
 				</div>
 				<div class="select-habitat-radios jquery-radios">
-					<input type="radio" name="select-habitat" id="new-count-r1" class="counts-habitat-radio-button radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
-					<input type="radio" name="select-habitat" id="new-count-r2" class="counts-habitat-radio-button radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
-					<input type="radio" name="select-habitat" id="new-count-r3" class="counts-habitat-radio-button radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
-					<input type="radio" name="select-habitat" id="new-count-r4" class="counts-habitat-radio-button radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
+					<input type="radio" name="new-counts-select-habitat" id="new-count-r1" class="counts-habitat-radio-button radio-button" value="1" /><label for="new-count-r1">Habitat 1</label>
+					<input type="radio" name="new-counts-select-habitat" id="new-count-r2" class="counts-habitat-radio-button radio-button" value="2" /><label for="new-count-r2">Habitat 2</label>
+					<input type="radio" name="new-counts-select-habitat" id="new-count-r3" class="counts-habitat-radio-button radio-button" value="3" /><label for="new-count-r3">Habitat 3</label>
+					<input type="radio" name="new-counts-select-habitat" id="new-count-r4" class="counts-habitat-radio-button radio-button" value="4" /><label for="new-count-r4">Habitat 4</label>
 				</div>
 
 				<div class="divider"></div>
@@ -872,8 +872,9 @@
 				
 
 				<div class="record-organisms">
-					<h3>Count Organisms</h3>   
-					<div id="vegetation-count-div">
+					<h5>Count Organisms</h5>
+					<h6 class="creature-table-header">Enter units of Wallscope covered by vegetation and enter up to 3 counts for each creature</h6>   
+<!-- 					<div id="vegetation-count-div">
 						<table class="count-vegetation">
 							<tr>
 								<th colspan="4" class="table-header">Enter units of Wallscope covered by vegetation</th>
@@ -898,69 +899,79 @@
 					    </table>
 				 	</div>
 				 
-					<div class="divider"></div>
+					<div class="divider"></div> -->
                                
 					<table id="count-organisms">
 						<tr>
-							<th colspan="6" class="table-header creature-table-header">Enter up to 3 counts for each creature</th>
- 						</tr>
-						<tr>
 						    <th> </th>
+						    <th> <img src="/images/icon_0006_fuzzy-mold.png" class="image"/></th>
+						    <th> <img src="/images/icon_0007_scum.png" class="image" /></th>
 							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
 							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
 							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
-							<th> Date</th> 
 							<th> Time</th> 
+							<th> Date</th> 
 						</tr> 
 						
 						<tr>
 							<td> Count 1 </td>
+							<td> <input type="number" class="count-organism-data-cell count-mold"/> </td>							
+							<td> <input type="number" class="count-organism-data-cell count-scum"/> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug1" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-green-bug1" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-predator1" /> </td>
-							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count1-date" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count1-time" /> </td>
+							<td> <input type="text" class="table-date-adjuster count-organism-data-cell new-counts-datepicker count-date" /> </td>							
 						</tr>
 						
 						<tr>
 							<td> Count 2</td>
+							<td> </td>
+							<td> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug2" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-green-bug2" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-predator2" /> </td>
-							<td> <input type="text" class="count-organism-data-cell new-counts-datepicker count2-date" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count2-time" /> </td>
+							<td> </td>
 						</tr>
 						
 						<tr>
-							<td class="dotted-bottom-border"> Count 3</td>
-						    <td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-blue-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-green-bug3" /> </td>
-							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-predator3" /> </td>
-							<td class="dotted-bottom-border"> <input type="text" class="count-organism-data-cell new-counts-datepicker count3-date" /> </td>
-							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count3-time" /> </td>
+							<td> Count 3</td>
+							<td> </td>
+							<td> </td>
+						    <td> <input type="number" class="count-organism-data-cell count-blue-bug3" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-green-bug3" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator3" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count3-time" /> </td>
+							<td> </td>
 						</tr>  
 											
 						<tr>
 							<td> Average</td>
-						    <td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-blue-bug4" /> </td>
-							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-green-bug4" /> </td>
-							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-predator4" /> </td> 
+							<td class="dotted-bottom-border"> </td>
+							<td class="dotted-bottom-border"> </td>
+						    <td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-blue-bug4" /> </td>
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-green-bug4" /> </td>
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-predator4" /> </td> 
 						</tr>
 						
 						<tr>
 							<td> Multiplier</td>
-						    <td> <input type="number" class="count-organism-data-cell count-blue-bug5" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-green-bug5" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-predator5" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-mold5" /> </td>						
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-scum5" /> </td>						
+						    <td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-blue-bug5" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-green-bug5" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-predator5" /> </td>
 						</tr>
 						
 						<tr>
 							<td> Final Count</td>
+							<td> <input type="number" class="count-organism-data-cell count-mold6" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-scum6" /> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug6" /> </td>
 						 	<td> <input type="number" class="count-organism-data-cell count-green-bug6" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-predator6" /> </td>
-						</tr>
-						
+						</tr>						
 					</table>
 				</div>
 				<br/>
