@@ -844,7 +844,11 @@ WallCology = {
 					
 				}
 				
-			})
+			})                                                                     
+			
+			$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]], [[0.4, 1], [2.2, 1.3]] ], { });
+			
+			
 			
 			// When the 'SAVE' button is clicked we need to save the investigation's results
 			$('div#investigation-pages div#investigation-results div.action-buttons button#save-investigation-results').click(function() {
@@ -873,12 +877,44 @@ WallCology = {
 			$("div#investigation-pages button#what-others-did-investigation").click(function() {
 				$('div#investigation-pages div#investigation-menu-page').hide();
 				$('div#investigation-pages div#investigation-what-others-did').show();	
-			});        
+			});   
+			      
+			
+			$("div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type button").click(function (){
+				$("div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type button").removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			});
 			 
 			// If the back-button is clicked on the "What others did page"
 			$('div#investigation-pages div#investigation-what-others-did div.action-buttons button.back-button').click(function () {
 				$('div#investigation-pages div#investigation-menu-page').show();
 				$('div#investigation-pages div#investigation-what-others-did').hide();
+			});  
+			
+			
+			$('div#investigation-pages div#investigation-what-others-did table#what-others-said-organisms td').click(function (){
+				if ($(this).hasClass('selected') == true){
+					$(this).removeClass('selected');
+					$(this).css('border', 'none');
+				} else {
+					$(this).addClass('selected');
+					$(this).css('border', '1px solid black');
+				}
+			});      
+			
+			$('div#investigation-what-others-did div#investigation-what-others-said-environment-temperature button').click(function(){
+				$('div#investigation-what-others-did div#investigation-what-others-said-environment-temperature button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			})
+			
+			$('div#investigation-what-others-did div#investigation-what-others-said-environment-light-level button').click(function(){
+				$('div#investigation-what-others-did div#investigation-what-others-said-environment-light-level button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+			})
+			
+			$('div#investigation-what-others-did div#investigation-what-others-said-environment-humidity button').click(function(){
+				$('div#investigation-what-others-did div#investigation-what-others-said-environment-humidity button').removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
 			})
 			
     	},

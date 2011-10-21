@@ -14,7 +14,7 @@ body {
 /********************************* INVESTIGATION MENU PAGE *****************************/   
    
 div#tabs-5 {
-	background-image: url('/images/bkgd_habitat.png');
+	background-image: url('/images/bkgd_investigations.png');
 	background-repeat: no-repeat;
 /* 	font-size: 14px;*/
 }
@@ -121,6 +121,28 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 
 /********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/
+                                              
+
+div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type{
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#investigation-pages div#investigation-what-others-did table#what-others-said-organisms {
+	margin-left: auto;
+	margin-right: auto;
+	width: 550px;
+}                    
+
+div#investigation-pages div#investigation-what-others-did div.investigation-environment-filter {
+	width: 250px;                         
+	float: left;
+} 
+
+div#investigation-pages div#investigation-what-others-did div.investigation-environment-filter button.standard-button {
+	width: 100px;         
+}
 
 
 /********************************* INDIVIDUAL INVESTIGATION RESULT *****************************/
