@@ -1498,19 +1498,51 @@ WallCology = {
         },
 
 		printGraphs: function(ev) {
-			WallCology.countsGraphData
-			//alert("Selected Habitat: " + WallCology.countsGraphData.selectedHabitat)
-			// setup background areas
-			var markings = [
-			//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
-			//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
-			];
-
-			// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
-			$.plot($("#view-counts .vegetation-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]] ], { yaxis: { min: 0, max: 1 }, grid: { markings: markings } })
-			$.plot($("#view-counts .creature-graph"), [ [[20111008, 0], [20111009, 4], [20111010, 3], [20111011, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
-			$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+			// the resultArray represents the counts in the database
+			resultsArray = WallCology.countsGraphData.results
 			
+			if (resultsArray.length > 0) {
+				// Reference day will be day 0 all others will be a positive integer
+				refDay = new Date(2011,9,15)
+				// needed for some date math
+				day = 1000*60*60*24
+				// array for scum, mold and resulting vegetation, which is passed to plot function
+				var scum = []
+				var mold = []
+				var vegetation = []
+		
+				// loop over array and create arrays that can be printed
+				for (i=0; i < resultsArray.length; i++) {
+					// date of the current dataset
+					countDate = new Date(resultsArray[i].timestamp)
+					// calculating date difference (positive int)
+					dayDiff = Math.ceil((countDate.getTime()-refDay.getTime())/(day))
+					
+					// fill scum array
+					if (parseInt(resultsArray[i].scum) > -1) {
+						scum[dayDiff] = [dayDiff, parseInt(resultsArray[i].scum)]
+					}
+					//fill mold array
+					if (parseInt(resultsArray[i].mold) > -1) {
+						mold[dayDiff] = [dayDiff, parseInt(resultsArray[i].mold)]
+					}
+				}
+		
+				// create vegetation array by adding scum and mold arrays
+				vegetation.push(scum)
+				vegetation.push(mold)
+		
+				// setup background areas
+				var markings = [
+				//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
+				//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
+				];
+
+				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
+				$.plot($("#view-counts .vegetation-graph"), vegetation, {  })
+				$.plot($("#view-counts .creature-graph"), [ [[1, 0], [3, 4], [4, 3], [6, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+				$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+			}
 		}
         
         // not sure why we're going this route, but whateves
