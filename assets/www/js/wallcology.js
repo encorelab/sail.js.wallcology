@@ -1510,6 +1510,20 @@ WallCology = {
 				var scum = []
 				var mold = []
 				var vegetation = []
+				// array for scum, mold and resulting vegetation, which is passed to plot function
+				var green_bug = []
+				var blue_bug = []
+				var predator = []
+				var creatures = []
+				// arrays for light_level, temperature and humidity
+				var temperature = []
+				var humidity = []
+				var light_level =[]
+				var environment = []
+				
+				// needed to draw x a bit longer than biggest data point
+				maxDay = 0
+				
 		
 				// loop over array and create arrays that can be printed
 				for (i=0; i < resultsArray.length; i++) {
@@ -1518,30 +1532,66 @@ WallCology = {
 					// calculating date difference (positive int)
 					dayDiff = Math.ceil((countDate.getTime()-refDay.getTime())/(day))
 					
+					if (dayDiff > maxDay) {
+						maxDay = dayDiff + 1
+					}
+					
 					// fill scum array
-					if (parseInt(resultsArray[i].scum) > -1) {
-						scum[dayDiff] = [dayDiff, parseInt(resultsArray[i].scum)]
+					if (parseInt(resultsArray[i].organism_counts.scum.final_count) > -1) {
+						scum[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.scum.final_count)]
 					}
 					//fill mold array
-					if (parseInt(resultsArray[i].mold) > -1) {
-						mold[dayDiff] = [dayDiff, parseInt(resultsArray[i].mold)]
+					if (parseInt(resultsArray[i].organism_counts.mold.final_count) > -1) {
+						mold[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.mold.final_count)]
+					}
+					
+					// fill green_bug array
+					if (parseInt(resultsArray[i].organism_counts.green_bug.final_count) > -1) {
+						green_bug[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.green_bug.final_count)]
+					}
+					// fill blue_bug array
+					if (parseInt(resultsArray[i].organism_counts.blue_bug.final_count) > -1) {
+						blue_bug[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.blue_bug.final_count)]
+					}
+					// fill predator array
+					if (parseInt(resultsArray[i].organism_counts.predator.final_count) > -1) {
+						predator[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.predator.final_count)]
+					}
+					
+					if (parseInt(resultsArray[i].temperature) > -1) {
+						temperature[dayDiff] = [dayDiff, parseInt(resultsArray[i].temperature)]
+					}
+					
+					if (parseInt(resultsArray[i].humidity) > -1) {
+						humidity[dayDiff] = [dayDiff, parseInt(resultsArray[i].humidity)]
+					}
+					
+					if (parseInt(resultsArray[i].light_level) > -1) {
+						light_level[dayDiff] = [dayDiff, parseInt(resultsArray[i].light_level)]
 					}
 				}
 		
-				// create vegetation array by adding scum and mold arrays
+				// Add scum and mold arrays
 				vegetation.push(scum)
 				vegetation.push(mold)
-		
-				// setup background areas
-				var markings = [
-				//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
-				//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
-				];
+				
+				// Add green_bug, blue_bug, and predator to the creatures array
+				creatures.push(green_bug)
+				creatures.push(blue_bug)
+				creatures.push(predator)
+				
+				// Add light_level, temperature and humidity data to the environment array
+				environment.push(temperature)
+				environment.push(humidity)
+				environment.push(light_level)
+				
+				// Configuration of graph drawing settings
+				graphConfig = { xaxis: {min: 0, max: maxDay}, yaxis: {min: 0}, points: {show: true}, lines: {show: true} }
 
 				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
-				$.plot($("#view-counts .vegetation-graph"), vegetation, {  })
-				$.plot($("#view-counts .creature-graph"), [ [[1, 0], [3, 4], [4, 3], [6, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
-				$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+				$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)
+				$.plot($("#view-counts .creature-graph"), creatures, graphConfig)
+				$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
 			}
 		}
         
