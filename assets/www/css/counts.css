@@ -2,7 +2,6 @@
 	background-image: url('/images/bkgd_count.png');
 	background-repeat: no-repeat;
 	font-size: 14px;
-	margin-left: 20px;
 	/* 	height: 1178px; */
 }
 
@@ -41,6 +40,10 @@
 
 #landing-counts .view-button {
 	margin-top: 50px;
+}
+
+#new-counts {
+	margin-left: 20px;
 }
 
 #new-counts .ui-button {
@@ -139,12 +142,12 @@
 }
 
 #new-counts .save-button {
-	margin-top: 15px;
-	margin-left: 375px;
+	margin-top: 60px;
+	margin-left: 380px;
 }
 
 #new-counts .back-button {
-	margin-top: 15px;
+	margin-top: 60px;
 	margin-left: 20px;
 }
 

@@ -29,8 +29,8 @@ a:active {
 }
 
 .top-level-text {
-	height: 40px;
-	width: 190px;
+	height: 32px;
+	width: 145px;
 	margin-top: 5px;
 	margin-bottom: 3px;
 	border-radius: 4px;
@@ -128,7 +128,7 @@ div#tabs .tab-pane {
 }
 
 #new-counts .save-button {
-	display:none;
+	/*display:none;*/
 }
 
 .hide-tab-investigations {
