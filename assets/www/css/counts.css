@@ -255,7 +255,6 @@ div#new-counts table#count-organisms td input {
 #view-counts .vegetation-graph {
 	width: 540px;
 	height: 300px;
-	border: dotted;
 	margin-left: 76px;
 }
 
@@ -263,7 +262,6 @@ div#new-counts table#count-organisms td input {
 	margin-top: 20px;
 	width: 540px;
 	height: 300px;
-	border: dotted;
 	margin-left: 76px;
 	margin-bottom: 30px;
 }
@@ -272,18 +270,17 @@ div#new-counts table#count-organisms td input {
 	margin-top: 20px;
 	width: 540px;
 	height: 300px;
-	border: dotted;
 	margin-left: 76px;
 	margin-bottom: 30px;
 }
 
-#view-counts .legend {
+/*#view-counts .legend {
 	float: right;
 	margin-right: 20px;
 	width: 480px;
 	height: 120px;
 	border: dotted;
-}
+}*/
 
 #view-counts .conditions-table {
 	margin-top: 12px;

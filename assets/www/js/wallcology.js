@@ -1511,87 +1511,100 @@ WallCology = {
 			
 			if (resultsArray.length > 0) {
 				// Reference day will be day 0 all others will be a positive integer
-				refDay = new Date(2011,9,15)
+				refDay = new Date(2011,9,19)
 				// needed for some date math
 				day = 1000*60*60*24
 				// array for scum, mold and resulting vegetation, which is passed to plot function
 				var scum = []
 				var mold = []
-				var vegetation = []
+				//var vegetation = []
 				// array for scum, mold and resulting vegetation, which is passed to plot function
 				var green_bug = []
 				var blue_bug = []
 				var predator = []
-				var creatures = []
+				//var creatures = []
 				// arrays for light_level, temperature and humidity
 				var temperature = []
 				var humidity = []
 				var light_level =[]
-				var environment = []
+				//var environment = []
 				
 				// needed to draw x a bit longer than biggest data point
 				maxDay = 0
 				
+				var selHabitatResults = []
+				if (WallCology.countsGraphData.selectedHabitat !== "all") {
+					selHabitatResults = _.select(resultsArray, function(count) {
+						if (count.chosen_habitat == WallCology.countsGraphData.selectedHabitat) {
+							return count
+						}
+					});
+				}
 		
 				// loop over array and create arrays that can be printed
-				for (i=0; i < resultsArray.length; i++) {
+				for (i=0; i < selHabitatResults.length; i++) {
 					// date of the current dataset
-					countDate = new Date(resultsArray[i].timestamp)
+					countDate = new Date(selHabitatResults[i].timestamp)
 					// calculating date difference (positive int)
 					dayDiff = Math.ceil((countDate.getTime()-refDay.getTime())/(day))
 					
+					// to make x axis of graph a bit longer
 					if (dayDiff > maxDay) {
 						maxDay = dayDiff + 1
 					}
 					
 					// fill scum array
-					if (parseInt(resultsArray[i].organism_counts.scum.final_count) > -1) {
-						scum[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.scum.final_count)]
+					if (parseInt(selHabitatResults[i].organism_counts.scum.final_count) > -1) {
+						scum[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.scum.final_count)]
 					}
-					// fill mold array
-					if (parseInt(resultsArray[i].organism_counts.mold.final_count) > -1) {
-						mold[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.mold.final_count)]
+
+					//fill mold array
+					if (parseInt(selHabitatResults[i].organism_counts.mold.final_count) > -1) {
+						mold[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.mold.final_count)]
 					}
 					
 					// fill green_bug array
-					if (parseInt(resultsArray[i].organism_counts.green_bug.final_count) > -1) {
-						green_bug[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.green_bug.final_count)]
+					if (parseInt(selHabitatResults[i].organism_counts.green_bug.final_count) > -1) {
+						green_bug[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.green_bug.final_count)]
 					}
 					// fill blue_bug array
-					if (parseInt(resultsArray[i].organism_counts.blue_bug.final_count) > -1) {
-						blue_bug[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.blue_bug.final_count)]
+					if (parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count) > -1) {
+						blue_bug[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count)]
 					}
 					// fill predator array
-					if (parseInt(resultsArray[i].organism_counts.predator.final_count) > -1) {
-						predator[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.predator.final_count)]
+					if (parseInt(selHabitatResults[i].organism_counts.predator.final_count) > -1) {
+						predator[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.predator.final_count)]
 					}
 					
-					if (parseInt(resultsArray[i].temperature) > -1) {
-						temperature[dayDiff] = [dayDiff, parseInt(resultsArray[i].temperature)]
+					if (parseInt(selHabitatResults[i].temperature) > -1) {
+						temperature[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].temperature)]
 					}
 					
-					if (parseInt(resultsArray[i].humidity) > -1) {
-						humidity[dayDiff] = [dayDiff, parseInt(resultsArray[i].humidity)]
+					if (parseInt(selHabitatResults[i].humidity) > -1) {
+						humidity[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].humidity)]
 					}
 					
-					if (parseInt(resultsArray[i].light_level) > -1) {
+					if (parseInt(selHabitatResults[i].light_level) > -1) {
 						light_level[dayDiff] = [dayDiff, parseInt(resultsArray[i].light_level)]
 					}
 				}
 		
 				// Add scum and mold arrays
-				vegetation.push(scum)
-				vegetation.push(mold)
+				var vegetation = [ {label: "scum", data: scum, color: "green"}, {label:"mold", data: mold, color: "orange"} ]
+				//vegetation.push(scum)
+				//vegetation.push(mold)
 				
 				// Add green_bug, blue_bug, and predator to the creatures array
-				creatures.push(green_bug)
-				creatures.push(blue_bug)
-				creatures.push(predator)
+				var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"}, {label:"predator", data: predator, color: "black"} ]
+				//creatures.push(green_bug)
+				//creatures.push(blue_bug)
+				//creatures.push(predator)
 				
 				// Add light_level, temperature and humidity data to the environment array
-				environment.push(temperature)
-				environment.push(humidity)
-				environment.push(light_level)
+				var environment = [ {label: "temperature", data: temperature, color: "red"}, {label:"humidity", data: humidity, color: "pink"}, {label:"light_level", data: light_level, color: "yellow"}  ]
+				//environment.push(temperature)
+				//environment.push(humidity)
+				//environment.push(light_level)
 				
 				// Configuration of graph drawing settings
 				graphConfig = { xaxis: {min: 0, max: maxDay}, yaxis: {min: 0}, points: {show: true}, lines: {show: true} }
