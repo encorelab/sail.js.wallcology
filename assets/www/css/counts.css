@@ -216,10 +216,11 @@ div#new-counts table#count-organisms td input {
 #view-counts .view-counts-title {
 	color: #AC2790;
 	margin-left: 30px;
+	margin-top: -10px;
 }
 
 #view-counts .select-habitat-container {
-	margin-top: 35px;
+	margin-top: 15px;
 	width: 700px;
 	text-align: center;
 }

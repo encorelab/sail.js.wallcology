@@ -30,7 +30,7 @@ a:active {
 
 .top-level-text {
 	height: 32px;
-	width: 145px;
+	width: 160px;
 	margin-top: 5px;
 	margin-bottom: 3px;
 	border-radius: 4px;
@@ -88,7 +88,7 @@ div#tabs .tab-pane {
 }
 
 
-/* Theming, Jquery UI overwrites */
+/* Theming, jquery UI overwrites */
 
 .new-page-button .ui-button-text  {
 	color: white;
@@ -124,7 +124,7 @@ div#tabs .tab-pane {
 }
 
 #landing-counts .view-button {
-	display:none;
+	/*display:none;*/
 }
 
 #new-counts .save-button {

@@ -1548,7 +1548,7 @@ WallCology = {
 					if (parseInt(resultsArray[i].organism_counts.scum.final_count) > -1) {
 						scum[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.scum.final_count)]
 					}
-					//fill mold array
+					// fill mold array
 					if (parseInt(resultsArray[i].organism_counts.mold.final_count) > -1) {
 						mold[dayDiff] = [dayDiff, parseInt(resultsArray[i].organism_counts.mold.final_count)]
 					}
