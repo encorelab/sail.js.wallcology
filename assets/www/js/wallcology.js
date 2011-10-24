@@ -1595,24 +1595,35 @@ WallCology = {
 				//vegetation.push(mold)
 				
 				// Add green_bug, blue_bug, and predator to the creatures array
+				
+				// REVEAL FOR PREDATOR
+				/*var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"} ]*/
 				var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"}, {label:"predator", data: predator, color: "black"} ]
 				//creatures.push(green_bug)
 				//creatures.push(blue_bug)
 				//creatures.push(predator)
 				
 				// Add light_level, temperature and humidity data to the environment array
-				var environment = [ {label: "temperature", data: temperature, color: "red"}, {label:"humidity", data: humidity, color: "pink"}, {label:"light_level", data: light_level, color: "yellow"}  ]
+				var environment = [ {label: "temperature", data: temperature, color: "red"}, {label:"light level", data: light_level, color: "yellow"}, {label:"humidity", data: humidity, color: "pink"} ]
 				//environment.push(temperature)
 				//environment.push(humidity)
 				//environment.push(light_level)
 				
 				// Configuration of graph drawing settings
-				graphConfig = { xaxis: {min: 0, max: maxDay}, yaxis: {min: 0}, points: {show: true}, lines: {show: true} }
+				graphConfig = { xaxis: {min: 0, max: maxDay}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
+								legend: {position: "nw", backgroundOpacity: 0} }
 
 				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
 				$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)
 				$.plot($("#view-counts .creature-graph"), creatures, graphConfig)
 				$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
+				
+				// inserting images into the legends
+				$('#view-counts .vegetation-graph .legendLabel').eq(0).html('<img src="/images/icon_0007_scum.png"/ class="legend-image">')
+				$('#view-counts .vegetation-graph .legendLabel').eq(1).html('<img src="/images/icon_0006_fuzzy-mold.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(0).html('<img src="/images/icon_0008_green-bug.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(1).html('<img src="/images/icon_0000_blue-bug.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(2).html('<img src="/images/icon_0005_predator.png"/ class="legend-image">')
 			}
 		}
         
