@@ -123,6 +123,18 @@ div#tabs .tab-pane {
 /*	display:none;*/
 }
 
+#landing-counts .view-button {
+	display:none;
+}
+
+#new-counts .save-button {
+	display:none;
+}
+
+.hide-tab-investigations {
+	display:none;
+}
+
 #describe-lifecycle-organism-button {
 	/*display:none;*/
 }
