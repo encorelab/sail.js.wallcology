@@ -646,11 +646,19 @@ WallCology = {
             $('#landing-counts .view-button').click(function() {				
             	$('#landing-counts').hide()
             	$('#view-counts').show()
-
+				
 				// reset data
 				WallCology.countsGraphData = null
-				// retrieve selected Habitat from UI
-				selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				// retrieve selected Habitat from UI or set to default
+				if (!$('input:radio[name=select-habitat]:checked').val()) {					
+					$('input:radio[name=select-habitat]').filter('[value="1"]').attr('checked', true);
+					//$("#organism-comment-filter-1 + label").addClass("ui-state-active");
+					$("#view-counts-r1 + label").addClass("ui-state-active");
+					selectedHabitat = 1
+				}
+				else {
+					selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				}
 				// set selectedHabitat
 				WallCology.countsGraphData = {'selectedHabitat':selectedHabitat}
 				// retrieve counts data for graphing and trigger draw graphs and store in WallCology.countsGraphData
@@ -705,7 +713,7 @@ WallCology = {
             	// should also clear fields here (or on entry)
             })  
 
-		// ********** INVESTIGATIONS ***********************************************************************************
+// ********** INVESTIGATIONS ***********************************************************************************
 
 			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
 				$('div#investigation-pages div#investigation-menu-page').hide();
