@@ -676,9 +676,10 @@ WallCology = {
 				if ( $('.counts-habitat-radio-button').is(':checked') && $('#new-counts .count-temperature').val() &&
 						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
 						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
-						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val() &&
+						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val()
 						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL
-						$('#new-counts .count-predator6').val() ) 
+						//&& $('#new-counts .count-predator6').val()
+						) 
 					{
 
             		Sail.app.observations.newCountsContent()
@@ -1649,8 +1650,8 @@ WallCology = {
 				// create array that can be graphed
 				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})				
 				// REVEAL FOR PREDATOR
-				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
-				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
+				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]*/
 				
 				// average values for temperature
 				temperature = Sail.app.observations.avgCountValues(temperature)
