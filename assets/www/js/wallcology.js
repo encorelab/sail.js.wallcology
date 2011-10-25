@@ -651,10 +651,10 @@ WallCology = {
 				WallCology.countsGraphData = null
 				// retrieve selected Habitat from UI or set to default
 				if (!$('input:radio[name=select-habitat]:checked').val()) {					
-					$('input:radio[name=select-habitat]').filter('[value="1"]').attr('checked', true);
+					$('input:radio[name=select-habitat]').filter('[value="all"]').attr('checked', true);
 					//$("#organism-comment-filter-1 + label").addClass("ui-state-active");
-					$("#view-counts-r1 + label").addClass("ui-state-active");
-					selectedHabitat = 1
+					$("#view-counts-r5 + label").addClass("ui-state-active");
+					selectedHabitat = "all"
 				}
 				else {
 					selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
@@ -667,9 +667,7 @@ WallCology = {
             
 // **********NEW COUNTS******************************************************************************************
             
-/*			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
-				alert ('hello');
-			});*/
+
 			$('.new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(function() {
