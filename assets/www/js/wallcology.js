@@ -1302,8 +1302,10 @@ WallCology = {
 			for(i = 0; i < countsArray.length; i++) {
 				// make sure to only do something if there is data in the array at the iterator position
 				if (countsArray[i]) {
+					var valCount = countsArray[i].length
 					// add up all the values for the same day
 					countsArray[i] = _.reduce(countsArray[i], function(memo,val) { return memo + val }, 0)
+					countsArray[i] = countsArray[i] / valCount
 				}
 			}
 			return countsArray
@@ -1650,8 +1652,21 @@ WallCology = {
 				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
 				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
+				// average values for temperature
+				temperature = Sail.app.observations.avgCountValues(temperature)
+				// create array that can be graphed
+				temperatureForGraph = _.map(temperature, function(val,i) {return [i,val]})
+				// average values for light_level
+				light_level = Sail.app.observations.avgCountValues(light_level)
+				// create array that can be graphed
+				lightLevelForGraph = _.map(light_level, function(val,i) {return [i,val]})
+				// average values for humidity
+				humidity = Sail.app.observations.avgCountValues(humidity)
+				// create array that can be graphed
+				humidityForGraph = _.map(humidity, function(val,i) {return [i,val]})
+				
 				// Add light_level, temperature and humidity data to the environment array
-				var environment = [ {label: "temperature", data: temperature, color: "red"}, {label:"light level", data: light_level, color: "yellow"}, {label:"humidity", data: humidity, color: "pink"} ]
+				var environment = [ {label: "temperature", data: temperatureForGraph, color: "red"}, {label:"light level", data: lightLevelForGraph, color: "yellow"}, {label:"humidity", data: humidityForGraph, color: "pink"} ]
 				
 				// Configuration of graph drawing settings
 				graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
