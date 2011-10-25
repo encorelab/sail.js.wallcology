@@ -1430,8 +1430,8 @@ WallCology = {
 	        sev = new Sail.Event('new_observation', {
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=new-counts-select-habitat]:checked').val(),
-	        	temperature:$('#new-counts .count-temperature').val(),
 	        	light_level:$('#new-counts .count-light').val(),
+	        	temperature:$('#new-counts .count-temperature').val(),
 	        	humidity:$('#new-counts .count-humidity').val(),
 	        	date:$('#new-counts .count-date').val(),
 	        	organism_counts:{
@@ -1536,7 +1536,7 @@ WallCology = {
 			
 			if (resultsArray.length > 0) {
 				// Reference day will be day 0 all others will be a positive integer
-				refDay = new Date(2011,9,19)
+				refDay = new Date(2011,9,26)
 				// needed for some date math
 				day = 1000*60*60*24
 				// array for scum, mold and resulting vegetation, which is passed to plot function
@@ -1634,7 +1634,7 @@ WallCology = {
 				// create array that can be graphed
 				moldForGraph = _.map(mold, function(val,i) {return [i,val]})	
 				// Add scum and mold arrays to vegetaion array for graphing
-				var vegetation = [ {label: "scum", data: scumForGraph, color: "green"}, {label:"mold", data: moldForGraph, color: "orange"} ]
+				var vegetation = [ {label: "scum", data: scumForGraph, color: "yellow"}, {label:"mold", data: moldForGraph, color: "#00FF00"} ]
 				
 				// add up values for green_bug
 				green_bug = Sail.app.observations.addCountValues(green_bug)
@@ -1650,7 +1650,7 @@ WallCology = {
 				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})				
 				// REVEAL FOR PREDATOR
 				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
-				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
 				// average values for temperature
 				temperature = Sail.app.observations.avgCountValues(temperature)
@@ -1666,7 +1666,7 @@ WallCology = {
 				humidityForGraph = _.map(humidity, function(val,i) {return [i,val]})
 				
 				// Add light_level, temperature and humidity data to the environment array
-				var environment = [ {label: "temperature", data: temperatureForGraph, color: "red"}, {label:"light level", data: lightLevelForGraph, color: "yellow"}, {label:"humidity", data: humidityForGraph, color: "pink"} ]
+				var environment = [ {label:"light level", data: lightLevelForGraph, color: "#FF9933"}, {label: "temperature", data: temperatureForGraph, color: "#33CCFF"}, {label:"humidity", data: humidityForGraph, color: "#FF3333"} ]
 				
 				// Configuration of graph drawing settings
 				graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
@@ -1674,7 +1674,9 @@ WallCology = {
 
 				$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)
 				$.plot($("#view-counts .creature-graph"), creatures, graphConfig)
-				$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
+				if (WallCology.countsGraphData.selectedHabitat !== 'all') {
+					$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
+				}
 				
 				// inserting images into the legends
 				$('#view-counts .vegetation-graph .legendLabel').eq(0).html('<img src="/images/icon_0007_scum.png"/ class="legend-image">')
