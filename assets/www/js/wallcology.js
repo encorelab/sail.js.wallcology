@@ -679,6 +679,7 @@ WallCology = {
 						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
 						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
 						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val() &&
+						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL
 						$('#new-counts .count-predator6').val() ) 
 					{
 
@@ -1590,7 +1591,7 @@ WallCology = {
 				}
 		
 				// Add scum and mold arrays
-				var vegetation = [ {label: "scum", data: scum, color: "green"}, {label:"mold", data: mold, color: "orange"} ]
+				var vegetation = [ {label: "scum", data: scum, color: "yellow"}, {label:"mold", data: mold, color: "#00FF00"} ]
 				//vegetation.push(scum)
 				//vegetation.push(mold)
 				
@@ -1598,7 +1599,7 @@ WallCology = {
 				
 				// REVEAL FOR PREDATOR
 				/*var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"} ]*/
-				var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"}, {label:"predator", data: predator, color: "black"} ]
+				var creatures = [ {label: "green_bug", data: green_bug, color: "#008000"}, {label:"blue_bug", data: blue_bug, color: "blue"}, {label:"predator", data: predator, color: "black"} ]
 				//creatures.push(green_bug)
 				//creatures.push(blue_bug)
 				//creatures.push(predator)
@@ -1627,21 +1628,6 @@ WallCology = {
 			}
 		}
         
-        // not sure why we're going this route, but whateves
-/*        context_switch: function(event, changedContext) {
-        	//alert(changedContext)
-        	// set the context
-        	// where are the contexts defined?
-        	// 
-        	//"viewing_others_habitat_observations", "viewing_others_organism_observations", "viewing_others_lifecycle_observations", "viewing_others_foodweb_observations"
-        	//and maybe "viewing_other"
-        	//$(Sail.app).trigger('context_switch', "viewing_others_habitat_observations")
-        	if (changedContext == "viewing_others_habitat_observations") {
-        		selectableTags = ["X", "Y"]
-            	alert(changedContext)
-        	} 
-        	
-        }*/
     }
 }
     /*
