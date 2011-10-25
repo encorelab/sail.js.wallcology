@@ -1284,6 +1284,30 @@ WallCology = {
 			})//, "json")
 			
 		},
+		
+		addCountValues: function(countsArray) {
+			// add up values for scum
+			for(i = 0; i < countsArray.length; i++) {
+				// make sure to only do something if there is data in the array at the iterator position
+				if (countsArray[i]) {
+					// add up all the values for the same day
+					countsArray[i] = _.reduce(countsArray[i], function(memo,val) { return memo + val }, 0)
+				}
+			}
+			return countsArray
+		},
+		
+		avgCountValues: function(countsArray) {
+			// add up values for scum
+			for(i = 0; i < countsArray.length; i++) {
+				// make sure to only do something if there is data in the array at the iterator position
+				if (countsArray[i]) {
+					// add up all the values for the same day
+					countsArray[i] = _.reduce(countsArray[i], function(memo,val) { return memo + val }, 0)
+				}
+			}
+			return countsArray
+		},
 
 
 // ***************************************************************************************************************
@@ -1539,6 +1563,9 @@ WallCology = {
 						}
 					});
 				}
+				else {
+					selHabitatResults = resultsArray
+				}
 		
 				// loop over array and create arrays that can be printed
 				for (i=0; i < selHabitatResults.length; i++) {
@@ -1549,70 +1576,87 @@ WallCology = {
 					
 					// to make x axis of graph a bit longer
 					if (dayDiff > maxDay) {
-						maxDay = dayDiff + 1
+						maxDay = dayDiff
 					}
 					
 					// fill scum array
 					if (parseInt(selHabitatResults[i].organism_counts.scum.final_count) > -1) {
-						scum[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.scum.final_count)]
+						scum[dayDiff] = scum[dayDiff] || []
+						scum[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.scum.final_count))
 					}
 
 					//fill mold array
 					if (parseInt(selHabitatResults[i].organism_counts.mold.final_count) > -1) {
-						mold[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.mold.final_count)]
+						mold[dayDiff] = mold[dayDiff] || []
+						mold[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.mold.final_count))
 					}
 					
 					// fill green_bug array
 					if (parseInt(selHabitatResults[i].organism_counts.green_bug.final_count) > -1) {
-						green_bug[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.green_bug.final_count)]
+						green_bug[dayDiff] = green_bug[dayDiff] || []
+						green_bug[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.green_bug.final_count))
 					}
 					// fill blue_bug array
 					if (parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count) > -1) {
-						blue_bug[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count)]
+						blue_bug[dayDiff] = blue_bug[dayDiff] || []
+						blue_bug[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count))
 					}
 					// fill predator array
 					if (parseInt(selHabitatResults[i].organism_counts.predator.final_count) > -1) {
-						predator[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].organism_counts.predator.final_count)]
+						predator[dayDiff] = predator[dayDiff] || []
+						predator[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.predator.final_count))
 					}
 					
 					if (parseInt(selHabitatResults[i].temperature) > -1) {
-						temperature[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].temperature)]
+						temperature[dayDiff] = temperature[dayDiff] || []
+						temperature[dayDiff].push(parseInt(selHabitatResults[i].temperature))
 					}
 					
 					if (parseInt(selHabitatResults[i].humidity) > -1) {
-						humidity[dayDiff] = [dayDiff, parseInt(selHabitatResults[i].humidity)]
+						humidity[dayDiff] = humidity[dayDiff] || []
+						humidity[dayDiff].push(parseInt(selHabitatResults[i].humidity))
 					}
 					
 					if (parseInt(selHabitatResults[i].light_level) > -1) {
-						light_level[dayDiff] = [dayDiff, parseInt(resultsArray[i].light_level)]
+						light_level[dayDiff] = light_level[dayDiff] || []
+						light_level[dayDiff].push(parseInt(selHabitatResults[i].light_level))
 					}
 				}
-		
-				// Add scum and mold arrays
-				var vegetation = [ {label: "scum", data: scum, color: "yellow"}, {label:"mold", data: mold, color: "#00FF00"} ]
-				//vegetation.push(scum)
-				//vegetation.push(mold)
 				
-				// Add green_bug, blue_bug, and predator to the creatures array
+				// add up values for scum
+				scum = Sail.app.observations.addCountValues(scum)
+				// create array that can be graphed
+				scumForGraph = _.map(scum, function(val,i) {return [i,val]})
+				// add up values for mold
+				mold = Sail.app.observations.addCountValues(mold)
+				// create array that can be graphed
+				moldForGraph = _.map(mold, function(val,i) {return [i,val]})	
+				// Add scum and mold arrays to vegetaion array for graphing
+				var vegetation = [ {label: "scum", data: scumForGraph, color: "green"}, {label:"mold", data: moldForGraph, color: "orange"} ]
 				
+				// add up values for green_bug
+				green_bug = Sail.app.observations.addCountValues(green_bug)
+				// create array that can be graphed
+				greenBugForGraph = _.map(green_bug, function(val,i) {return [i,val]})
+				// add up values for blue_bug
+				blue_bug = Sail.app.observations.addCountValues(blue_bug)
+				// create array that can be graphed
+				blueBugForGraph = _.map(blue_bug, function(val,i) {return [i,val]})
+				// add up values for blue_bug
+				predator = Sail.app.observations.addCountValues(predator)
+				// create array that can be graphed
+				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})				
 				// REVEAL FOR PREDATOR
-				/*var creatures = [ {label: "green_bug", data: green_bug, color: "green"}, {label:"blue_bug", data: blue_bug, color: "blue"} ]*/
-				var creatures = [ {label: "green_bug", data: green_bug, color: "#008000"}, {label:"blue_bug", data: blue_bug, color: "blue"}, {label:"predator", data: predator, color: "black"} ]
-				//creatures.push(green_bug)
-				//creatures.push(blue_bug)
-				//creatures.push(predator)
+				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
 				// Add light_level, temperature and humidity data to the environment array
 				var environment = [ {label: "temperature", data: temperature, color: "red"}, {label:"light level", data: light_level, color: "yellow"}, {label:"humidity", data: humidity, color: "pink"} ]
-				//environment.push(temperature)
-				//environment.push(humidity)
-				//environment.push(light_level)
 				
 				// Configuration of graph drawing settings
-				graphConfig = { xaxis: {min: 0, max: maxDay}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
+				graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
 								legend: {position: "nw", backgroundOpacity: 0} }
 
-				// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
 				$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)
 				$.plot($("#view-counts .creature-graph"), creatures, graphConfig)
 				$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
