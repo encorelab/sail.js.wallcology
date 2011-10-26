@@ -97,17 +97,17 @@
 	clear: left;
 }
 
-#new-counts div.temperature-input {
-	margin-left: 0;
+#new-counts div.light-level-input {
+	margin-left: 0px;
 	margin-top: 18px;
 	margin-bottom: 40px;
+	padding: 0;
 	float: left;
 }
 
-#new-counts div.light-level-input {
+#new-counts div.temperature-input {
 	margin-left: 20px;
 	margin-top: 18px;
-	padding: 0;
 	float: left;
 }
 

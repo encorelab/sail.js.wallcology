@@ -110,9 +110,9 @@ div#tabs .tab-pane {
 
 /* Hide the predator */
 /* REMEMBER TO HIDE/REVEAL THE PREDATOR FROM THE VIEW GRAPHS MANUALLY */
-/* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit)
+/* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */
 .predator-reveal {
-	 /*display:none;*/ 
+	 display:none; 
 }
 
 /* Hide relationships */
