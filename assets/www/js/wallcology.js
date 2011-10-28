@@ -646,11 +646,19 @@ WallCology = {
             $('#landing-counts .view-button').click(function() {				
             	$('#landing-counts').hide()
             	$('#view-counts').show()
-
+				
 				// reset data
 				WallCology.countsGraphData = null
-				// retrieve selected Habitat from UI
-				selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				// retrieve selected Habitat from UI or set to default
+				if (!$('input:radio[name=select-habitat]:checked').val()) {					
+					$('input:radio[name=select-habitat]').filter('[value="all"]').attr('checked', true);
+					//$("#organism-comment-filter-1 + label").addClass("ui-state-active");
+					$("#view-counts-r5 + label").addClass("ui-state-active");
+					selectedHabitat = "all"
+				}
+				else {
+					selectedHabitat = $('input:radio[name=select-habitat]:checked').val()
+				}
 				// set selectedHabitat
 				WallCology.countsGraphData = {'selectedHabitat':selectedHabitat}
 				// retrieve counts data for graphing and trigger draw graphs and store in WallCology.countsGraphData
@@ -659,9 +667,7 @@ WallCology = {
             
 // **********NEW COUNTS******************************************************************************************
             
-/*			$('div#record-organisms table#count-vegetation-date-time td#count-vegetation-date-picker').datepicker(function() {
-				alert ('hello');
-			});*/
+
 			$('.new-counts-datepicker').datepicker()
 			
 			$('#new-counts .save-button').click(function() {
@@ -670,8 +676,10 @@ WallCology = {
 				if ( $('.counts-habitat-radio-button').is(':checked') && $('#new-counts .count-temperature').val() &&
 						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
 						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
-						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val() &&
-						$('#new-counts .count-predator6').val() ) 
+						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val()
+						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL
+						//&& $('#new-counts .count-predator6').val()
+						) 
 					{
 
             		Sail.app.observations.newCountsContent()
@@ -705,7 +713,7 @@ WallCology = {
             	// should also clear fields here (or on entry)
             })  
 
-		// ********** INVESTIGATIONS ***********************************************************************************
+// ********** INVESTIGATIONS ***********************************************************************************
 
 			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
 				$('div#investigation-pages div#investigation-menu-page').hide();
@@ -1313,6 +1321,32 @@ WallCology = {
 			})//, "json")
 			
 		},
+		
+		addCountValues: function(countsArray) {
+			// add up values for scum
+			for(i = 0; i < countsArray.length; i++) {
+				// make sure to only do something if there is data in the array at the iterator position
+				if (countsArray[i]) {
+					// add up all the values for the same day
+					countsArray[i] = _.reduce(countsArray[i], function(memo,val) { return memo + val }, 0)
+				}
+			}
+			return countsArray
+		},
+		
+		avgCountValues: function(countsArray) {
+			// add up values for scum
+			for(i = 0; i < countsArray.length; i++) {
+				// make sure to only do something if there is data in the array at the iterator position
+				if (countsArray[i]) {
+					var valCount = countsArray[i].length
+					// add up all the values for the same day
+					countsArray[i] = _.reduce(countsArray[i], function(memo,val) { return memo + val }, 0)
+					countsArray[i] = countsArray[i] / valCount
+				}
+			}
+			return countsArray
+		},
 
 
 // ***************************************************************************************************************
@@ -1433,8 +1467,8 @@ WallCology = {
 	        sev = new Sail.Event('new_observation', {
 	        	type:'count',
 	        	chosen_habitat:$('input:radio[name=new-counts-select-habitat]:checked').val(),
-	        	temperature:$('#new-counts .count-temperature').val(),
 	        	light_level:$('#new-counts .count-light').val(),
+	        	temperature:$('#new-counts .count-temperature').val(),
 	        	humidity:$('#new-counts .count-humidity').val(),
 	        	date:$('#new-counts .count-date').val(),
 	        	organism_counts:{
@@ -1534,36 +1568,162 @@ WallCology = {
         },
 
 		printGraphs: function(ev) {
-			WallCology.countsGraphData
-			//alert("Selected Habitat: " + WallCology.countsGraphData.selectedHabitat)
-			// setup background areas
-			var markings = [
-			//{ color: '#00FF00', xaxis: { from: 0.5, to: 1.5 } },
-			//{ color: '#FF0000', xaxis: { from: 1.5, to: 2.5 } }
-			];
-
-			// TODO: Select data from mongoDB and use it instead of dummy data. However this is to get flot going
-			$.plot($("#view-counts .vegetation-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]] ], { yaxis: { min: 0, max: 1 }, grid: { markings: markings } })
-			$.plot($("#view-counts .creature-graph"), [ [[20111008, 0], [20111009, 4], [20111010, 3], [20111011, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
-			$.plot($("#view-counts .enviro-conditions-graph"), [ [[0, 0], [1, 4], [2, 8], [3, 1] ] ], { yaxis: { min: 0, max: 4 }, grid: { markings: markings } })
+			// the resultArray represents the counts in the database
+			resultsArray = WallCology.countsGraphData.results
 			
+			if (resultsArray.length > 0) {
+				// Reference day will be day 0 all others will be a positive integer
+				refDay = new Date(2011,9,26)
+				// needed for some date math
+				day = 1000*60*60*24
+				// array for scum, mold and resulting vegetation, which is passed to plot function
+				var scum = []
+				var mold = []
+				//var vegetation = []
+				// array for scum, mold and resulting vegetation, which is passed to plot function
+				var green_bug = []
+				var blue_bug = []
+				var predator = []
+				//var creatures = []
+				// arrays for light_level, temperature and humidity
+				var temperature = []
+				var humidity = []
+				var light_level =[]
+				//var environment = []
+				
+				// needed to draw x a bit longer than biggest data point
+				maxDay = 0
+				
+				var selHabitatResults = []
+				if (WallCology.countsGraphData.selectedHabitat !== "all") {
+					selHabitatResults = _.select(resultsArray, function(count) {
+						if (count.chosen_habitat == WallCology.countsGraphData.selectedHabitat) {
+							return count
+						}
+					});
+				}
+				else {
+					selHabitatResults = resultsArray
+				}
+		
+				// loop over array and create arrays that can be printed
+				for (i=0; i < selHabitatResults.length; i++) {
+					// date of the current dataset
+					countDate = new Date(selHabitatResults[i].timestamp)
+					// calculating date difference (positive int)
+					dayDiff = Math.ceil((countDate.getTime()-refDay.getTime())/(day))
+					
+					// to make x axis of graph a bit longer
+					if (dayDiff > maxDay) {
+						maxDay = dayDiff
+					}
+					
+					// fill scum array
+					if (parseInt(selHabitatResults[i].organism_counts.scum.final_count) > -1) {
+						scum[dayDiff] = scum[dayDiff] || []
+						scum[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.scum.final_count))
+					}
+
+					//fill mold array
+					if (parseInt(selHabitatResults[i].organism_counts.mold.final_count) > -1) {
+						mold[dayDiff] = mold[dayDiff] || []
+						mold[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.mold.final_count))
+					}
+					
+					// fill green_bug array
+					if (parseInt(selHabitatResults[i].organism_counts.green_bug.final_count) > -1) {
+						green_bug[dayDiff] = green_bug[dayDiff] || []
+						green_bug[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.green_bug.final_count))
+					}
+					// fill blue_bug array
+					if (parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count) > -1) {
+						blue_bug[dayDiff] = blue_bug[dayDiff] || []
+						blue_bug[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.blue_bug.final_count))
+					}
+					// fill predator array
+					if (parseInt(selHabitatResults[i].organism_counts.predator.final_count) > -1) {
+						predator[dayDiff] = predator[dayDiff] || []
+						predator[dayDiff].push(parseInt(selHabitatResults[i].organism_counts.predator.final_count))
+					}
+					
+					if (parseInt(selHabitatResults[i].temperature) > -1) {
+						temperature[dayDiff] = temperature[dayDiff] || []
+						temperature[dayDiff].push(parseInt(selHabitatResults[i].temperature))
+					}
+					
+					if (parseInt(selHabitatResults[i].humidity) > -1) {
+						humidity[dayDiff] = humidity[dayDiff] || []
+						humidity[dayDiff].push(parseInt(selHabitatResults[i].humidity))
+					}
+					
+					if (parseInt(selHabitatResults[i].light_level) > -1) {
+						light_level[dayDiff] = light_level[dayDiff] || []
+						light_level[dayDiff].push(parseInt(selHabitatResults[i].light_level))
+					}
+				}
+				
+				// add up values for scum
+				scum = Sail.app.observations.addCountValues(scum)
+				// create array that can be graphed
+				scumForGraph = _.map(scum, function(val,i) {return [i,val]})
+				// add up values for mold
+				mold = Sail.app.observations.addCountValues(mold)
+				// create array that can be graphed
+				moldForGraph = _.map(mold, function(val,i) {return [i,val]})	
+				// Add scum and mold arrays to vegetaion array for graphing
+				var vegetation = [ {label: "scum", data: scumForGraph, color: "yellow"}, {label:"mold", data: moldForGraph, color: "#00FF00"} ]
+				
+				// add up values for green_bug
+				green_bug = Sail.app.observations.addCountValues(green_bug)
+				// create array that can be graphed
+				greenBugForGraph = _.map(green_bug, function(val,i) {return [i,val]})
+				// add up values for blue_bug
+				blue_bug = Sail.app.observations.addCountValues(blue_bug)
+				// create array that can be graphed
+				blueBugForGraph = _.map(blue_bug, function(val,i) {return [i,val]})
+				// add up values for blue_bug
+				predator = Sail.app.observations.addCountValues(predator)
+				// create array that can be graphed
+				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})				
+				// REVEAL FOR PREDATOR
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
+				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]*/
+				
+				// average values for temperature
+				temperature = Sail.app.observations.avgCountValues(temperature)
+				// create array that can be graphed
+				temperatureForGraph = _.map(temperature, function(val,i) {return [i,val]})
+				// average values for light_level
+				light_level = Sail.app.observations.avgCountValues(light_level)
+				// create array that can be graphed
+				lightLevelForGraph = _.map(light_level, function(val,i) {return [i,val]})
+				// average values for humidity
+				humidity = Sail.app.observations.avgCountValues(humidity)
+				// create array that can be graphed
+				humidityForGraph = _.map(humidity, function(val,i) {return [i,val]})
+				
+				// Add light_level, temperature and humidity data to the environment array
+				var environment = [ {label:"light level", data: lightLevelForGraph, color: "#FF9933"}, {label: "temperature", data: temperatureForGraph, color: "#33CCFF"}, {label:"humidity", data: humidityForGraph, color: "#FF3333"} ]
+				
+				// Configuration of graph drawing settings
+				graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
+								legend: {position: "nw", backgroundOpacity: 0} }
+
+				$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)
+				$.plot($("#view-counts .creature-graph"), creatures, graphConfig)
+				if (WallCology.countsGraphData.selectedHabitat !== 'all') {
+					$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
+				}
+				
+				// inserting images into the legends
+				$('#view-counts .vegetation-graph .legendLabel').eq(0).html('<img src="/images/icon_0007_scum.png"/ class="legend-image">')
+				$('#view-counts .vegetation-graph .legendLabel').eq(1).html('<img src="/images/icon_0006_fuzzy-mold.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(0).html('<img src="/images/icon_0008_green-bug.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(1).html('<img src="/images/icon_0000_blue-bug.png"/ class="legend-image">')
+				$('#view-counts .creature-graph .legendLabel').eq(2).html('<img src="/images/icon_0005_predator.png"/ class="legend-image">')
+			}
 		}
         
-        // not sure why we're going this route, but whateves
-/*        context_switch: function(event, changedContext) {
-        	//alert(changedContext)
-        	// set the context
-        	// where are the contexts defined?
-        	// 
-        	//"viewing_others_habitat_observations", "viewing_others_organism_observations", "viewing_others_lifecycle_observations", "viewing_others_foodweb_observations"
-        	//and maybe "viewing_other"
-        	//$(Sail.app).trigger('context_switch', "viewing_others_habitat_observations")
-        	if (changedContext == "viewing_others_habitat_observations") {
-        		selectableTags = ["X", "Y"]
-            	alert(changedContext)
-        	} 
-        	
-        }*/
     }
 }
     /*

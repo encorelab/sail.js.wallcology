@@ -62,7 +62,7 @@
 			<li id="organisms-tab" class="hide-tab-organisms tab-click"><a href="#tabs-2">Organisms</a></li>
 			<li id="relationships-tab" class="hide-tab-relationships tab-click"><a href="#tabs-3">Relationships</a></li>
 			<li id="counts-tab" class="hide-tab-counts tab-click"><a href="#tabs-4">Counts</a></li>	
-			<li id="investigation-tab" class="hide-tab-counts tab-click"><a href="#tabs-5">Investigation</a></li>			
+			<li id="investigation-tab" class="hide-tab-investigations tab-click"><a href="#tabs-5">Investigation</a></li>			
 		</ul>
 		
 
@@ -819,7 +819,7 @@
 				<div id="inner-landing-counts" class="inner-landing-buttons">
 					<button type="button" class="new-button counts-button"><b>I want to add a new COUNT</b></button>
 					<br/><br/>
-					<button type="button" class="view-button counts-button"><b>I want to see our COUNTS</b></button>
+					<button type="button" class="view-button counts-button "><b>I want to see our COUNTS</b></button>
 				</div>
 			</div>
 				
@@ -840,16 +840,7 @@
 
 				<div class="divider"></div>
 
-				<div class="record-environment">				
-					<div class="temperature-input">
-						<h3>Record Temperature</h3>
-						<div>
-							<input type="number" name="temperature" class="count-temperature text-box"/>
-							<label for="temperature"> &#176C</label>
-						</div>
-<!-- 						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button radio-button" /><label for="new-count-r6">High</label>
- -->				</div>					
+				<div class="record-environment">
 					<div class="light-level-input">
 						<h3>Record Light Levels</h3>
 						<div>
@@ -859,6 +850,15 @@
 <!-- 						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button radio-button" /><label for="new-count-r7">Low</label>
 						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button radio-button" /><label for="new-count-r8">High</label>
  -->				</div>					
+					<div class="temperature-input">
+						<h3>Record Temperature</h3>
+						<div>
+							<input type="number" name="temperature" class="count-temperature text-box"/>
+							<label for="temperature"> &#176C</label>
+						</div>
+<!-- 						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
+						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button radio-button" /><label for="new-count-r6">High</label>
+ -->				</div>									
 					<div class="humidity-input">
 						<h3>Record Humidity</h3>
 						<div>
@@ -872,7 +872,7 @@
 				
 
 				<div class="record-organisms">
-					<h5>Count Organisms</h5>
+					<h4>Count Organisms</h4>
 					<h6 class="creature-table-header">Enter units of Wallscope covered by vegetation and enter up to 3 counts for each creature</h6>   
 <!-- 					<div id="vegetation-count-div">
 						<table class="count-vegetation">
@@ -908,7 +908,7 @@
 						    <th> <img src="/images/icon_0007_scum.png" class="image" /></th>
 							<th> <img src="/images/icon_0000_blue-bug.png" class="image"/> </th>
 							<th> <img src="/images/icon_0008_green-bug.png" class="image"/></th>
-							<th> <img src="/images/icon_0005_predator.png" class="image"/></th>
+							<th> <img src="/images/icon_0005_predator.png" class="image predator-reveal"/></th>
 							<th> Time</th> 
 							<th> Date</th> 
 						</tr> 
@@ -919,7 +919,7 @@
 							<td> <input type="number" class="count-organism-data-cell count-scum"/> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug1" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-green-bug1" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-predator1" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator1 predator-reveal" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count1-time" /> </td>
 							<td> <input type="text" class="table-date-adjuster count-organism-data-cell new-counts-datepicker count-date" /> </td>							
 						</tr>
@@ -930,7 +930,7 @@
 							<td> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug2" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-green-bug2" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-predator2" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator2 predator-reveal" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count2-time" /> </td>
 							<td> </td>
 						</tr>
@@ -941,7 +941,7 @@
 							<td> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug3" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count-green-bug3" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-predator3" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator3 predator-reveal" /> </td>
 							<td> <input type="number" class="count-organism-data-cell count3-time" /> </td>
 							<td> </td>
 						</tr>  
@@ -952,7 +952,7 @@
 							<td class="dotted-bottom-border"> </td>
 						    <td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-blue-bug4" /> </td>
 							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-green-bug4" /> </td>
-							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-predator4" /> </td> 
+							<td class="dotted-bottom-border"> <input type="number" class="count-organism-data-cell count-predator4 predator-reveal" /> </td> 
 						</tr>
 						
 						<tr>
@@ -961,7 +961,7 @@
 							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-scum5" /> </td>						
 						    <td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-blue-bug5" /> </td>
 							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-green-bug5" /> </td>
-							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-predator5" /> </td>
+							<td class="dotted-top-border"> <input type="number" class="count-organism-data-cell count-predator5 predator-reveal" /> </td>
 						</tr>
 						
 						<tr>
@@ -970,7 +970,7 @@
 							<td> <input type="number" class="count-organism-data-cell count-scum6" /> </td>
 						    <td> <input type="number" class="count-organism-data-cell count-blue-bug6" /> </td>
 						 	<td> <input type="number" class="count-organism-data-cell count-green-bug6" /> </td>
-							<td> <input type="number" class="count-organism-data-cell count-predator6" /> </td>
+							<td> <input type="number" class="count-organism-data-cell count-predator6 predator-reveal" /> </td>
 						</tr>						
 					</table>
 				</div>
@@ -998,12 +998,9 @@
 						<input type="radio" name="select-habitat" id="view-counts-r2" class="view-counts-habitat-radio-button radio-button" value="2" /><label for="view-counts-r2">Habitat 2</label>
 						<input type="radio" name="select-habitat" id="view-counts-r3" class="view-counts-habitat-radio-button radio-button" value="3" /><label for="view-counts-r3">Habitat 3</label>
 						<input type="radio" name="select-habitat" id="view-counts-r4" class="view-counts-habitat-radio-button radio-button" value="4" /><label for="view-counts-r4">Habitat 4</label>
-						<input type="radio" name="select-habitat" id="view-counts-r5" class="view-counts-habitat-radio-button radio-button" value="all" /><label for="view-counts-r5">All Habitats</label>
+						<input type="radio" name="select-habitat" id="view-counts-r5" class="view-counts-habitat-radio-button radio-button" value="all" /><label for="view-counts-r5">Total</label>
 					</div>					
 				</div>
-				
-				<!-- Adding a div with ID placeholder to draw graphs with flot library 
-				<div id="placeholder" style="width: 600px; height: 300px; padding: 0px; position: relative;"></div>-->
 				
 				<div class="graphs-container">
 					<!-- Placeholder get filled by graphs with flot library -->

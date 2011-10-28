@@ -29,8 +29,8 @@ a:active {
 }
 
 .top-level-text {
-	height: 40px;
-	width: 190px;
+	height: 32px;
+	width: 160px;
 	margin-top: 5px;
 	margin-bottom: 3px;
 	border-radius: 4px;
@@ -88,7 +88,7 @@ div#tabs .tab-pane {
 }
 
 
-/* Theming, Jquery UI overwrites */
+/* Theming, jquery UI overwrites */
 
 .new-page-button .ui-button-text  {
 	color: white;
@@ -109,6 +109,8 @@ div#tabs .tab-pane {
 */
 
 /* Hide the predator */
+/* REMEMBER TO HIDE/REVEAL THE PREDATOR FROM THE VIEW GRAPHS MANUALLY */
+/* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */
 .predator-reveal {
 	 display:none; 
 }
@@ -121,6 +123,18 @@ div#tabs .tab-pane {
 /* Hide counts */
 .hide-tab-counts {
 /*	display:none;*/
+}
+
+#landing-counts .view-button {
+/*	display:none;*/
+}
+
+#new-counts .save-button {
+	/*display:none;*/
+}
+
+.hide-tab-investigations {
+	display:none;
 }
 
 #describe-lifecycle-organism-button {

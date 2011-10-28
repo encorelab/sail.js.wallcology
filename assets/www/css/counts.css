@@ -2,7 +2,6 @@
 	background-image: url('/images/bkgd_count.png');
 	background-repeat: no-repeat;
 	font-size: 14px;
-	margin-left: 20px;
 	/* 	height: 1178px; */
 }
 
@@ -41,6 +40,10 @@
 
 #landing-counts .view-button {
 	margin-top: 50px;
+}
+
+#new-counts {
+	margin-left: 20px;
 }
 
 #new-counts .ui-button {
@@ -94,17 +97,17 @@
 	clear: left;
 }
 
-#new-counts div.temperature-input {
-	margin-left: 0;
+#new-counts div.light-level-input {
+	margin-left: 0px;
 	margin-top: 18px;
 	margin-bottom: 40px;
+	padding: 0;
 	float: left;
 }
 
-#new-counts div.light-level-input {
+#new-counts div.temperature-input {
 	margin-left: 20px;
 	margin-top: 18px;
-	padding: 0;
 	float: left;
 }
 
@@ -139,12 +142,12 @@
 }
 
 #new-counts .save-button {
-	margin-top: 15px;
-	margin-left: 375px;
+	margin-top: 60px;
+	margin-left: 380px;
 }
 
 #new-counts .back-button {
-	margin-top: 15px;
+	margin-top: 60px;
 	margin-left: 20px;
 }
 
@@ -213,10 +216,11 @@ div#new-counts table#count-organisms td input {
 #view-counts .view-counts-title {
 	color: #AC2790;
 	margin-left: 30px;
+	margin-top: -10px;
 }
 
 #view-counts .select-habitat-container {
-	margin-top: 35px;
+	margin-top: 15px;
 	width: 700px;
 	text-align: center;
 }
@@ -244,41 +248,37 @@ div#new-counts table#count-organisms td input {
 
 #view-counts .graphs-container {
 	margin-top: 20px;
-	width: 700px;
-	/* text-align: center; */
 }
 
 #view-counts .vegetation-graph {
-	width: 540px;
-	height: 300px;
-	border: dotted;
-	margin-left: 76px;
+	width: 600px;
+	height: 260px;
+	margin-left: 40px;
+}
+
+#view-counts .vegetation-graph .legend {
+	image: url('/images/icon_0007_scum.png');
 }
 
 #view-counts .creature-graph {
 	margin-top: 20px;
-	width: 540px;
-	height: 300px;
-	border: dotted;
-	margin-left: 76px;
+	width: 600px;
+	height: 260px;
+	margin-left: 40px;
 	margin-bottom: 30px;
 }
 
 #view-counts .enviro-conditions-graph {
 	margin-top: 20px;
-	width: 540px;
-	height: 300px;
-	border: dotted;
-	margin-left: 76px;
+	width: 600px;
+	height: 260px;
+	margin-left: 40px;
 	margin-bottom: 30px;
 }
 
-#view-counts .legend {
-	float: right;
-	margin-right: 20px;
-	width: 480px;
-	height: 120px;
-	border: dotted;
+#view-counts .legend-image {
+	height: 30px;
+	width: 30px;
 }
 
 #view-counts .conditions-table {
@@ -300,18 +300,6 @@ div#new-counts table#count-organisms td input {
 
 #view-counts .color-box-low {
 	background-color: white;
-}
-
-#view-counts .temperatureColor {
-	
-}
-
-#view-counts .lightColor {
-	
-}
-
-#view-counts .humidityColor {
-	
 }
 
 #view-counts .back-button {
