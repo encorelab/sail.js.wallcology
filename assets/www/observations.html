@@ -1018,7 +1018,12 @@
 	   
 		<!-- *************************************************************** INVESTIGATION PAGES *****************************************-->  
 		<div id="tabs-5" class="tab-pane">      
-			<div id="investigation-pages">
+			<div id="investigation-pages"> 
+				           
+				<!-- This hidden field holds the id of the record for the current investigation setup in the database. 
+					This id is needed for updating the record -->
+				<input id="investigation-setup-db-id" type="hidden" value="null"/>
+                                                   
 
 				<!--********************************* INVESTIGATION MENU PAGE *****************************-->
 				<div id="investigation-menu-page">  
@@ -1048,7 +1053,7 @@
 						<input style="float: left" size="90" id="headline-title" type="text"/>
 					</div>   
 					
-					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+					<!-- <div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
 						<span style="float: left; width: 100px"> Keywords </span>
 						<table id="investigation-keyword-table">
 							<tr>
@@ -1082,7 +1087,7 @@
 								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
 							</tr>
 						</table>
-					</div>
+					</div> -->
 					
 					 <div class="action-buttons">
 						<button class="back-button standard-button investigation-button">BACK</button>
@@ -1232,10 +1237,10 @@
 						<h4> Select the report you are interested in viewing: </h4>
 				
 						<div class="datatable">
-							<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-organism-table">
+							<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-investigation-table">
 								<thead>
 									<tr>
-										<th> Behavior </th>						
+										<th>Behavior</th>						
 										<th>Author(s)</th>
 										<th>Last Updated</th>
 									</tr>

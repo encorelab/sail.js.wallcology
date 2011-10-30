@@ -717,16 +717,26 @@ WallCology = {
 
 			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
 				$('div#investigation-pages div#investigation-menu-page').hide();
-				$('div#investigation-pages div#investigation-motivation').show();      
+				$('div#investigation-pages div#investigation-motivation').show();
+				      
 			})
 			    
 			// if the back button is clicked on 'Investigation Motivation' page
 			$('div#investigation-motivation div.action-buttons button.back-button').click(function () {
 				$('div#investigation-pages div#investigation-menu-page').show();
-				$('div#investigation-pages div#investigation-motivation').hide();
+				$('div#investigation-pages div#investigation-motivation').hide();  
 				
-				// Clear all fields
-				Sail.app.observations.investigationMotivationClearFields();
+				// Since we're getting out of the motivation setup and to the main menu page, we need to clear the value of investigation-setup-db-id
+				$("div#tabs-5 input#investigation-setup-db-id").attr("value", "null");
+				
+				// Clear investigation motivation fields
+				Sail.app.observations.investigationMotivationClearFields();     
+				
+				// Clear investigation setup fields                                                                                   
+				Sail.app.observations.investigationSetupClearFields();
+				
+				// Clear investigation results fields
+				Sail.app.observations.investigationResultClearFields();
 			}) 
 			
 			// In the Investigation Motivation page, this sets the value of the chosen Type
@@ -752,10 +762,20 @@ WallCology = {
 				// if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
 				// 					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
 				// 				} else { // Send the filled form to be saved
+					                                                                            
+					                                              
+					// check to see if this is a new investigation motivation being created or an update
+					if ($("div#tabs-5 input#investigation-setup-db-id").attr("value") == "null"){
 					
-					Sail.app.observations.newInvestigationMotivation(selectedType, motivationForDescription, headline, selectedKeywords);
+						// create the record id, which will be passed on to MongoDB to use as the record's id in the DB.
+						dbId = Math.floor((Math.random() * 1e50)).toString(36);  
+						$("div#tabs-5 input#investigation-setup-db-id").attr("value", dbId);
 					
-					Sail.app.observations.investigationMotivationClearFields();
+						Sail.app.observations.newInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
+					
+					}else { // update
+						Sail.app.observations.updateInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
+					}
 					
 					//  Move to the "Investigation Setup" page	
 					$('div#investigation-motivation').hide();
@@ -771,9 +791,6 @@ WallCology = {
 			$('div#investigation-pages div#investigation-setup div.action-buttons button#back-to-investigation-motivation').click(function() { 
 				$('div#investigation-setup').hide();				
   				$('div#investigation-motivation').show(); 
-
-				// Clear the page                                                                                   
-				Sail.app.observations.investigationSetupClearFields();
 			}) 		
                   
 			
@@ -821,15 +838,38 @@ WallCology = {
 				// 	alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
 				// } else {
 					// Submit the data
-					Sail.app.observations.newInvestigationSetup(selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
+					Sail.app.observations.newInvestigationSetup(dbId, selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
 
-					// Clear the page                                                                                   
-					Sail.app.observations.investigationSetupClearFields();
-
+					
 				   	// Move to "Investigation Results" page
 				    $('div#investigation-pages div#investigation-setup').hide();
 					$('div#investigation-pages div#investigation-results').show();
-				// }			 
+				// }
+				
+				    
+				// As soon as we move to the new page, we'll need to populate the graph. First get the content from Gugo's server and then plot it
+				// $.get('http://ltg.evl.uic.edu/gugo/wc_micro/micro.php', {temp: "1", light: "1", humid: "1", scum: "72", fuzz: "63", se: "20", fe: "15", pred: "10"},
+				// 	function(data){
+				// 		console.log(data);
+				// 	}
+				// )
+				
+				$.ajax({
+					type: "GET",      
+					dataType: "jsonp",
+					url: "http://ltg.evl.uic.edu/gugo/wc_micro/micro.php",
+					data: {temp: "1", light: "1", humid: "1", scum: "72", fuzz: "63", se: "20", fe: "0", pred: "0"},
+				    context: this,
+				  	success: function(data) { 
+						console.log(data);
+					}
+				}) 
+				               
+				
+				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, {"type":"fuzz","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, {"type":"se","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, {"type":"fe","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"type":"pred","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} ];
+				                 
+				console.log(returnedData[0].type);			                                                                         
+				$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]], [[0.4, 1], [2.2, 1.3]] ], { });			 
 			})
 			
 			
@@ -837,7 +877,7 @@ WallCology = {
 			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
 				$('div#investigation-pages div#investigation-results').hide();
 				$('div#investigation-pages div#investigation-setup').show();     
-				
+								
 				Sail.app.observations.investigationResultClearFields();
 			})
 			
@@ -854,9 +894,8 @@ WallCology = {
 				
 			})                                                                     
 			
-			$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]], [[0.4, 1], [2.2, 1.3]] ], { });
-			
-			
+	
+
 			
 			// When the 'SAVE' button is clicked we need to save the investigation's results
 			$('div#investigation-pages div#investigation-results div.action-buttons button#save-investigation-results').click(function() {
@@ -865,12 +904,23 @@ WallCology = {
 				
 				if (description == "" || interpretation == "") {
 					alert ("Please fill the Description & Interpretation sections and then hit 'SAVE'.");
-				}else {
-					// Save the reults 
-					Sail.app.observations.newInvestigationResult(description, interpretation);
+				}else {                   
 					
-					// Clear the page 
-					Sail.app.observations.investigationResultClearFields();
+					// Save the reults    
+					Sail.app.observations.newInvestigationResult(dbId, description, interpretation);
+					
+					dbId=null;
+					$("div#tabs-5 input#investigation-setup-db-id").attr("value", "null");
+					                                                         
+					// Clear investigation motivation fields
+					Sail.app.observations.investigationMotivationClearFields();
+					
+					// Clear investigation setup fields                                                                                   
+					Sail.app.observations.investigationSetupClearFields();
+					
+					// Clear investigation results fields 
+					Sail.app.observations.investigationResultClearFields(); 
+					
 					
 					// Move to main menu
 					$('div#investigation-pages div#investigation-results').hide();
@@ -1204,7 +1254,69 @@ WallCology = {
 				}
 			})//, "json")
 			
-		},
+		},  
+		
+		// generateInvestigationDT: function(investigationType, organism, temperature, lightLevel, humidity) {
+		// 	// we do a count REST call to determine how many results to expect
+		// 	// (setting batch_size in _find)
+		// 	$.ajax({
+		// 		type: "GET",
+		// 		url: "/mongoose/wallcology/observations/_investigation",
+		// 		data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation", "organism":organism})},
+		// 		context: this,
+		// 		success: function(data) {
+		// 			criteria = {"run.name":Sail.app.run.name, "type":"investigation","organism":organism}
+		// 			criteria[this.aspect] = {$ne: ""}
+		// 				
+		// 	    	if (data.ok === 1) {			    		
+		// 				batchSize = 0
+		// 				batchSize = data.count
+		// 				
+		// 				$.ajax({
+		// 					type: "GET",
+		// 					url: "/mongoose/wallcology/observations/_find",
+		// 					data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+		// 					context: this,
+		// 					success: function(data) {  
+		// 						investigationResultsArray = []
+		// 						for (i=0;i<data.results.length;i++) {
+		// 							d = new Date(data.results[i].timestamp)
+		// 							investigationResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+		// 						}
+		// 
+		// 				    	if (data.ok === 1) {			    		
+		// 							$('#aggregate-investigation-table').dataTable({
+		// 								"aaSorting": [[2,'desc']],
+		// 								"bAutoWidth": false,										
+		// 								"bLengthChange": false,
+		// 								"bDestroy" : true,		
+		// 								"bJQueryUI": true,
+		// 								"iDisplayLength": 6,
+		// 								"sPaginationType": "full_numbers",
+		// 								"aoColumns": [        
+		// 												{ "sWidth": "500px" },
+		// 												null,
+		// 												null
+		// 											],
+		// 
+		// 								"aaData": investigationResultsArray	
+		// 							})
+		// 				    	}
+		// 				    	else {
+		// 							console.log("Mongoose request failed")
+		// 							return false
+		// 						}
+		// 					}
+		// 				})//, "json")	
+		// 	    	}
+		// 	    	else {
+		// 				console.log("Mongoose request failed")
+		// 				return false
+		// 			}
+		// 		}
+		// 	})
+		// 	
+		// }, 
 
 		generateRelationshipsDT: function(userRelationshipSelection) {
 			// we do a count REST call to determine how many results to expect
@@ -1428,22 +1540,35 @@ WallCology = {
 	        $('#new-relationship .comments').val('')
         }, 
 
-		newInvestigationMotivation: function(selectedType, motivationForDescription, headline, selectedKeywords) {   
+		newInvestigationMotivation: function(dbId, selectedType, motivationForDescription, headline) {   
 			
 	        sev = new Sail.Event('new_observation', {
-	        	type : 'investigation_motivation',
+	        	type : 'investigation_setup', 
+				_id : dbId,
 				selectedType : selectedType,
 				motivationForDescription : motivationForDescription,
-				headline : headline,
-				selectedKeywords : selectedKeywords
+				headline : headline,                  
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },   
 
-		newInvestigationSetup: function(selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
+		updateInvestigationMotivation: function(dbId, selectedType, motivationForDescription, headline) {   
 			
-	        sev = new Sail.Event('new_observation', {
-	        	type : 'investigation_setup',
+	        sev = new Sail.Event('changed_observation', {
+	        	type : 'investigation_setup', 
+				_id : dbId,
+				selectedType : selectedType,
+				motivationForDescription : motivationForDescription,
+				headline : headline,                  
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        }, 
+
+		newInvestigationSetup: function(dbId, selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
+			
+	        sev = new Sail.Event('changed_observation', {
+	        	type : 'investigation_setup',       
+				_id : dbId,
 				selectedOrganisms : selectedOrganisms,
 				temperature : temperature,
 				lightLevel : lightLevel,
@@ -1453,10 +1578,11 @@ WallCology = {
 	        WallCology.groupchat.sendEvent(sev)
         },
 
-		newInvestigationResult: function(description, interpretation) {   
+		newInvestigationResult: function(dbId, description, interpretation) {   
 			
-	        sev = new Sail.Event('new_observation', {
+	        sev = new Sail.Event('changed_observation', {
 	        	type : 'investigation_setup',
+				_id : dbId,
 				description : description,
 				interpretation : interpretation
 	        })
