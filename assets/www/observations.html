@@ -1018,7 +1018,12 @@
 	   
 		<!-- *************************************************************** INVESTIGATION PAGES *****************************************-->  
 		<div id="tabs-5" class="tab-pane">      
-			<div id="investigation-pages">
+			<div id="investigation-pages"> 
+				           
+				<!-- This hidden field holds the id of the record for the current investigation setup in the database. 
+					This id is needed for updating the record -->
+				<input id="investigation-setup-db-id" type="hidden" value="null"/>
+                                                   
 
 				<!--********************************* INVESTIGATION MENU PAGE *****************************-->
 				<div id="investigation-menu-page">  
@@ -1031,7 +1036,7 @@
 				 
 				<!--********************************* INVESTIGATION MOTIVATION *****************************-->
 				<div id="investigation-motivation">
-					<img src="/images/new_habitat.png">  
+					<img src="/images/new_invest_mot.png">  
 					
 					<div id="investigation-type">
 						<p style="float: left; width: 200px; margin-right: 20px"> <b> Investigation Type </b></p>
@@ -1048,7 +1053,7 @@
 						<input style="float: left" size="90" id="headline-title" type="text"/>
 					</div>   
 					
-					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+					<!-- <div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
 						<span style="float: left; width: 100px"> Keywords </span>
 						<table id="investigation-keyword-table">
 							<tr>
@@ -1082,7 +1087,7 @@
 								<td> <input type="checkbox" name="investigation-keyword" value="Lorem" /> Lorem </td>
 							</tr>
 						</table>
-					</div>
+					</div> -->
 					
 					 <div class="action-buttons">
 						<button class="back-button standard-button investigation-button">BACK</button>
@@ -1093,7 +1098,7 @@
 
 				<!--********************************* INVESTIGATION SETUP *****************************-->
 				<div id="investigation-setup">
- 					<img src="/images/new_habitat.png"> 
+ 					<img src="/images/new_invest_setup.png"> 
  					<p><b> Organisms </b></p>
 					<p> Select the organisms you would like to add to your experiment (choose one or more)</p>
 					
@@ -1146,7 +1151,7 @@
 
 				<!--********************************* INVESTIGATION RESULTS *****************************-->
 				<div id="investigation-results">
-                	<img src="/images/new_habitat.png">
+                	<img src="/images/new_invest_results.png">
 
 					
 					<div style="float: left; width: 100%; margin-bottom: 25px">
@@ -1178,17 +1183,72 @@
 
 				<!--********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************-->
 				<div id="investigation-what-others-did">
-					<h2> What others did for their INVESTIGATION </h2>
+					<h2 style="color: #E63F0D"> What others did for their INVESTIGATION </h2>
 					<p> Select from the following criteria to view investigations you are interested in:</p>
 					
-					<div style="margin-left: auto; margin-right: auto; width: 200px; float: left; text-align: center">
+					<div style="margin-left: auto; margin-right: auto; width: 100%; float: left; text-align: center">
 						<p> <b>Investigation Type</b> </p>
-						<table>
+						<table id="what-others-said-investigation-type">
 							<tr> 
 								<td> <button class="standard-button"> Theory </button> </td>
 								<td> <button class="standard-button"> Question </button> </td>
 						    </tr>
 						</table>
+					</div> 
+					
+					<div style="width: 100%; float: left;">
+						<p> <b>Organism(s)</b> </p>
+						<table id="what-others-said-organisms">
+							<tr> 
+								<td value="scum"> <img src="/images/icon_0007_scum.png"/> </td>
+								<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png"/> </td>
+								<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png"/> </td>
+								<td value="green-bug"> <img src="/images/icon_0008_green-bug.png"/> </td>
+								<td value="predator"> <img src="/images/icon_0005_predator.png"/> </td>
+						    </tr>
+						</table>
+					</div> 
+					
+					
+					<div style="float: left; width: 100%; margin-bottom: 25px">  
+						<div style="margin: auto; width: 750px">
+							<div id="investigation-what-others-said-environment-temperature" class="investigation-environment-filter">
+								<p> <b>Temperature</b> </p>
+								<button class="standard-button" value="low">Low</button>
+								<button class="standard-button" value="high">High</button>
+							</div>
+					      
+							<div id="investigation-what-others-said-environment-light-level" class="investigation-environment-filter">
+								<p> <b>Light Levels</b> </p>
+								<button class="standard-button" value="low">Low</button>
+								<button class="standard-button" value="high">High</button>
+							</div>
+					
+							<div id="investigation-what-others-said-environment-humidity" class="investigation-environment-filter">
+								<p> <b>Humidity</b> </p> 
+								<button class="standard-button" value="low">Low</button>
+								<button class="standard-button" value="high">High</button>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div id="investigations-what-others-said-aggregate-table">
+						<h4> Select the report you are interested in viewing: </h4>
+				
+						<div class="datatable">
+							<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-investigation-table">
+								<thead>
+									<tr>
+										<th>Behavior</th>						
+										<th>Author(s)</th>
+										<th>Last Updated</th>
+									</tr>
+								</thead>
+								<tbody>						
+								</tbody>
+							</table>
+						</div>
 					</div>
 					
                 	<div class="action-buttons">
