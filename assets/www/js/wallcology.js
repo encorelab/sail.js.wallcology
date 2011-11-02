@@ -60,7 +60,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 4 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
@@ -717,8 +717,7 @@ WallCology = {
 
 			$('div#investigation-pages div#investigation-menu-page button#start-new-investigation').click(function() { 
 				$('div#investigation-pages div#investigation-menu-page').hide();
-				$('div#investigation-pages div#investigation-motivation').show();
-				      
+				$('div#investigation-pages div#investigation-motivation').show();				      
 			})
 			    
 			// if the back button is clicked on 'Investigation Motivation' page
@@ -931,26 +930,36 @@ WallCology = {
 
 			 // *******************************  Investigation What Others Did Page **********************************
 
-
-			$("div#investigation-pages button#what-others-did-investigation").click(function() {
-				$('div#investigation-pages div#investigation-menu-page').hide();
-				$('div#investigation-pages div#investigation-what-others-did').show();	
+			var invViewSelectedOrganism = null
+			var invViewSelectedType = null
+			
+			
+			
+			$("#investigation-pages button#what-others-did-investigation").click(function() {
+				$('#investigation-menu-page').hide();
+				$('#view-investigations').show();	
+				Sail.app.observations.generateInvestigationsDT({})
 			});   
 			      
-			
-			$("div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type button").click(function (){
-				$("div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type button").removeClass('selected investigation-button');
-				$(this).addClass('selected investigation-button');
-			});
-			 
 			// If the back-button is clicked on the "What others did page"
-			$('div#investigation-pages div#investigation-what-others-did div.action-buttons button.back-button').click(function () {
-				$('div#investigation-pages div#investigation-menu-page').show();
-				$('div#investigation-pages div#investigation-what-others-did').hide();
+			$('#view-investigations div.action-buttons button.back-button').click(function () {
+				$('#view-investigations button').removeClass('selected investigation-button');
+				$('#view-investigations table#what-others-said-organisms td').removeClass('selected');
+				$('#view-investigations table#what-others-said-organisms td').css('border', 'none');
+				$('#view-investigations').hide();
+				$('#investigation-menu-page').show();
 			});  
+						
+			$("#view-investigations table#what-others-said-investigation-type button").click(function (){
+				$("#view-investigations table#what-others-said-investigation-type button").removeClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');
+				
+				// onClick, find the values of all of the pressed buttons and regen the table
+				invViewSelectedType = $(this).attr('value');				
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganism:invViewSelectedOrganism})
+			});
 			
-			
-			$('div#investigation-pages div#investigation-what-others-did table#what-others-said-organisms td').click(function (){
+			$('#view-investigations table#what-others-said-organisms td').click(function (){
 				if ($(this).hasClass('selected') == true){
 					$(this).removeClass('selected');
 					$(this).css('border', 'none');
@@ -958,25 +967,30 @@ WallCology = {
 					$(this).addClass('selected');
 					$(this).css('border', '1px solid black');
 				}
+				
+				invViewSelectedOrganism = $(this).attr('value')
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganism:invViewSelectedOrganism})
 			});      
 			
-			$('div#investigation-what-others-did div#investigation-what-others-said-environment-temperature button').click(function(){
-				$('div#investigation-what-others-did div#investigation-what-others-said-environment-temperature button').removeClass('selected investigation-button');
+			$('#view-investigations #investigation-what-others-said-environment-temperature button').click(function(){
+				$('#view-investigations #investigation-what-others-said-environment-temperature button').removeClass('selected investigation-button');
 				$(this).addClass('selected investigation-button');
 			})
 			
-			$('div#investigation-what-others-did div#investigation-what-others-said-environment-light-level button').click(function(){
-				$('div#investigation-what-others-did div#investigation-what-others-said-environment-light-level button').removeClass('selected investigation-button');
+			$('#view-investigations #investigation-what-others-said-environment-light-level button').click(function(){
+				$('#view-investigations #investigation-what-others-said-environment-light-level button').removeClass('selected investigation-button');
 				$(this).addClass('selected investigation-button');
 			})
 			
-			$('div#investigation-what-others-did div#investigation-what-others-said-environment-humidity button').click(function(){
-				$('div#investigation-what-others-did div#investigation-what-others-said-environment-humidity button').removeClass('selected investigation-button');
+			$('#view-investigations div#investigation-what-others-said-environment-humidity button').click(function(){
+				$('#view-investigations #investigation-what-others-said-environment-humidity button').removeClass('selected investigation-button');
 				$(this).addClass('selected investigation-button');
 			})
 			
     	},
 
+    	
+    	
 // ****************************************** HELPER FUNCTIONS ***************************************************
 
 		// this doesn't work in Safari, for some reason
@@ -1255,68 +1269,6 @@ WallCology = {
 			})//, "json")
 			
 		},  
-		
-		// generateInvestigationDT: function(investigationType, organism, temperature, lightLevel, humidity) {
-		// 	// we do a count REST call to determine how many results to expect
-		// 	// (setting batch_size in _find)
-		// 	$.ajax({
-		// 		type: "GET",
-		// 		url: "/mongoose/wallcology/observations/_investigation",
-		// 		data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation", "organism":organism})},
-		// 		context: this,
-		// 		success: function(data) {
-		// 			criteria = {"run.name":Sail.app.run.name, "type":"investigation","organism":organism}
-		// 			criteria[this.aspect] = {$ne: ""}
-		// 				
-		// 	    	if (data.ok === 1) {			    		
-		// 				batchSize = 0
-		// 				batchSize = data.count
-		// 				
-		// 				$.ajax({
-		// 					type: "GET",
-		// 					url: "/mongoose/wallcology/observations/_find",
-		// 					data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
-		// 					context: this,
-		// 					success: function(data) {  
-		// 						investigationResultsArray = []
-		// 						for (i=0;i<data.results.length;i++) {
-		// 							d = new Date(data.results[i].timestamp)
-		// 							investigationResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
-		// 						}
-		// 
-		// 				    	if (data.ok === 1) {			    		
-		// 							$('#aggregate-investigation-table').dataTable({
-		// 								"aaSorting": [[2,'desc']],
-		// 								"bAutoWidth": false,										
-		// 								"bLengthChange": false,
-		// 								"bDestroy" : true,		
-		// 								"bJQueryUI": true,
-		// 								"iDisplayLength": 6,
-		// 								"sPaginationType": "full_numbers",
-		// 								"aoColumns": [        
-		// 												{ "sWidth": "500px" },
-		// 												null,
-		// 												null
-		// 											],
-		// 
-		// 								"aaData": investigationResultsArray	
-		// 							})
-		// 				    	}
-		// 				    	else {
-		// 							console.log("Mongoose request failed")
-		// 							return false
-		// 						}
-		// 					}
-		// 				})//, "json")	
-		// 	    	}
-		// 	    	else {
-		// 				console.log("Mongoose request failed")
-		// 				return false
-		// 			}
-		// 		}
-		// 	})
-		// 	
-		// }, 
 
 		generateRelationshipsDT: function(userRelationshipSelection) {
 			// we do a count REST call to determine how many results to expect
@@ -1387,6 +1339,143 @@ WallCology = {
 			})//, "json")
 			
 		},
+
+		generateInvestigationsDT: function(userInvestigationSelections) {
+			// we do a count REST call to determine how many results to expect
+			// (setting batch_size in _find)
+			$.ajax({
+				type: "GET",
+				url: "/mongoose/wallcology/observations/_count",
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "investigation_type":userInvestigationSelections.investigationType,
+					"organisms":userInvestigationSelections.investigationOrganism})},
+					/*"temperature":userInvestigationSelections.TEMP, "light":userInvestigationSelections.LIGHT, "humidity":userInvestigationSelections.HUMIDITY
+*/							
+				context: userInvestigationSelections,
+				success: function(data) {
+					
+					criteria = {"run.name":Sail.app.run.name, "type":"investigation_setup", "investigation_type":userInvestigationSelections.investigationType,
+							"organisms":userInvestigationSelections.investigationOrganism}
+					//criteria["comments"] = {$ne: ""}
+					this.criteria = criteria
+
+			    	if (data.ok === 1) {			    		
+						batchSize = 0
+						batchSize = data.count
+						
+						$.ajax({
+							type: "GET",
+							url: "/mongoose/wallcology/observations/_find",
+							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+							context: this, 
+							success: function(data) {
+										
+								investigationResultsArray = []
+								for (i=0;i<data.results.length;i++) {
+									d = new Date(data.results[i].timestamp)
+									// datatables do not like undefined, so switched to empty string
+									if (data.results[i].motivation_description == null) {
+										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									else {
+										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									
+								}
+
+						    	if (data.ok === 1) {			    		
+									$('#investigations-datatable').dataTable({
+										"aaSorting": [[2,'desc']],
+										"bLengthChange": false,
+										"bDestroy" : true,		
+										"bJQueryUI": true,
+										"iDisplayLength": 8,										
+										"sPaginationType": "full_numbers",
+										"aoColumns": [        
+														{ "sWidth": "500px" },
+														null,
+														null
+													],
+
+										"aaData": investigationResultsArray	
+									})
+						    	}
+						    	else {
+									console.log("Mongoose request failed")
+									return false
+								}
+							}
+						})
+			    	}
+			    	else {
+						console.log("Mongoose request failed")
+						return false
+					}
+			    }
+			})
+			
+		},		
+		// generateInvestigationDT: function(investigationType, organism, temperature, lightLevel, humidity) {
+		// 	// we do a count REST call to determine how many results to expect
+		// 	// (setting batch_size in _find)
+		// 	$.ajax({
+		// 		type: "GET",
+		// 		url: "/mongoose/wallcology/observations/_investigation",
+		// 		data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation", "organism":organism})},
+		// 		context: this,
+		// 		success: function(data) {
+		// 			criteria = {"run.name":Sail.app.run.name, "type":"investigation","organism":organism}
+		// 			criteria[this.aspect] = {$ne: ""}
+		// 				
+		// 	    	if (data.ok === 1) {			    		
+		// 				batchSize = 0
+		// 				batchSize = data.count
+		// 				
+		// 				$.ajax({
+		// 					type: "GET",
+		// 					url: "/mongoose/wallcology/observations/_find",
+		// 					data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
+		// 					context: this,
+		// 					success: function(data) {  
+		// 						investigationResultsArray = []
+		// 						for (i=0;i<data.results.length;i++) {
+		// 							d = new Date(data.results[i].timestamp)
+		// 							investigationResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
+		// 						}
+		// 
+		// 				    	if (data.ok === 1) {			    		
+		// 							$('#aggregate-investigation-table').dataTable({
+		// 								"aaSorting": [[2,'desc']],
+		// 								"bAutoWidth": false,										
+		// 								"bLengthChange": false,
+		// 								"bDestroy" : true,		
+		// 								"bJQueryUI": true,
+		// 								"iDisplayLength": 6,
+		// 								"sPaginationType": "full_numbers",
+		// 								"aoColumns": [        
+		// 												{ "sWidth": "500px" },
+		// 												null,
+		// 												null
+		// 											],
+		// 
+		// 								"aaData": investigationResultsArray	
+		// 							})
+		// 				    	}
+		// 				    	else {
+		// 							console.log("Mongoose request failed")
+		// 							return false
+		// 						}
+		// 					}
+		// 				})//, "json")	
+		// 	    	}
+		// 	    	else {
+		// 				console.log("Mongoose request failed")
+		// 				return false
+		// 			}
+		// 		}
+		// 	})
+		// 	
+		// }, 
+		
 		
 		retrieveCountsGraphData: function() {
 			// we do a count REST call to determine how many results to expect
@@ -1545,8 +1634,8 @@ WallCology = {
 	        sev = new Sail.Event('new_observation', {
 	        	type : 'investigation_setup', 
 				_id : dbId,
-				selectedType : selectedType,
-				motivationForDescription : motivationForDescription,
+				investigation_type : selectedType,
+				motivation_description: motivationForDescription,
 				headline : headline,                  
 	        })
 	        WallCology.groupchat.sendEvent(sev)
@@ -1557,8 +1646,8 @@ WallCology = {
 	        sev = new Sail.Event('changed_observation', {
 	        	type : 'investigation_setup', 
 				_id : dbId,
-				selectedType : selectedType,
-				motivationForDescription : motivationForDescription,
+				investigation_type : selectedType,
+				motivation_description : motivationForDescription,
 				headline : headline,                  
 	        })
 	        WallCology.groupchat.sendEvent(sev)
@@ -1569,9 +1658,9 @@ WallCology = {
 	        sev = new Sail.Event('changed_observation', {
 	        	type : 'investigation_setup',       
 				_id : dbId,
-				selectedOrganisms : selectedOrganisms,
+				selected_organisms : selectedOrganisms,
 				temperature : temperature,
-				lightLevel : lightLevel,
+				light_level : lightLevel,
 				humidity : humidity,
 				hypothesis : hypothesis
 	        })
@@ -1823,8 +1912,8 @@ WallCology = {
 				// bugfix to show lines
 				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })				
 				// REVEAL FOR PREDATOR
-				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
-				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]*/
+				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
 				// average values for temperature
 				temperature = Sail.app.observations.avgCountValues(temperature)
