@@ -60,7 +60,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 4 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
@@ -1912,8 +1912,8 @@ WallCology = {
 				// bugfix to show lines
 				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })				
 				// REVEAL FOR PREDATOR
-				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
-				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
+				//var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
 				// average values for temperature
 				temperature = Sail.app.observations.avgCountValues(temperature)
