@@ -43,10 +43,9 @@ div#tabs-5 button.new-page-button  {
 	width: 570px;
 }
 
-
 div#tabs-5 button.investigation-button {
-	background: url("") repeat scroll 0 0 #E63F0D;
-	border: 1px solid #E63F0D;   
+	background: url("") repeat scroll 0 0 #F1433A;
+	border: 1px solid #F1433A;   
 	color: white;
 }                                                   
 
@@ -58,8 +57,7 @@ div#tabs-5 div#investigation-motivation div.action-buttons {
 
 div#tabs-5 div#investigation-motivation div.action-buttons {
 	margin-top: 30px;
-}       
-                                                            
+}                                                                  
 
 div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigation-setup {
    float: right;
@@ -119,29 +117,66 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 
 
-
 /********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/
-                                              
+            
+#view-investigations {
+	width: 800px;
+}
 
-div#investigation-pages div#investigation-what-others-did table#what-others-said-investigation-type{
+#view-investigations .view-investigation-header {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#view-investigations .view-investigation-type-selectors {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 25px;
+	width: 100%;
+	float: left;
+	text-align: center
+}
+
+#view-investigations #what-others-said-investigation-type {
 	width: 150px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-div#investigation-pages div#investigation-what-others-did table#what-others-said-organisms {
+#view-investigations .standard-button {
+	width: 100px;
+}	
+
+#view-investigations #view-investigation-organism-selectors {
+	width: 100%
+	float: left;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#view-investigations #what-others-said-organisms {
 	margin-left: auto;
 	margin-right: auto;
 	width: 550px;
 }                    
 
-div#investigation-pages div#investigation-what-others-did div.investigation-environment-filter {
+#view-investigations .investigation-environment-filter {
 	width: 250px;                         
 	float: left;
-} 
+	text-align: center;
+}
 
-div#investigation-pages div#investigation-what-others-did div.investigation-environment-filter button.standard-button {
-	width: 100px;         
+#view-investigations .datatable-title {
+	margin-left: 30px;
+}
+
+#view-investigations .action-buttons {
+	margin-top: 25px;
+	margin-left: 40px;
+}
+
+#view-investigations .back-button {
+	width: 100px;
 }
 
 

@@ -1,17 +1,9 @@
 <!-- TODO
 
-- change % to units in counts
-- do the graphs
-
-- delay between submission and arrival in XMPP space
-- default (empty?) table should load on entering the view relationships page
 - make default behaviour for click on tabs to put us on the landing page
 - set a max row length/size on the data tables... we don't want kids entering 70 lines of text and crashing stuff
 - get rid of the gray bottom of the table cells in what-others-said-about-lifecycles 
 - add colors to Discussion bubbles
-- finish counts page (clear buttons on submit, etc)
-- we need to start on Microworlds, particularly the graphing
-- add PIC -> X 
  -->
 
 
@@ -1176,27 +1168,33 @@
 					
 					<div class="action-buttons">
 						<button id="back-to-investigation-setup" class="back-button standard-button investigation-button">BACK</button>
-						<button id='save-investigation-results' class="save-button investigation-button">Save</button>
+						<button id='save-investigation-results' class="save-button investigation-button">SAVE</button>
 					</div>
 				</div>		                                               
 
 
-				<!--********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************-->
-				<div id="investigation-what-others-did">
-					<h2 style="color: #E63F0D"> What others did for their INVESTIGATION </h2>
-					<p> Select from the following criteria to view investigations you are interested in:</p>
+
+
+
+<!--********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************-->
+
+				<div id="view-investigations">
+					<div class="view-investigation-header">
+						<h2 style="color: #F1433A"> What others did for their INVESTIGATION </h2>
+						<p> Select from the following criteria to view investigations you are interested in:</p>
+					</div>
 					
-					<div style="margin-left: auto; margin-right: auto; width: 100%; float: left; text-align: center">
+					<div class="view-investigation-type-selectors">
 						<p> <b>Investigation Type</b> </p>
 						<table id="what-others-said-investigation-type">
 							<tr> 
-								<td> <button class="standard-button"> Theory </button> </td>
-								<td> <button class="standard-button"> Question </button> </td>
+								<td> <button class="standard-button" value="theory"> Theory </button> </td>
+								<td> <button class="standard-button" value="question"> Question </button> </td>
 						    </tr>
 						</table>
 					</div> 
 					
-					<div style="width: 100%; float: left;">
+					<div id="view-investigation-organism-selectors">
 						<p> <b>Organism(s)</b> </p>
 						<table id="what-others-said-organisms">
 							<tr> 
@@ -1234,10 +1232,11 @@
 					
 					
 					<div id="investigations-what-others-said-aggregate-table">
-						<h4> Select the report you are interested in viewing: </h4>
+						<h4 class="datatable-title"> Select the report you are interested in viewing: </h4>
 				
 						<div class="datatable">
-							<table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-investigation-table">
+							<!-- <table cellpadding="0" cellspacing="0" border="0" class="display" id="aggregate-investigation-table"> -->
+							<table class="display" id="investigations-datatable">
 								<thead>
 									<tr>
 										<th>Behavior</th>						
@@ -1252,7 +1251,7 @@
 					</div>
 					
                 	<div class="action-buttons">
-						<button class="back-button standard-button investigation-button">BACK</button>
+						<button class="investigation-button back-button standard-button">BACK</button>
 					</div>
 				</div>		                                                                 
 
