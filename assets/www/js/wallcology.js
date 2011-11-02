@@ -1881,10 +1881,15 @@ WallCology = {
 				scum = Sail.app.observations.addCountValues(scum)
 				// create array that can be graphed
 				scumForGraph = _.map(scum, function(val,i) {return [i,val]})
+				// BUGFIX: to get rid of bug where no lines show up in graph we need to get rid of undefined values
+				// in the array e.g. [[0, 1000], undefined, [2, 1300]] ==> [[0,1000], [2,1300]], which reject does :)
+				scumForGraph = _.reject(scumForGraph, function(val){ return val == undefined; })				
 				// add up values for mold
 				mold = Sail.app.observations.addCountValues(mold)
 				// create array that can be graphed
-				moldForGraph = _.map(mold, function(val,i) {return [i,val]})	
+				moldForGraph = _.map(mold, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				moldForGraph = _.reject(moldForGraph, function(val){ return val == undefined; })	
 				// Add scum and mold arrays to vegetaion array for graphing
 				var vegetation = [ {label: "scum", data: scumForGraph, color: "yellow"}, {label:"mold", data: moldForGraph, color: "#00FF00"} ]
 				
@@ -1892,14 +1897,20 @@ WallCology = {
 				green_bug = Sail.app.observations.addCountValues(green_bug)
 				// create array that can be graphed
 				greenBugForGraph = _.map(green_bug, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				greenBugForGraph = _.reject(greenBugForGraph, function(val){ return val == undefined; })
 				// add up values for blue_bug
 				blue_bug = Sail.app.observations.addCountValues(blue_bug)
 				// create array that can be graphed
 				blueBugForGraph = _.map(blue_bug, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				blueBugForGraph = _.reject(blueBugForGraph, function(val){ return val == undefined; })
 				// add up values for blue_bug
 				predator = Sail.app.observations.addCountValues(predator)
 				// create array that can be graphed
-				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})				
+				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })				
 				// REVEAL FOR PREDATOR
 				/*var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]*/
 				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "#008000"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
@@ -1908,14 +1919,20 @@ WallCology = {
 				temperature = Sail.app.observations.avgCountValues(temperature)
 				// create array that can be graphed
 				temperatureForGraph = _.map(temperature, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				temperatureForGraph = _.reject(temperatureForGraph, function(val){ return val == undefined; })
 				// average values for light_level
 				light_level = Sail.app.observations.avgCountValues(light_level)
 				// create array that can be graphed
 				lightLevelForGraph = _.map(light_level, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				lightLevelForGraph = _.reject(lightLevelForGraph, function(val){ return val == undefined; })
 				// average values for humidity
 				humidity = Sail.app.observations.avgCountValues(humidity)
 				// create array that can be graphed
 				humidityForGraph = _.map(humidity, function(val,i) {return [i,val]})
+				// bugfix to show lines
+				humidityForGraph = _.reject(humidityForGraph, function(val){ return val == undefined; })
 				
 				// Add light_level, temperature and humidity data to the environment array
 				var environment = [ {label:"light level", data: lightLevelForGraph, color: "#FF9933"}, {label: "temperature", data: temperatureForGraph, color: "#33CCFF"}, {label:"humidity", data: humidityForGraph, color: "#FF3333"} ]
