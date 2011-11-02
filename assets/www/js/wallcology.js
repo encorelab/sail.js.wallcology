@@ -1946,6 +1946,9 @@ WallCology = {
 				if (WallCology.countsGraphData.selectedHabitat !== 'all') {
 					$.plot($("#view-counts .enviro-conditions-graph"), environment, graphConfig)
 				}
+				else {
+					$("#view-counts .enviro-conditions-graph").html("")
+				}
 				
 				// inserting images into the legends
 				$('#view-counts .vegetation-graph .legendLabel').eq(0).html('<img src="/images/icon_0007_scum.png"/ class="legend-image">')
