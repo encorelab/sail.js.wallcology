@@ -26,6 +26,12 @@ class Archivist < Sail::Agent
       store_observation_in_mongo(observation)
     end
     
+    event :changed_observation? do |stanza, data|
+      observation = data['payload']
+      ['origin', 'run', 'timestamp'].each{|meta| observation[meta] = data[meta]}
+      store_observation_in_mongo(observation)
+    end
+    
     message :error? do |err|
       log err, :ERROR
     end
