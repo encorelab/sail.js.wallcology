@@ -1555,7 +1555,8 @@ WallCology = {
 			
 		},
 		
-		retrieveGugoGraphData: function(temperature, lightLevel, humidity) {
+		retrieveGugoGraphData: function(temperature, lightLevel, humidity) { 
+			
 			$.ajax({
 				type: "GET",      
 				dataType: "json",
@@ -1575,7 +1576,8 @@ WallCology = {
 						   min: 0,
 						   max: 100
 						}
-					});
+					});             
+					
 					
 					for (i in selectedOrganisms){
 						for (j in returnedData){ 
@@ -1591,7 +1593,21 @@ WallCology = {
 									// plot.setData(curNewData);
 									// plot.draw();
 								}							    
-								graphData.push({'label' : curType, 'data' : curNewData});
+								
+								legendImg = null;                     
+								if (curType == "scum"){
+									legendImg = "/images/icon_0007_scum.png";
+								} else if (curType == "fuzzy-mold"){
+									legendImg = "/images/icon_0006_fuzzy-mold.png";
+								} else if (curType == "blue-bug"){
+		                            legendImg = "/images/icon_0000_blue-bug.png";
+								} else if (curType == "green-bug"){
+		                            legendImg = "/images/icon_0008_green-bug.png";
+								} else if (curType == "predator"){
+									legendImg = "/images/icon_0005_predator.png";
+								}
+								
+								graphData.push({'label' : '<img style="width: 30px" src="'+ legendImg +'"/>', 'data' : curNewData});
 								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
 							}
 						}
