@@ -841,30 +841,16 @@ WallCology = {
 				   	// Move to "Investigation Results" page
 				    $('div#investigation-pages div#investigation-setup').hide();
 					$('div#investigation-pages div#investigation-results').show();  
-					
-					// As soon as we move to the new page, we'll need to populate the graph. First get the content from Gugo's server and then plot it
-					// $.get('http://ltg.evl.uic.edu/gugo/wc_micro/micro.php', {temp: "1", light: "1", humid: "1", scum: "72", fuzz: "63", se: "20", fe: "15", pred: "10"},
-					// 	function(data){
-					// 		console.log(data);
-					// 	}
-					// )     
+					   
 
 					// convert the environment settings to booleans
 					temperature = temperature == "high" ? 1 : 0;
 					lightLevel = lightLevel == "high" ? 1 : 0;
 					humidity = humidity == "high" ? 1 : 0;
 
-					$.ajax({
-						type: "GET",      
-						dataType: "json",
-						url: "/uic/gugo/wc_micro/micro.php",
-						data: {temp: temperature, light: lightLevel, humid: humidity, scum: "72", fuzz: "63", se: "20", fe: "15", pred: "0"},
-						context: this,
-						success: function(data) { 
-							Sail.app.observations.drawSimulationGraph(data);
-						}
-					})
-				}              
+					Sail.app.observations.retrieveGugoGraphData(temperature, lightLevel, humidity)
+
+				}       
 				
 				// returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
 				// 				 {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, 
@@ -1529,6 +1515,51 @@ WallCology = {
 			
 		},
 		
+		retrieveGugoGraphData: function(temperature, lightLevel, humidity) {
+			$.ajax({
+				type: "GET",      
+				dataType: "json",
+				url: "/uic/gugo/wc_micro/micro.php",
+				data: {temp: temperature, light: lightLevel, humid: humidity, scum: "72", fuzz: "63", se: "20", fe: "15", pred: "0"},
+				context: this,
+				success: function(data) { 
+					returnedData = data
+					
+					graphData = [[]]; 
+					var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
+						xaxis: {      
+							min: 0,
+							max: 100
+						},
+						yaxis: {      
+						   min: 0,
+						   max: 100
+						}
+					});
+					
+					for (i in selectedOrganisms){
+						for (j in returnedData){ 
+							
+							if (returnedData[j].type == selectedOrganisms[i]){ 
+							
+								curType = returnedData[j].type;
+								curData = returnedData[j].data;  
+								curNewData = [];
+								for (k=1; k<=curData.length; k++){     
+									curNewData.push([k, curData[k-1]]);
+									// setTimeout ("updateGraph(curType, curNewData)", 1000);
+									// plot.setData(curNewData);
+									// plot.draw();
+								}							    
+								graphData.push({'label' : curType, 'data' : curNewData});
+								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
+							}
+						}
+					}
+				}
+			})
+		},
+		
 		addCountValues: function(countsArray) {
 			// add up values for scum
 			for(i = 0; i < countsArray.length; i++) {
@@ -1962,39 +1993,6 @@ WallCology = {
 				$('#view-counts .creature-graph .legendLabel').eq(0).html('<img src="/images/icon_0008_green-bug.png"/ class="legend-image">')
 				$('#view-counts .creature-graph .legendLabel').eq(1).html('<img src="/images/icon_0000_blue-bug.png"/ class="legend-image">')
 				$('#view-counts .creature-graph .legendLabel').eq(2).html('<img src="/images/icon_0005_predator.png"/ class="legend-image">')
-			}
-		},
-		
-		
-	    drawSimulationGraph: function(ev) {
-			graphData = [[]]; 
-		    var plot = $.plot($("#investigation-results-graph"), graphData, {
-				xaxis: {      
-					min: 0,
-					max: 100
-				},
-				yaxis: {      
-				   min: 0,
-				   max: 100
-				}
-			}); 
-		    
-		
-			for (i in selectedOrganisms){
-				for (j in returnedData){ 
-					
-					if (returnedData[j].type == selectedOrganisms[i]){ 
-					
-						curType = returnedData[j].type;
-						curData = returnedData[j].data;  
-						curNewData = [];
-						for (k=1; k<=curData.length; k++){     
-							curNewData.push([k, curData[k-1]]);
-						}							    
-						graphData.push({'label' : curType, 'data' : curNewData});
-						$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
-					}
-				}
 			}
 		}
         
