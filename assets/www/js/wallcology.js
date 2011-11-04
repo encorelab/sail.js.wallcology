@@ -865,21 +865,58 @@ WallCology = {
 				}) 
 				               
 				
-				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, {"type":"se","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, {"type":"fe","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"type":"pred","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} ];
+				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
+								 {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, 
+								 {"type":"blue-bug","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, 
+								 {"type":"green-bug","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, 
+								 {"type":"predator","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} 
+							   ];
 				// returnedData = [ {"type":"scum","data":[72, 55, 69]}, {"type":"fuzzy-mold","data": [23, 66, 39]} ];
 				          
 				
-			    graphData = []; 
-			    plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
-					xaxis: {
+			    graphData = [[]]; 
+			    var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
+					xaxis: {      
 						min: 0,
 						max: 100
 					},
-					yaxis: {
+					yaxis: {      
 					   min: 0,
 					   max: 100
 					}
-				});             
+				}); 
+			   
+				console.log(selectedOrganisms);
+                       
+				
+				// var seconds = 10;
+				// for (s=1; s<=seconds; s++){
+				// 	for (i in selectedOrganisms){
+				// 		for (j in returnedData){ 
+				// 
+				// 			if (returnedData[j].type == selectedOrganisms[i]){ 
+				// 
+				// 				curType = returnedData[j].type;
+				// 				curData = returnedData[j].data;  
+				// 				curNewData = [];                   
+				// 				console.log([s, curData[s-1]]);
+				// 				curNewData.push([s, curData[s-1]]);  
+				// 				// plot.setData([s, curData[s-1]]);
+				// 				plot.setData(
+				// 					{   
+				// 						data : [s, curData[s-1]]
+				// 					});
+				// 				plot.draw();
+				// 				
+				// 				// graphData.push({'label' : curType, 'data' : curNewData});
+				// 				// $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);    
+				// 				// break;
+				// 			}
+				// 		}
+				// 	}	
+				// } 
+
+
 				
 				for (i in selectedOrganisms){
 					for (j in returnedData){ 
@@ -889,112 +926,33 @@ WallCology = {
 							curType = returnedData[j].type;
 							curData = returnedData[j].data;  
 							curNewData = [];
-							for (k=1; k<=curData.length; k++){
+							for (k=1; k<=curData.length; k++){     
 								curNewData.push([k, curData[k-1]]);
-							}
-							    
+								// setTimeout ("updateGraph(curType, curNewData)", 1000);
+								// plot.setData(curNewData);
+								// plot.draw();
+							}							    
 							graphData.push({'label' : curType, 'data' : curNewData});
 							$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
-							
 						}
 					}
 				}  
+				      
 				
-				// console.log(graphData);
-				//       
-				// updateGraph(0);
+				// function pause(millis) 
+				// {
+				//         var date = new Date();
+				//         var curDate = null;
 				// 
-				// function updateGraph (index){
-				// 	plot.setData(graphData[index]);					        
-				// 	plot.draw();
-				//                                       
-				// 	if (index== 10) {
-				// 		clearTimeout(t);
-				// 	}
-				// 	t = setTimeout(updateGraph(index++), 500);
-				// }  
-				
-				
-				            
-				
-				                                             
-			    
-				
-				// i=1;
-				// graphData = {};   
-				// for (j in selectedOrganisms) {
-				// 	for (k in returnedData){  
-				// 		if (returnedData[k].type == selectedOrganisms[j]){
-				// 			for (l=1; l<=3; l++){
-				// 		    	graphData[selectedOrganisms[j]] = [l, returnedData[k].data[l]];
-				// 			}
-				// 		}
-				// 	} 
-				// 	i++;
+				//         do { curDate = new Date(); } 
+				//         while(curDate-date < millis)
 				// }
 				// 
-				// console.log(graphData);
-				
 				// 
-				//                         
-				// i=0;      
-				// var arr = [];   
-				//               
-				// for (i=0; i<4; i++){
-				// 	for (j in graphData) {      
-				// 		arr.push( 
-				// 			{ 
-				// 				label : j,
-				// 				data: [i*10, graphData[j][i]]
-				// 			});							
-				//   	}
-				//  }			            
-				// 
-				// console.log(arr); 
-				
-				   		            
-				
-				
-      
-				// function update(i) {
-				// 	plot.setData(arr[i]);
-				//     plot.draw();
-				// 
-				//     setTimeout(update, 1000);
+				// function updateGraph(curType, curNewData){
+				// 	graphData.push({'label' : curType, 'data' : curNewData});
+				// 	$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);
 				// }   
-				// 
-				// for (l=0; l<4; l++){
-				// 	update (l);
-				// }   
-				
-				
-				i=0;				           
-				// var timer = setInterval(function() { 
-				//    
-				//  	plot.push(arr[i]);
-				// 	plot.draw();				
-				// 	    
-				// 	i++;
-				// 	if(i == 6) {
-				// 		clearInterval(timer);
-				// 	}               
-				// },1000);
-				                                                                          
-				
-				// var linePoints = [[0, 3], [4, 8], [8, 5], [9, 13]];
-				// var i = 0;
-				// var arr = [[]];
-				// var timer = setInterval(function(){
-				// 	arr[0].push(linePoints[i]);
-				// 	$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), arr);
-				// 	i++;
-				// 	if(i === linePoints.length){
-				// 		clearInterval(timer);   
-				// 	}
-				// },1000);
-				
-				// console.log(returnedData[0].data);			                                                                         
-				// $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]], [[0.4, 1], [2.2, 1.3]] ], { });			 
 			})
 			
 			
