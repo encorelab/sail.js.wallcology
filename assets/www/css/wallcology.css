@@ -112,7 +112,7 @@ div#tabs .tab-pane {
 /* REMEMBER TO HIDE/REVEAL THE PREDATOR FROM THE VIEW GRAPHS MANUALLY line ~1887*/
 /* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */
 .predator-reveal {
-	 display:none; 
+	 /*display:none;*/ 
 }
 
 /* Hide relationships */
@@ -134,7 +134,7 @@ div#tabs .tab-pane {
 }
 
 .hide-tab-investigations {
-	display:none;
+	/*display:none;*/
 }
 
 #describe-lifecycle-organism-button {

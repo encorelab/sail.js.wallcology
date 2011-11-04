@@ -183,4 +183,42 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 
-/********************************* INDIVIDUAL INVESTIGATION RESULT *****************************/
+/********************************* VIEW INVESTIGATIONS DETAILS *****************************/
+
+#view-investigations-details {
+	margin-left: 20px;
+}
+
+#view-investigations-details .details-title {
+	color: #F1433A;
+	width: 20%;
+	float: left;
+}
+
+#view-investigations-details .layout-table {
+	width: 680px;
+}
+
+#view-investigations-details .table-cell {
+	width: 300px;
+	height: 200px;
+}
+
+
+#view-investigations-details .add-comment-text-field {
+	width: 600px;
+	height: 70px;
+}
+
+#view-investigations-details .standard-button {
+	margin-top: 20px;
+	width: 100px;
+}
+
+#view-investigations-details .back-button {
+	margin-left: 10px;
+}
+
+#view-investigations-details .save-button {
+	margin-left: 450px;
+}

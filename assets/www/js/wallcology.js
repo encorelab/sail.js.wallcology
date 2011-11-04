@@ -60,7 +60,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 3 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 4 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
@@ -249,53 +249,7 @@ WallCology = {
             	$('#open-habitat').show()
             })
             $('#what-others-said-habitat .add-to-discussion-button').hide()
-
-					
-/*
- * $('#add-to-discussion-habitat .author-search-button').click(function(){
- * $('#author-search-habitat').show()
- * Sail.app.rollcall.fetchAllUsers(function(data) { $(data).each(function() { u =
- * this['user'] li = $("<li id='user-"+u.account.login+"'>"+u.account.login+"</li> ")
- * li.data('account', u.account) li.click(function() {
- * Sail.app.ollcall.Authenticator.pickLogin($(this).data('account')) })
- * picker.children(".users").append(li) })
- * 
- * $(inContainer || 'body').append(picker)
- *  }) })
- */ 
-            
-/*
- * This doesn't actually do anything $('#add-to-discussion-habitat
- * .save-button').click(function(){ Sail.app.observations.newDiscussionContent()
- * $('#add-to-discussion-habitat').hide() $('#new-habitat').hide()
- * $('#open-habitat').show() })
- */
-            
-
-	
-			// do we still need this? TODO
-/*
- * $("#what-others-said-habitat .add-to-discussion-button").click(function(){ //
- * Check to see if all required filters/comments are selected if
- * ($("#what-others-said-habitat input:radio:checked").size() == 2){ // TODO:
- * send the data to the server to be saved // Dummy code to move to the next
- * step $('#what-others-said-habitat').hide()
- * $('#add-to-discussions-habitat').show() // End of Dummy code } else { alert
- * ("Please select at least 2 filters!"); } })
- * 
- * $('#add-to-discussion-habitat .back-button').click(function(){
- * $('#new-habitat').hide() $('#open-habitat').show() })
- *  // Send selected filters for the agents to pull them back
- * $("div#aggregate-habitat-filters input").click(function(){
- * totalFiltersSelected = $("div#aggregate-habitat-filters
- * input").attr("checked"); // A filter from each category is selected so we can
- * send them to the agents (TODO? Still need?) if (totalFiltersSelected == 2){
- * alert ('woohoo'); }
- *  // Set the table header for the dynamic column if (this.name ==
- * "note-filter-set"){ $("table#aggregate-habitat-table
- * th#dynamic-column-aggregate-habitat").html($(this).button("option",
- * "label")); } })
- */                    			
+     			
 
 
 // **********ORGANISM****************************************************************************************
@@ -935,7 +889,6 @@ WallCology = {
 			var invViewSelectedTemperature = null
 			var invViewSelectedLightLevel = null
 			var invViewSelectedHumidity = null
-			// then check for null in generateInvestDT
 			
 			
 			$("#investigation-pages button#what-others-did-investigation").click(function() {
@@ -964,6 +917,9 @@ WallCology = {
 			});
 			
 			$('#view-investigations table#what-others-said-organisms td').click(function(){
+				// clear the array used to pass the seleced organisms
+				invViewSelectedOrganisms.length = 0
+				
 				if ($(this).hasClass('selected') == true){
 					$(this).removeClass('selected');
 					$(this).css('border', 'none');
@@ -972,29 +928,85 @@ WallCology = {
 					$(this).css('border', '1px solid black');
 				}
 				
+				// fill the array used to pass the selected organisms
 				$('#what-others-said-organisms .selected').each(function () {
-					invViewSelectedOrganisms.push(this.id)
-				})
-				
+					invViewSelectedOrganisms.push($(this).attr('value'))
+				})				
 				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
-					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})	
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			});      
 			
 			$('#view-investigations #investigation-what-others-said-environment-temperature button').click(function(){
 				$('#view-investigations #investigation-what-others-said-environment-temperature button').removeClass('selected investigation-button');
-				$(this).addClass('selected investigation-button');
+				$(this).addClass('selected investigation-button');				
+				invViewSelectedTemperature = $(this).attr('value');
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			})
 			
 			$('#view-investigations #investigation-what-others-said-environment-light-level button').click(function(){
 				$('#view-investigations #investigation-what-others-said-environment-light-level button').removeClass('selected investigation-button');
 				$(this).addClass('selected investigation-button');
+				invViewSelectedLightLevel = $(this).attr('value');
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			})
 			
 			$('#view-investigations div#investigation-what-others-said-environment-humidity button').click(function(){
 				$('#view-investigations #investigation-what-others-said-environment-humidity button').removeClass('selected investigation-button');
 				$(this).addClass('selected investigation-button');
+				invViewSelectedHumidity = $(this).attr('value');
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			})
 			
+			$('#investigations-datatable tr').live('click', function() {
+				$('#view-investigations').hide()
+				$('#view-investigations-details').show()
+				detailsMotivation = $(this).children(':first').html()
+				detailsTime = $(this).children(':last').html()
+				
+				//START HERE, CONTINUE WITH CSS, FIX FLOAT LEFT
+				// TODO fix context, add detailsTime to decrease nonuniqueness issues
+				$.ajax({
+					type: "GET",
+					url: "/mongoose/wallcology/observations/_find",
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "motivation_description":detailsMotivation})},
+					context: this,
+					success: function(data) {
+
+				    	if (data.ok === 1) {
+				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
+				    		$('#view-investigations-details .motivation-content').html(detailsMotivation)
+				    		$('#view-investigations-details .hypothesis-content').html(data.results[0].hypothesis)
+				    		$('#view-investigations-details .description-content').html(data.results[0].description)
+				    		$('#view-investigations-details .interpretation-content').html(data.results[0].interpretation)
+				    	}
+				    	else {
+							console.log("Mongoose request failed")
+							return false
+						}
+					}
+				})
+
+				
+				
+           	})
+
+           	
+// *************************************** VIEW INVESTIGATION DETAILS **********************************************
+		          	
+           	
+			$('#view-investigations-details .action-buttons .back-button').click(function () {
+				$('#view-investigations-details').hide();
+				$('#view-investigations').show();
+			})  
+			
+			$('#view-investigations-details .action-buttons .save-button').click(function () {
+				// FIXME add something like this:    Sail.app.observations.updateInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
+				$('#view-investigations-details').hide();
+				$('#investigation-menu-page').show();
+			})
     	},
 
     	
@@ -1219,9 +1231,7 @@ WallCology = {
 				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism", "organism":userOrganismSelections.selectedOrganism})},
 				context: userOrganismSelections,
 				success: function(data) {
-/*			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"organism","organism":selectedOrganism}) },
-				function(data) {*/
+
 					criteria = {"run.name":Sail.app.run.name, "type":"organism","organism":this.selectedOrganism}
 					criteria[this.aspect] = {$ne: ""}
 						
@@ -1235,9 +1245,7 @@ WallCology = {
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
 							context: this,
 							success: function(data) {
-/*						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify(criteria), batch_size: batchSize },						
-							function(data) {*/
+
 								organismResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
@@ -1267,14 +1275,14 @@ WallCology = {
 									return false
 								}
 							}
-						})//, "json")	
+						})	
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
 				}
-			})//, "json")
+			})
 			
 		},  
 
@@ -1291,9 +1299,7 @@ WallCology = {
 					criteria = {"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":userRelationshipSelection.from, "energy_transfer.to":userRelationshipSelection.to}
 					criteria["comments"] = {$ne: ""}
 					this.criteria = criteria
-/*			$.get("/mongoose/wallcology/observations/_count",
-				{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to})},
-				function(data) {*/
+
 			    	if (data.ok === 1) {			    		
 						batchSize = 0
 						batchSize = data.count
@@ -1304,11 +1310,7 @@ WallCology = {
 							data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
 							context: this, 
 							success: function(data) {
-								
-/*						$.get("/mongoose/wallcology/observations/_find",
-							{ criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"relationship", "energy_transfer.from":from, "energy_transfer.to":to}), batch_size: batchSize },
-							function(data) {
-*/								
+							
 								relationshipResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
@@ -1337,14 +1339,14 @@ WallCology = {
 									return false
 								}
 							}
-						})//, "json")
+						})
 			    	}
 			    	else {
 						console.log("Mongoose request failed")
 						return false
 					}
 			    }
-			})//, "json")
+			})
 			
 		},
 
@@ -1367,12 +1369,21 @@ WallCology = {
 						criteria["investigation_type"] = userInvestigationSelections.investigationType
 					}
 					
-					// START HERE.THIS DOES NOT WORK
-					if (userInvestigationSelections.investigationOrganisms.length >0) {
+					// THIS DOES NOT WORK... needs to incorporate $and
+/*					if (userInvestigationSelections.investigationOrganisms.length >0) {
 						_.each(userInvestigationSelections.investigationOrganisms, function(organism) {
-							criteria["organisms"] = organism
+							criteria["selected_organisms"] = organism
 						})
+					}*/
+/*					if (userInvestigationSelections.investigationOrganisms.length == 1) {
+						criteria["selected_organisms"] = userInvestigationSelections.investigationOrganisms[0]
 					}
+					if (userInvestigationSelections.investigationOrganisms.length == 2) {
+						// criteria["selected_organisms"] = userInvestigationSelections.investigationOrganisms[1]
+						tempString = "[{selected_organisms:" + userInvestigationSelections.investigationOrganisms[0] + "},{selected_organisms:" + userInvestigationSelections.investigationOrganisms[1] + "}]"
+						criteria["$and"] = tempString
+							// ({ $and: [{selected_organisms:"scum"},{selected-organisms:"fuzzy_mold"}] })
+					}	*/				
 					if (userInvestigationSelections.investigationTemperature) {
 						criteria["temperature"] = userInvestigationSelections.investigationTemperature
 					}
@@ -1401,10 +1412,10 @@ WallCology = {
 									d = new Date(data.results[i].timestamp)
 									// datatables do not like undefined, so switched to empty string
 									if (data.results[i].motivation_description == null) {
-										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d)]
+										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d), data.results[i]._id]
 									}
 									else {
-										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d)]
+										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d), data.results[i]._id]
 									}
 									
 								}
@@ -1419,8 +1430,10 @@ WallCology = {
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
-														null,
-														null
+														{ "sWidth": "135px" },
+														{ "sWidth": "65px" },
+														//{ "SWidth": "1px" }
+														//{ "bVisible": false }
 													],
 
 										"aaData": investigationResultsArray	
