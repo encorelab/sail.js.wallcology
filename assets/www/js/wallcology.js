@@ -758,9 +758,9 @@ WallCology = {
 					selectedKeywords.push($(this).val());
 				}); 
 				                                         
-				// if (selectedType == 'undefined' || motivationForDescription == "" || headline == "" || selectedKeywords.length == 0){
-				// 					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
-				// 				} else { // Send the filled form to be saved
+				if (selectedType == 'undefined' || motivationForDescription == "" || headline == ""){
+					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
+				} else { // Send the filled form to be saved
 					                                                                            
 					                                              
 					// check to see if this is a new investigation motivation being created or an update
@@ -780,7 +780,7 @@ WallCology = {
 					$('div#investigation-motivation').hide();
 					$('div#investigation-setup').show();
 					
-				// }                                                                                      
+				}                                                                                      
 			})
 			
 			
@@ -853,6 +853,9 @@ WallCology = {
 				// 	}
 				// )
 				
+				Sail.app.observations.retrieveGugoGraphData()
+				
+				/*
 				$.ajax({
 					type: "GET",      
 					dataType: "jsonp",
@@ -861,30 +864,53 @@ WallCology = {
 					context: this,
 					success: function(data) { 
 						console.log(data)
+						returnedData = data
+						
+						graphData = [[]]; 
+						var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
+							xaxis: {      
+								min: 0,
+								max: 100
+							},
+							yaxis: {      
+							   min: 0,
+							   max: 100
+							}
+						});
+						
+						for (i in selectedOrganisms){
+							for (j in returnedData){ 
+								
+								if (returnedData[j].type == selectedOrganisms[i]){ 
+								
+									curType = returnedData[j].type;
+									curData = returnedData[j].data;  
+									curNewData = [];
+									for (k=1; k<=curData.length; k++){     
+										curNewData.push([k, curData[k-1]]);
+										// setTimeout ("updateGraph(curType, curNewData)", 1000);
+										// plot.setData(curNewData);
+										// plot.draw();
+									}							    
+									graphData.push({'label' : curType, 'data' : curNewData});
+									$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
+								}
+							}
+						}
 					}
 				}) 
-				               
+				*/              
 				
-				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
+				/*returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
 								 {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, 
 								 {"type":"blue-bug","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, 
 								 {"type":"green-bug","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, 
 								 {"type":"predator","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} 
-							   ];
+							   ];*/
 				// returnedData = [ {"type":"scum","data":[72, 55, 69]}, {"type":"fuzzy-mold","data": [23, 66, 39]} ];
 				          
 				
-			    graphData = [[]]; 
-			    var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
-					xaxis: {      
-						min: 0,
-						max: 100
-					},
-					yaxis: {      
-					   min: 0,
-					   max: 100
-					}
-				}); 
+			    
 			   
 				console.log(selectedOrganisms);
                        
@@ -918,25 +944,7 @@ WallCology = {
 
 
 				
-				for (i in selectedOrganisms){
-					for (j in returnedData){ 
-						
-						if (returnedData[j].type == selectedOrganisms[i]){ 
-						
-							curType = returnedData[j].type;
-							curData = returnedData[j].data;  
-							curNewData = [];
-							for (k=1; k<=curData.length; k++){     
-								curNewData.push([k, curData[k-1]]);
-								// setTimeout ("updateGraph(curType, curNewData)", 1000);
-								// plot.setData(curNewData);
-								// plot.draw();
-							}							    
-							graphData.push({'label' : curType, 'data' : curNewData});
-							$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
-						}
-					}
-				}  
+				  
 				      
 				
 				// function pause(millis) 
@@ -1606,6 +1614,52 @@ WallCology = {
 			    }
 			})//, "json")
 			
+		},
+		
+		retrieveGugoGraphData: function() {
+			$.ajax({
+				type: "GET",      
+				dataType: "json",
+				url: "/uic/gugo/wc_micro/micro.php",
+				data: {temp: "1", light: "1", humid: "1", scum: "72", fuzz: "63", se: "20", fe: "0", pred: "0"},
+				context: this,
+				success: function(data) { 
+					console.log(data)
+					returnedData = data
+					
+					graphData = [[]]; 
+					var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
+						xaxis: {      
+							min: 0,
+							max: 100
+						},
+						yaxis: {      
+						   min: 0,
+						   max: 100
+						}
+					});
+					
+					for (i in selectedOrganisms){
+						for (j in returnedData){ 
+							
+							if (returnedData[j].type == selectedOrganisms[i]){ 
+							
+								curType = returnedData[j].type;
+								curData = returnedData[j].data;  
+								curNewData = [];
+								for (k=1; k<=curData.length; k++){     
+									curNewData.push([k, curData[k-1]]);
+									// setTimeout ("updateGraph(curType, curNewData)", 1000);
+									// plot.setData(curNewData);
+									// plot.draw();
+								}							    
+								graphData.push({'label' : curType, 'data' : curNewData});
+								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
+							}
+						}
+					}
+				}
+			})
 		},
 		
 		addCountValues: function(countsArray) {
