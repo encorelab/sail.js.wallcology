@@ -98,8 +98,8 @@ div#tabs-5 div#investigation-results div.action-buttons button#save-investigatio
 }   
 
 div#tabs-5 div#investigation-results div#investigation-results-graph {
-	width: 500px;
-	height: 300px;
+	width: 750px;
+	height: 350px;
 	background-color: white;
 	float: left;
 }
