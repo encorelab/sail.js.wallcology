@@ -930,9 +930,12 @@ WallCology = {
 
 			 // *******************************  Investigation What Others Did Page **********************************
 
-			var invViewSelectedOrganism = null
 			var invViewSelectedType = null
-			
+			var invViewSelectedOrganisms = []
+			var invViewSelectedTemperature = null
+			var invViewSelectedLightLevel = null
+			var invViewSelectedHumidity = null
+			// then check for null in generateInvestDT
 			
 			
 			$("#investigation-pages button#what-others-did-investigation").click(function() {
@@ -941,7 +944,7 @@ WallCology = {
 				Sail.app.observations.generateInvestigationsDT({})
 			});   
 			      
-			// If the back-button is clicked on the "What others did page"
+			// If the back-button is clicked on the "What others did page", clear all values
 			$('#view-investigations div.action-buttons button.back-button').click(function () {
 				$('#view-investigations button').removeClass('selected investigation-button');
 				$('#view-investigations table#what-others-said-organisms td').removeClass('selected');
@@ -956,10 +959,11 @@ WallCology = {
 				
 				// onClick, find the values of all of the pressed buttons and regen the table
 				invViewSelectedType = $(this).attr('value');				
-				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganism:invViewSelectedOrganism})
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			});
 			
-			$('#view-investigations table#what-others-said-organisms td').click(function (){
+			$('#view-investigations table#what-others-said-organisms td').click(function(){
 				if ($(this).hasClass('selected') == true){
 					$(this).removeClass('selected');
 					$(this).css('border', 'none');
@@ -968,8 +972,12 @@ WallCology = {
 					$(this).css('border', '1px solid black');
 				}
 				
-				invViewSelectedOrganism = $(this).attr('value')
-				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganism:invViewSelectedOrganism})
+				$('#what-others-said-organisms .selected').each(function () {
+					invViewSelectedOrganisms.push(this.id)
+				})
+				
+				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
+					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})	
 			});      
 			
 			$('#view-investigations #investigation-what-others-said-environment-temperature button').click(function(){
@@ -1346,16 +1354,35 @@ WallCology = {
 			$.ajax({
 				type: "GET",
 				url: "/mongoose/wallcology/observations/_count",
-				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "investigation_type":userInvestigationSelections.investigationType,
-					"organisms":userInvestigationSelections.investigationOrganism})},
-					/*"temperature":userInvestigationSelections.TEMP, "light":userInvestigationSelections.LIGHT, "humidity":userInvestigationSelections.HUMIDITY
-*/							
+				data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup"})},
+							
 				context: userInvestigationSelections,
 				success: function(data) {
 					
-					criteria = {"run.name":Sail.app.run.name, "type":"investigation_setup", "investigation_type":userInvestigationSelections.investigationType,
-							"organisms":userInvestigationSelections.investigationOrganism}
-					//criteria["comments"] = {$ne: ""}
+					criteria = {"run.name":Sail.app.run.name, "type":"investigation_setup"}
+
+					// add additional selectors if they are not null (from #view-investigations section)
+					// these will work with both undefined and null?
+					if (userInvestigationSelections.investigationType) {
+						criteria["investigation_type"] = userInvestigationSelections.investigationType
+					}
+					
+					// START HERE.THIS DOES NOT WORK
+					if (userInvestigationSelections.investigationOrganisms.length >0) {
+						_.each(userInvestigationSelections.investigationOrganisms, function(organism) {
+							criteria["organisms"] = organism
+						})
+					}
+					if (userInvestigationSelections.investigationTemperature) {
+						criteria["temperature"] = userInvestigationSelections.investigationTemperature
+					}
+					if (userInvestigationSelections.investigationLightLevel) {
+						criteria["light_level"] = userInvestigationSelections.investigationLightLevel
+					}
+					if (userInvestigationSelections.investigationHumidity) {
+						criteria["humidity"] = userInvestigationSelections.investigationHumidity
+					}
+
 					this.criteria = criteria
 
 			    	if (data.ok === 1) {			    		

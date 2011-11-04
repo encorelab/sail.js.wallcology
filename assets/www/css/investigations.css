@@ -177,6 +177,9 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations .back-button {
 	width: 100px;
+	background: url("") repeat scroll 0 0 #F1433A;
+	border: 1px solid #F1433A;   
+	color: white;
 }
 
 
