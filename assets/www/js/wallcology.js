@@ -856,19 +856,103 @@ WallCology = {
 				$.ajax({
 					type: "GET",      
 					dataType: "jsonp",
-					url: "http://ltg.evl.uic.edu/gugo/wc_micro/micro.php",
+					url: "/uic/gugo/wc_micro/micro.php",
 					data: {temp: "1", light: "1", humid: "1", scum: "72", fuzz: "63", se: "20", fe: "0", pred: "0"},
-				    context: this,
-				  	success: function(data) { 
-						console.log(data);
+					context: this,
+					success: function(data) { 
+						console.log(data)
 					}
 				}) 
 				               
 				
-				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, {"type":"fuzz","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, {"type":"se","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, {"type":"fe","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"type":"pred","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} ];
-				                 
-				console.log(returnedData[0].type);			                                                                         
-				$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), [ [[0, 0], [1, 1], [2, 1], [3, 0]], [[0.4, 1], [2.2, 1.3]] ], { });			 
+				returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
+								 {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, 
+								 {"type":"blue-bug","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, 
+								 {"type":"green-bug","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, 
+								 {"type":"predator","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} 
+							   ];
+				// returnedData = [ {"type":"scum","data":[72, 55, 69]}, {"type":"fuzzy-mold","data": [23, 66, 39]} ];
+				          
+				
+			    graphData = [[]]; 
+			    var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
+					xaxis: {      
+						min: 0,
+						max: 100
+					},
+					yaxis: {      
+					   min: 0,
+					   max: 100
+					}
+				}); 
+			   
+				console.log(selectedOrganisms);
+                       
+				
+				// var seconds = 10;
+				// for (s=1; s<=seconds; s++){
+				// 	for (i in selectedOrganisms){
+				// 		for (j in returnedData){ 
+				// 
+				// 			if (returnedData[j].type == selectedOrganisms[i]){ 
+				// 
+				// 				curType = returnedData[j].type;
+				// 				curData = returnedData[j].data;  
+				// 				curNewData = [];                   
+				// 				console.log([s, curData[s-1]]);
+				// 				curNewData.push([s, curData[s-1]]);  
+				// 				// plot.setData([s, curData[s-1]]);
+				// 				plot.setData(
+				// 					{   
+				// 						data : [s, curData[s-1]]
+				// 					});
+				// 				plot.draw();
+				// 				
+				// 				// graphData.push({'label' : curType, 'data' : curNewData});
+				// 				// $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);    
+				// 				// break;
+				// 			}
+				// 		}
+				// 	}	
+				// } 
+
+
+				
+				for (i in selectedOrganisms){
+					for (j in returnedData){ 
+						
+						if (returnedData[j].type == selectedOrganisms[i]){ 
+						
+							curType = returnedData[j].type;
+							curData = returnedData[j].data;  
+							curNewData = [];
+							for (k=1; k<=curData.length; k++){     
+								curNewData.push([k, curData[k-1]]);
+								// setTimeout ("updateGraph(curType, curNewData)", 1000);
+								// plot.setData(curNewData);
+								// plot.draw();
+							}							    
+							graphData.push({'label' : curType, 'data' : curNewData});
+							$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
+						}
+					}
+				}  
+				      
+				
+				// function pause(millis) 
+				// {
+				//         var date = new Date();
+				//         var curDate = null;
+				// 
+				//         do { curDate = new Date(); } 
+				//         while(curDate-date < millis)
+				// }
+				// 
+				// 
+				// function updateGraph(curType, curNewData){
+				// 	graphData.push({'label' : curType, 'data' : curNewData});
+				// 	$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);
+				// }   
 			})
 			
 			
@@ -992,7 +1076,8 @@ WallCology = {
     	
     	
 // ****************************************** HELPER FUNCTIONS ***************************************************
-
+         
+	   
 		// this doesn't work in Safari, for some reason
 		dateString: function(d) {
 			 function pad(n){return n<10 ? '0'+n : n}
