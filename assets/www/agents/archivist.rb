@@ -27,9 +27,30 @@ class Archivist < Sail::Agent
     end
     
     event :changed_observation? do |stanza, data|
+      # this will create the observation obj from the data received in the XMPP stanza
       observation = data['payload']
       ['origin', 'run', 'timestamp'].each{|meta| observation[meta] = data[meta]}
-      store_observation_in_mongo(observation)
+      
+      # check if there is an object with the _id, which was received in the stanza, is stored in the db
+      log "observation id in stanza #{observation['_id']}"
+      # (OrderedHash, Nil) find_one(spec_or_object_id = nil, opts = {})
+      observationFromDb = @mongo.collection('observations').find_one({"_id" => observation['_id']})
+      
+      if observationFromDb != nil
+        log "Observation hash for id #{observation['_id']} from mongo db: #{observationFromDb}"
+      else
+        log "No observation found for id: #{observation['_id']}"
+      end
+      
+      # TODO iterate over observation and copy all fields to observationFromDb then store observationFromDb
+      observation.each_pair do |k,v|
+        observationFromDb[k] = v
+      end
+      
+      log "observation hash: #{observation}"
+      log "observationFromDb hash after copying in observation hash: #{observationFromDb}"
+      
+      store_observation_in_mongo(observationFromDb)
     end
     
     message :error? do |err|
