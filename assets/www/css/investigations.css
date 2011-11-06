@@ -187,26 +187,101 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations-details {
 	margin-left: 20px;
+	padding-top: 30px;
 }
 
-#view-investigations-details .details-title {
+#view-investigations-details .headline {
 	color: #F1433A;
-	width: 20%;
+	width: 165px;
 	float: left;
+	font-size: 20px;
 }
 
-#view-investigations-details .layout-table {
-	width: 680px;
+#view-investigations-details .headline-content {
+	font-size: 20px;
+}
+
+#view-investigations-details .layout-table-top {
+	margin-top: 10px;
+	width: 735px;
+}
+
+#view-investigations-details .layout-table-bottom {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 735px;
 }
 
 #view-investigations-details .table-cell {
-	width: 300px;
-	height: 200px;
+	margin-top: 8px;
+	width: 337px;
+	height: 115px;
+	padding: 8px;
+	background-color: rgba(255,102,102,0.3);
 }
 
+#view-investigations-details .selected-variables {
+	margin-top: 20px;
+}
+
+#view-investigations-details .selected-variables-content {
+	margin-top: 8px;
+	padding: 8px;
+	width: 720px;
+	height: 280px;
+	background-color: rgba(255,102,102,0.3);
+}
+
+#view-investigations-details .graph-box {
+	margin-top: 20px;
+	margin-right: 10px;
+	height: 240px;
+	width: 340px;
+	background-color: white;
+	float: right;
+}
+
+#view-investigations-details .image {
+	height: 60px;
+	width: 60px;
+}
+
+#view-investigations-details .variable-table {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	float: clear;	
+}
+
+#view-investigations-details .variable-table-cell {
+	padding: 4px;
+}
+
+#view-investigations-details .conditions-titles-box {
+	height: 30px;
+}
+
+#view-investigations-details .temperature {
+	margin-left: 30px;
+	float: left;
+}
+
+#view-investigations-details .light-level {
+	margin-left: 30px;
+	float: left;
+}
+
+#view-investigations-details .humidity {
+	margin-left: 30px;
+	float: left;
+}
+
+#view-investigations-details .add-comment {
+	margin-top: 20px;
+}
 
 #view-investigations-details .add-comment-text-field {
-	width: 600px;
+	margin-top: 8px;
+	width: 715px;
 	height: 70px;
 }
 
@@ -216,9 +291,9 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 #view-investigations-details .back-button {
-	margin-left: 10px;
+	margin-left: 20px;
 }
 
 #view-investigations-details .save-button {
-	margin-left: 450px;
+	margin-left: 480px;
 }
