@@ -957,8 +957,8 @@ WallCology = {
 				detailsMotivation = $(this).children(':first').html()
 				detailsTime = $(this).children(':last').html()
 				
-				//START HERE, CONTINUE WITH CSS, FIX FLOAT LEFT
 				// TODO fix context, add detailsTime to decrease nonuniqueness issues
+				// TODO fix overlap of tabs with discuss button
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_find",
@@ -970,6 +970,9 @@ WallCology = {
 				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
 				    		$('#view-investigations-details .motivation-content').html(detailsMotivation)
 				    		$('#view-investigations-details .hypothesis-content').html(data.results[0].hypothesis)
+				    		$('#view-investigations-details .temperature-content').html(data.results[0].temperature)
+				    		$('#view-investigations-details .light-level-content').html(data.results[0].light_level)
+				    		$('#view-investigations-details .humidity-content').html(data.results[0].humidity)
 				    		$('#view-investigations-details .description-content').html(data.results[0].description)
 				    		$('#view-investigations-details .interpretation-content').html(data.results[0].interpretation)
 				    	}
