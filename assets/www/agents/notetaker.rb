@@ -22,7 +22,8 @@ class Notetaker < Sail::Agent
     
     event :ck_new_note? do |stanza, sev|
       note = {
-        :content => sev['payload'],
+        :content => sev['payload']['content'],
+        :pos     => sev['payload']['pos'], # may be nil
         :author  => sev['origin'],
         :timestamp => sev['timestamp'],
         :run => sev['run'],
@@ -32,6 +33,21 @@ class Notetaker < Sail::Agent
       }
       
       store_note_in_mongo(note)
+    end
+    
+    event :ck_position_note? do |stanza, sev|
+      id = sev['payload']['id']
+      note = @mongo.collection('notes').find_one(:_id => id)
+      
+      if note
+        note['pos'] = sev['payload']['pos']
+        
+        log "storing new position for note #{id.inspect} at #{note['pos'].inspect}"
+
+        store_note_in_mongo(note)
+      else
+        log "received new position for note #{id.inspect}, but the note doesn't exist in the database!", :ERROR
+      end
     end
     
     message :error? do |err|
