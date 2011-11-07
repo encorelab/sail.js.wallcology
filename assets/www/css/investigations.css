@@ -298,6 +298,10 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 	height: 30px;
 }
 
+#view-investigations-details .selected {
+	border: 1px solid red;
+}
+
 #view-investigations-details .temperature {
 	margin-left: 30px;
 	float: left;
@@ -314,7 +318,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 #view-investigations-details .add-comment {
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 #view-investigations-details .add-comment-text-field {
