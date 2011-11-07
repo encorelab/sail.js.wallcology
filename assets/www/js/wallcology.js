@@ -713,7 +713,7 @@ WallCology = {
 				}); 
 				                                         
 				if (typeof selectedType == 'undefined' || motivationForDescription == "" || headline == ""){
-					alert ("You must choose an investigation type, describe it, give it a headline and chose the keywords which relate to it before moving forward.");
+					alert ("Please choose an investigation type, describe it and give it a headline");
 				} else { // Send the filled form to be saved                                    
 					                                              
 					// check to see if this is a new investigation motivation being created or an update
@@ -787,7 +787,7 @@ WallCology = {
 				hypothesis = $('div#investigation-setup textarea#investigation-setup-hypothesis').val();
 				
 				if (selectedOrganisms.length == 0 || typeof temperature == "undefined" || typeof lightLevel == "undefined" || typeof humidity == "undefinied" || hypothesis == ""){
-					alert ("You need to choose all the required filters and fill in your hypothesis before you can move forward");
+					alert ("Please choose all the required filters and fill in your hypothesis");
 				} else {   
 					// Submit the data
 					Sail.app.observations.newInvestigationSetup(dbId, selectedOrganisms, temperature, lightLevel, humidity, hypothesis);
@@ -847,7 +847,7 @@ WallCology = {
 				interpretation = $('div#investigation-pages div#investigation-results textarea#investigation-results-interpretation').val();
 				
 				if (description == "" || interpretation == "") {
-					alert ("Please fill the Description & Interpretation sections and then hit 'SAVE'.");
+					alert ("Please fill the Description & Interpretation sections and then hit 'SAVE'");
 				}else {                   
 					
 					// Save the reults    
@@ -959,6 +959,7 @@ WallCology = {
 				
 				// TODO fix context, add detailsTime to decrease nonuniqueness issues
 				// TODO fix overlap of tabs with discuss button
+				// TODO import the graph to view details (or more likely, recreate)
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_find",
