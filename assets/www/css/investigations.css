@@ -51,12 +51,26 @@ div#tabs-5 button.investigation-button {
 
 /** ********************************* Investigation Motivation Page *************************** */
    
-div#tabs-5 div#investigation-motivation div.action-buttons {                             
-	width: 660px;
+#investigation-motivation {
+	margin-left: 20px;
 }
 
-div#tabs-5 div#investigation-motivation div.action-buttons {
+div#tabs-5 div#investigation-motivation div.action-buttons {                             
+	width: 640px;
 	margin-top: 30px;
+}
+
+div#tabs-5 div#investigation-motivation .standard-button {
+	width: 100px;
+}
+
+div#tabs-5 div#investigation-motivation .back-button {
+	margin-left: 20px;
+	width: 100px;
+}                                                                  
+
+div#tabs-5 div#investigation-motivation .next-button {
+	width: 100px;
 }                                                                  
 
 div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigation-setup {
@@ -66,20 +80,36 @@ div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigati
 
 /** ********************************* Investigation Setup Page *************************** */
 
+#investigation-setup {
+	margin-left: 20px;
+}
+
 div#investigation-pages div#investigation-setup table#investigation-organism-table {
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 150px;
 	margin-bottom: 25px;
 }          
 
 
 div#investigation-pages div#investigation-setup div.investigation-environment-filter {
 	float: left; 
-	width: 200px;
-}  
+	width: 240px;
+}
+
+#investigation-setup .image {
+	width: 80px;
+	height: 80px;
+}
+
+#investigation-setup .standard-button {
+	width: 100px;
+}
+
+#investigation-setup .back-button {
+	margin-left: 20px;
+}
 
 div#tabs-5 div#investigation-setup div.action-buttons {                             
-	width: 660px;
+	width: 640px;
 }  
 
 div#tabs-5 div#investigation-setup div.action-buttons button#to-investigation-results {
@@ -88,9 +118,15 @@ div#tabs-5 div#investigation-setup div.action-buttons button#to-investigation-re
 
                                   
 /** ********************************* Investigation Results Page *************************** */
+
+#investigation-results {
+	margin-left: 20px;
+}
+
 div#tabs-5 div#investigation-results div.action-buttons {                             
-	width: 660px;   
+	width: 640px;   
 	margin-top: 25px;
+	margin-left: 20px;
 } 
 
 div#tabs-5 div#investigation-results div.action-buttons button#save-investigation-results {
@@ -113,7 +149,9 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 	margin-top: 100px;
 }
 
-
+#investigation-results .standard-button {
+	width: 100px;
+}
 
 
 

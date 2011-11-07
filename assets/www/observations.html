@@ -1038,11 +1038,11 @@
 					
 					<p style="float: left; width: 100%;"> <b> Describe the motivation for your new investigation.</b> I have a <b><span id="selected-investigation-type">...</span></b> I want to investigate. </p> 
 					<br/><br/>
-					<textarea id="motivation-description" cols="103" rows="5"></textarea> 
+					<textarea id="motivation-description" cols="105" rows="5"></textarea> 
 					 
 					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
-						<span style="float: left; width: 100px"> Headline </span>
-						<input style="float: left" size="90" id="headline-title" type="text"/>
+						<span style="float: left; width: 75px"> <b>Headline</b> </span>
+						<input style="float: left" size="93" id="headline-title" type="text"/>
 					</div>   
 					
 					<!-- <div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
@@ -1092,15 +1092,15 @@
 				<div id="investigation-setup">
  					<img src="/images/new_invest_setup.png"> 
  					<p><b> Organisms </b></p>
-					<p> Select the organisms you would like to add to your experiment (choose one or more)</p>
+					<p> Select the organisms you would like to add to your experiment (choose one or more):</p>
 					
 					<table id="investigation-organism-table">
 						<tr>
-							<td value="scum"> <img src="/images/icon_0007_scum.png"> </td>
-							<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png"> </td>
-							<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png"> </td>
-							<td value="green-bug"> <img src="/images/icon_0008_green-bug.png"> </td>
-							<td value="predator" class="predator-reveal"> <img src="/images/icon_0005_predator.png"> </td>							
+							<td value="scum"> <img src="/images/icon_0007_scum.png" class="image"> </td>
+							<td value="fuzzy-mold"> <img src="/images/icon_0006_fuzzy-mold.png" class="image"> </td>
+							<td value="blue-bug"> <img src="/images/icon_0000_blue-bug.png" class="image"> </td>
+							<td value="green-bug"> <img src="/images/icon_0008_green-bug.png" class="image"> </td>
+							<td value="predator" class="predator-reveal"> <img src="/images/icon_0005_predator.png" class="image"> </td>							
 						</tr>
 					</table> 
 					
@@ -1131,12 +1131,12 @@
 						<p> <b> Hypothesis </b> </p>  
 						<p> Here's what I think will happen to my populations </p>
 					
-						<textarea id="investigation-setup-hypothesis" cols="80" rows="8"></textarea>
+						<textarea id="investigation-setup-hypothesis" cols="105" rows="8"></textarea>
 					</div>
 					
 					<div class="action-buttons">
 						<button id="back-to-investigation-motivation" class="back-button standard-button investigation-button">BACK</button>
-						<button id='to-investigation-results' class="next-button investigation-button">NEXT</button>
+						<button id='to-investigation-results' class="next-button standard-button investigation-button">NEXT</button>
 					</div>
 				</div>		 
 
@@ -1146,7 +1146,7 @@
                 	<img src="/images/new_invest_results.png">
 
 					
-					<div style="float: left; width: 100%; margin-bottom: 25px">
+					<div style="float: left; width: 90%; margin-bottom: 25px">
 						<div id="investigation-results-graph">	
 						
 						
@@ -1158,17 +1158,17 @@
 					
 					<p> <b> Description </b> What happened? </p>
 					
-					<textarea id="investigation-results-description" cols="80" rows="5"></textarea>
+					<textarea id="investigation-results-description" cols="110" rows="5"></textarea>
 						
 						
 					<p> <b> Interpretation </b> Can you explain why it happened? </p>
 
-					<textarea id="investigation-results-interpretation" cols="80" rows="5"></textarea>	
+					<textarea id="investigation-results-interpretation" cols="110" rows="5"></textarea>	
 										
 					
 					<div class="action-buttons">
 						<button id="back-to-investigation-setup" class="back-button standard-button investigation-button">BACK</button>
-						<button id='save-investigation-results' class="save-button investigation-button">SAVE</button>
+						<button id='save-investigation-results' class="save-button standard-button investigation-button">SAVE</button>
 					</div>
 				</div>		                                               
 
