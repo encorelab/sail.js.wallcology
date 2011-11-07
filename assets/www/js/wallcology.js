@@ -802,7 +802,7 @@ WallCology = {
 					lightLevel = lightLevel == "high" ? 1 : 0;
 					humidity = humidity == "high" ? 1 : 0;
 
-					Sail.app.observations.retrieveGugoGraphData(temperature, lightLevel, humidity)
+					Sail.app.observations.retrieveGugoGraphData(selectedOrganisms, temperature, lightLevel, humidity)
 
 				}       
 				
@@ -839,8 +839,6 @@ WallCology = {
 			})                                                                     
 			
 	
-
-			
 			// When the 'SAVE' button is clicked we need to save the investigation's results
 			$('div#investigation-pages div#investigation-results div.action-buttons button#save-investigation-results').click(function() {
 				description = $('div#investigation-pages div#investigation-results textarea#investigation-results-description').val();
@@ -956,10 +954,9 @@ WallCology = {
 				$('#view-investigations-details').show()
 				detailsMotivation = $(this).children(':first').html()
 				detailsTime = $(this).children(':last').html()
+				$('#view-investigations-details .graph-box').html("")
 				
 				// TODO fix context, add detailsTime to decrease nonuniqueness issues
-				// TODO fix overlap of tabs with discuss button
-				// TODO import the graph to view details (or more likely, recreate)
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_find",
@@ -976,6 +973,19 @@ WallCology = {
 				    		$('#view-investigations-details .humidity-content').html(data.results[0].humidity)
 				    		$('#view-investigations-details .description-content').html(data.results[0].description)
 				    		$('#view-investigations-details .interpretation-content').html(data.results[0].interpretation)
+
+				    		// outlines for correct organisms
+				    		$('#view-investigations-details .selected').removeClass('selected')
+				    		for (i = 0; i < data.results[0].selected_organisms.length; i++) {
+				    			tempString = '#view-investigations-details .' + data.results[0].selected_organisms[i]
+				    			$(tempString).addClass('selected')
+				    		}				    		
+				    		
+				    		temperature = data.results[0].temperature == "high" ? 1 : 0
+				    		lightLevel = data.results[0].light_level == "high" ? 1 : 0
+				    		humidity = data.results[0].humidity == "high" ? 1 : 0
+				    		
+							Sail.app.observations.retrieveGugoGraphData(data.results[0].selected_organisms, temperature, lightLevel, humidity)
 				    	}
 				    	else {
 							console.log("Mongoose request failed")
@@ -1428,8 +1438,6 @@ WallCology = {
 														{ "sWidth": "500px" },
 														{ "sWidth": "135px" },
 														{ "sWidth": "65px" },
-														//{ "SWidth": "1px" }
-														//{ "bVisible": false }
 													],
 
 										"aaData": investigationResultsArray	
@@ -1449,69 +1457,7 @@ WallCology = {
 			    }
 			})
 			
-		},		
-		// generateInvestigationDT: function(investigationType, organism, temperature, lightLevel, humidity) {
-		// 	// we do a count REST call to determine how many results to expect
-		// 	// (setting batch_size in _find)
-		// 	$.ajax({
-		// 		type: "GET",
-		// 		url: "/mongoose/wallcology/observations/_investigation",
-		// 		data: {criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation", "organism":organism})},
-		// 		context: this,
-		// 		success: function(data) {
-		// 			criteria = {"run.name":Sail.app.run.name, "type":"investigation","organism":organism}
-		// 			criteria[this.aspect] = {$ne: ""}
-		// 				
-		// 	    	if (data.ok === 1) {			    		
-		// 				batchSize = 0
-		// 				batchSize = data.count
-		// 				
-		// 				$.ajax({
-		// 					type: "GET",
-		// 					url: "/mongoose/wallcology/observations/_find",
-		// 					data: { criteria: JSON.stringify(criteria), batch_size: batchSize },
-		// 					context: this,
-		// 					success: function(data) {  
-		// 						investigationResultsArray = []
-		// 						for (i=0;i<data.results.length;i++) {
-		// 							d = new Date(data.results[i].timestamp)
-		// 							investigationResultsArray[i] = [data.results[i][this.aspect], data.results[i].origin, Sail.app.observations.dateString(d)]
-		// 						}
-		// 
-		// 				    	if (data.ok === 1) {			    		
-		// 							$('#aggregate-investigation-table').dataTable({
-		// 								"aaSorting": [[2,'desc']],
-		// 								"bAutoWidth": false,										
-		// 								"bLengthChange": false,
-		// 								"bDestroy" : true,		
-		// 								"bJQueryUI": true,
-		// 								"iDisplayLength": 6,
-		// 								"sPaginationType": "full_numbers",
-		// 								"aoColumns": [        
-		// 												{ "sWidth": "500px" },
-		// 												null,
-		// 												null
-		// 											],
-		// 
-		// 								"aaData": investigationResultsArray	
-		// 							})
-		// 				    	}
-		// 				    	else {
-		// 							console.log("Mongoose request failed")
-		// 							return false
-		// 						}
-		// 					}
-		// 				})//, "json")	
-		// 	    	}
-		// 	    	else {
-		// 				console.log("Mongoose request failed")
-		// 				return false
-		// 			}
-		// 		}
-		// 	})
-		// 	
-		// }, 
-		
+		},
 		
 		retrieveCountsGraphData: function() {
 			// we do a count REST call to determine how many results to expect
@@ -1559,18 +1505,44 @@ WallCology = {
 			
 		},
 		
-		retrieveGugoGraphData: function(temperature, lightLevel, humidity) { 
+		retrieveGugoGraphData: function(selectedOrganisms, temperature, lightLevel, humidity) {
+			scumCount = "0"
+			fuzzyMoldCount = "0"
+			blueBugCount = "0"
+			greenBugCount = "0"
+			predatorCount = "0"
+			// graphCounts: {scumCount: 0, fuzzyMoldCount: 0, blueBugCount: 0, greenBugCount: 0, predatorCount: 0}
+			// scum: "72", fuzz: "63", se: "20", fe: "15", pred: "10"
+			// Gugo's data needs either above numbers or 0 passed with ajax call
+			// there must be a nicer way to do this :/
+			for (i=0; i<selectedOrganisms.length; i++) {
+				if (selectedOrganisms[i] == "scum") {scumCount = "72"}
+				else if (selectedOrganisms[i] == "fuzzy-mold") {fuzzyMoldCount = "63"}
+				else if (selectedOrganisms[i] == "blue-bug") {blueBugCount = "20"}
+				else if (selectedOrganisms[i] == "green-bug") {greenBugCount = "15"}
+				else if (selectedOrganisms[i] == "predator") {predatorCount = "10"}
+			}
 			
 			$.ajax({
 				type: "GET",      
 				dataType: "json",
 				url: "/uic/gugo/wc_micro/micro.php",
-				data: {temp: temperature, light: lightLevel, humid: humidity, scum: "72", fuzz: "63", se: "20", fe: "15", pred: "0"},
+				data: {temp: temperature, light: lightLevel, humid: humidity, scum: scumCount, fuzz: fuzzyMoldCount, se: blueBugCount, fe: greenBugCount, pred: predatorCount},
+				// data: {temp: temperature, light: lightLevel, humid: humidity, scum: scumCount, fuzz: "63", se: "20", fe: "15", pred: "0"},
 				context: this,
 				success: function(data) { 
 					returnedData = data
+
+/*					var vegetation = [ {label: "scum", data: scumForGraph, color: "yellow"}, {label:"mold", data: moldForGraph, color: "#00FF00"} ]
+
+					// Configuration of graph drawing settings
+					graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
+									legend: {position: "nw", backgroundOpacity: 0} }
+					$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)*/
+			
 					
-					graphData = [[]]; 
+					graphData = [[]];
+					
 					var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
 						xaxis: {      
 							min: 0,
@@ -1612,13 +1584,18 @@ WallCology = {
 								}
 								
 								graphData.push({'label' : '<img style="width: 30px" src="'+ legendImg +'"/>', 'data' : curNewData});
-								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData); 
+								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);
+								// this is an ugly workaround, sorry
+								$.plot($("#view-investigations-details .graph-box"), graphData)
 							}
 						}
 					}
+					// $.plot($("#view-counts .creature-graph"), creatures, graphConfig)
+
 				}
 			})
 		},
+
 		
 		addCountValues: function(countsArray) {
 			// add up values for scum
