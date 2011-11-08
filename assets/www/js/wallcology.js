@@ -1543,18 +1543,6 @@ WallCology = {
 					
 					graphData = [[]];
 					
-					var plot = $.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, {
-						xaxis: {      
-							min: 0,
-							max: 100
-						},
-						yaxis: {      
-						   min: 0,
-						   max: 100
-						}
-					});             
-					
-					
 					for (i in selectedOrganisms){
 						for (j in returnedData){ 
 							
@@ -1570,28 +1558,33 @@ WallCology = {
 									// plot.draw();
 								}							    
 								
-								legendImg = null;                     
+								legendImg = null;    
+								legendColor = null;
 								if (curType == "scum"){
 									legendImg = "/images/icon_0007_scum.png";
+									legendColor = "yellow"
 								} else if (curType == "fuzzy-mold"){
 									legendImg = "/images/icon_0006_fuzzy-mold.png";
+									legendColor = "#00FF00"
 								} else if (curType == "blue-bug"){
 		                            legendImg = "/images/icon_0000_blue-bug.png";
+		                            legendColor = "blue"
 								} else if (curType == "green-bug"){
 		                            legendImg = "/images/icon_0008_green-bug.png";
+		                            legendColor = "green"
 								} else if (curType == "predator"){
 									legendImg = "/images/icon_0005_predator.png";
+									legendColor = "black"
 								}
-								
-								graphData.push({'label' : '<img style="width: 30px" src="'+ legendImg +'"/>', 'data' : curNewData});
-								$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData);
-								// this is an ugly workaround, sorry
-								$.plot($("#view-investigations-details .graph-box"), graphData)
+
+								graphData.push({'label' : '<img style="width: 30px" src="'+ legendImg +'"/>', 'data' : curNewData, color: legendColor});
 							}
 						}
 					}
-					// $.plot($("#view-counts .creature-graph"), creatures, graphConfig)
-
+					graphConfig = { xaxis: {show: false}, yaxis: {show: false}, lines: {show: true} }
+					$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, graphConfig);
+					// this is an ugly workaround, sorry
+					$.plot($("#view-investigations-details .graph-box"), graphData, graphConfig)
 				}
 			})
 		},
