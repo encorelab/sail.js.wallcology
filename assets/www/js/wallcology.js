@@ -60,7 +60,7 @@ WallCology = {
 			
             $('#tabs').tabs()
             $('#tabs').show()
-            $('#tabs').tabs({ selected: 4 });			// for testing, sets default open tab
+            $('#tabs').tabs({ selected: 0 });			// for testing, sets default open tab
             var $tabs = $('#tabs').tabs()
             
             // initial context
@@ -925,10 +925,9 @@ WallCology = {
 					$('#view-investigations table#what-others-said-organisms td').css('border', 'none');
 					$(this).addClass('selected');
 					$(this).css('border', '1px solid black');
-				}				
+				}					
 				
 				invViewSelectedOrganisms = $('#what-others-said-organisms .selected').attr('value')
-
 				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
 					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			});      
@@ -983,7 +982,15 @@ WallCology = {
 								}
 				    		}
 				    		
+				    		// fill the text on the page from the DB results
 				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
+				    		if (data.results[0].investigation_type == "theory") {
+				    			$('#view-investigations-details .motivation-title').html('<b>Theory</b>')
+				    		}
+				    		if (data.results[0].investigation_type == "question") {
+				    			$('#view-investigations-details .motivation-title').html('<b>Question</b>')
+				    		}
+				    		// $('#view-investigations-details .motivation-title').html('<b>' + data.results[0].investigation_type + '</b>')
 				    		$('#view-investigations-details .motivation-content').html(detailsMotivation)
 				    		$('#view-investigations-details .hypothesis-content').html(data.results[0].hypothesis)
 				    		$('#view-investigations-details .temperature-content').html(data.results[0].temperature)
@@ -1024,9 +1031,9 @@ WallCology = {
 			})  
 			
 			$('#view-investigations-details .action-buttons .save-button').click(function () {
-				comments = $('#view-investigations-details .add-comment-text-field').val() + '\r'
+/*				comments = $('#view-investigations-details .add-comment-text-field').val() + '\r'
 				Sail.app.observations.changedInvestigationResult($('#view-investigation-db-id').val(), comments)
-				$('#view-investigation-db-id').attr("value", "null")
+				$('#view-investigation-db-id').attr("value", "null")*/
 				$('#view-investigations-details').hide()
 				$('#investigation-menu-page').show()
 			})
@@ -1388,7 +1395,7 @@ WallCology = {
 					criteria = {"run.name":Sail.app.run.name, "type":"investigation_setup"}
 
 					// add additional selectors if they are not null (from #view-investigations section)
-					// these will work with both undefined and null?
+					// these will work with both undefined and null? That should never happen
 					if (userInvestigationSelections.investigationType) {
 						criteria["investigation_type"] = userInvestigationSelections.investigationType
 					}
@@ -1421,29 +1428,35 @@ WallCology = {
 								investigationResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
-									// datatables do not like undefined, so switched to empty string
-									if (data.results[i].motivation_description == null) {
-										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d)]
+									// datatables do not like undefined, so switched to empty string... but this should never happen
+									if (data.results[i].motivation_description == null && data.results[i].interpretation == null) {
+										investigationResultsArray[i] = ["", "", data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									else if (data.results[i].motivation_description == null) {
+										investigationResultsArray[i] = ["", data.results[i].interpretation, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}
+									else if (data.results[i].interpretation == null) {
+										investigationResultsArray[i] = [data.results[i].motivation_description, "", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 									else {
-										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}
-									
+										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].interpretation, data.results[i].origin, Sail.app.observations.dateString(d)]
+									}									
 								}
 
 						    	if (data.ok === 1) {			    		
 									$('#investigations-datatable').dataTable({
-										"aaSorting": [[2,'desc']],
+										"aaSorting": [[3,'desc']],
 										"bAutoWidth": false,
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
-										"iDisplayLength": 8,										
+										"iDisplayLength": 6,										
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
-														{ "sWidth": "500px" },
+														{ "sWidth": "300px" },
+														{ "sWidth": "300px" },
 														null,
-														null,
+														null
 													],
 
 										"aaData": investigationResultsArray	
