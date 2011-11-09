@@ -209,7 +209,12 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations .standard-button {
 	width: 100px;
-}	
+}
+
+#view-investigations .image {
+	width: 80px;
+	height: 80px;
+}
 
 #view-investigations #view-investigation-organism-selectors {
 	width: 100%
@@ -221,7 +226,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 #view-investigations #what-others-said-organisms {
 	margin-left: auto;
 	margin-right: auto;
-	width: 550px;
+	width: 450px;
 }                    
 
 #view-investigations .investigation-environment-filter {
