@@ -114,6 +114,16 @@ WallCology = {
             		    defaultTags: ['Populations']
             		})
             	}
+            	else if (ui.index == 4) {
+            		$(Sail.app).trigger('context_switch', {
+            		    selectableTags: [
+            		      ['Theory', 'Question', 'Observation', 'Investigation', 'Other Idea'],
+            		      ['Temperature', 'Light', 'Humidity', 'Blue Beetles', 'Turtles', 'Yellow', 'Green'],
+            		      ['Habitats', 'Organisms', 'Food Web', 'Populations']
+            		    ],
+            		    defaultTags: ['Investigation']
+            		})
+            	}
             	else {
             		console.log('what tab are you clicking on?!')
             	}
@@ -953,18 +963,26 @@ WallCology = {
 				$('#view-investigations').hide()
 				$('#view-investigations-details').show()
 				detailsMotivation = $(this).children(':first').html()
+				detailsAuthor = $(this).children(':nth-child(2)').html()
 				detailsTime = $(this).children(':last').html()
+				
 				$('#view-investigations-details .graph-box').html("")
 				
-				// TODO fix context, add detailsTime to decrease nonuniqueness issues
 				$.ajax({
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_find",
-					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "motivation_description":detailsMotivation})},
+					// do a feeble attempt at checking for uniqueness
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "motivation_description":detailsMotivation,"origin":detailsAuthor})},
 					context: this,
 					success: function(data) {
 
 				    	if (data.ok === 1) {
+				    		// checks if same author submitted same content. Will not crash, will only display the first record retrieved
+							d = new Date(data.results[0].timestamp)
+							if (Sail.app.observations.dateString(d) != detailsTime) {
+								alert("Possible duplicate record. Please confirm with staff")
+							}
+				    		
 				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
 				    		$('#view-investigations-details .motivation-content').html(detailsMotivation)
 				    		$('#view-investigations-details .hypothesis-content').html(data.results[0].hypothesis)
@@ -1418,10 +1436,10 @@ WallCology = {
 									d = new Date(data.results[i].timestamp)
 									// datatables do not like undefined, so switched to empty string
 									if (data.results[i].motivation_description == null) {
-										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d), data.results[i]._id]
+										investigationResultsArray[i] = ["", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 									else {
-										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d), data.results[i]._id]
+										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 									
 								}
@@ -1429,6 +1447,7 @@ WallCology = {
 						    	if (data.ok === 1) {			    		
 									$('#investigations-datatable').dataTable({
 										"aaSorting": [[2,'desc']],
+										"bAutoWidth": false,
 										"bLengthChange": false,
 										"bDestroy" : true,		
 										"bJQueryUI": true,
@@ -1436,8 +1455,8 @@ WallCology = {
 										"sPaginationType": "full_numbers",
 										"aoColumns": [        
 														{ "sWidth": "500px" },
-														{ "sWidth": "135px" },
-														{ "sWidth": "65px" },
+														null,
+														null,
 													],
 
 										"aaData": investigationResultsArray	

@@ -839,59 +839,27 @@
 							<input type="number" name="light-level" class="count-light text-box"/>
 							<label for="light-level"> LX</label>
 						</div>
-<!-- 						<input type="radio" name="light" value="low" id="new-count-r7" class="counts-light-radio-button radio-button" /><label for="new-count-r7">Low</label>
-						<input type="radio" name="light" value="high" id="new-count-r8" class="counts-light-radio-button radio-button" /><label for="new-count-r8">High</label>
- -->				</div>					
+					</div>					
 					<div class="temperature-input">
 						<h3>Record Temperature</h3>
 						<div>
 							<input type="number" name="temperature" class="count-temperature text-box"/>
 							<label for="temperature"> &#176C</label>
 						</div>
-<!-- 						<input type="radio" name="temp" value="low" id="new-count-r5" class="counts-temperature-radio-button radio-button" /><label for="new-count-r5">Low</label>
-						<input type="radio" name="temp" value="high" id="new-count-r6" class="counts-temperature-radio-button radio-button" /><label for="new-count-r6">High</label>
- -->				</div>									
+					</div>									
 					<div class="humidity-input">
 						<h3>Record Humidity</h3>
 						<div>
 							<input type="number" name="humidity" class="count-humidity text-box"/>
 							<label for="humidity"> %</label>
 						</div>
-<!-- 						<input type="radio" name="humidity" value="low" id="new-count-r9" class="counts-humidity-radio-button radio-button" /><label for="new-count-r9">Low</label>
-						<input type="radio" name="humidity" value="high" id="new-count-r10" class="counts-humidity-radio-button radio-button" /><label for="new-count-r10">High</label>
- -->				</div>					
+					</div>					
 				</div>
 				
 
 				<div class="record-organisms">
 					<h4>Count Organisms</h4>
 					<h6 class="creature-table-header">Enter units of Wallscope covered by vegetation and enter up to 3 counts for each creature</h6>   
-<!-- 					<div id="vegetation-count-div">
-						<table class="count-vegetation">
-							<tr>
-								<th colspan="4" class="table-header">Enter units of Wallscope covered by vegetation</th>
- 							</tr>
- 							<tr class="table-body">
-	 							<td><img src="/images/icon_0007_scum.png" class="scum-image image" /></td>
-	 							<td><input type="number" class="text-box count-scum"/> UNITS</td>
-	 							<td><img src="/images/icon_0006_fuzzy-mold.png" class="fuzzy-mold-image image"/></td>
-	 							<td><input type="number" class="text-box count-mold"/> UNITS</td>      
- 							</tr>
-						</table> 
-					
-						<table id="count-vegetation-date-time">     
-							<tr>
-								<th> Date </th>
-								<th> Time </th>
-							</tr>
-							<tr>
-								<td id="count-vegetation-date-picker"> <input type="text" class="count-organism-data-cell new-counts-datepicker vegetation-date"> </td>						
-								<td id="count-vegetation-time"> <input type="number" class="count-organism-data-cell vegetation-time"/>
-							</tr>
-					    </table>
-				 	</div>
-				 
-					<div class="divider"></div> -->
                                
 					<table id="count-organisms">
 						<tr>
@@ -1031,18 +999,18 @@
 					<img src="/images/new_invest_mot.png">  
 					
 					<div id="investigation-type">
-						<p style="float: left; width: 200px; margin-right: 20px"> <b> Investigation Type </b></p>
+						<p style="float: left; width: 120px; margin-right: 20px"> <b> Investigation Type </b></p>
 						<button class="standard-button" value="theory">Theory</button>
 						<button class="standard-button" value="question">Question</button>					
 					</div>   
 					
-					<p style="float: left; width: 100%;"> <b> Describe the motivation for your new investigation.</b> I have a <b><span id="selected-investigation-type">...</span></b> I want to investigate. </p> 
+					<p style="float: left; width: 100%;"> <b> Describe the motivation for your new investigation.</b> I have a <b><span id="selected-investigation-type">...</span></b> I want to investigate: </p> 
 					<br/><br/>
-					<textarea id="motivation-description" cols="105" rows="5"></textarea> 
+					<textarea id="motivation-description"></textarea> 
 					 
 					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
-						<span style="float: left; width: 75px"> <b>Headline</b> </span>
-						<input style="float: left" size="93" id="headline-title" type="text"/>
+						<span style="float: left; width: 75px;"> <b>Headline</b> </span>
+						<input id="headline-title" type="text"/>
 					</div>   
 					
 					<!-- <div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
@@ -1105,9 +1073,9 @@
 					</table> 
 					
 					<p><b> Environmental Conditions </b></p>
-					<p> Specify the environmental conditions you would like to add to your experiment </p>
+					<p> Specify the environmental conditions you would like to add to your experiment: </p>
 					 
-					<div style="float: left; width: 100%; margin-bottom: 25px">
+					<div style="float: left; width: 100%; margin-bottom: 35px">
 						<div id="investigation-environment-temperature" class="investigation-environment-filter">
 							<p> <b>Temperature</b> </p>
 							<button class="standard-button" value="low">Low</button>
@@ -1129,9 +1097,9 @@
 					  
 					<div style="width: 100%; float: left; margin-bottom: 25px">
 						<p> <b> Hypothesis </b> </p>  
-						<p> Here's what I think will happen to my populations </p>
+						<p> Here's what I think will happen to my populations: </p>
 					
-						<textarea id="investigation-setup-hypothesis" cols="105" rows="8"></textarea>
+						<textarea id="investigation-setup-hypothesis"></textarea>
 					</div>
 					
 					<div class="action-buttons">
@@ -1146,24 +1114,20 @@
                 	<img src="/images/new_invest_results.png">
 
 					
-					<div style="float: left; width: 90%; margin-bottom: 25px">
-						<div id="investigation-results-graph">	
-						
-						
-						</div>
-					
-						<!-- <button id="animate-investigation-results-button">Pause</button>  -->
-					
+					<div class="graph-container">
+						<div class="population-label">Population</div>
+						<div id="investigation-results-graph"></div>
+						<div class="time-label">Time</div>					
 					</div> 
 					
-					<p> <b> Description </b> What happened? </p>
+					<p> <b> Description </b> (what happened?) </p>
 					
-					<textarea id="investigation-results-description" cols="110" rows="5"></textarea>
+					<textarea id="investigation-results-description" class="results-input-box"></textarea>
 						
 						
-					<p> <b> Interpretation </b> Can you explain why it happened? </p>
+					<p> <b> Interpretation </b> (can you explain why it happened?) </p>
 
-					<textarea id="investigation-results-interpretation" cols="110" rows="5"></textarea>	
+					<textarea id="investigation-results-interpretation" class="results-input-box"></textarea>	
 										
 					
 					<div class="action-buttons">
@@ -1185,7 +1149,7 @@
 					</div>
 					
 					<div class="view-investigation-type-selectors">
-						<p> <b>Investigation Type</b> </p>
+						<p class="type-selector-title"> <b>Investigation Type</b> </p>
 						<table id="what-others-said-investigation-type">
 							<tr> 
 								<td> <button class="standard-button" value="theory"> Theory </button> </td>
@@ -1208,7 +1172,7 @@
 					</div> 
 					
 					
-					<div style="float: left; width: 100%; margin-bottom: 25px">  
+					<div style="float: left; width: 100%; margin-bottom: 40px">  
 						<div style="margin: auto; width: 750px">
 							<div id="investigation-what-others-said-environment-temperature" class="investigation-environment-filter">
 								<p> <b>Temperature</b> </p>
@@ -1283,7 +1247,11 @@
 						<div> <b>Selected variables</b> </div>					
 						<div class="selected-variables-content">
 						
-							<div class="graph-box"></div>
+							<div class="graph-container">
+								<div class="population-label">Population</div>
+								<div class="graph-box"></div>
+								<div class="time-label">Time</div>
+							</div>
 							
 							<table class="variable-table"">
 		 						<tr> 					
