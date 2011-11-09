@@ -122,6 +122,10 @@ div#investigation-pages div#investigation-setup div.investigation-environment-fi
 	margin-left: 20px;
 }
 
+#investigation-setup .cancel-button {
+	margin-left: 20px;
+}
+
 div#tabs-5 div#investigation-setup div.action-buttons {                             
 	width: 640px;
 }  
@@ -143,7 +147,7 @@ div#tabs-5 div#investigation-results div.action-buttons {
 	margin-left: 20px;
 } 
 
-div#tabs-5 div#investigation-results div.action-buttons button#save-investigation-results {
+#save-investigation-results {
    float: right;
 }   
 

@@ -711,7 +711,7 @@ WallCology = {
 			
 			
 			// Next button is clicked in "Investigation Motivation" page
-			$('div#investigation-pages div#investigation-motivation div.action-buttons button#to-investigation-setup').click(function() {  
+			$('#to-investigation-setup').click(function() {  
 				  
 				// Check to make sure all fields are filled 
 			    selectedType = $('div#investigation-motivation div#investigation-type button.selected').attr('value');
@@ -749,10 +749,15 @@ WallCology = {
 			
 			// *******************************  Investigation Setup Page **********************************
 			
-			// Back button of "Investigation Setup" is clicked
-			$('div#investigation-pages div#investigation-setup div.action-buttons button#back-to-investigation-motivation').click(function() { 
-				$('div#investigation-setup').hide();				
-  				$('div#investigation-motivation').show(); 
+			// Cancel button of "Investigation Setup" is clicked
+			$('#cancel-investigation-motivation').click(function() { 
+				$('div#investigation-setup').hide()				
+  				$('div#investigation-menu-page').show()
+
+				//call function to send XMPP message to archivist to delete record by _id
+				Sail.app.observations.removeInvestigationById(dbId)
+				// clear some data - maybe not needed here
+				Sail.app.observations.investigationResultClearFields()
 			}) 		
                   
 			
@@ -814,25 +819,19 @@ WallCology = {
 
 					Sail.app.observations.retrieveGugoGraphData(selectedOrganisms, temperature, lightLevel, humidity)
 
-				}       
-				
-				// returnedData = [ {"type":"scum","data":[72, 57, 41, 38, 44, 52, 58, 58, 51, 45, 44, 47, 51, 54, 53, 50, 48, 48, 50, 51, 52, 51, 49, 49, 49, 50, 50, 50, 50, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}, 
-				// 				 {"type":"fuzzy-mold","data":[63, 49, 34, 32, 36, 44, 50, 50, 44, 39, 38, 41, 44, 47, 45, 42, 40, 40, 42, 44, 44, 43, 42, 42, 42, 43, 43, 44, 43, 42, 42, 42, 43, 43, 43, 43, 42, 42, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43, 43]}, 
-				// 				 {"type":"blue-bug","data":[20, 44, 40, 22, 14, 12, 16, 26, 33, 30, 22, 18, 18, 21, 25, 27, 25, 22, 20, 21, 23, 25, 25, 24, 22, 22, 22, 23, 24, 23, 23, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23]}, 
-				// 				 {"type":"green-bug","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, 
-				// 				 {"type":"predator","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} 
-				// 			   ];  
-				// returnedData = [ {"type":"scum","data":[72, 55, 69]}, {"type":"fuzzy-mold","data": [23, 66, 39]} ];
-				          
+				}				          
 			})
 			
 			
 			// *******************************  Investigation Results Page **********************************
-			$('div#investigation-pages div#investigation-results div.action-buttons button#back-to-investigation-setup').click(function() {
-				$('div#investigation-pages div#investigation-results').hide();
-				$('div#investigation-pages div#investigation-setup').show();     
-								
-				Sail.app.observations.investigationResultClearFields();
+			$('#cancel-investigation-setup').click(function() {
+				$('#investigation-results').hide()
+				$('#investigation-menu-page').show()
+				
+				//call function to send XMPP message to archivist to delete record by _id
+				Sail.app.observations.removeInvestigationById(dbId)
+				// clear some data
+				Sail.app.observations.investigationResultClearFields()
 			})
 			
 			$('div#investigation-pages div#investigation-results button#animate-investigation-results-button').click(function() {
@@ -1722,7 +1721,7 @@ WallCology = {
 				headline : headline,                  
 	        })
 	        WallCology.groupchat.sendEvent(sev)
-        }, 
+        },
 
 		newInvestigationSetup: function(dbId, selectedOrganisms, temperature, lightLevel, humidity, hypothesis) {   
 			
@@ -1758,6 +1757,14 @@ WallCology = {
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },
+
+		removeInvestigationById: function(dbId) {
+			sev = new Sail.Event('remove_observation', {
+	        	type : 'investigation_setup', 
+				_id : dbId                 
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+		},
 
         newCountsContent: function() {
 	        sev = new Sail.Event('new_observation', {
