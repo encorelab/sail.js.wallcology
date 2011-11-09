@@ -983,7 +983,7 @@
 				<!-- This hidden field holds the id of the record for the current investigation setup in the database. 
 					This id is needed for updating the record -->
 				<input id="investigation-setup-db-id" type="hidden" value="null"/>
-				<input id="view-investigation-db-id" type="hidden" value="null"/>
+				<!-- <input id="view-investigation-db-id" type="hidden" value="null"/> -->
                                                    
 
 				<!--********************************* INVESTIGATION MENU PAGE *****************************-->
@@ -1009,10 +1009,10 @@
 					<br/><br/>
 					<textarea id="motivation-description"></textarea> 
 					 
-					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
+<!-- 					<div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
 						<span style="float: left; width: 75px;"> <b>Headline</b> </span>
 						<input id="headline-title" type="text"/>
-					</div>   
+					</div>    -->
 					
 					<!-- <div style="width: 100%; float: left; margin-top: 20px; margin-bottom: 30px">
 						<span style="float: left; width: 100px"> Keywords </span>
@@ -1167,7 +1167,7 @@
 								<td id="mold-selector" value="fuzzy-mold"> <img class="image" src="/images/icon_0006_fuzzy-mold.png"/> </td>
 								<td id="blue-bug-selector" value="blue-bug"> <img class="image" src="/images/icon_0000_blue-bug.png"/> </td>
 								<td id="green-bug-selector" value="green-bug"> <img class="image" src="/images/icon_0008_green-bug.png"/> </td>
-								<td id="predator-selector" value="predator"> <img class="image" src="/images/icon_0005_predator.png"/> </td>
+								<td id="predator-selector" class="predator-reveal" value="predator"> <img class="image" src="/images/icon_0005_predator.png"/> </td>
 						    </tr>
 						</table>
 					</div> 
@@ -1205,7 +1205,7 @@
 								<thead>
 									<tr>
 										<th>Question/Theory</th>	
-										<th>Interpretation</th>					
+										<th>Description</th>					
 										<th>Author(s)</th>
 										<th>Last Updated</th>										
 									</tr>
@@ -1225,8 +1225,8 @@
 				<!--********************************* VIEW INVESTIGATION DETAILS *****************************-->
 
 				<div id="view-investigations-details">
-					<div class="headline"><b>Investigation: </b></div><div class="headline-content"><b></b></div>
-					
+					<div class="headline"><b>Investigation Details</b></div>
+					<!-- <div class="headline-content"><b></b></div> -->				
 					
 					<table class="layout-table-top">
 						<tr> 
