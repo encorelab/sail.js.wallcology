@@ -884,7 +884,7 @@ WallCology = {
 			 // *******************************  Investigation What Others Did Page **********************************
 
 			var invViewSelectedType = null
-			var invViewSelectedOrganisms = []
+			var invViewSelectedOrganisms = null
 			var invViewSelectedTemperature = null
 			var invViewSelectedLightLevel = null
 			var invViewSelectedHumidity = null
@@ -916,21 +916,19 @@ WallCology = {
 			});
 			
 			$('#view-investigations table#what-others-said-organisms td').click(function(){
-				// clear the array used to pass the seleced organisms
-				invViewSelectedOrganisms.length = 0
 				
 				if ($(this).hasClass('selected') == true){
-					$(this).removeClass('selected');
-					$(this).css('border', 'none');
+					$('#view-investigations table#what-others-said-organisms td').removeClass('selected');
+					$('#view-investigations table#what-others-said-organisms td').css('border', 'none');
 				} else {
+					$('#view-investigations table#what-others-said-organisms td').removeClass('selected');
+					$('#view-investigations table#what-others-said-organisms td').css('border', 'none');
 					$(this).addClass('selected');
 					$(this).css('border', '1px solid black');
-				}
+				}				
 				
-				// fill the array used to pass the selected organisms
-				$('#what-others-said-organisms .selected').each(function () {
-					invViewSelectedOrganisms.push($(this).attr('value'))
-				})				
+				invViewSelectedOrganisms = $('#what-others-said-organisms .selected').attr('value')
+
 				Sail.app.observations.generateInvestigationsDT({investigationType:invViewSelectedType, investigationOrganisms:invViewSelectedOrganisms,
 					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			});      
@@ -959,7 +957,7 @@ WallCology = {
 					investigationTemperature:invViewSelectedTemperature, investigationLightLevel:invViewSelectedLightLevel, investigationHumidity:invViewSelectedHumidity})
 			})
 			
-			$('#investigations-datatable tr').live('click', function() {
+			$('#investigations-datatable tbody tr').live('click', function() {
 				$('#view-investigations').hide()
 				$('#view-investigations-details').show()
 				detailsMotivation = $(this).children(':first').html()
@@ -978,10 +976,12 @@ WallCology = {
 
 				    	if (data.ok === 1) {
 				    		// checks if same author submitted same content. Will not crash, will only display the first record retrieved
-							d = new Date(data.results[0].timestamp)
-							if (Sail.app.observations.dateString(d) != detailsTime) {
-								alert("Possible duplicate record. Please confirm with staff")
-							}
+				    		for (i = 0; i < data.results.length; i++) {
+								d = new Date(data.results[i].timestamp)
+								if (Sail.app.observations.dateString(d) != detailsTime) {
+									alert("Possible duplicate record. Please confirm with staff")
+								}
+				    		}
 				    		
 				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
 				    		$('#view-investigations-details .motivation-content').html(detailsMotivation)
@@ -991,8 +991,9 @@ WallCology = {
 				    		$('#view-investigations-details .humidity-content').html(data.results[0].humidity)
 				    		$('#view-investigations-details .description-content').html(data.results[0].description)
 				    		$('#view-investigations-details .interpretation-content').html(data.results[0].interpretation)
+				    		$('#view-investigation-db-id').attr("value", data.results[0]._id)
 
-				    		// outlines for correct organisms
+				    		// outline selectors for correct organisms
 				    		$('#view-investigations-details .selected').removeClass('selected')
 				    		for (i = 0; i < data.results[0].selected_organisms.length; i++) {
 				    			tempString = '#view-investigations-details .' + data.results[0].selected_organisms[i]
@@ -1010,10 +1011,7 @@ WallCology = {
 							return false
 						}
 					}
-				})
-
-				
-				
+				})							
            	})
 
            	
@@ -1021,14 +1019,16 @@ WallCology = {
 		          	
            	
 			$('#view-investigations-details .action-buttons .back-button').click(function () {
-				$('#view-investigations-details').hide();
-				$('#view-investigations').show();
+				$('#view-investigations-details').hide()
+				$('#view-investigations').show()
 			})  
 			
 			$('#view-investigations-details .action-buttons .save-button').click(function () {
-				// FIXME add something like this:    Sail.app.observations.updateInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
-				$('#view-investigations-details').hide();
-				$('#investigation-menu-page').show();
+				comments = $('#view-investigations-details .add-comment-text-field').val() + '\r'
+				Sail.app.observations.changedInvestigationResult($('#view-investigation-db-id').val(), comments)
+				$('#view-investigation-db-id').attr("value", "null")
+				$('#view-investigations-details').hide()
+				$('#investigation-menu-page').show()
 			})
     	},
 
@@ -1392,22 +1392,9 @@ WallCology = {
 					if (userInvestigationSelections.investigationType) {
 						criteria["investigation_type"] = userInvestigationSelections.investigationType
 					}
-					
-					// THIS DOES NOT WORK... needs to incorporate $and
-/*					if (userInvestigationSelections.investigationOrganisms.length >0) {
-						_.each(userInvestigationSelections.investigationOrganisms, function(organism) {
-							criteria["selected_organisms"] = organism
-						})
-					}*/
-/*					if (userInvestigationSelections.investigationOrganisms.length == 1) {
-						criteria["selected_organisms"] = userInvestigationSelections.investigationOrganisms[0]
-					}
-					if (userInvestigationSelections.investigationOrganisms.length == 2) {
-						// criteria["selected_organisms"] = userInvestigationSelections.investigationOrganisms[1]
-						tempString = "[{selected_organisms:" + userInvestigationSelections.investigationOrganisms[0] + "},{selected_organisms:" + userInvestigationSelections.investigationOrganisms[1] + "}]"
-						criteria["$and"] = tempString
-							// ({ $and: [{selected_organisms:"scum"},{selected-organisms:"fuzzy_mold"}] })
-					}	*/				
+					if (userInvestigationSelections.investigationOrganisms) {
+						criteria["selected_organisms"] = userInvestigationSelections.investigationOrganisms
+					}			
 					if (userInvestigationSelections.investigationTemperature) {
 						criteria["temperature"] = userInvestigationSelections.investigationTemperature
 					}
@@ -1552,13 +1539,6 @@ WallCology = {
 				success: function(data) { 
 					returnedData = data
 
-/*					var vegetation = [ {label: "scum", data: scumForGraph, color: "yellow"}, {label:"mold", data: moldForGraph, color: "#00FF00"} ]
-
-					// Configuration of graph drawing settings
-					graphConfig = { xaxis: {min: 0, max: (maxDay+1)}, yaxis: {min: 0}, points: {show: true}, lines: {show: true},
-									legend: {position: "nw", backgroundOpacity: 0} }
-					$.plot($("#view-counts .vegetation-graph"), vegetation, graphConfig)*/
-			
 					
 					graphData = [[]];
 					
@@ -1600,7 +1580,7 @@ WallCology = {
 							}
 						}
 					}
-					graphConfig = { xaxis: {show: false}, yaxis: {show: false}, lines: {show: true} }
+					graphConfig = { xaxis: {show: false}, yaxis: {min: 0, max: 100, show: false}, lines: {show: true} }
 					$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, graphConfig);
 					// this is an ugly workaround, sorry
 					$.plot($("#view-investigations-details .graph-box"), graphData, graphConfig)
@@ -1760,6 +1740,16 @@ WallCology = {
 				_id : dbId,
 				description : description,
 				interpretation : interpretation
+	        })
+	        WallCology.groupchat.sendEvent(sev)
+        },
+        
+        changedInvestigationResult: function(dbId, comments) {
+        	
+	        sev = new Sail.Event('changed_observation', {
+	        	type : 'investigation_setup',
+				_id : dbId,
+				comments: comments
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },

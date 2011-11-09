@@ -983,6 +983,7 @@
 				<!-- This hidden field holds the id of the record for the current investigation setup in the database. 
 					This id is needed for updating the record -->
 				<input id="investigation-setup-db-id" type="hidden" value="null"/>
+				<input id="view-investigation-db-id" type="hidden" value="null"/>
                                                    
 
 				<!--********************************* INVESTIGATION MENU PAGE *****************************-->
@@ -999,7 +1000,7 @@
 					<img src="/images/new_invest_mot.png">  
 					
 					<div id="investigation-type">
-						<p style="float: left; width: 120px; margin-right: 20px"> <b> Investigation Type </b></p>
+						<p style="float: left; width: 160px; margin-right: 5px"> <b> Investigation Type </b></p>
 						<button class="standard-button" value="theory">Theory</button>
 						<button class="standard-button" value="question">Question</button>					
 					</div>   
@@ -1203,7 +1204,7 @@
 							<table class="display" id="investigations-datatable">
 								<thead>
 									<tr>
-										<th>Behavior</th>						
+										<th>Motivation</th>						
 										<th>Author(s)</th>
 										<th>Last Updated</th>										
 									</tr>
