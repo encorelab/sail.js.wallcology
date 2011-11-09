@@ -56,8 +56,8 @@ div#tabs-5 button.investigation-button {
 }
 
 #investigation-motivation #motivation-description {
-	width: 640px;
-	height: 75px;
+	width: 660px;
+	height: 123px;
 }
 
 #investigation-motivation #headline-title {
@@ -66,7 +66,7 @@ div#tabs-5 button.investigation-button {
 } 
 
 div#tabs-5 div#investigation-motivation div.action-buttons {                             
-	width: 690px;
+	width: 640px;
 	margin-top: 450px;
 }
 
@@ -271,12 +271,6 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations-details .headline {
 	color: #F1433A;
-	width: 165px;
-	float: left;
-	font-size: 20px;
-}
-
-#view-investigations-details .headline-content {
 	font-size: 20px;
 }
 

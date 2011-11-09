@@ -641,7 +641,7 @@ WallCology = {
 						$('#new-counts .count-light').val() && $('#new-counts .count-humidity').val() &&
 						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
 						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val()
-						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL
+						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL predator-reveal
 						//&& $('#new-counts .count-predator6').val()
 						) 
 					{
@@ -716,14 +716,14 @@ WallCology = {
 				// Check to make sure all fields are filled 
 			    selectedType = $('div#investigation-motivation div#investigation-type button.selected').attr('value');
 				motivationForDescription = $('div#investigation-motivation textarea#motivation-description').val();
-				headline = $('div#investigation-motivation input#headline-title').val(); 
+				//headline = $('div#investigation-motivation input#headline-title').val(); 
                 selectedKeywords = [];
 				$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
 					selectedKeywords.push($(this).val());
 				}); 
 				                                         
-				if (typeof selectedType == 'undefined' || motivationForDescription == "" || headline == ""){
-					alert ("Please choose an investigation type, describe it and give it a headline");
+				if (typeof selectedType == 'undefined' || motivationForDescription == ""){
+					alert ("Please choose an investigation type and describe it");
 				} else { // Send the filled form to be saved                                    
 					                                              
 					// check to see if this is a new investigation motivation being created or an update
@@ -733,10 +733,10 @@ WallCology = {
 						dbId = Math.floor((Math.random() * 1e50)).toString(36);  
 						$("div#tabs-5 input#investigation-setup-db-id").attr("value", dbId);
 					
-						Sail.app.observations.newInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
+						Sail.app.observations.newInvestigationMotivation(dbId, selectedType, motivationForDescription);
 					
 					}else { // update
-						Sail.app.observations.updateInvestigationMotivation(dbId, selectedType, motivationForDescription, headline);
+						Sail.app.observations.updateInvestigationMotivation(dbId, selectedType, motivationForDescription);
 					}
 					
 					//  Move to the "Investigation Setup" page	
@@ -959,7 +959,7 @@ WallCology = {
 				$('#view-investigations').hide()
 				$('#view-investigations-details').show()
 				detailsMotivation = $(this).children(':first').html()
-				detailsAuthor = $(this).children(':nth-child(2)').html()
+				detailsAuthor = $(this).children(':nth-child(3)').html()
 				detailsTime = $(this).children(':last').html()
 				
 				$('#view-investigations-details .graph-box').html("")
@@ -968,7 +968,7 @@ WallCology = {
 					type: "GET",
 					url: "/mongoose/wallcology/observations/_find",
 					// do a feeble attempt at checking for uniqueness
-					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "motivation_description":detailsMotivation,"origin":detailsAuthor})},
+					data: { criteria: JSON.stringify({"run.name":Sail.app.run.name, "type":"investigation_setup", "motivation_description":detailsMotivation, "origin":detailsAuthor})},
 					context: this,
 					success: function(data) {
 
@@ -982,7 +982,8 @@ WallCology = {
 				    		}
 				    		
 				    		// fill the text on the page from the DB results
-				    		$('#view-investigations-details .headline-content').html(data.results[0].headline)
+				    		// $('#view-investigations-details .headline-content').html(data.results[0].headline)
+				    		
 				    		if (data.results[0].investigation_type == "theory") {
 				    			$('#view-investigations-details .motivation-title').html('<b>Theory</b>')
 				    		}
@@ -1052,7 +1053,7 @@ WallCology = {
 			$("div#investigation-motivation div#investigation-type button").removeClass('investigation-button selected');
 			$("div#investigation-motivation span#selected-investigation-type").text('...'); 
 			$('div#investigation-motivation textarea#motivation-description').val('');   
-			$('div#investigation-motivation input#headline-title').val(''); 
+			//$('div#investigation-motivation input#headline-title').val(''); 
 			$('div#investigation-motivation table#investigation-keyword-table input:checked').each(function (){
 				$(this).attr('checked', false);
 			});
@@ -1420,18 +1421,19 @@ WallCology = {
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
 									// datatables do not like undefined, so switched to empty string... but this should never happen
-									if (data.results[i].motivation_description == null && data.results[i].interpretation == null) {
+									// this can be removed when we only let them finish or delete
+/*									if (data.results[i].motivation_description == null && data.results[i].description == null) {
 										investigationResultsArray[i] = ["", "", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 									else if (data.results[i].motivation_description == null) {
-										investigationResultsArray[i] = ["", data.results[i].interpretation, data.results[i].origin, Sail.app.observations.dateString(d)]
+										investigationResultsArray[i] = ["", data.results[i].description, data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
-									else if (data.results[i].interpretation == null) {
+									else if (data.results[i].description == null) {
 										investigationResultsArray[i] = [data.results[i].motivation_description, "", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
-									else {
-										investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].interpretation, data.results[i].origin, Sail.app.observations.dateString(d)]
-									}									
+									else {*/
+									investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].description, data.results[i].origin, Sail.app.observations.dateString(d)]
+									/*}*/									
 								}
 
 						    	if (data.ok === 1) {			    		
@@ -1584,7 +1586,7 @@ WallCology = {
 							}
 						}
 					}
-					graphConfig = { xaxis: {show: false}, yaxis: {min: 0, max: 100, show: false}, lines: {show: true} }
+					graphConfig = { xaxis: {show: false}, yaxis: {min: 0, max: 90, show: false}, lines: {show: true} }
 					$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, graphConfig);
 					// this is an ugly workaround, sorry
 					$.plot($("#view-investigations-details .graph-box"), graphData, graphConfig)
@@ -1699,26 +1701,24 @@ WallCology = {
 	        $('#new-relationship .comments').val('')
         }, 
 
-		newInvestigationMotivation: function(dbId, selectedType, motivationForDescription, headline) {   
+		newInvestigationMotivation: function(dbId, selectedType, motivationForDescription) {   
 			
 	        sev = new Sail.Event('new_observation', {
 	        	type : 'investigation_setup', 
 				_id : dbId,
 				investigation_type : selectedType,
-				motivation_description: motivationForDescription,
-				headline : headline,                  
+				motivation_description: motivationForDescription               
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },   
 
-		updateInvestigationMotivation: function(dbId, selectedType, motivationForDescription, headline) {   
+		updateInvestigationMotivation: function(dbId, selectedType, motivationForDescription) {   
 			
 	        sev = new Sail.Event('changed_observation', {
 	        	type : 'investigation_setup', 
 				_id : dbId,
 				investigation_type : selectedType,
-				motivation_description : motivationForDescription,
-				headline : headline,                  
+				motivation_description : motivationForDescription              
 	        })
 	        WallCology.groupchat.sendEvent(sev)
         },
@@ -1998,8 +1998,9 @@ WallCology = {
 				// create array that can be graphed
 				predatorForGraph = _.map(predator, function(val,i) {return [i,val]})
 				// bugfix to show lines
-				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })				
-				// REVEAL FOR PREDATOR
+				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })	
+				
+				// REVEAL FOR PREDATOR predator-reveal
 				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
 				//var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
