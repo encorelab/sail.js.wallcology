@@ -55,9 +55,19 @@ div#tabs-5 button.investigation-button {
 	margin-left: 20px;
 }
 
-div#tabs-5 div#investigation-motivation div.action-buttons {                             
+#investigation-motivation #motivation-description {
 	width: 640px;
-	margin-top: 30px;
+	height: 75px;
+}
+
+#investigation-motivation #headline-title {
+	float: left;
+	width: 565px;
+} 
+
+div#tabs-5 div#investigation-motivation div.action-buttons {                             
+	width: 690px;
+	margin-top: 450px;
 }
 
 div#tabs-5 div#investigation-motivation .standard-button {
@@ -85,10 +95,9 @@ div#tabs-5 div#investigation-motivation div.action-buttons button#to-investigati
 }
 
 div#investigation-pages div#investigation-setup table#investigation-organism-table {
-	margin-left: 150px;
-	margin-bottom: 25px;
+	margin-left: 100px;
+	margin-bottom: 45px;
 }          
-
 
 div#investigation-pages div#investigation-setup div.investigation-environment-filter {
 	float: left; 
@@ -98,6 +107,11 @@ div#investigation-pages div#investigation-setup div.investigation-environment-fi
 #investigation-setup .image {
 	width: 80px;
 	height: 80px;
+}
+
+#investigation-setup #investigation-setup-hypothesis {
+	width: 650px;
+	height: 130px;
 }
 
 #investigation-setup .standard-button {
@@ -124,7 +138,7 @@ div#tabs-5 div#investigation-setup div.action-buttons button#to-investigation-re
 }
 
 div#tabs-5 div#investigation-results div.action-buttons {                             
-	width: 640px;   
+	width: 670px;   
 	margin-top: 25px;
 	margin-left: 20px;
 } 
@@ -133,11 +147,31 @@ div#tabs-5 div#investigation-results div.action-buttons button#save-investigatio
    float: right;
 }   
 
+#investigation-results .graph-container {
+	width: 710px;
+	height: 330px;
+	margin-bottom: 35px;
+}	
+
 div#tabs-5 div#investigation-results div#investigation-results-graph {
-	width: 750px;
-	height: 350px;
+	width: 690px;
+	height: 310px;
 	background-color: white;
-	float: left;
+	float: right;
+	margin-right: 10px
+}
+
+#investigation-results .time-label {
+	float: right;
+}
+
+#investigation-results .population-label {
+	margin-left: -15px;
+}
+
+#investigation-results .results-input-box {
+	width: 710px;
+	height: 75px;
 }
 
 div#tabs-5 div#investigation-results button#animate-investigation-results-button {
@@ -157,28 +191,20 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 /********************************* WHAT OTHERS DID FOR THEIR INVESTIGATION *****************************/
             
-#view-investigations {
-	width: 800px;
-}
-
 #view-investigations .view-investigation-header {
 	margin-top: 20px;
-	margin-left: 20px;
+	margin-left: 30px;
 }
 
 #view-investigations .view-investigation-type-selectors {
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 25px;
-	width: 100%;
-	float: left;
-	text-align: center
+	width: 200px;
 }
 
-#view-investigations #what-others-said-investigation-type {
-	width: 150px;
-	margin-left: auto;
-	margin-right: auto;
+#view-investigations .type-selector-title {
+	text-align: center;
 }
 
 #view-investigations .standard-button {
@@ -204,6 +230,12 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 	text-align: center;
 }
 
+#view-investigations #investigations-what-others-said-aggregate-table {
+	margin-left: 20px;	
+	margin-right: 15px;
+
+}
+
 #view-investigations .datatable-title {
 	margin-left: 30px;
 }
@@ -225,7 +257,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations-details {
 	margin-left: 20px;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 #view-investigations-details .headline {
@@ -251,33 +283,45 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 #view-investigations-details .table-cell {
-	margin-top: 8px;
+	margin-top: 6px;
 	width: 337px;
-	height: 115px;
+	height: 74px;
 	padding: 8px;
 	background-color: rgba(255,102,102,0.3);
 }
 
 #view-investigations-details .selected-variables {
+	width: 720px;
 	margin-top: 20px;
 }
 
 #view-investigations-details .selected-variables-content {
-	margin-top: 8px;
-	padding: 8px;
-	width: 720px;
+	margin-top: 6px;
 	height: 280px;
+	padding: 8px;
 	background-color: rgba(255,102,102,0.3);
 }
 
-#view-investigations-details .graph-box {
+#view-investigations-details .graph-container {
+	height: 250px;
+	width: 340px;
 	margin-top: 20px;
 	margin-right: 10px;
-	height: 240px;
-	width: 340px;
-	background-color: white;
 	float: right;
 }
+
+#view-investigations-details .graph-box {
+	height: 220px;
+	width: 320px;
+	background-color: white;	
+	float: right;
+}
+
+	
+#view-investigations-details .time-label {
+	float: right;
+}	
+	
 
 #view-investigations-details .image {
 	height: 60px;
@@ -291,7 +335,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 #view-investigations-details .variable-table-cell {
-	padding: 4px;
+	padding: 2px;
 }
 
 #view-investigations-details .conditions-titles-box {
@@ -322,9 +366,9 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 }
 
 #view-investigations-details .add-comment-text-field {
-	margin-top: 8px;
+	margin-top: 6px;
 	width: 715px;
-	height: 70px;
+	height: 55px;
 }
 
 #view-investigations-details .standard-button {
