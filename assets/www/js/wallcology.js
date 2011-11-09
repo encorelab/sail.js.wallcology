@@ -1029,14 +1029,6 @@ WallCology = {
 			$('#view-investigations-details .action-buttons .back-button').click(function () {
 				$('#view-investigations-details').hide()
 				$('#view-investigations').show()
-			})  
-			
-			$('#view-investigations-details .action-buttons .save-button').click(function () {
-/*				comments = $('#view-investigations-details .add-comment-text-field').val() + '\r'
-				Sail.app.observations.changedInvestigationResult($('#view-investigation-db-id').val(), comments)
-				$('#view-investigation-db-id').attr("value", "null")*/
-				$('#view-investigations-details').hide()
-				$('#investigation-menu-page').show()
 			})
     	},
 
