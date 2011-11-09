@@ -4,6 +4,10 @@ Xoom dimensions:
 888px x 800 px (with soft keyboard revealed)
 */
 
+.predator-reveal {
+	 display: none; 
+}
+
 a {
   color: #047AAC;
 }
@@ -111,9 +115,7 @@ div#tabs .tab-pane {
 /* Hide the predator */
 /* REMEMBER TO HIDE/REVEAL THE PREDATOR FROM THE VIEW GRAPHS MANUALLY line ~1887*/
 /* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */c
-.predator-reveal {
-	 /*display:none;*/ 
-}
+
 
 /* Hide relationships */
 .hide-tab-relationships {
