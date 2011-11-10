@@ -750,14 +750,16 @@ WallCology = {
 			// *******************************  Investigation Setup Page **********************************
 			
 			// Cancel button of "Investigation Setup" is clicked
-			$('#cancel-investigation-motivation').click(function() { 
+			$('#cancel-investigation-setup').click(function() { 
 				$('div#investigation-setup').hide()				
   				$('div#investigation-menu-page').show()
 
-				//call function to send XMPP message to archivist to delete record by _id
+  				// clear all data
+				$("div#tabs-5 input#investigation-setup-db-id").attr("value", "null");
+				Sail.app.observations.investigationMotivationClearFields();                                                                                    
+				Sail.app.observations.investigationSetupClearFields();
+				Sail.app.observations.investigationResultClearFields();
 				Sail.app.observations.removeInvestigationById(dbId)
-				// clear some data - maybe not needed here
-				Sail.app.observations.investigationResultClearFields()
 			}) 		
                   
 			
@@ -824,14 +826,18 @@ WallCology = {
 			
 			
 			// *******************************  Investigation Results Page **********************************
-			$('#cancel-investigation-setup').click(function() {
+			$('#cancel-investigation-results').click(function() {
 				$('#investigation-results').hide()
 				$('#investigation-menu-page').show()
 				
+				// clear all data
+				$("div#tabs-5 input#investigation-setup-db-id").attr("value", "null")
+				Sail.app.observations.investigationMotivationClearFields()                                                                               
+				Sail.app.observations.investigationSetupClearFields()
+				Sail.app.observations.investigationResultClearFields()
+				
 				//call function to send XMPP message to archivist to delete record by _id
 				Sail.app.observations.removeInvestigationById(dbId)
-				// clear some data
-				Sail.app.observations.investigationResultClearFields()
 			})
 			
 			$('div#investigation-pages div#investigation-results button#animate-investigation-results-button').click(function() {
@@ -1058,8 +1064,7 @@ WallCology = {
 				$(this).attr('checked', false);
 			});
 		},  
-		
-		
+			
 		investigationSetupClearFields: function() {
 		  	$('div#investigation-setup table#investigation-organism-table td.selected').css('border', 'none');
 			$('div#investigation-setup table#investigation-organism-table td.selected').removeClass('selected');
@@ -1420,9 +1425,8 @@ WallCology = {
 								investigationResultsArray = []
 								for (i=0;i<data.results.length;i++) {
 									d = new Date(data.results[i].timestamp)
-									// datatables do not like undefined, so switched to empty string... but this should never happen
-									// this can be removed when we only let them finish or delete
-/*									if (data.results[i].motivation_description == null && data.results[i].description == null) {
+									// datatables do not like undefined, so switched to empty string... this will only happen on crash, power off, etc
+									if (data.results[i].motivation_description == null && data.results[i].description == null) {
 										investigationResultsArray[i] = ["", "", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
 									else if (data.results[i].motivation_description == null) {
@@ -1431,9 +1435,9 @@ WallCology = {
 									else if (data.results[i].description == null) {
 										investigationResultsArray[i] = [data.results[i].motivation_description, "", data.results[i].origin, Sail.app.observations.dateString(d)]
 									}
-									else {*/
+									else {
 									investigationResultsArray[i] = [data.results[i].motivation_description, data.results[i].description, data.results[i].origin, Sail.app.observations.dateString(d)]
-									/*}*/									
+									}									
 								}
 
 						    	if (data.ok === 1) {			    		
