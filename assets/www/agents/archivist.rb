@@ -53,6 +53,20 @@ class Archivist < Sail::Agent
       store_observation_in_mongo(observationFromDb)
     end
     
+    event :remove_observation? do |stanza, data|
+      # this will create the observation obj from the data received in the XMPP stanza
+      observation = data['payload']
+      ['origin', 'run', 'timestamp'].each{|meta| observation[meta] = data[meta]}
+      
+      # log _id of observation to be deleted
+      log "observation to be deleted _id: #{observation['_id']}"
+      if @mongo.collection('observations').remove({"_id" => observation['_id']})
+        log "deleting observation with _id: #{observation['_id']} was successfull"
+      else
+        log "deleting observation with _id: #{observation['_id']} FAILED !!"
+      end
+    end
+    
     message :error? do |err|
       log err, :ERROR
     end
