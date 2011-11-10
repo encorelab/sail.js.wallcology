@@ -23,7 +23,20 @@ class Archivist < Sail::Agent
     event :new_observation? do |stanza, data|
       observation = data['payload']
       ['origin', 'run', 'timestamp'].each{|meta| observation[meta] = data[meta]}
-      store_observation_in_mongo(observation)
+      
+      # better to not assume that messages arrive in sequence ???
+      # probably better so check if entry for _id exists if not store away if one exists merge and store
+      observationFromDb = @mongo.collection('observations').find_one({"_id" => observation['_id']})
+      if observationFromDb == nil
+        log "Observation with _id #{observation['_id']} not in DB (expected) so store it from XMPP stanza"
+        store_observation_in_mongo(observation)
+      else
+        log "Observation with _id #{observation['_id']} found in DB (unexpected), so merge data with XMPP stanza and store"
+        observation.each_pair do |k,v|
+          observationFromDb[k] = v
+        end
+        store_observation_in_mongo(observationFromDb)
+      end
     end
     
     event :changed_observation? do |stanza, data|
@@ -38,13 +51,14 @@ class Archivist < Sail::Agent
       
       if observationFromDb != nil
         log "Observation hash for id #{observation['_id']} from mongo db: #{observationFromDb}"
+        # TODO iterate over observation and copy all fields to observationFromDb then store observationFromDb
+        observation.each_pair do |k,v|
+          observationFromDb[k] = v
+        end
       else
         log "No observation found for id: #{observation['_id']}"
-      end
-      
-      # TODO iterate over observation and copy all fields to observationFromDb then store observationFromDb
-      observation.each_pair do |k,v|
-        observationFromDb[k] = v
+        # no observation returned from db so copy observation into observationDB
+        observationFromDb = observation
       end
       
       log "observation hash: #{observation}"
