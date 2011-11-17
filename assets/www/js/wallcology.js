@@ -964,9 +964,18 @@ WallCology = {
 			$('#investigations-datatable tbody tr').live('click', function() {
 				$('#view-investigations').hide()
 				$('#view-investigations-details').show()
-				detailsMotivation = $(this).children(':first').html()
-				detailsAuthor = $(this).children(':nth-child(3)').html()
-				detailsTime = $(this).children(':last').html()
+				detailsMotivation = $(this).children(':first').text()
+				detailsAuthor = $(this).children(':nth-child(3)').text()
+				detailsTime = $(this).children(':last').text()
+
+				$('#view-investigations-details .motivation-title').html('')
+		    		$('#view-investigations-details .motivation-content').html('')
+		    		$('#view-investigations-details .hypothesis-content').html('')
+		    		$('#view-investigations-details .temperature-content').html('')
+		    		$('#view-investigations-details .light-level-content').html('')
+		    		$('#view-investigations-details .humidity-content').html('')
+		    		$('#view-investigations-details .description-content').html('')
+		    		$('#view-investigations-details .interpretation-content').html('')
 				
 				$('#view-investigations-details .graph-box').html("")
 				

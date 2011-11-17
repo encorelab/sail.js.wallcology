@@ -291,6 +291,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 	height: 74px;
 	padding: 8px;
 	background-color: rgba(255,102,102,0.3);
+	font-size: 12px;
 }
 
 #view-investigations-details .selected-variables {
@@ -339,6 +340,7 @@ div#tabs-5 div#investigation-results button#animate-investigation-results-button
 
 #view-investigations-details .variable-table-cell {
 	padding: 2px;
+	font-size: 12px;
 }
 
 #view-investigations-details .conditions-titles-box {
