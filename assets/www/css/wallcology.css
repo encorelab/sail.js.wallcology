@@ -5,7 +5,7 @@ Xoom dimensions:
 */
 
 .predator-reveal {
-	 display: none; 
+/*	 display: none; */
 }
 
 a {
@@ -114,7 +114,7 @@ div#tabs .tab-pane {
 
 /* Hide the predator */
 /* REMEMBER TO HIDE/REVEAL THE PREDATOR FROM THE VIEW GRAPHS MANUALLY line ~1887*/
-/* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */c
+/* REMEMBER THAT WE NEED TO COMMENT OUT ~683 (checking vals for new counts submit) */
 
 
 /* Hide relationships */
