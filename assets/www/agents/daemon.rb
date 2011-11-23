@@ -22,4 +22,8 @@ AGENT_PASSWORD = "1d6f760bc95729166e551d7bee1d75c69b133015"
 @daemon << Archivist.new(:room => "wallcology-ben-fall2011", :password => AGENT_PASSWORD, :database => 'wallcology')
 @daemon << Notetaker.new(:room => "wallcology-ben-fall2011", :password => AGENT_PASSWORD, :database => 'common-knowledge')
 
+# Demo run
+#@daemon << Archivist.new(:room => "wallcology-teacher-demo", :password => AGENT_PASSWORD, :database => 'wallcology')
+#@daemon << Notetaker.new(:room => "wallcology-teacher-demo", :password => AGENT_PASSWORD, :database => 'common-knowledge')
+
 @daemon.start
