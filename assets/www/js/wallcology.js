@@ -642,7 +642,7 @@ WallCology = {
 						$('#new-counts .count-scum6').val() && $('#new-counts .count-mold6').val() &&
 						$('#new-counts .count-blue-bug6').val() && $('#new-counts .count-green-bug6').val()
 						// COMMENT OUT NEXT LINE FOR PREDATOR REVEAL predator-reveal
-						//&& $('#new-counts .count-predator6').val()
+						&& $('#new-counts .count-predator6').val()
 						) 
 					{
 
@@ -2014,8 +2014,8 @@ WallCology = {
 				predatorForGraph = _.reject(predatorForGraph, function(val){ return val == undefined; })	
 				
 				// REVEAL FOR PREDATOR predator-reveal
-				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
-				//var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
+				//var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"} ]
+				var creatures = [ {label: "green_bug", data: greenBugForGraph, color: "green"}, {label:"blue_bug", data: blueBugForGraph, color: "blue"}, {label:"predator", data: predatorForGraph, color: "black"} ]
 				
 				// average values for temperature
 				temperature = Sail.app.observations.avgCountValues(temperature)
