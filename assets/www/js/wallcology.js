@@ -1599,7 +1599,7 @@ WallCology = {
 							}
 						}
 					}
-					graphConfig = { xaxis: {min: 0, max: 50, show: false}, yaxis: {min: 0, max: 90, show: false}, lines: {show: true} }
+					graphConfig = { xaxis: {min: 0, max: 50, show: true}, yaxis: {min: 0, max: 90, show: true}, lines: {show: true} }
 					$.plot($("div#investigation-pages div#investigation-results div#investigation-results-graph"), graphData, graphConfig);
 					// this is an ugly workaround, sorry
 					$.plot($("#view-investigations-details .graph-box"), graphData, graphConfig)
